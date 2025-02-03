@@ -11,203 +11,117 @@ module.exports = grammar({
   name: "dyn",
   extras: $ => [
     /\s/,
-    $.comment,
   ],
-  word: $ => $.identifier,
-
+  conflicts: $ => [
+    [$.expr, $.type_expr],
+    [$.expr, $.member_chain]
+  ],
   rules: {
-    source_file: $ => seq($.module_declaration, repeat(choice($.definition, $.pub_definition))),
-
-    module_declaration: $ => seq('module', $.string, ';'),
-
-    pub_definition: $ => seq('pub', $.definition),
-
-    definition: $ => choice(
-      $.use_definition,
-      $.fn_definition,
-      $.variable_definition,
-      $.enum_definition,
-      $.error_definition,
-      $.struct_definition,
-    ),
-
-    use_definition: $ => seq('use', optional($.identifier), $.string, ';'),
-
-    fn_definition: $ => prec(2,seq($.identifier, '=', $.param_list, choice($.block, $.arrow_expression))),
-
-    param_list: $ => prec.left(1, seq('(', repeat(seq(
-      optional('mut'),
-      $.identifier,
-      repeat(seq(',', $.identifier)),
-      seq(':', $.type_expression)
-    )), ')')) ,
-
-    variable_definition: $ => seq(commaSep1($.identifier), choice(seq(':', $.type_expression, '=', $.expression), seq(':=', $.expression), seq(':', $.type_expression)), ';'),
-
-    enum_definition: $ => prec(2, seq($.identifier, '=', 'enum', '{', optional($.enum_member_list), '}')),
-
-    enum_member_list: $ => repeat1(choice(
-      prec.left(1,seq($.identifier, optional(seq(':', $.type_expression)), ',')),
-      prec.left(2,choice($.fn_definition, $.variable_definition, $.enum_definition, $.error_definition, $.struct_definition))
-    )),
-
-    error_definition: $ => prec(2, seq($.identifier, '=', 'error', '{', optional($.error_member_list), '}')),
-
-    error_member_list: $ => repeat1(choice(
-      prec.left(1,seq($.identifier, optional(seq(':', $.type_expression)), ',')),
-      prec.left(2,choice($.fn_definition, $.variable_definition, $.enum_definition, $.error_definition, $.struct_definition))
-    )),
-
-    struct_definition: $ => prec(2, seq($.identifier, '=', 'struct', '{', optional($.struct_member_list), '}')),
-
-    struct_member_list: $ => repeat1(choice(
-      seq(sepBy1(',', $.identifier), ':', $.type_expression, ','),
-      $.definition,
-    )),
-
-    block: $ => seq('{', repeat($.statement), '}'),
-
-    label: $ => prec(3, seq($.identifier, ':', $.block)),
-
-    statement: $ => choice(
-        seq(optional('mut'), $.variable_definition),
-        $.if_statement,
-        $.match_statement,
-        $.defer_statement,
-        $.return_statement,
-        $.break_statement,
-        $.for_statement,
-        $.while_statement,
-        $.assignment_statement,
-        $.enum_definition,
-        $.fn_definition,
-        $.struct_definition,
-        $.error_definition,
-    ),
-
-    if_statement: $ => prec.right(seq(
-      'if',
-      $.expression,
-      optional($.capture),
-      $.block,
-      optional(seq('else', choice($.if_statement, $.block)))
-    )),
-
-    match_statement: $ => seq('match', $.expression, '{', optional($.match_arms), '}'),
-
-    match_arms: $ => repeat1(seq($.match_pattern, ':', optional($.capture), $.expression, optional(','))),
-
-    match_pattern: $ => choice('_', $.expression, $.range_expression, seq('.', $.identifier), seq('(', $.expression, ')')),
-
-    defer_statement: $ => seq('defer', optional($.capture), choice($.block, seq($.expression, ';'))),
-
-    return_statement: $ => seq('return', optional($.expression), ';'),
-
-    break_statement: $ => seq('break', optional(seq($.label, $.expression)), ';'),
-
-    for_statement: $ => seq('for', commaSep1($.expression), ':', $.capture, $.block),
-
-    while_statement: $ => seq('while', $.expression, optional(seq(':', $.capture)), $.block),
-
-    assignment_statement: $ => prec(1, seq(choice($.identifier, $.array_access, $.field_expression), $.assignment_operators, $.expression, ';')),
-
-    assignment_operators: $ => choice('=', '+=', '-=', '*=', '%=', '/=', '|=', '&=', '~='),
-
-    capture: $ => seq('|', sepBy1(',', $.identifier), '|'),
-
-    type_expression: $ => prec(2, choice($.identifier, $.array_type, $.pointer_type, $.optional_type, $.function_type)),
-
-    array_type: $ => seq('[', ']', $.type_expression),
-
-    pointer_type: $ => seq('*', $.type_expression),
-
-    optional_type: $ => seq('?', $.type_expression),
-
-    function_type: $ => prec.left(2, seq( '(', optional(repeat($.type_expression)), ')', optional($.type_expression))),
-
-    expression: $ => prec(1, choice(
+    source_file: $ => seq($.module_decl, repeat(choice($.decl, $.pub_decl))),
+    module_decl: $ => seq('module', $.string, ';'),
+    pub_decl: $ => seq('pub', $.decl),
+    decl: $ => choice($.use_decl, $.fn_decl, $.var_decl, $.enum_decl, $.error_decl, $.struct_decl),
+    use_decl: $ => seq('use', optional($.identifier), $.string, ';'),
+    fn_decl: $ => seq($.identifier, '=', '(', optional($.param_list), ')', choice($.block, $.arrow_expr)),
+    param_list: $ => seq($.param, repeat(seq(',', $.param))),
+    param: $ => seq(optional('mut'), $.identifier, repeat(seq(',', $.identifier)), ':', $.type_expr, optional(seq('=', $.expr))),
+    var_decl: $ => seq($.identifier, repeat(seq(',', $.identifier)), choice(seq(':', $.type_expr, '=', choice($.expr, $.type_expr)), seq(':=', choice($.expr, $.type_expr))), ';'),
+    mut_var_decl: $ => seq( 'mut', $.identifier, repeat(seq(',', $.identifier)), optional(choice(seq(':', $.type_expr, '=', $.expr), seq(':=', $.expr))), ';' ),
+    enum_decl: $ => seq($.identifier, '=', $.enum_literal),
+    enum_param_list: $ => seq($.enum_member, repeat(seq(',', $.enum_member))),
+    enum_member: $ => choice($.enum_param, $.fn_decl, $.var_decl, $.enum_decl, $.error_decl, $.struct_decl),
+    enum_param: $ => seq($.identifier, optional(seq(':', $.type_expr)), ','),
+    error_decl: $ => seq($.identifier, '=', $.error_literal),
+    error_param_list: $ => seq($.error_member, repeat(seq(',', $.error_member))),
+    error_member: $ => choice($.error_param, $.fn_decl, $.var_decl, $.error_decl, $.error_decl, $.struct_decl),
+    error_param: $ => seq($.identifier, optional(seq(':', $.type_expr)), ','),
+    struct_decl: $ => seq($.identifier, '=', $.struct_literal),
+    struct_param_list: $ => seq($.struct_member, repeat(seq(',', $.struct_member))),
+    struct_member: $ => choice($.struct_param, $.fn_decl, $.var_decl, $.struct_decl, $.struct_decl, $.struct_decl),
+    struct_param: $ => seq($.identifier, repeat(seq(',', $.identifier)), ':', $.type_expr, ','),
+    block: $ => seq('{', repeat($.stmt), '}'),
+    label: $ => seq($.identifier, ':', $.block),
+    arrow_expr: $ => seq('=>', $.expr, ';'),
+    capture: $ => seq('|', optional('mut'), $.identifier, repeat(seq(',', optional('mut'), $.identifier)), '|'),
+    stmt: $ => choice($.mut_var_decl, $.if_stmt, $.match_stmt, $.return_stmt, $.break_stmt, $.for_stmt, $.while_stmt, $.assign_stmt, $.decl, $.call, $.defer_stmt),
+    call: $ => seq(choice($.member_chain, $.lambda_expr), $.fn_call_suffix, ';'),
+    if_stmt: $ => seq('if', choice($.binary_expr, seq($.identifier, ':', $.capture)), choice($.block, $.stmt), optional(seq('else', choice($.block, $.stmt)))),
+    if_expr: $ => prec.right(2,seq('if', choice($.binary_expr, seq($.identifier, ':', $.capture)), choice($.label, $.expr), 'else', choice($.label, $.expr))),
+    match_stmt: $ => seq('match', $.expr, '{', optional($.match_arms), '}'),
+    match_arms: $ => seq($.match_arm, repeat(seq(',', $.match_arm))),
+    match_arm: $ => seq($.match_pattern, ':', optional($.capture), choice($.block, $.stmt)),
+    match_expr: $ => seq('match', $.expr, '{', optional($.match_arms_expr), '}'),
+    match_arms_expr: $ => seq($.match_arm, repeat(seq(',', $.match_arm_expr))),
+    match_arm_expr: $ => seq($.match_pattern, ':', optional($.capture), choice($.block, $.expr)),
+    match_pattern: $ => choice('_', $.expr, $.range_expr),
+    defer_stmt: $ => seq('defer', optional($.capture), choice($.stmt, $.block)),
+    return_stmt: $ => seq('return', optional($.expr), ';'),
+    break_stmt: $ => seq('break', optional($.label_break), ';'),
+    label_break: $ => seq(':', $.identifier, optional($.expr)),
+    for_stmt: $ => seq('for', $.expr, ':', $.capture, choice($.label, $.stmt)),
+    while_stmt: $ => seq('while', $.expr, optional(seq(':', $.capture)), choice($.label, $.stmt)),
+    assign_stmt: $ => seq($.member_chain_lhs, $.assign_op, $.expr, ';'),
+    assign_op: $ => choice("=", "+=", "-=", "*=", "/=", "%=", "^="),
+    expr: $ => choice(
       $.literal,
-      $.binary_expression,
-      $.unary_expression,
-      $.call_expression,
-      $.field_expression,
-      $.array_expression,
-      $.lambda_expression,
+      $.binary_expr,
+      $.unary_expr,
+      $.lambda_expr,
+      seq($.lambda_expr, $.fn_call_suffix),
       $.identifier,
-      $.type_expression,
-    )),
-
-    literal: $ => choice(
-      $.number,
-      $.string,
-      $.char,
-      $.boolean,
-      'undefined',
-      'null',
+      $.grouped_expr,
+      $.member_chain,
+      $.struct_literal,
+      $.enum_literal,
+      $.error_literal,
+      $.struct_initializer,
+      $.enum_error_initializer,
+      $.array_initializer,
+      $.if_expr,
+      $.match_expr,
     ),
-
-    binary_expression: $ => {
-      const operators = [
-        ['+', 1],
-        ['-', 1],
-        ['*', 2],
-        ['/', 2],
-        ['%', 2],
-        ['|', 3],
-        ['&', 3],
-        ['^', 3],
-        ['==', 5],
-        ['!=', 5],
-        ['||', 6],
-        ['&&', 6]
-      ]
-
-      return choice(...operators.map(([operator, precedence]) => prec.left(precedence, seq(
-        field('left', $.expression),
-        field('operator', operator),
-        field('right', $.expression)
-      ))));
-    },
-    
-    unary_expression: $ => choice(
-      prec.right(3, seq(field('operator', choice('-', '!', '&')), field('argument', $.expression))),
-      prec.left(3, seq(field('operator', $.expression), field('operator', choice('++', '--'))))
-    ),
-
-    call_expression: $ => prec.left(1, seq(field('function', $.expression), '(', optional(commaSep1($.expression)), ')')),
-
-    field_expression: $ => prec.left(2, seq(field('object', $.expression), '.', field('property', choice($.identifier, '*', '?')))),
-
-    array_expression: $ => seq('.', '[', optional(commaSep1($.expression)), ']'),
-
-    array_access: $ => seq($.identifier, '[', $.expression, ']'),
-
-    lambda_expression: $ => seq($.param_list, optional($.type_annotation), choice($.expression, $.block)),
-
-    range_expression: $ => seq($.expression, '..', $.expression),
-
-    arrow_expression: $ => seq('=>', $.expression, ';'),
-
-    type_annotation: $ => seq(':', $.type_expression),
-
-    identifier: $ => /[a-zA-Z_][a-zA-Z0-9_]*/,
-    
-    number: $ => /\d+(\.\d+)?/,
-
-    string: $ => /"[^"]*"/,
-
-    char: $ => /'[^']*'/,
-
+    binary_expr: $ => prec.left(2, choice(seq($.expr, $.op, $.expr), seq($.type_expr, choice('==', '!='), $.type_expr))),
+    op: $ => choice("+", "-", "*", "/", "%", "|", "&", "^", ">>", "<<", "==", "!=", "||", "&&"),
+    unary_expr: $ => choice($.prefix_expr, $.postfix_expr),
+    prefix_expr: $ => prec.right(3, seq(choice("-", "&", "!", "~"), $.expr)),
+    postfix_expr: $ => seq($.expr, choice('++', '--')),
+    member_chain: $ => seq($.identifier, $.suffix),
+    suffix: $ => choice($.suffix_no_call, $.fn_call_suffix),
+    suffix_no_call: $ => choice($.member_access_suffix, $.pointer_deref_suffix, $.optional_deref_suffix, $.array_index_suffix),
+    member_chain_lhs: $ => seq($.identifier, repeat(choice($.suffix_no_call, seq($.fn_call_suffix, $.suffix_no_call)))),
+    member_access_suffix: $ => seq('.', $.identifier),
+    pointer_deref_suffix: $ => '.*',
+    optional_deref_suffix: $ => '.?',
+    array_index_suffix: $ => seq('[', $.expr, ']'),
+    fn_call_suffix: $ => seq('(', optional($.argument_list), ')'),
+    argument_list: $ => seq(choice($.expr, $.type_expr), repeat(seq(',', choice($.expr, $.type_expr)))),
+    lambda_expr: $ => seq('(', optional($.param_list), ')', choice($.block, $.arrow_expr)),
+    grouped_expr: $ => seq('(', $.expr, ')'),
+    range_expr: $ => seq($.expr, '..', $.expr),
+    literal: $ => choice($.number, $.string, $.char, $.boolean, 'undefined', 'null'),
+    number: $ => choice($.int, $.float),
+    int: $ => token(/[0-9]+/),
+    float: $ => seq(optional($.int), '.', $.int),
+    string: $ => seq('"', repeat($.string_character), '"'),
+    string_character: $ => choice($.escape_sequence, $.non_escape_character),
+    escape_sequence: $ => seq('\\', choice('\\', '"', 'n', 't', 'r')),
+    non_escape_character: $ => /[^"]+/,
+    char: $ => seq('\'', choice($.escape_sequence, $.non_escape_char), '\''),
+    non_escape_char: $ => /[^']+/,
     boolean: $ => choice('true', 'false'),
-
-    comment: $ => token(choice(seq('//', '/.*/'), seq('/*', /[^*]*\*+([^/*][^*]*\*+)*/, '/*'))),
+    struct_literal: $ => seq('struct', '{', repeat($.struct_param_list), '}'),
+    enum_literal: $ => seq('enum', '{', repeat($.enum_param_list), '}'),
+    error_literal: $ => seq('error', '{', repeat($.error_param_list), '}'),
+    struct_initializer: $ => seq(choice($.member_chain, $.identifier, '.'), '{', optional($.struct_field_initializers), '}'),
+    struct_field_initializers: $ => seq($.identifier, ':', $.expr),
+    enum_error_initializer: $ => seq('.', $.identifier, optional(seq('(', $.expr, ')'))),
+    array_initializer: $ => seq('.', '[', optional($.expr_list), ']'),
+    expr_list: $ => seq($.expr, repeat(seq(',', $.expr))),
+    identifier: $ => token(/(?:[A-Za-z][A-Za-z0-9_]*|_[A-Za-z0-9_]*[A-Za-z][A-Za-z0-9_]*)/),
+    digit: $ => /[0-9]/,
+    type_expr: $ => choice($.array_type, $.pointer_type, $.optional_type, $.identifier, $.member_chain),
+    array_type: $ => seq('[', ']', $.type_expr),
+    pointer_type: $ => seq('*', $.type_expr),
+    optional_type: $ => seq('?', $.type_expr),
   }
 });
-
-function commaSep1(rule) {
-  return seq(rule, repeat(seq(',', rule)))
-}
-
-function sepBy1(sep, rule) {
-  return seq(rule, repeat(seq(sep, rule)))
-}
