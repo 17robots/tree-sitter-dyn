@@ -1,1 +1,7 @@
-hello
+module "main";
+
+use "std:io";
+
+main := () {
+	io.println("Hello world");
+}

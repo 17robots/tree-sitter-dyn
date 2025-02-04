@@ -66,23 +66,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "fn_decl"
-        },
-        {
-          "type": "SYMBOL",
           "name": "var_decl"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "enum_decl"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "error_decl"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "struct_decl"
         }
       ]
     },
@@ -112,52 +96,6 @@
         {
           "type": "STRING",
           "value": ";"
-        }
-      ]
-    },
-    "fn_decl": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        },
-        {
-          "type": "STRING",
-          "value": "="
-        },
-        {
-          "type": "STRING",
-          "value": "("
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "param_list"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "STRING",
-          "value": ")"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "block"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "arrow_expr"
-            }
-          ]
         }
       ]
     },
@@ -418,23 +356,6 @@
         }
       ]
     },
-    "enum_decl": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        },
-        {
-          "type": "STRING",
-          "value": "="
-        },
-        {
-          "type": "SYMBOL",
-          "name": "enum_literal"
-        }
-      ]
-    },
     "enum_param_list": {
       "type": "SEQ",
       "members": [
@@ -469,23 +390,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "fn_decl"
-        },
-        {
-          "type": "SYMBOL",
           "name": "var_decl"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "enum_decl"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "error_decl"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "struct_decl"
         }
       ]
     },
@@ -523,23 +428,6 @@
         }
       ]
     },
-    "error_decl": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        },
-        {
-          "type": "STRING",
-          "value": "="
-        },
-        {
-          "type": "SYMBOL",
-          "name": "error_literal"
-        }
-      ]
-    },
     "error_param_list": {
       "type": "SEQ",
       "members": [
@@ -574,23 +462,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "fn_decl"
-        },
-        {
-          "type": "SYMBOL",
           "name": "var_decl"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "error_decl"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "error_decl"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "struct_decl"
         }
       ]
     },
@@ -628,23 +500,6 @@
         }
       ]
     },
-    "struct_decl": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        },
-        {
-          "type": "STRING",
-          "value": "="
-        },
-        {
-          "type": "SYMBOL",
-          "name": "struct_literal"
-        }
-      ]
-    },
     "struct_param_list": {
       "type": "SEQ",
       "members": [
@@ -679,23 +534,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "fn_decl"
-        },
-        {
-          "type": "SYMBOL",
           "name": "var_decl"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "struct_decl"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "struct_decl"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "struct_decl"
         }
       ]
     },
@@ -757,21 +596,25 @@
       ]
     },
     "label": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        },
-        {
-          "type": "STRING",
-          "value": ":"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "block"
-        }
-      ]
+      "type": "PREC",
+      "value": 2,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "identifier"
+          },
+          {
+            "type": "STRING",
+            "value": ":"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "block"
+          }
+        ]
+      }
     },
     "arrow_expr": {
       "type": "SEQ",
@@ -1542,17 +1385,21 @@
           "name": "lambda_expr"
         },
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "lambda_expr"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "fn_call_suffix"
-            }
-          ]
+          "type": "PREC",
+          "value": 2,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "lambda_expr"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "fn_call_suffix"
+              }
+            ]
+          }
         },
         {
           "type": "SYMBOL",
@@ -1796,17 +1643,21 @@
       ]
     },
     "suffix": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "suffix_no_call"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "fn_call_suffix"
-        }
-      ]
+      "type": "PREC",
+      "value": 2,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "suffix_no_call"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "fn_call_suffix"
+          }
+        ]
+      }
     },
     "suffix_no_call": {
       "type": "CHOICE",
@@ -2091,29 +1942,11 @@
       }
     },
     "float": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "int"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "STRING",
-          "value": "."
-        },
-        {
-          "type": "SYMBOL",
-          "name": "int"
-        }
-      ]
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[0-9]+\\.[0-9]+"
+      }
     },
     "string": {
       "type": "SEQ",
@@ -2314,12 +2147,12 @@
             {
               "type": "SYMBOL",
               "name": "identifier"
-            },
-            {
-              "type": "STRING",
-              "value": "."
             }
           ]
+        },
+        {
+          "type": "STRING",
+          "value": "."
         },
         {
           "type": "STRING",
@@ -2361,42 +2194,46 @@
       ]
     },
     "enum_error_initializer": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "."
-        },
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": "("
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "expr"
-                },
-                {
-                  "type": "STRING",
-                  "value": ")"
-                }
-              ]
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        }
-      ]
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "."
+          },
+          {
+            "type": "SYMBOL",
+            "name": "identifier"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "("
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "expr"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": ")"
+                  }
+                ]
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
     },
     "array_initializer": {
       "type": "SEQ",
@@ -2480,11 +2317,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "member_chain"
         },
         {
           "type": "SYMBOL",
-          "name": "member_chain"
+          "name": "identifier"
         }
       ]
     },
@@ -2545,6 +2382,47 @@
     ],
     [
       "expr",
+      "member_chain",
+      "struct_initializer"
+    ],
+    [
+      "expr",
+      "member_chain"
+    ],
+    [
+      "expr",
+      "struct_initializer"
+    ],
+    [
+      "type_expr",
+      "member_chain"
+    ],
+    [
+      "var_decl",
+      "enum_member"
+    ],
+    [
+      "var_decl",
+      "enum_param"
+    ],
+    [
+      "var_decl",
+      "error_member"
+    ],
+    [
+      "var_decl",
+      "error_param"
+    ],
+    [
+      "var_decl",
+      "struct_member"
+    ],
+    [
+      "var_decl",
+      "struct_param"
+    ],
+    [
+      "struct_initializer",
       "member_chain"
     ]
   ],
