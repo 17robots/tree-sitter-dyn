@@ -1,0 +1,3 @@
+module "main";
+
+main := (x, y: i32) {};
