@@ -757,6 +757,21 @@
     }
   },
   {
+    "type": "identifier_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "if_expr",
     "named": true,
     "fields": {},
@@ -1210,7 +1225,7 @@
       "required": true,
       "types": [
         {
-          "type": "identifier",
+          "type": "identifier_list",
           "named": true
         },
         {
@@ -1640,6 +1655,10 @@
         },
         {
           "type": "fn_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
           "named": true
         },
         {

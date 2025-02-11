@@ -11,7 +11,6 @@ module.exports = grammar({
   name: "dyn",
   extras: $ => [/\s+/],
   conflicts: $ => [
-    [$.expr, $.member_chain, $.struct_initializer],
     [$.expr, $.member_chain],
     [$.stmt, $.else_stmt],
     [$.suffix, $.call],
@@ -21,13 +20,17 @@ module.exports = grammar({
     [$.expr, $.struct_initializer, $.type_expr],
     [$.stmt_match, $.else_stmt_match],
     [$.fn_literal, $.fn_type],
-    [$.expr, $.member_chain, $.member_chain_lhs, $.call],
     [$.range_expr, $.arrow_expr],
     [$.expr, $.type_expr, $.call],
     [$.assign_stmt, $.range_expr],
-    [$.expr, $.member_chain, $.member_chain_lhs, $.struct_initializer],
-    [$.expr, $.member_chain, $.member_chain_lhs],
-    [$.var_decl, $.label, $.expr, $.member_chain],
+    [$.expr, $.member_chain, $.type_expr],
+    [$.member_chain, $.type_expr],
+    [$.identifier_list, $.member_chain, $.type_expr],
+    [$.expr, $.member_chain, $.member_chain_lhs, $.type_expr, $.call],
+    [$.expr, $.member_chain, $.struct_initializer, $.type_expr],
+    [$.expr, $.member_chain, $.member_chain_lhs, $.struct_initializer, $.type_expr],
+    [$.expr, $.member_chain, $.member_chain_lhs, $.type_expr],
+    [$.var_decl, $.label, $.expr, $.member_chain, $.type_expr],
   ],
   rules: {
     source_file: $ => seq($.module_decl, repeat(seq(choice($.var_decl, $.pub_decl), ';'))),
@@ -55,7 +58,8 @@ module.exports = grammar({
 
     fn_literal: $ => seq('(', optional($.param_list), ')', optional($.type_expr), choice($.block, $.arrow_expr)),
     param_list: $ => seq($.param, repeat(seq(',', $.param))),
-    param: $ => choice(seq($.identifier, ':', $.type_expr), seq($.identifier, repeat(seq(',', $.identifier)), ':', $.type_expr)),
+    param: $ => seq($.identifier_list, ':', $.type_expr),
+    identifier_list: $ => seq($.identifier, repeat(seq(',', $.identifier))),
     
     arrow_expr: $ => seq('=>', choice($.expr, $.call, $.assign_stmt, $.while_stmt, $.for_stmt, $.if_stmt, $.match_stmt)), // TODO: fill this in
     
@@ -137,7 +141,7 @@ module.exports = grammar({
     
     identifier: $ => token(/(?:[A-Za-z][A-Za-z0-9_]*|_[A-Za-z0-9_]*[A-Za-z][A-Za-z0-9_]*)/),
     
-    type_expr: $ => choice($.array_type, $.pointer_type, $.optional_type, $.member_chain, $.member_chain, $.fn_type),
+    type_expr: $ => choice($.array_type, $.pointer_type, $.optional_type, $.member_chain, $.fn_type, $.identifier),
     array_type: $ => seq('[', ']', $.type_expr),
     pointer_type: $ => seq('*', $.type_expr),
     optional_type: $ => seq('?', $.type_expr),
