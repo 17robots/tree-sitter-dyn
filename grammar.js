@@ -27,7 +27,6 @@ module.exports = grammar({
   name: 'dyn',
   word: $ => $.identifier,
   extras: $ => [/\s+/, $.comment],
-  supertypes: $ => [$.expr, $.stmt],
   conflicts: $ => [
     [$.expr, $.type_expr],
     [$.expr_no_literal, $.type_expr],
@@ -35,7 +34,6 @@ module.exports = grammar({
     [$.expr, $.expr_no_literal, $.type_expr],
     [$.fn, $.expr_no_literal],
     [$.block],
-    [$.stmt_semi, $.expr_no_literal],
     [$.stmt, $.expr_no_literal],
   ],
   rules: {
@@ -50,14 +48,14 @@ module.exports = grammar({
       $.if_stmt,
       $.for_stmt,
       $.while_stmt,
-      $.match_stmt,
-      $.base_stmt,
+      prec(1, $.match_expr),
+      seq($.base_stmt, ';'),
       $.block,
     ),
 
     return_expr: $ => prec.right(seq('return', optional($.expr))),
-
     break_expr: $ => seq('break', optional(seq(':', $.identifier, $.expr))),
+    continue_expr: $ => seq('continue', optional(seq(':', $.identifier, $.expr))),
 
     fn: $ => prec.right(seq(optional('inline'), '(', optional($.param), ')', optional($.type_expr), choice(seq('=>', $.expr), $.block))),
     param: $ => seq($.identifier, repeat(seq(',', $.identifier)), ':', $.type_expr, optional(seq('=', $.expr)), optional(seq(',', $.param))),
@@ -70,12 +68,10 @@ module.exports = grammar({
 
     match_prefix: $ => seq('match', $.expr),
     match_pattern: $ => choice('_', $.range_expr, $.expr),
-    match_stmt: $ => prec.right(seq($.match_prefix, '{', $.match_arm_stmt, '}')),
     match_expr: $ => prec.right(seq($.match_prefix, '{', $.match_arm_expr, '}')),
-    match_arm_stmt: $ => prec.right(seq($.match_pattern, ':', optional($.capture), $.stmt, optional(seq(',', $.match_arm_stmt)))),
     match_arm_expr: $ => prec.right(seq($.match_pattern, ':', optional($.capture), $.expr, optional(seq(',', $.match_arm_expr)))),
 
-    block: $ => seq(optional(seq($.identifier, ':')), '{', repeat($.stmt_semi), '}'),
+    block: $ => seq(optional(seq($.identifier, ':')), '{', repeat($.stmt), '}'),
 
     while_prefix: $ => seq('while', $.expr, optional(seq(':', $.capture))),
     while_stmt: $ => prec.right(seq($.while_prefix, $.body)),
@@ -132,6 +128,7 @@ module.exports = grammar({
       $.block,
       $.return_expr,
       $.break_expr,
+      $.continue_expr,
       seq('comp', $.expr_no_literal), // comptime expression
       seq('try', $.expr_no_literal), // try expression
       seq('(', $.expr, ')'), // grouped expr
