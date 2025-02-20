@@ -30,29 +30,6 @@
     }
   },
   {
-    "type": "base_stmt",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "break_stmt",
-          "named": true
-        },
-        {
-          "type": "expr_no_literal",
-          "named": true
-        },
-        {
-          "type": "mut_var_decl",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "binary_expr",
     "named": true,
     "fields": {
@@ -169,14 +146,64 @@
           "named": true
         },
         {
-          "type": "stmt_semi",
+          "type": "stmt",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "break_stmt",
+    "type": "body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "block",
+          "named": true
+        },
+        {
+          "type": "else_body",
+          "named": true
+        },
+        {
+          "type": "expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "body_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "block",
+          "named": true
+        },
+        {
+          "type": "else_body",
+          "named": true
+        },
+        {
+          "type": "else_body_expr",
+          "named": true
+        },
+        {
+          "type": "expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "break_expr",
     "named": true,
     "fields": {},
     "children": {
@@ -204,6 +231,63 @@
       "types": [
         {
           "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "continue_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "expr",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "else_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "capture",
+          "named": true
+        },
+        {
+          "type": "stmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "else_body_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "capture",
+          "named": true
+        },
+        {
+          "type": "stmt",
           "named": true
         }
       ]
@@ -360,7 +444,15 @@
           "named": true
         },
         {
+          "type": "break_expr",
+          "named": true
+        },
+        {
           "type": "capture",
+          "named": true
+        },
+        {
+          "type": "continue_expr",
           "named": true
         },
         {
@@ -377,6 +469,10 @@
         },
         {
           "type": "fn",
+          "named": true
+        },
+        {
+          "type": "for_expr",
           "named": true
         },
         {
@@ -407,6 +503,21 @@
     }
   },
   {
+    "type": "expr_stmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "fn",
     "named": true,
     "fields": {},
@@ -428,6 +539,25 @@
         },
         {
           "type": "type_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "for_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "body_expr",
+          "named": true
+        },
+        {
+          "type": "for_prefix",
           "named": true
         }
       ]
@@ -465,30 +595,11 @@
       "required": true,
       "types": [
         {
-          "type": "for_prefix",
+          "type": "body",
           "named": true
         },
         {
-          "type": "stmt",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "for_stmt_semi",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
           "type": "for_prefix",
-          "named": true
-        },
-        {
-          "type": "stmt_semi",
           "named": true
         }
       ]
@@ -502,6 +613,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "capture",
+          "named": true
+        },
         {
           "type": "expr",
           "named": true
@@ -541,30 +656,11 @@
       "required": true,
       "types": [
         {
-          "type": "if_prefix",
+          "type": "body",
           "named": true
         },
         {
-          "type": "stmt",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "if_stmt_semi",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
           "type": "if_prefix",
-          "named": true
-        },
-        {
-          "type": "stmt_semi",
           "named": true
         }
       ]
@@ -597,33 +693,6 @@
         },
         {
           "type": "match_pattern",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "match_arm_stmt",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "capture",
-          "named": true
-        },
-        {
-          "type": "match_arm_stmt",
-          "named": true
-        },
-        {
-          "type": "match_pattern",
-          "named": true
-        },
-        {
-          "type": "stmt",
           "named": true
         }
       ]
@@ -677,25 +746,6 @@
       "types": [
         {
           "type": "expr",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "match_stmt",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "match_arm_stmt",
-          "named": true
-        },
-        {
-          "type": "match_prefix",
           "named": true
         }
       ]
@@ -825,11 +875,11 @@
       "required": true,
       "types": [
         {
-          "type": "base_stmt",
+          "type": "block",
           "named": true
         },
         {
-          "type": "block",
+          "type": "expr_stmt",
           "named": true
         },
         {
@@ -841,46 +891,15 @@
           "named": true
         },
         {
-          "type": "match_stmt",
+          "type": "match_expr",
+          "named": true
+        },
+        {
+          "type": "mut_var_decl",
           "named": true
         },
         {
           "type": "while_stmt",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "stmt_semi",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "base_stmt",
-          "named": true
-        },
-        {
-          "type": "block",
-          "named": true
-        },
-        {
-          "type": "for_stmt_semi",
-          "named": true
-        },
-        {
-          "type": "if_stmt_semi",
-          "named": true
-        },
-        {
-          "type": "match_stmt",
-          "named": true
-        },
-        {
-          "type": "while_stmt_semi",
           "named": true
         }
       ]
@@ -1071,26 +1090,7 @@
       "required": true,
       "types": [
         {
-          "type": "stmt",
-          "named": true
-        },
-        {
-          "type": "while_prefix",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "while_stmt_semi",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "stmt_semi",
+          "type": "body",
           "named": true
         },
         {
@@ -1287,6 +1287,10 @@
   },
   {
     "type": "comp",
+    "named": false
+  },
+  {
+    "type": "continue",
     "named": false
   },
   {

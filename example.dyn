@@ -93,7 +93,7 @@ main := () ! {
 
 	for 0..10: |i| { io.print("{}", i); }
 	for 0..10, 0..10: |i, j| io.println("These increment at the same time {} {}", i, j);
-	for 0..10: |i| for 0..10 |j| io.print("These increment differently {} {}", i, j);
+	for 0..10: |i| for 0..10: |j| io.print("These increment differently {} {}", i, j);
 	some_other_array := .[1,2,3];
 	for some_other_array: |i| io.print("Arr val: {}", i);
 	for some_other_array, 0..some_other_array.len: |i, j| io.print("Arr ind: {}, arr val: {}", j, i);
@@ -189,6 +189,7 @@ main := () ! {
 	DivideError := error {
 		DivideByZero
 	};
+
 	divide(x,y) f32!DivideError => if y == 0 DivideError.DivideByZero else x / y;
 
 	try divide(1,1);
@@ -200,4 +201,3 @@ main := () ! {
 		defer |e| {}
 	}
 };
-

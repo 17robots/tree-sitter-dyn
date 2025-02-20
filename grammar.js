@@ -30,11 +30,15 @@ module.exports = grammar({
   conflicts: $ => [
     [$.expr, $.type_expr],
     [$.expr_no_literal, $.type_expr],
-    [$.base_stmt, $.expr, $.type_expr],
     [$.expr, $.expr_no_literal, $.type_expr],
     [$.fn, $.expr_no_literal],
     [$.block],
+    [$.body, $.expr_no_literal],
+    [$.body, $.body_expr, $.expr_no_literal],
+    [$.body, $.body_expr],
+    [$.body_expr, $.expr_no_literal],
     [$.stmt, $.expr_no_literal],
+    [$.else_body, $.else_body_expr],
   ],
   rules: {
     source_file: $ => seq($.module_decl, repeat(seq(optional('pub'), $.var_decl, ';'))),
@@ -43,19 +47,19 @@ module.exports = grammar({
     var_decl: $ => seq($.identifier, choice(':=', seq(':', $.type_expr, '=')), $.expr),
     mut_var_decl: $ => seq(optional('mut'), $.identifier, choice(seq(':=', $.expr), seq(':', $.type_expr, optional(seq('=', $.expr))))),
 
-    base_stmt: $ => choice($.mut_var_decl, $.expr_no_literal),
     stmt: $ => choice(
       $.if_stmt,
+      $.expr_stmt,
       $.for_stmt,
       $.while_stmt,
-      prec(1, $.match_expr),
-      seq($.base_stmt, ';'),
       $.block,
+      prec(1, $.match_expr),
+      seq($.mut_var_decl, ';'),
     ),
 
     return_expr: $ => prec.right(seq('return', optional($.expr))),
-    break_expr: $ => seq('break', optional(seq(':', $.identifier, $.expr))),
-    continue_expr: $ => seq('continue', optional(seq(':', $.identifier, $.expr))),
+    break_expr: $ => prec.right(seq('break', optional(seq(':', $.identifier, $.expr)))),
+    continue_expr: $ => prec.right(seq('continue', optional(seq(':', $.identifier, $.expr)))),
 
     fn: $ => prec.right(seq(optional('inline'), '(', optional($.param), ')', optional($.type_expr), choice(seq('=>', $.expr), $.block))),
     param: $ => seq($.identifier, repeat(seq(',', $.identifier)), ':', $.type_expr, optional(seq('=', $.expr)), optional(seq(',', $.param))),
@@ -64,7 +68,9 @@ module.exports = grammar({
 
     if_prefix: $ => seq('if', $.expr, optional(seq(':', $.capture))),
     if_stmt: $ => prec.right(seq($.if_prefix, $.body)),
-    if_expr: $ => prec.right(seq($.if_prefix, $.expr, 'else', $.expr)),
+    if_expr: $ => prec.right(seq($.if_prefix, $.expr, optional(seq('else', optional($.capture), $.expr)))),
+
+    expr_stmt: $ => seq($.expr, ';'),
 
     match_prefix: $ => seq('match', $.expr),
     match_pattern: $ => choice('_', $.range_expr, $.expr),
@@ -74,10 +80,24 @@ module.exports = grammar({
     block: $ => seq(optional(seq($.identifier, ':')), '{', repeat($.stmt), '}'),
 
     while_prefix: $ => seq('while', $.expr, optional(seq(':', $.capture))),
-    while_stmt: $ => prec.right(seq($.while_prefix, $.body)),
+    while_stmt: $ => seq($.while_prefix, $.body),
+    while_expr: $ => prec.right(seq($.while_prefix, $.body_expr)),
 
     for_prefix: $ => seq(optional('inline'), 'for', choice($.expr, $.range_expr), repeat(seq(',', choice($.expr, $.range_expr))), seq(':', $.capture)),
     for_stmt: $ => seq($.for_prefix, $.body),
+    for_expr: $ => prec.right(seq($.for_prefix, $.body_expr)),
+
+    body: $ => choice(
+      seq($.block, optional($.else_body)),
+      seq($.expr, choice(';', $.else_body))
+    ),
+    else_body: $ => seq('else', optional($.capture), $.stmt),
+
+    body_expr: $ => choice(
+      seq($.block, optional($.else_body)),
+      seq($.expr, choice(';', $.else_body_expr))
+    ),
+    else_body_expr: $ => seq('else', optional($.capture), $.stmt),
 
     expr: $ => prec.right(choice($.literal, $.type_expr, $.expr_no_literal)),
 
@@ -121,6 +141,7 @@ module.exports = grammar({
       $.assign_expr,
       $.fn,
       $.if_expr,
+      $.for_expr,
       $.match_expr,
       $.struct_initializer,
       $.enum_error_initializer,
@@ -173,12 +194,6 @@ module.exports = grammar({
     error_member: $ => seq(choice(seq($.var_decl, ';'), seq($.identifier, optional(seq(':', $.type_expr)), ',')), optional($.error_member)),
 
     capture: $ => seq('|', optional('mut'), $.identifier, repeat(seq(',', optional('mut'), $.identifier)), '|'),
-
-    body: $ => choice(
-      seq($.block, optional($.else_body)),
-      seq($.expr, choice(';', $.else_body))
-    ),
-    else_body: $ => seq('else', optional($.capture), $.stmt),
 
     literal: $ => choice(
       /[0-9]+/,
