@@ -1,7 +1,5 @@
 module main;
 
 main := () {
-	for 0..10: |i| { io.print("{}", i); }
-	for 0..10, 0..10: |i, j| io.println("These increment at the same time {} {}", i, j);
-	for 0..10: |i| for 0..10: |j| io.print("These increment differently {} {}", i, j);
+  some_math := (x: i32, y: i32) i32 => x + y;
 };
