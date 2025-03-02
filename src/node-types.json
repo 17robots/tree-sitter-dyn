@@ -16,6 +16,10 @@
           "named": true
         },
         {
+          "type": "range_expression",
+          "named": true
+        },
+        {
           "type": "result_block_expr",
           "named": true
         }
@@ -399,6 +403,10 @@
       "required": true,
       "types": [
         {
+          "type": "assign_expression",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -458,11 +466,11 @@
           "named": true
         },
         {
-          "type": "identifier",
+          "type": "non_literal_expression",
           "named": true
         },
         {
-          "type": "non_literal_expression",
+          "type": "parameter_declaration",
           "named": true
         }
       ]
@@ -516,6 +524,10 @@
         },
         {
           "type": "expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
           "named": true
         }
       ]
@@ -606,15 +618,19 @@
       "required": true,
       "types": [
         {
+          "type": "block",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
           "type": "if_prefix",
           "named": true
         },
         {
           "type": "result_block",
-          "named": true
-        },
-        {
-          "type": "result_block_expr",
           "named": true
         }
       ]
@@ -854,6 +870,25 @@
     }
   },
   {
+    "type": "parameter_declaration",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "non_literal_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "pointer_dereference",
     "named": true,
     "fields": {},
@@ -878,6 +913,21 @@
       "types": [
         {
           "type": "non_literal_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "range_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
           "named": true
         }
       ]
@@ -968,10 +1018,6 @@
       "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "assign_expression",
-          "named": true
-        },
         {
           "type": "defer_statement",
           "named": true
@@ -1236,6 +1282,10 @@
   },
   {
     "type": ".*",
+    "named": false
+  },
+  {
+    "type": "..",
     "named": false
   },
   {

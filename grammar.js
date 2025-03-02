@@ -45,7 +45,11 @@ const unary_operators = ['!', '~', '-', '&']
 module.exports = grammar({
   name: 'dyn',
   extras: $ => [/\s+/, $.comment],
-  conflicts: $ => [[$.result_block, $.result_block_expr],[$.fn],[$.fn_type, $.expression]],
+  conflicts: $ => [
+    [$.result_block, $.result_block_expr],
+    [$.fn_type, $.expression],
+    [$.result_block, $.if_expression]
+  ],
   rules: {
     source_file: $ => seq($.module_declaration, repeat(seq($.declaration, ';'))),
     module_declaration: $ => seq('module', $.identifier, ';'),
@@ -60,22 +64,23 @@ module.exports = grammar({
       prec(1, $.match),
       seq($.mut_declaration, ';'),
       seq($.expression, ';'),
-      seq($.assign_expression, ';')
     ),
     block: $ => seq(optional(seq($.identifier, ':')), '{', repeat($.statement), '}'),
 
-    fn: $ => prec.right(seq('(', commaSep(commaSep1($.identifier), ':', $.non_literal_expression), ')', optional($.non_literal_expression), choice($.block, $.arrow_expression))),
+    fn: $ => prec.right(seq('(', optional(seq(commaSep1($.parameter_declaration), optional(','))), ')', optional($.non_literal_expression), choice($.block, $.arrow_expression))),
+    parameter_declaration: $ => seq(commaSep($.identifier), ':', $.non_literal_expression),
+
     arrow_expression: $ => seq('=>', $.expression),
 
     assign_expression: $ => seq($.non_literal_expression, choice(...assign_operators), $.expression),
 
     if_prefix: $ => seq(token('if'), $.expression, optional(seq(':', $.capture))),
     while_prefix: $ => seq(token('while'), $.expression, optional(seq(':', $.capture))),
-    for_prefix: $ => seq(token('for'), commaSep1($.expression), seq(':', $.capture)),
+    for_prefix: $ => seq(token('for'), commaSep1(choice($.expression, $.range_expression)), seq(':', $.capture)),
     match: $ => seq(token('match'), $.expression, '{', commaSep($.arm), '}'),
-    arm: $ => seq( choice($.expression, '_'), ':', optional($.capture), $.result_block_expr),
+    arm: $ => seq(commaSep1(choice($.expression, '_', $.range_expression)), ':', optional($.capture), $.result_block_expr),
 
-    if_statement: $ => seq($.if_prefix, $.result_block_expr, choice(';', seq('else', $.result_block))),
+    if_statement: $ => seq($.if_prefix, choice(seq($.block, optional(seq('else', $.result_block))), seq($.expression, choice(';', seq('else', $.result_block))))),
     while_statement: $ => seq($.while_prefix, $.result_block),
     for_statement: $ => seq($.for_prefix, $.result_block),
     defer_statement: $ => seq('defer', optional($.capture), $.result_block),
@@ -92,6 +97,7 @@ module.exports = grammar({
       $.fn,
       $.for_expression,
       $.while_expression,
+      $.assign_expression
     )),
     non_literal_expression: $ => prec.right(choice(
       $.if_expression,
@@ -107,7 +113,7 @@ module.exports = grammar({
       $.call,
       $.catch,
       $.try,
-      prec.right($.fn_type),
+      $.fn_type,
       $.grouped,
       $.struct,
       $.enum,
@@ -123,8 +129,8 @@ module.exports = grammar({
     binary_expression: $ => choice(...binary_operators.map(([operator, precedence]) => prec.left(precedence, seq($.expression, operator, $.expression)))),
     unary_expression: $ => prec.left(precedences.unary, seq(choice(...unary_operators), $.expression)),
 
-    return_expression: $ => prec.right(seq('return', optional(seq(':', $.identifier, optional($.expression))))),
-    break_expression: $ => prec.right(seq('break', optional(seq(':', $.identifier, optional($.expression))))),
+    return_expression: $ => prec.right(seq('return', optional(seq(':', $.identifier)), optional($.expression))),
+    break_expression: $ => prec.right(seq('break', optional(seq(':', $.identifier)), optional($.expression))),
     continue_expression: $ => prec.right(seq('continue', optional(seq(':', $.identifier, optional($.expression))))),
 
     nullish_expression: $ => prec.right(precedences.bitwise, seq($.expression, '??', $.expression)),
@@ -153,7 +159,7 @@ module.exports = grammar({
 
     array_initialization: $ => seq('[', commaSep($.expression), ']'),
     enum_error_initialization: $ => prec.right(seq('.', $.identifier, optional(seq('(', $.expression, ')')))),
-    struct_initialization: $ => seq(choice($.identifier, '.'), '{', commaSep(seq($.identifier, ':', $.expression)), '}'),
+    struct_initialization: $ => seq('.', optional($.identifier), '{', commaSep(seq($.identifier, ':', $.expression)), '}'),
 
     struct: $ => seq('struct', '{', repeat($.struct_member), '}'),
     struct_member: $ => choice(seq($.declaration, ';'), seq(commaSep1($.identifier), ':', $.non_literal_expression, optional(seq('=', $.expression)), ',')),
@@ -166,7 +172,7 @@ module.exports = grammar({
 
     capture: $ => seq('|', commaSep1(seq(optional('mut'), $.identifier)), '|'),
 
-    identifier: _ => token(/[$\w][\w]*/),
+    identifier: _ => token(/[a-zA-Z_][a-zA-Z0-9_]*/),
     comment: _ => token(choice(/\/\/[^\n]*/, /\/\*([^*]|\*+[^/*])*\*+\//)),
     literal: _ => choice( /[0-9]+/, /[0-9]+\.[0-9]+/, /"[^"]*"/, /'[^']*'/, 'true', 'false', 'undefined', 'null'),
   },

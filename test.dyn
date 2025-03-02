@@ -1,5 +1,5 @@
 module main;
 
 main := () ! {
-  if yes {}
+	MathFn: type = (i32)i32;
 };
