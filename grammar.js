@@ -149,7 +149,7 @@ module.exports = grammar({
     optional_type: $ => prec.right(1, seq('?', $.non_literal_expression)),
     pointer_type: $ => prec.right(1, seq('*', $.non_literal_expression)),
     array_type: $ => prec.right(1, seq('[', ']', $.non_literal_expression)),
-    fn_type: $ => prec.right(seq('(', commaSep($.non_literal_expression), ')', optional($.non_literal_expression))),
+    fn_type: $ => prec.right(seq('(', optional(field('types', seq($.non_literal_expression, repeat(seq(',', $.non_literal_expression))))), optional(','), ')', optional(field('return_type', $.non_literal_expression)))),
     error_union_type: $ => prec.right(1, seq(optional($.non_literal_expression), '!', optional(seq(repeat(seq($.non_literal_expression, '!')), $.non_literal_expression)))),
 
     grouped: $ => seq('(', $.expression, ')'),

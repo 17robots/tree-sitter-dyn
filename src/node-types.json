@@ -479,16 +479,31 @@
   {
     "type": "fn_type",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "non_literal_expression",
-          "named": true
-        }
-      ]
+    "fields": {
+      "return_type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "non_literal_expression",
+            "named": true
+          }
+        ]
+      },
+      "types": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "non_literal_expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
