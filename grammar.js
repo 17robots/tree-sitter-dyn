@@ -46,9 +46,10 @@ module.exports = grammar({
   name: 'dyn',
   extras: $ => [/\s+/, $.comment],
   conflicts: $ => [
-    [$.result_block, $.result_block_expr],
     [$.fn_type, $.expression],
-    [$.result_block, $.if_expression]
+    [$.statement, $.result_block],
+    [$.statement, $.result_block, $.if_expression],
+    [$.statement, $.result_block, $.result_block_expr],
   ],
   rules: {
     source_file: $ => seq($.module_declaration, repeat(seq($.declaration, ';'))),
@@ -64,6 +65,7 @@ module.exports = grammar({
       prec(1, $.match),
       seq($.mut_declaration, ';'),
       seq($.expression, ';'),
+      $.block,
     ),
     block: $ => seq(optional(seq($.identifier, ':')), '{', repeat($.statement), '}'),
 
@@ -149,7 +151,7 @@ module.exports = grammar({
     optional_type: $ => prec.right(1, seq('?', $.non_literal_expression)),
     pointer_type: $ => prec.right(1, seq('*', $.non_literal_expression)),
     array_type: $ => prec.right(1, seq('[', ']', $.non_literal_expression)),
-    fn_type: $ => prec.right(seq('(', optional(field('types', seq($.non_literal_expression, repeat(seq(',', $.non_literal_expression))))), optional(','), ')', optional(field('return_type', $.non_literal_expression)))),
+    fn_type: $ => prec.right(seq('fn', '(', optional(seq(field('types', commaSep($.non_literal_expression)), optional(','))), ')', optional(field('return_type', $.non_literal_expression)))),
     error_union_type: $ => prec.right(1, seq(optional($.non_literal_expression), '!', optional(seq(repeat(seq($.non_literal_expression, '!')), $.non_literal_expression)))),
 
     grouped: $ => seq('(', $.expression, ')'),
