@@ -46,15 +46,17 @@ module.exports = grammar({
   name: 'dyn',
   extras: $ => [/\s+/, $.comment],
   conflicts: $ => [
-    [$.fn_type, $.expression],
     [$.statement, $.result_block],
     [$.statement, $.result_block, $.if_expression],
     [$.statement, $.result_block, $.result_block_expr],
+    [$.comp, $.expression],
+    [$.fn, $.expression],
+    [$.fn]
   ],
   rules: {
     source_file: $ => seq($.module_declaration, repeat(seq($.declaration, ';'))),
     module_declaration: $ => seq('module', $.identifier, ';'),
-    declaration: $ => seq($.identifier, choice(':=', seq(':', $.non_literal_expression, '=')), $.expression),
+    declaration: $ => seq(optional('pub'), $.identifier, choice(':=', seq(':', $.non_literal_expression, '=')), $.expression),
     mut_declaration: $ => seq(optional('mut'), $.identifier, choice(seq(':=', $.expression), seq(':', $.non_literal_expression, optional(seq('=', $.expression))))),
 
     statement: $ => choice(
@@ -63,26 +65,26 @@ module.exports = grammar({
       $.while_statement,
       $.defer_statement,
       prec(1, $.match),
-      seq($.mut_declaration, ';'),
+      seq($.assign_expression, ';'),
       seq($.expression, ';'),
+      seq($.mut_declaration, ';'),
       $.block,
     ),
     block: $ => seq(optional(seq($.identifier, ':')), '{', repeat($.statement), '}'),
 
-    fn: $ => prec.right(seq('(', optional(seq(commaSep1($.parameter_declaration), optional(','))), ')', optional($.non_literal_expression), choice($.block, $.arrow_expression))),
-    parameter_declaration: $ => seq(commaSep($.identifier), ':', $.non_literal_expression),
+    fn: $ => prec.right(seq(optional('inline'), '(', commaSep(seq(commaSep1($.identifier), optional(seq(':', choice($.non_literal_expression, $.comp))))), ')', optional($.non_literal_expression), optional(choice($.block, $.arrow_expression)))),
 
-    arrow_expression: $ => seq('=>', $.expression),
+    arrow_expression: $ => seq('=>', choice($.expression, $.assign_expression)),
 
     assign_expression: $ => seq($.non_literal_expression, choice(...assign_operators), $.expression),
 
     if_prefix: $ => seq(token('if'), $.expression, optional(seq(':', $.capture))),
     while_prefix: $ => seq(token('while'), $.expression, optional(seq(':', $.capture))),
-    for_prefix: $ => seq(token('for'), commaSep1(choice($.expression, $.range_expression)), seq(':', $.capture)),
+    for_prefix: $ => seq(optional('inline'), token('for'), commaSep1(choice($.expression, $.range_expression)), seq(':', $.capture)),
     match: $ => seq(token('match'), $.expression, '{', commaSep($.arm), '}'),
     arm: $ => seq(commaSep1(choice($.expression, '_', $.range_expression)), ':', optional($.capture), $.result_block_expr),
 
-    if_statement: $ => seq($.if_prefix, choice(seq($.block, optional(seq('else', $.result_block))), seq($.expression, choice(';', seq('else', $.result_block))))),
+    if_statement: $ => seq($.if_prefix, choice(seq($.block, optional(seq('else', $.result_block))), seq(choice($.expression, $.assign_expression), choice(';', seq('else', $.result_block))))),
     while_statement: $ => seq($.while_prefix, $.result_block),
     for_statement: $ => seq($.for_prefix, $.result_block),
     defer_statement: $ => seq('defer', optional($.capture), $.result_block),
@@ -96,12 +98,12 @@ module.exports = grammar({
       $.return_expression,
       $.break_expression,
       $.continue_expression,
-      $.fn,
       $.for_expression,
       $.while_expression,
-      $.assign_expression
+      $.comp,
     )),
     non_literal_expression: $ => prec.right(choice(
+      $.identifier,
       $.if_expression,
       $.nullish_expression,
       $.optional_dereference,
@@ -115,7 +117,6 @@ module.exports = grammar({
       $.call,
       $.catch,
       $.try,
-      $.fn_type,
       $.grouped,
       $.struct,
       $.enum,
@@ -125,7 +126,8 @@ module.exports = grammar({
       $.struct_initialization,
       $.array_initialization,
       $.enum_error_initialization,
-      $.identifier,
+      $.fn,
+      token('type')
     )),
 
     binary_expression: $ => choice(...binary_operators.map(([operator, precedence]) => prec.left(precedence, seq($.expression, operator, $.expression)))),
@@ -147,17 +149,17 @@ module.exports = grammar({
 
     catch: $ => prec.right(precedences.bitwise, seq($.non_literal_expression, 'catch', optional($.capture), choice($.block, $.expression))),
     try: $ => prec.right(precedences.bitwise, seq('try', $.non_literal_expression)),
+    comp: $ => prec.right(seq('comp', $.non_literal_expression)),
 
     optional_type: $ => prec.right(1, seq('?', $.non_literal_expression)),
     pointer_type: $ => prec.right(1, seq('*', $.non_literal_expression)),
     array_type: $ => prec.right(1, seq('[', ']', $.non_literal_expression)),
-    fn_type: $ => prec.right(seq('fn', '(', optional(seq(field('types', commaSep($.non_literal_expression)), optional(','))), ')', optional(field('return_type', $.non_literal_expression)))),
     error_union_type: $ => prec.right(1, seq(optional($.non_literal_expression), '!', optional(seq(repeat(seq($.non_literal_expression, '!')), $.non_literal_expression)))),
 
     grouped: $ => seq('(', $.expression, ')'),
     while_expression: $ => prec.right(seq($.while_prefix, $.result_block_expr)),
     for_expression: $ => prec.right(seq($.for_prefix, $.result_block_expr)),
-    result_block_expr: $ => prec.right(choice($.block, $.expression)),
+    result_block_expr: $ => prec.right(choice($.block, $.expression, $.assign_expression)),
 
     array_initialization: $ => seq('[', commaSep($.expression), ']'),
     enum_error_initialization: $ => prec.right(seq('.', $.identifier, optional(seq('(', $.expression, ')')))),
@@ -176,7 +178,11 @@ module.exports = grammar({
 
     identifier: _ => token(/[a-zA-Z_][a-zA-Z0-9_]*/),
     comment: _ => token(choice(/\/\/[^\n]*/, /\/\*([^*]|\*+[^/*])*\*+\//)),
-    literal: _ => choice( /[0-9]+/, /[0-9]+\.[0-9]+/, /"[^"]*"/, /'[^']*'/, 'true', 'false', 'undefined', 'null'),
+    literal: $ => choice($.number, $.float, $.string, $.char, 'true', 'false', 'undefined', 'null'),
+    number: _ => token(/[0-9]+/),
+    float: _ => token(/[0-9]+\.[0-9]+/),
+    char: _ => token(/'[^']*'/),
+    string: _ => token(/"[^"]*"/)
   },
 })
 
