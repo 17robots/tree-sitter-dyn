@@ -79,12 +79,12 @@ main := () ! {
 	mut_mut_val_ptr = undefined;
 
 	mut nums := [1,2,3,4,5];
-	nums2: []i32 = [];
+	mut nums2: []i32 = [];
 	nums[0] *= 2;
 	nums[1] = 4;
 	nums[2] += nums[2];
 
-	yes := true;
+	yes : u1 = true;
 	if yes {
 		io.print("Hello World\n");
 	} else {
@@ -106,7 +106,7 @@ main := () ! {
 	for 0..10: |i| for 0..10: |j| io.print("These increment differently {} {}", i, j);
 	some_other_array := [1,2,3];
 	for some_other_array: |i| io.print("Arr val: {}", i);
-	for some_other_array, 0..some_other_array.len: |i, j| io.print("Arr ind: {}, arr val: {}", j, i);
+	for some_other_array, 0..some_other_array.len: |mut i, mut j| io.print("Arr ind: {}, arr val: {}", j, i);
 
 	mut while_val: i32 = 0;
 	while while_val < 10 i += 1;

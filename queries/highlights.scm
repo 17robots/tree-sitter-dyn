@@ -18,6 +18,7 @@
 (mut_declaration (identifier) @function (expression (non_literal_expression (fn))))
 
 ((identifier) @type (#match? @type "^(i|u)[0-9]+$"))
+((identifier) @type (#match? @type "^f(16|32|64|128)+$"))
 
 (comment) @comment
 
