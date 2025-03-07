@@ -71,7 +71,7 @@ module.exports = grammar({
     ),
     block: $ => seq(optional(seq($.identifier, ':')), '{', repeat($.statement), '}'),
 
-    fn: $ => prec.right(seq(optional('inline'), '(', commaSep(seq(optional(seq(commaSep1($.identifier), ':')), choice($.non_literal_expression, $.comp))), ')', optional($.non_literal_expression), optional(choice($.block, $.arrow_expression)))),
+    fn: $ => prec.right(seq(optional('inline'), '(', commaSep(seq(optional(seq(commaSep1($.identifier), ':')), field('type', choice($.non_literal_expression, $.comp)))), ')', optional($.non_literal_expression), optional(choice($.block, $.arrow_expression)))),
 
     arrow_expression: $ => seq('=>', choice($.expression, $.assign_expression)),
 

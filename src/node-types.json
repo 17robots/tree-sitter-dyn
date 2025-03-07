@@ -500,7 +500,22 @@
   {
     "type": "fn",
     "named": true,
-    "fields": {},
+    "fields": {
+      "type": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "comp",
+            "named": true
+          },
+          {
+            "type": "non_literal_expression",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": false,
@@ -511,10 +526,6 @@
         },
         {
           "type": "block",
-          "named": true
-        },
-        {
-          "type": "comp",
           "named": true
         },
         {

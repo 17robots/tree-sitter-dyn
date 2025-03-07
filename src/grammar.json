@@ -373,17 +373,21 @@
                         ]
                       },
                       {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "SYMBOL",
-                            "name": "non_literal_expression"
-                          },
-                          {
-                            "type": "SYMBOL",
-                            "name": "comp"
-                          }
-                        ]
+                        "type": "FIELD",
+                        "name": "type",
+                        "content": {
+                          "type": "CHOICE",
+                          "members": [
+                            {
+                              "type": "SYMBOL",
+                              "name": "non_literal_expression"
+                            },
+                            {
+                              "type": "SYMBOL",
+                              "name": "comp"
+                            }
+                          ]
+                        }
                       }
                     ]
                   },
@@ -442,17 +446,21 @@
                               ]
                             },
                             {
-                              "type": "CHOICE",
-                              "members": [
-                                {
-                                  "type": "SYMBOL",
-                                  "name": "non_literal_expression"
-                                },
-                                {
-                                  "type": "SYMBOL",
-                                  "name": "comp"
-                                }
-                              ]
+                              "type": "FIELD",
+                              "name": "type",
+                              "content": {
+                                "type": "CHOICE",
+                                "members": [
+                                  {
+                                    "type": "SYMBOL",
+                                    "name": "non_literal_expression"
+                                  },
+                                  {
+                                    "type": "SYMBOL",
+                                    "name": "comp"
+                                  }
+                                ]
+                              }
                             }
                           ]
                         }

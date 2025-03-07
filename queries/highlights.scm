@@ -23,7 +23,7 @@
 (break_expression (identifier) @label)
 (continue_expression (identifier) @label)
 (member_access (identifier) @variable.member)
-(fn (identifier) @variable.parameter)
+(fn (identifier) @variable.parameter type: (identifier) @type)
 (enum_error_initialization (identifier) @type.enum.variant)
 (call) @function.call
 
