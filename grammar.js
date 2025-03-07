@@ -51,13 +51,12 @@ module.exports = grammar({
     [$.statement, $.result_block, $.result_block_expr],
     [$.comp, $.expression],
     [$.fn, $.expression],
-    [$.fn]
   ],
   rules: {
     source_file: $ => seq($.module_declaration, repeat(seq($.declaration, ';'))),
     module_declaration: $ => seq('module', $.identifier, ';'),
-    declaration: $ => seq(optional('pub'), $.identifier, choice(':=', seq(':', $.non_literal_expression, '=')), $.expression),
-    mut_declaration: $ => seq(optional('mut'), $.identifier, choice(seq(':=', $.expression), seq(':', $.non_literal_expression, optional(seq('=', $.expression))))),
+    declaration: $ => seq(optional('pub'), $.identifier, choice(':=', seq(field('type', seq(':', $.non_literal_expression)), '=')), $.expression),
+    mut_declaration: $ => seq(optional('mut'), $.identifier, choice(seq(':=', $.expression), seq(field('type', seq(':', $.non_literal_expression)), optional(seq('=', $.expression))))),
 
     statement: $ => choice(
       $.for_statement,
@@ -72,7 +71,7 @@ module.exports = grammar({
     ),
     block: $ => seq(optional(seq($.identifier, ':')), '{', repeat($.statement), '}'),
 
-    fn: $ => prec.right(seq(optional('inline'), '(', commaSep(seq(commaSep1($.identifier), optional(seq(':', choice($.non_literal_expression, $.comp))))), ')', optional($.non_literal_expression), optional(choice($.block, $.arrow_expression)))),
+    fn: $ => prec.right(seq(optional('inline'), '(', commaSep(seq(optional(seq(commaSep1($.identifier), ':')), choice($.non_literal_expression, $.comp))), ')', optional($.non_literal_expression), optional(choice($.block, $.arrow_expression)))),
 
     arrow_expression: $ => seq('=>', choice($.expression, $.assign_expression)),
 
@@ -166,11 +165,11 @@ module.exports = grammar({
     struct_initialization: $ => seq('.', optional($.identifier), '{', commaSep(seq($.identifier, ':', $.expression)), '}'),
 
     struct: $ => seq('struct', '{', repeat($.struct_member), '}'),
-    struct_member: $ => choice(seq($.declaration, ';'), seq(commaSep1($.identifier), ':', $.non_literal_expression, optional(seq('=', $.expression)), ',')),
+    struct_member: $ => choice(seq($.declaration, ';'), seq(commaSep1($.identifier), field('type', seq(':', $.non_literal_expression)), optional(seq('=', $.expression)), ',')),
     enum: $ => seq('enum', '{', repeat($.enum_member), '}'),
-    enum_member: $ => choice(seq($.declaration, ';'), seq($.identifier, optional(seq(':', $.non_literal_expression)), ',')),
+    enum_member: $ => choice(seq($.declaration, ';'), seq($.identifier, optional(field('type', seq(':', $.non_literal_expression))), ',')),
     error: $ => seq('error', '{', repeat($.error_member), '}'),
-    error_member: $ => choice(seq($.declaration, ';'), seq($.identifier, optional(seq(':', $.non_literal_expression)), ',')),
+    error_member: $ => choice(seq($.declaration, ';'), seq($.identifier, optional(field('type', seq(':', $.non_literal_expression))), ',')),
 
     if_expression: $ => prec.right(seq($.if_prefix, choice($.expression, $.block), 'else', choice($.expression, $.block))),
 

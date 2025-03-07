@@ -42,6 +42,8 @@ AStruct := struct {
 
 List := (comp type)!;
 
+something := (x, y: i32, fn: (comp type)!) {};
+
 main := () ! {
 	x := 2;
 	y: i32 = 2;

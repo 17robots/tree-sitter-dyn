@@ -264,7 +264,22 @@
   {
     "type": "declaration",
     "named": true,
-    "fields": {},
+    "fields": {
+      "type": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "non_literal_expression",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -275,10 +290,6 @@
         },
         {
           "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "non_literal_expression",
           "named": true
         }
       ]
@@ -340,9 +351,24 @@
   {
     "type": "enum_member",
     "named": true,
-    "fields": {},
+    "fields": {
+      "type": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "non_literal_expression",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
@@ -351,10 +377,6 @@
         },
         {
           "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "non_literal_expression",
           "named": true
         }
       ]
@@ -378,9 +400,24 @@
   {
     "type": "error_member",
     "named": true,
-    "fields": {},
+    "fields": {
+      "type": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "non_literal_expression",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
@@ -389,10 +426,6 @@
         },
         {
           "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "non_literal_expression",
           "named": true
         }
       ]
@@ -727,7 +760,22 @@
   {
     "type": "mut_declaration",
     "named": true,
-    "fields": {},
+    "fields": {
+      "type": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "non_literal_expression",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -738,10 +786,6 @@
         },
         {
           "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "non_literal_expression",
           "named": true
         }
       ]
@@ -1109,7 +1153,22 @@
   {
     "type": "struct_member",
     "named": true,
-    "fields": {},
+    "fields": {
+      "type": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "non_literal_expression",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -1124,10 +1183,6 @@
         },
         {
           "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "non_literal_expression",
           "named": true
         }
       ]

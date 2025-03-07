@@ -1,6 +1,3 @@
-(declaration (identifier) @variable)
-(mut_declaration (identifier) @variable)
-
 ["defer" "comp" "undefined" "null"] @keyword
 ["if" "match" "else"] @keyword.conditional
 ["for" "while"] @keyword.repeat
@@ -11,8 +8,16 @@
 "return" @keyword.return
 "use" @keyword.import
 
-(declaration (identifier) @module)
+(identifier) @variable
+
+(declaration (identifier) @type (expression (non_literal_expression [(enum) (error) (struct)])))
+(declaration (identifier) @function (expression (non_literal_expression (fn))))
+
+(mut_declaration (identifier) @type (expression (non_literal_expression [(enum) (error) (struct)])))
+(mut_declaration (identifier) @function (expression (non_literal_expression (fn))))
+
 (comment) @comment
+
 (block (identifier) @label)
 (return_expression (identifier) @label)
 (break_expression (identifier) @label)
@@ -27,8 +32,8 @@
 (float) @number.float
 (char) @character
 
-(enum_member (identifier) @type)
-(error_member (identifier) @type)
+(enum_member (identifier) @constant)
+(error_member (identifier) @constant)
 (struct_member (identifier) @property)
 
 (enum_member (declaration (identifier) @property))
