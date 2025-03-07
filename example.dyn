@@ -33,16 +33,22 @@ PartneredError := error {
 	message: []u8,
 };
 
+getType := () type => i32;
+
 AStruct := struct {
 	items: i32,
 	here: i32,
 	other: []i32,
+	ptr: *i32,
+	optional: []?*(getType()),
 	new := () AStruct => .{ items: 0, here: 0, other: [] };
 };
 
 List := (comp type)!;
 
 something := (x, y: i32, fn: (comp type)!) {};
+
+Uh := (x: i32) {};
 
 main := () ! {
 	x := 2;

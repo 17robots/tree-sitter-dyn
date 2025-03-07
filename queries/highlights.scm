@@ -3,6 +3,7 @@
 ["for" "while"] @keyword.repeat
 ["try" "catch"] @keyword.exception
 ["pub" "inline" "mut"] @keyword.modifier
+["true" "false"] @boolean
 ["struct" "enum" "error" "type"] @keyword.type
 "module" @module
 "return" @keyword.return
@@ -16,6 +17,8 @@
 (mut_declaration (identifier) @type (expression (non_literal_expression [(enum) (error) (struct)])))
 (mut_declaration (identifier) @function (expression (non_literal_expression (fn))))
 
+((identifier) @type (#match? @type "^(i|u)[0-9]+$"))
+
 (comment) @comment
 
 (block (identifier) @label)
@@ -23,9 +26,8 @@
 (break_expression (identifier) @label)
 (continue_expression (identifier) @label)
 (member_access (identifier) @variable.member)
-(fn (identifier) @variable.parameter type: (identifier) @type)
 (enum_error_initialization (identifier) @type.enum.variant)
-(call) @function.call
+(call (non_literal_expression (identifier))) @function.call
 
 (string) @string
 (number) @number
@@ -39,6 +41,8 @@
 (enum_member (declaration (identifier) @property))
 (error_member (declaration (identifier) @property))
 (struct_member (declaration (identifier) @property))
+
+(struct_initialization name: (identifier) @type)
 
 ["," "." ":"] @punctuation.delimiter
 ["(" ")" "[" "]" "{" "}"] @punctuation.bracket

@@ -162,7 +162,7 @@ module.exports = grammar({
 
     array_initialization: $ => seq('[', commaSep($.expression), ']'),
     enum_error_initialization: $ => prec.right(seq('.', $.identifier, optional(seq('(', $.expression, ')')))),
-    struct_initialization: $ => seq('.', optional($.identifier), '{', commaSep(seq($.identifier, ':', $.expression)), '}'),
+    struct_initialization: $ => seq('.', optional(field('name', $.identifier)), '{', commaSep(seq($.identifier, ':', $.expression)), '}'),
 
     struct: $ => seq('struct', '{', repeat($.struct_member), '}'),
     struct_member: $ => choice(seq($.declaration, ';'), seq(commaSep1($.identifier), field('type', seq(':', $.non_literal_expression)), optional(seq('=', $.expression)), ',')),
