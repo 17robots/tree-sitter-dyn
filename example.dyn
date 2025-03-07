@@ -1,7 +1,7 @@
 module main;
 
 io := use std:io;
-heap := use std.io;
+heap := use std:io;
 
 BasicEnum := enum {
 	item,
@@ -153,7 +153,7 @@ main := () ! {
 
 	a_cool_match_thing := match a_cool_num {
 		1..12: a_cool_number,
-		_: block: {
+		_: blk: {
 			break :blk 13;
 		}
 	};
@@ -186,7 +186,7 @@ main := () ! {
 
 	label: {
 
-  	}
+  }
 
 	DivideError := error {
 		DivideByZero,

@@ -11,7 +11,7 @@
 "return" @keyword.return
 "use" @keyword.import
 
-(identifier) @variable
+(declaration (identifier) @module)
 (comment) @comment
 (block (identifier) @label)
 (return_expression (identifier) @label)
@@ -26,6 +26,14 @@
 (number) @number
 (float) @number.float
 (char) @character
+
+(enum_member (identifier) @type)
+(error_member (identifier) @type)
+(struct_member (identifier) @property)
+
+(enum_member (declaration (identifier) @property))
+(error_member (declaration (identifier) @property))
+(struct_member (declaration (identifier) @property))
 
 ["," "." ":"] @punctuation.delimiter
 ["(" ")" "[" "]" "{" "}"] @punctuation.bracket

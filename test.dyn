@@ -1,5 +1,10 @@
 module main;
 
 main := () {
-  if i < 10 another_while_val = null;
+  if i < 10 another_while_val = error;
+};
+
+something := struct {
+  something_else: i32 = 5,
+  woah := () {};
 };
