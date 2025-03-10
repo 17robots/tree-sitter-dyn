@@ -171,7 +171,7 @@ module.exports = grammar({
     error: $ => seq('error', '{', repeat($.error_member), '}'),
     error_member: $ => choice(seq($.declaration, ';'), seq($.identifier, optional(field('type', seq(':', $.non_literal_expression))), ',')),
 
-    if_expression: $ => prec.right(seq($.if_prefix, choice($.expression, $.block), 'else', choice($.expression, $.block))),
+    if_expression: $ => prec.right(seq($.if_prefix, choice($.expression, $.assign_expression, $.block), optional(seq('else', choice($.expression, $.assign_expression, $.block))))),
 
     capture: $ => seq('|', commaSep1(seq(optional('mut'), $.identifier)), '|'),
 
