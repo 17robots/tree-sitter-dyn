@@ -1,5 +1,0 @@
-module main;
-
-main := () {
-  if i < 10 another_while_val = null;
-};
