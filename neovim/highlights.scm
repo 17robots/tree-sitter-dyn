@@ -5,7 +5,7 @@
 ["pub" "inline" "mut"] @keyword.modifier
 ["true" "false"] @boolean
 ["struct" "enum" "error" "type"] @keyword.type
-"module" @module
+["module", "mod"] @module
 "return" @keyword.return
 "use" @keyword.import
 

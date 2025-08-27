@@ -48,7 +48,7 @@ module.exports = grammar({
   rules: {
     source_file: $ => seq($.module_declaration, repeat(seq($.pub_declaration, ';'))),
     declaration: $ => seq(optional('mut'), $.identifier, choice(':=', seq(':', $.non_literal_expression, '=')), $.expression),
-    module_declaration: $ => seq('module', $.identifier, ';'),
+    module_declaration: $ => seq(choice('module','mod'), $.identifier, ';'),
     pub_declaration: $ => seq(optional('pub'), $.declaration),
 
     // expression
