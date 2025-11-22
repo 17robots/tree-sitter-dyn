@@ -142,7 +142,7 @@ module.exports = grammar({
     ),
     error_type: $ => seq($.actionable_expression, '!', optional(seq(repeat(seq($.identifier, '!')), $.identifier))),
     struct_declaration: $ => seq('struct', '{', comma_separated($.struct_member), '}'),
-    struct_member: $ => seq(field('names', comma_separated1($.identifier)), choice(
+    struct_member: $ => seq(comma_separated1($.identifier), choice(
       seq(':=', $.expression),
       seq(':', $.actionable_expression, optional(seq('=', $.expression)))
     )),
