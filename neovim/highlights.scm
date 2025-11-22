@@ -12,7 +12,7 @@
 
 (identifier) @variable
 
-(variable_declaration (identifier) @type (typed_decl value: (expression [(enum) (error) (struct) (function_type)])))
+(variable_declaration (identifier) @type (typed_decl value: (expression [(type)])))
 (variable_declaration (identifier) @function (typed_decl value: (expression [(function_declaration)])))
 (typed_decl type: (expression @type [(identifier)]))
 
