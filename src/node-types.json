@@ -12,6 +12,10 @@
           "named": true
         },
         {
+          "type": "call_expression",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -97,6 +101,10 @@
       "types": [
         {
           "type": "actionable_expression",
+          "named": true
+        },
+        {
+          "type": "type",
           "named": true
         }
       ]
@@ -330,6 +338,10 @@
         {
           "type": "expression",
           "named": true
+        },
+        {
+          "type": "type",
+          "named": true
         }
       ]
     }
@@ -489,6 +501,10 @@
         {
           "type": "expression",
           "named": true
+        },
+        {
+          "type": "type",
+          "named": true
         }
       ]
     }
@@ -634,6 +650,10 @@
         {
           "type": "actionable_expression",
           "named": true
+        },
+        {
+          "type": "type",
+          "named": true
         }
       ]
     }
@@ -697,6 +717,10 @@
       "types": [
         {
           "type": "actionable_expression",
+          "named": true
+        },
+        {
+          "type": "type",
           "named": true
         }
       ]
@@ -925,22 +949,7 @@
   {
     "type": "struct_member",
     "named": true,
-    "fields": {
-      "names": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": ",",
-            "named": false
-          },
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
@@ -951,6 +960,14 @@
         },
         {
           "type": "expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "type",
           "named": true
         }
       ]

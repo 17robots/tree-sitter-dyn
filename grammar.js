@@ -58,10 +58,12 @@ module.exports = grammar({
     [$.typed_decl],
     [$.expression, $.parameter],
     [$.block],
+    [$.array_literal, $.array_type],
+    [$.actionable_expression, $.semicolon_statement],
   ],
   rules: {
     source_file: $ => seq($.module_declaration, repeat($.top_level)),
-    module_declaration: $ => seq(choice('module', 'mod'), $.identifier),
+    module_declaration: $ => seq(choice('module', 'mod'), $.identifier, ';'),
     top_level: $ => seq(optional('pub'), $.variable_declaration, ';'),
     variable_declaration: $ => seq(optional('mut'), $.identifier, choice($.typed_decl, $.untyped_decl)),
     typed_decl: $ => seq(':', field('type', $.expression), field('value', optional(seq('=', $.expression)))),
@@ -89,6 +91,7 @@ module.exports = grammar({
       $.optional_dereference,
       $.paren_expression,
       $.pointer_dereference,
+      $.call_expression,
     ),
     array_access: $ => seq($.actionable_expression, '[', $.int_literal, ']'),
     identifier: _ => token(/[a-zA-Z_][a-zA-Z0-9_]*/),
@@ -137,19 +140,19 @@ module.exports = grammar({
       field('name', $.identifier),
       choice(
         seq(':=', $.expression),
-        seq(':', $.actionable_expression, optional(seq('=', $.expression)))
+        seq(':', choice($.actionable_expression, $.type), optional(seq('=', $.expression)))
       )
     ),
     error_type: $ => seq($.actionable_expression, '!', optional(seq(repeat(seq($.identifier, '!')), $.identifier))),
     struct_declaration: $ => seq('struct', '{', comma_separated($.struct_member), '}'),
     struct_member: $ => seq(comma_separated1($.identifier), choice(
       seq(':=', $.expression),
-      seq(':', $.actionable_expression, optional(seq('=', $.expression)))
+      seq(':', choice($.actionable_expression, $.type), optional(seq('=', $.expression)))
     )),
-    array_type: $ => seq('[', ']', $.actionable_expression),
-    function_type: $ => seq('(', comma_separated($.expression), ')', $.actionable_expression),
-    optional_type: $ => seq('*', $.actionable_expression),
-    pointer_type: $ => seq('?', $.actionable_expression),
+    array_type: $ => seq('[', ']', choice($.actionable_expression, $.type)),
+    function_type: $ => seq('(', comma_separated($.expression), ')', choice($.actionable_expression, $.type)),
+    optional_type: $ => seq('?', choice($.actionable_expression, $.type)),
+    pointer_type: $ => seq('*', choice($.actionable_expression, $.type)),
     unary_expression: $ => choice(...unary_operators.map(([o]) => prec.left(precedence.unary, seq(o, $.expression)))),
     use: $ => seq('use', $.string_literal),
     block: $ => seq(optional(seq($.identifier, ':')), '{', repeat($.statement), '}'),

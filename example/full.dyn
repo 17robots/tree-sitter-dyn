@@ -1,0 +1,5 @@
+module main;
+
+AStruct := struct {
+  aThing := (s: AStruct) void {}
+};
