@@ -1176,7 +1176,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "struct_member"
+                  "name": "struct_literal_member"
                 },
                 {
                   "type": "REPEAT",
@@ -1189,7 +1189,7 @@
                       },
                       {
                         "type": "SYMBOL",
-                        "name": "struct_member"
+                        "name": "struct_literal_member"
                       }
                     ]
                   }
@@ -2862,11 +2862,6 @@
     [
       "expression",
       "parameter"
-    ],
-    [
-      "expression",
-      "struct_member",
-      "assign_expression"
     ],
     [
       "block"

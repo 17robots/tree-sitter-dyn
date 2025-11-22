@@ -897,7 +897,26 @@
           "named": true
         },
         {
-          "type": "struct_member",
+          "type": "struct_literal_member",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "struct_literal_member",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
           "named": true
         }
       ]

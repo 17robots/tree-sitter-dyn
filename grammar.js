@@ -57,7 +57,6 @@ module.exports = grammar({
     [$.expression, $.assign_expression],
     [$.typed_decl],
     [$.expression, $.parameter],
-    [$.expression, $.struct_member, $.assign_expression],
     [$.block],
   ],
   rules: {
@@ -119,7 +118,7 @@ module.exports = grammar({
     float_literal: _ => token(/[0-9]+\.[0-9]+/),
     int_literal: _ => token(/[0-9]+/),
     string_literal: _ => token(seq('"', repeat(choice(/[^"\\]/, /\\./)), '"')),
-    struct_literal: $ => seq(optional($.identifier), '{', comma_separated($.struct_member), '}'),
+    struct_literal: $ => seq(optional($.identifier), '{', comma_separated($.struct_literal_member), '}'),
     struct_literal_member: $ => seq($.identifier, ':', $.expression),
     try_expression: $ => seq('try', $.call_expression),
     type: $ => choice(
