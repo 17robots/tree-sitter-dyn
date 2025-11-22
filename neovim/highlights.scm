@@ -26,7 +26,6 @@
 (comment) @comment
 
 (block (identifier) @label)
-(return_expression (identifier) @label)
 (break_expression (identifier) @label)
 (continue_expression (identifier) @label)
 (member_access (identifier) @variable.member)
