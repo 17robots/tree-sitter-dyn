@@ -9,30 +9,35 @@
 ["break" "continue"] @keyword.continue
 "use" @keyword.import
 
-(block (identifier) @label)
-(break_expression (identifier) @label)
+(identifier) @variable
+((identifier) @type (#match? @type "^f(16|32|64|128)+$"))
+((identifier) @type (#match? @type "^(i|u)[0-9]+$"))
+
+(comment) @comment
+
 (call_expression (actionable_expression (identifier) @function.call))
 (call_expression (actionable_expression (member_access (identifier) @function.method.call)))
-(comment) @comment
+
+(member_access (identifier) @variable.member)
+
+(variable_declaration (identifier) @function (typed_decl value: (expression [(function_declaration)])))
+(variable_declaration (identifier) @type (typed_decl value: (expression [(type)])))
+(variable_declaration (identifier) @function (untyped_decl (expression [(function_declaration)])))
+(variable_declaration (identifier) @type (untyped_decl (expression [(type)])))
+
+(block (identifier) @label)
+(break_expression (identifier) @label)
 (continue_expression (identifier) @label)
 (enum_error_literal (identifier) @type.variant)
 (enum_error_member name: (identifier) @variable.member)
 (enum_error_member name: (identifier) @function.method (expression [(function_declaration)]))
 (expression [(type)]) @type
-(identifier) @variable
-((identifier) @type (#match? @type "^f(16|32|64|128)+$"))
-((identifier) @type (#match? @type "^(i|u)[0-9]+$"))
-(member_access (identifier) @variable.member)
 (module_declaration (identifier) @module)
 (parameter (identifier) @variable.parameter)
 (struct_literal (identifier) @type)
 (struct_literal_member (identifier) @variable.member)
 (struct_member (identifier) @variable.member)
 (struct_member (identifier) @function.method (expression [(function_declaration)]))
-(variable_declaration (identifier) @function (typed_decl value: (expression [(function_declaration)])))
-(variable_declaration (identifier) @type (typed_decl value: (expression [(type)])))
-(variable_declaration (identifier) @function (untyped_decl (expression [(function_declaration)])))
-(variable_declaration (identifier) @type (untyped_decl (expression [(type)])))
 
 (boolean_literal) @boolean
 (char_literal) @character
