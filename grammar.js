@@ -45,18 +45,27 @@ module.exports = grammar({
   conflicts: $ => [
     [$.actionable_expression, $.parameter],
     [$.paren_expression, $.function_type],
-    [$.actionable_expression, $.struct_literal],
-    [$.array_literal, $.array_type],
-    [$.enum_error_literal],
-    [$.function_declaration, $.function_type],
-    [$.expression, $.call_expression],
+    [$.error_type],
+    [$.break_expression],
+    [$.return_expression],
+    [$.expression, $.statement_nosemicolon],
+    [$.struct_literal, $.block],
+    [$.variable_declaration, $.actionable_expression, $.block],
+    [$.continue_expression],
+    [$.statement, $.statement_nosemicolon],
+    [$.statement_nosemicolon],
+    [$.expression, $.assign_expression],
+    [$.typed_decl],
+    [$.expression, $.parameter],
+    [$.expression, $.struct_member, $.assign_expression],
+    [$.block],
   ],
   rules: {
     source_file: $ => seq($.module_declaration, repeat($.top_level)),
     module_declaration: $ => seq(choice('module', 'mod'), $.identifier),
     top_level: $ => seq(optional('pub'), $.variable_declaration, ';'),
     variable_declaration: $ => seq(optional('mut'), $.identifier, choice($.typed_decl, $.untyped_decl)),
-    typed_decl: $ => seq(':', 'type', optional(seq('=', $.expression))),
+    typed_decl: $ => seq(':', field('type', $.expression), field('value', optional(seq('=', $.expression)))),
     untyped_decl: $ => seq(':=', $.expression),
     expression: $ => choice(
       $.actionable_expression,
@@ -64,7 +73,10 @@ module.exports = grammar({
       $.catch_expression,
       $.comp_expression,
       $.function_declaration,
+      seq($.if_expression, $.expression, 'else', $.expression),
       $.literal,
+      $.match_expression,
+      $.statement_nosemicolon,
       $.try_expression,
       $.type,
       $.unary_expression,
@@ -111,6 +123,7 @@ module.exports = grammar({
     try_expression: $ => seq('try', $.call_expression),
     type: $ => choice(
       $.enum_error_declaration,
+      $.error_type,
       $.struct_declaration,
       $.array_type,
       $.function_type,
@@ -127,6 +140,7 @@ module.exports = grammar({
         seq(':', $.actionable_expression, optional(seq('=', $.expression)))
       )
     ),
+    error_type: $ => seq($.actionable_expression, '!', optional(seq(repeat(seq($.identifier, '!')), $.identifier))),
     struct_declaration: $ => seq('struct', '{', comma_separated($.struct_member), '}'),
     struct_member: $ => seq(comma_separated1($.identifier), choice(
       seq(':=', $.expression),
@@ -144,28 +158,40 @@ module.exports = grammar({
       seq($.char_literal, '..', $.char_literal),
     ),
     statement: $ => choice(
-      seq(choice(
-        $.assign_expression,
-        $.break_expression,
-        $.call_expression,
-        $.return_expression,
-        $.variable_declaration
-      ), ';'),
-      choice(
-        $.block,
-        $.for_expression,
-        $.if_expression,
-        $.match_expression
-      )
+      $.block,
+      seq($.for_expression, $.statement),
+      seq($.if_expression, optional(seq($.statement_nosemicolon, 'else')), $.statement),
+      $.match_expression,
+      seq($.semicolon_statement, ';')
+    ),
+    statement_nosemicolon: $ => choice(
+      $.block,
+      seq($.for_expression, $.statement_nosemicolon),
+      seq($.if_expression, optional(seq($.statement_nosemicolon, 'else')), $.statement_nosemicolon),
+      $.match_expression,
+      $.semicolon_statement
+    ),
+    semicolon_statement: $ => choice(
+      $.assign_expression,
+      $.break_expression,
+      $.call_expression,
+      $.continue_expression,
+      $.return_expression,
+      $.variable_declaration
     ),
     assign_expression: $ => choice(...assign_operators.map(op => seq(choice($.actionable_expression, '_'), op, $.expression))),
     break_expression: $ => seq('break', optional(seq(':', $.identifier)), optional($.expression)),
     call_expression: $ => seq($.actionable_expression, '(', comma_separated($.expression), ')'),
+    continue_expression: $ => seq('continue', optional(seq(':', $.identifier))),
     return_expression: $ => seq('return', optional($.expression)),
-    for_expression: $ => seq('for', optional(comma_separated(choice($.expression, $.range_expression))), ':', optional($.capture), $.expression),
-    if_expression: $ => seq('if', $.expression, ':', optional($.capture), $.expression, optional(seq('else', $.expression))),
+    for_expression: $ => seq('for', optional(comma_separated(choice($.expression, $.range_expression))), ':', optional($.capture)),
+    if_expression: $ => seq('if', $.expression, ':', optional($.capture)),
     match_expression: $ => seq('match', $.expression, ':', '{', comma_separated($.arm), '}'),
-    arm: $ => seq(choice(comma_separated1(choice($.expression, $.range_expression)), '_'), ':', $.expression),
+    arm: $ => seq(
+      choice(comma_separated1(choice($.expression, $.range_expression)), '_'),
+      ':',
+      $.expression
+    ),
     capture: $ => seq('|', comma_separated(seq(optional('mut'), $.identifier)), '|'),
     comment: _ => token(choice(/\/\/[^\n]*/, /\/\*([^*]|\*+[^/*])*\*+\//)),
   }
