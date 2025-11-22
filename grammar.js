@@ -120,7 +120,7 @@ module.exports = grammar({
     int_literal: _ => token(/[0-9]+/),
     string_literal: _ => token(seq('"', repeat(choice(/[^"\\]/, /\\./)), '"')),
     struct_literal: $ => seq(optional($.identifier), '{', comma_separated($.struct_member), '}'),
-    struct_member: $ => seq($.identifier, ':', $.expression),
+    struct_literal_member: $ => seq($.identifier, ':', $.expression),
     try_expression: $ => seq('try', $.call_expression),
     type: $ => choice(
       $.enum_error_declaration,

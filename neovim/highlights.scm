@@ -10,42 +10,37 @@
 ["break" "continue"] @keyword.continue
 "use" @keyword.import
 
-(identifier) @variable
-
-(variable_declaration (identifier) @type (typed_decl value: (expression [(type)])))
-(variable_declaration (identifier) @type (untyped_decl (expression [(type)])))
-
-(variable_declaration (identifier) @function (typed_decl value: (expression [(function_declaration)])))
-(variable_declaration (identifier) @function (untyped_decl (expression [(function_declaration)])))
-
-(expression [(type)]) @type
-
-((identifier) @type (#match? @type "^(i|u)[0-9]+$"))
-((identifier) @type (#match? @type "^f(16|32|64|128)+$"))
-
-(comment) @comment
-
 (block (identifier) @label)
 (break_expression (identifier) @label)
+(call_expression (actionable_expression (identifier) @function.call))
+(call_expression (actionable_expression (member_access (identifier) @function.method.call)))
+(comment) @comment
 (continue_expression (identifier) @label)
-(member_access (identifier) @variable.member)
-(call_expression (actionable_expression (identifier))) @function.call
-
-(string_literal) @string
-(int_literal) @number
-(float_literal) @number.float
-(char_literal) @character
-
-(enum_error_member name: (identifier) @property)
-(enum_error_member name: (identifier) @function (expression [(function_declaration)]))
-
-(struct_member names: (identifier) @property)
-(struct_member names: (identifier) @function (expression [(function_declaration)]))
-
-(struct_literal (identifier) @type)
 (enum_error_literal (identifier) @type.variant)
+(enum_error_member name: (identifier) @variable.member)
+(enum_error_member name: (identifier) @function.method (expression [(function_declaration)]))
+(expression [(type)]) @type
+(identifier) @variable
+((identifier) @type (#match? @type "^f(16|32|64|128)+$"))
+((identifier) @type (#match? @type "^(i|u)[0-9]+$"))
+(member_access (identifier) @variable.member)
+(parameter (identifier) @variable.parameter)
+(struct_literal (identifier) @type)
+(struct_literal_member (identifier) @variable.member)
+(struct_member names: (identifier) @variable.member)
+(struct_member names: (identifier) @function.method (expression [(function_declaration)]))
+(variable_declaration (identifier) @function (typed_decl value: (expression [(function_declaration)])))
+(variable_declaration (identifier) @type (typed_decl value: (expression [(type)])))
+(variable_declaration (identifier) @function (untyped_decl (expression [(function_declaration)])))
+(variable_declaration (identifier) @type (untyped_decl (expression [(type)])))
 
-["," "." ":"] @punctuation.delimiter
+(boolean_literal) @boolean
+(char_literal) @character
+(float_literal) @number.float
+(int_literal) @number
+(string_literal) @string
+
+"_" @variable.parameter.builtin
+["," "." ":" ";"] @punctuation.delimiter
 ["(" ")" "[" "]" "{" "}"] @punctuation.bracket
-
 ["=" "*=" "%=" "/=" "+=" "-=" "<<=" ">>=" "&=" "^=" "|=" "||" "&&" "==" "!=" ">" ">=" "<" "<=" "&" "|" "<<" ">>" "+" "-" "*" "/" "%"] @operator
