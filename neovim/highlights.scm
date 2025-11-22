@@ -1,11 +1,11 @@
 ["defer" "comp" "undefined" "null"] @keyword
 ["if" "match" "else"] @keyword.conditional
-["for"] @keyword.repeat
+"for" @keyword.repeat
 ["try" "catch"] @keyword.exception
 ["pub" "inline" "mut"] @keyword.modifier
 ["true" "false"] @boolean
 ["struct" "enum" "error" "type"] @keyword.type
-["module", "mod"] @module
+["module" "mod"] @module
 "return" @keyword.return
 ["break" "continue"] @keyword.continue
 "use" @keyword.import
