@@ -40,7 +40,6 @@
 (int_literal) @number
 (string_literal) @string
 
-"_" @variable.parameter.builtin
 ["," "." ":" ";"] @punctuation.delimiter
 ["(" ")" "[" "]" "{" "}"] @punctuation.bracket
 ["=" "*=" "%=" "/=" "+=" "-=" "<<=" ">>=" "&=" "^=" "|=" "||" "&&" "==" "!=" ">" ">=" "<" "<=" "&" "|" "<<" ">>" "+" "-" "*" "/" "%"] @operator
