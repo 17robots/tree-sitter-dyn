@@ -13,10 +13,10 @@
 (identifier) @variable
 
 (variable_declaration (identifier) @type (typed_decl value: (expression [(type)])))
-(variable_declaration (identifier) @type (untyped_decl value: (expression [(type)])))
+(variable_declaration (identifier) @type (untyped_decl (expression [(type)])))
 
 (variable_declaration (identifier) @function (typed_decl value: (expression [(function_declaration)])))
-(variable_declaration (identifier) @function (untyped_decl value: (expression [(function_declaration)])))
+(variable_declaration (identifier) @function (untyped_decl (expression [(function_declaration)])))
 
 (expression [(type)]) @type
 
