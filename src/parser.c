@@ -21,10 +21,10 @@
 #define ALIAS_COUNT 0
 #define TOKEN_COUNT 78
 #define EXTERNAL_TOKEN_COUNT 0
-#define FIELD_COUNT 2
+#define FIELD_COUNT 4
 #define MAX_ALIAS_SEQUENCE_LENGTH 8
 #define MAX_RESERVED_WORD_SET_SIZE 0
-#define PRODUCTION_ID_COUNT 3
+#define PRODUCTION_ID_COUNT 6
 #define SUPERTYPE_COUNT 0
 
 enum ts_symbol_identifiers {
@@ -1019,12 +1019,16 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
 };
 
 enum ts_field_identifiers {
-  field_type = 1,
-  field_value = 2,
+  field_name = 1,
+  field_names = 2,
+  field_type = 3,
+  field_value = 4,
 };
 
 static const char * const ts_field_names[] = {
   [0] = NULL,
+  [field_name] = "name",
+  [field_names] = "names",
   [field_type] = "type",
   [field_value] = "value",
 };
@@ -1032,6 +1036,9 @@ static const char * const ts_field_names[] = {
 static const TSMapSlice ts_field_map_slices[PRODUCTION_ID_COUNT] = {
   [1] = {.index = 0, .length = 1},
   [2] = {.index = 1, .length = 3},
+  [3] = {.index = 4, .length = 1},
+  [4] = {.index = 5, .length = 2},
+  [5] = {.index = 7, .length = 1},
 };
 
 static const TSFieldMapEntry ts_field_map_entries[] = {
@@ -1041,6 +1048,13 @@ static const TSFieldMapEntry ts_field_map_entries[] = {
     {field_type, 1},
     {field_value, 2},
     {field_value, 3},
+  [4] =
+    {field_names, 0},
+  [5] =
+    {field_names, 0},
+    {field_names, 1},
+  [7] =
+    {field_name, 0},
 };
 
 static const TSSymbol ts_alias_sequences[PRODUCTION_ID_COUNT][MAX_ALIAS_SEQUENCE_LENGTH] = {
@@ -50283,7 +50297,7 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [651] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_match_expression, 7, 0, 0),
   [653] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_match_expression, 7, 0, 0),
   [655] = {.entry = {.count = 2, .reusable = false}}, REDUCE(sym_expression, 1, 0, 0), SHIFT(227),
-  [658] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_struct_member, 3, 0, 0),
+  [658] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_struct_member, 3, 0, 3),
   [660] = {.entry = {.count = 1, .reusable = false}}, SHIFT(138),
   [662] = {.entry = {.count = 1, .reusable = true}}, SHIFT(138),
   [664] = {.entry = {.count = 2, .reusable = false}}, REDUCE(sym_expression, 1, 0, 0), SHIFT(203),
@@ -50602,7 +50616,7 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [1329] = {.entry = {.count = 2, .reusable = true}}, REDUCE(sym_expression, 1, 0, 0), SHIFT(363),
   [1332] = {.entry = {.count = 1, .reusable = true}}, SHIFT(363),
   [1334] = {.entry = {.count = 3, .reusable = true}}, REDUCE(sym_expression, 1, 0, 0), REDUCE(sym_statement_nosemicolon, 2, 0, 0), SHIFT(384),
-  [1338] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_struct_member, 5, 0, 0),
+  [1338] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_struct_member, 5, 0, 3),
   [1340] = {.entry = {.count = 1, .reusable = false}}, SHIFT(139),
   [1342] = {.entry = {.count = 1, .reusable = true}}, SHIFT(183),
   [1344] = {.entry = {.count = 1, .reusable = true}}, SHIFT(184),
@@ -50655,16 +50669,16 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [1443] = {.entry = {.count = 1, .reusable = true}}, SHIFT(1101),
   [1445] = {.entry = {.count = 2, .reusable = true}}, REDUCE(sym_expression, 1, 0, 0), SHIFT(379),
   [1448] = {.entry = {.count = 1, .reusable = true}}, SHIFT(784),
-  [1450] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_enum_error_member, 3, 0, 0),
-  [1452] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_struct_member, 4, 0, 0),
+  [1450] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_enum_error_member, 3, 0, 5),
+  [1452] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_struct_member, 4, 0, 4),
   [1454] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_arm, 4, 0, 0),
   [1456] = {.entry = {.count = 1, .reusable = false}}, SHIFT(117),
   [1458] = {.entry = {.count = 1, .reusable = true}}, SHIFT(118),
   [1460] = {.entry = {.count = 1, .reusable = true}}, SHIFT(1107),
-  [1462] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_struct_member, 6, 0, 0),
+  [1462] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_struct_member, 6, 0, 4),
   [1464] = {.entry = {.count = 1, .reusable = false}}, SHIFT(250),
   [1466] = {.entry = {.count = 1, .reusable = true}}, REDUCE(aux_sym_for_expression_repeat1, 2, 0, 0),
-  [1468] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_enum_error_member, 5, 0, 0),
+  [1468] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_enum_error_member, 5, 0, 5),
   [1470] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_arm, 3, 0, 0),
   [1472] = {.entry = {.count = 1, .reusable = true}}, SHIFT(92),
   [1474] = {.entry = {.count = 1, .reusable = false}}, SHIFT(95),

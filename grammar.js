@@ -64,7 +64,7 @@ module.exports = grammar({
     source_file: $ => seq($.module_declaration, repeat($.top_level)),
     module_declaration: $ => seq(choice('module', 'mod'), $.identifier),
     top_level: $ => seq(optional('pub'), $.variable_declaration, ';'),
-    variable_declaration: $ => seq(optional('mut'), field('name', $.identifier), choice($.typed_decl, $.untyped_decl)),
+    variable_declaration: $ => seq(optional('mut'), $.identifier, choice($.typed_decl, $.untyped_decl)),
     typed_decl: $ => seq(':', field('type', $.expression), field('value', optional(seq('=', $.expression)))),
     untyped_decl: $ => seq(':=', $.expression),
     expression: $ => choice(
