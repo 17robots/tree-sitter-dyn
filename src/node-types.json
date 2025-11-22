@@ -315,18 +315,7 @@
   {
     "type": "enum_error_member",
     "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
@@ -340,6 +329,10 @@
           "named": true
         },
         {
+          "type": "identifier",
+          "named": true
+        },
+        {
           "type": "type",
           "named": true
         }
@@ -347,17 +340,13 @@
     }
   },
   {
-    "type": "error_type",
+    "type": "error_suffix",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
-        {
-          "type": "actionable_expression",
-          "named": true
-        },
         {
           "type": "identifier",
           "named": true
@@ -472,6 +461,10 @@
           "named": true
         },
         {
+          "type": "error_suffix",
+          "named": true
+        },
+        {
           "type": "expression",
           "named": true
         },
@@ -496,6 +489,10 @@
       "types": [
         {
           "type": "actionable_expression",
+          "named": true
+        },
+        {
+          "type": "error_suffix",
           "named": true
         },
         {
@@ -666,6 +663,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "actionable_expression",
+          "named": true
+        },
         {
           "type": "identifier",
           "named": true
@@ -1017,10 +1018,6 @@
         },
         {
           "type": "enum_error_declaration",
-          "named": true
-        },
-        {
-          "type": "error_type",
           "named": true
         },
         {

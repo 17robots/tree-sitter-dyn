@@ -45,7 +45,6 @@ module.exports = grammar({
   conflicts: $ => [
     [$.actionable_expression, $.parameter],
     [$.paren_expression, $.function_type],
-    [$.error_type],
     [$.break_expression],
     [$.return_expression],
     [$.expression, $.statement_nosemicolon],
@@ -60,6 +59,8 @@ module.exports = grammar({
     [$.block],
     [$.array_literal, $.array_type],
     [$.actionable_expression, $.semicolon_statement],
+    [$.error_suffix],
+    [$.function_type],
   ],
   rules: {
     source_file: $ => seq($.module_declaration, repeat($.top_level)),
@@ -102,8 +103,8 @@ module.exports = grammar({
     binary_expression: $ => choice(...binary_operators.map(([o, p]) => prec.left(p, seq($.expression, o, $.expression)))),
     catch_expression: $ => seq($.call_expression, 'catch', optional($.capture), $.expression),
     comp_expression: $ => seq('comp', choice($.block, $.call_expression)),
-    function_declaration: $ => seq(optional('inline'), '(', comma_separated($.parameter), ')', choice($.type, $.actionable_expression), choice($.block, seq('=>', $.expression))),
-    parameter: $ => seq(comma_separated1($.identifier), ':', choice($.type, seq('comp', 'type'))),
+    function_declaration: $ => seq(optional('inline'), '(', comma_separated($.parameter), ')', choice($.type, $.actionable_expression), optional($.error_suffix), choice($.block, seq('=>', $.expression))),
+    parameter: $ => seq(comma_separated1($.identifier), ':', choice($.type, $.actionable_expression, seq('comp', 'type'))),
     literal: $ => choice(
       $.array_literal,
       $.boolean_literal,
@@ -126,7 +127,6 @@ module.exports = grammar({
     try_expression: $ => seq('try', $.call_expression),
     type: $ => choice(
       $.enum_error_declaration,
-      $.error_type,
       $.struct_declaration,
       $.array_type,
       $.function_type,
@@ -137,20 +137,20 @@ module.exports = grammar({
     ),
     enum_error_declaration: $ => seq(choice('enum', 'error'), '{', comma_separated($.enum_error_member), '}'),
     enum_error_member: $ => seq(
-      field('name', $.identifier),
-      choice(
+      $.identifier,
+      optional(choice(
         seq(':=', $.expression),
         seq(':', choice($.actionable_expression, $.type), optional(seq('=', $.expression)))
-      )
+      ))
     ),
-    error_type: $ => seq($.actionable_expression, '!', optional(seq(repeat(seq($.identifier, '!')), $.identifier))),
+    error_suffix: $ => seq('!', optional(seq(repeat(seq($.identifier, '!')), $.identifier))),
     struct_declaration: $ => seq('struct', '{', comma_separated($.struct_member), '}'),
     struct_member: $ => seq(comma_separated1($.identifier), choice(
       seq(':=', $.expression),
       seq(':', choice($.actionable_expression, $.type), optional(seq('=', $.expression)))
     )),
     array_type: $ => seq('[', ']', choice($.actionable_expression, $.type)),
-    function_type: $ => seq('(', comma_separated($.expression), ')', choice($.actionable_expression, $.type)),
+    function_type: $ => seq('(', comma_separated(choice($.expression, seq('comp', 'type'))), ')', choice($.actionable_expression, $.type), optional($.error_suffix)),
     optional_type: $ => seq('?', choice($.actionable_expression, $.type)),
     pointer_type: $ => seq('*', choice($.actionable_expression, $.type)),
     unary_expression: $ => choice(...unary_operators.map(([o]) => prec.left(precedence.unary, seq(o, $.expression)))),
@@ -196,7 +196,7 @@ module.exports = grammar({
       ':',
       $.expression
     ),
-    capture: $ => seq('|', comma_separated(seq(optional('mut'), $.identifier)), '|'),
+    capture: $ => seq('|', comma_separated1(seq(optional('mut'), $.identifier)), '|'),
     comment: _ => token(choice(/\/\/[^\n]*/, /\/\*([^*]|\*+[^/*])*\*+\//)),
   }
 })
