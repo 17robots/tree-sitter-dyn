@@ -797,6 +797,10 @@
           "named": true
         },
         {
+          "type": "capture",
+          "named": true
+        },
+        {
           "type": "for_expression",
           "named": true
         },
@@ -1265,6 +1269,10 @@
   },
   {
     "type": "continue",
+    "named": false
+  },
+  {
+    "type": "defer",
     "named": false
   },
   {

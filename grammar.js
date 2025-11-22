@@ -159,6 +159,7 @@ module.exports = grammar({
     ),
     statement: $ => choice(
       $.block,
+      seq('defer', optional($.capture), $.statement),
       seq($.for_expression, $.statement),
       seq($.if_expression, optional(seq($.statement_nosemicolon, 'else')), $.statement),
       $.match_expression,
