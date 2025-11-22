@@ -1,11 +1,10 @@
-["defer" "comp" "null"] @keyword
+["defer" "comp" "null" "mod" "module"] @keyword
 ["if" "match" "else"] @keyword.conditional
 "for" @keyword.repeat
 ["try" "catch"] @keyword.exception
 ["pub" "inline" "mut"] @keyword.modifier
 ["true" "false"] @boolean
-["struct" "enum" "error" "type"] @keyword.type
-["module" "mod"] @module
+["struct" "enum" "error" "type" "void"] @keyword.type
 "return" @keyword.return
 ["break" "continue"] @keyword.continue
 "use" @keyword.import
@@ -24,6 +23,7 @@
 ((identifier) @type (#match? @type "^f(16|32|64|128)+$"))
 ((identifier) @type (#match? @type "^(i|u)[0-9]+$"))
 (member_access (identifier) @variable.member)
+(module_declaration (identifier) @module)
 (parameter (identifier) @variable.parameter)
 (struct_literal (identifier) @type)
 (struct_literal_member (identifier) @variable.member)
