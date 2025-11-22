@@ -14,7 +14,10 @@
 
 (variable_declaration (identifier) @type (typed_decl value: (expression [(type)])))
 (variable_declaration (identifier) @function (typed_decl value: (expression [(function_declaration)])))
-(typed_decl type: (expression @type [(identifier)]))
+(variable_declaration (identifier) @type (untyped_decl value: (expression [(type)])))
+(variable_declaration (identifier) @function (untyped_decl value: (expression [(function_declaration)])))
+
+(typed_decl type: (expression) @type (expression [(type)])))
 
 ((identifier) @type (#match? @type "^(i|u)[0-9]+$"))
 ((identifier) @type (#match? @type "^f(16|32|64|128)+$"))
