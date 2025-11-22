@@ -207,6 +207,10 @@
           "name": "match_expression"
         },
         {
+          "type": "STRING",
+          "value": "null"
+        },
+        {
           "type": "SYMBOL",
           "name": "statement_nosemicolon"
         },

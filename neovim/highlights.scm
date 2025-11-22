@@ -1,4 +1,4 @@
-["defer" "comp" "undefined" "null"] @keyword
+["defer" "comp" "null"] @keyword
 ["if" "match" "else"] @keyword.conditional
 "for" @keyword.repeat
 ["try" "catch"] @keyword.exception

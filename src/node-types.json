@@ -352,7 +352,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "actionable_expression",
@@ -1329,6 +1329,10 @@
   },
   {
     "type": "mut",
+    "named": false
+  },
+  {
+    "type": "null",
     "named": false
   },
   {

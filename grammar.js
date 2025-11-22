@@ -76,6 +76,7 @@ module.exports = grammar({
       seq($.if_expression, $.expression, 'else', $.expression),
       $.literal,
       $.match_expression,
+      'null',
       $.statement_nosemicolon,
       $.try_expression,
       $.type,
