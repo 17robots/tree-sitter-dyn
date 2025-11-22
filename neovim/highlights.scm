@@ -12,11 +12,11 @@
 
 (identifier) @variable
 
-(variable_declaration (identifier) @type (typed_decl value: (expression [(type)])))
-(variable_declaration (identifier) @type (untyped_decl value: (expression [(type)])))
+(variable_declaration name: (identifier) @type (typed_decl value: (expression [(type)])))
+(variable_declaration name: (identifier) @type (untyped_decl value: (expression [(type)])))
 
-(variable_declaration (identifier) @function (typed_decl value: (expression [(function_declaration)])))
-(variable_declaration (identifier) @function (untyped_decl value: (expression [(function_declaration)])))
+(variable_declaration name: (identifier) @function (typed_decl value: (expression [(function_declaration)])))
+(variable_declaration name: (identifier) @function (untyped_decl value: (expression [(function_declaration)])))
 
 (expression [(type)]) @type
 
@@ -37,14 +37,13 @@
 (float_literal) @number.float
 (char_literal) @character
 
-(enum_member (identifier) @constant)
-(error_member (identifier) @constant)
-(struct_member (identifier) @property)
+(enum_error_member name: (identifier) @property)
+(enum_error_member name: (identifier) @function (expression [(function_declaration)]))
 
-(enum_error_member (identifier) @property)
-(struct_member (identifier) @property)
+(struct_member names: (identifier) @property)
+(struct_member names: (identifier) @function (expression [(function_declaration)]))
 
-(struct_literal name: (identifier) @type)
+(struct_literal (identifier) @type)
 (enum_error_literal (identifier) @type.variant)
 
 ["," "." ":"] @punctuation.delimiter

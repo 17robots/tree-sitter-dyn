@@ -64,7 +64,7 @@ module.exports = grammar({
     source_file: $ => seq($.module_declaration, repeat($.top_level)),
     module_declaration: $ => seq(choice('module', 'mod'), $.identifier),
     top_level: $ => seq(optional('pub'), $.variable_declaration, ';'),
-    variable_declaration: $ => seq(optional('mut'), $.identifier, choice($.typed_decl, $.untyped_decl)),
+    variable_declaration: $ => seq(optional('mut'), field('name', $.identifier), choice($.typed_decl, $.untyped_decl)),
     typed_decl: $ => seq(':', field('type', $.expression), field('value', optional(seq('=', $.expression)))),
     untyped_decl: $ => seq(':=', $.expression),
     expression: $ => choice(
@@ -135,7 +135,7 @@ module.exports = grammar({
     ),
     enum_error_declaration: $ => seq(choice('enum', 'error'), '{', comma_separated($.enum_error_member), '}'),
     enum_error_member: $ => seq(
-      $.identifier,
+      field('name', $.identifier),
       choice(
         seq(':=', $.expression),
         seq(':', $.actionable_expression, optional(seq('=', $.expression)))
@@ -143,7 +143,7 @@ module.exports = grammar({
     ),
     error_type: $ => seq($.actionable_expression, '!', optional(seq(repeat(seq($.identifier, '!')), $.identifier))),
     struct_declaration: $ => seq('struct', '{', comma_separated($.struct_member), '}'),
-    struct_member: $ => seq(comma_separated1($.identifier), choice(
+    struct_member: $ => seq(field('names', comma_separated1($.identifier)), choice(
       seq(':=', $.expression),
       seq(':', $.actionable_expression, optional(seq('=', $.expression)))
     )),
