@@ -29,8 +29,8 @@
 (break_expression (identifier) @label)
 (continue_expression (identifier) @label)
 (enum_error_literal (identifier) @type.variant)
-(enum_error_member name: (identifier) @variable.member)
-(enum_error_member name: (identifier) @function.method (expression [(function_declaration)]))
+(enum_error_member (identifier) @variable.member)
+(enum_error_member (identifier) @function.method (expression [(function_declaration)]))
 (expression [(type)]) @type
 (module_declaration (identifier) @module)
 (parameter (identifier) @variable.parameter)
