@@ -35,6 +35,8 @@ PartneredError := error {
 
 getType := () type => i32;
 
+some_sort_of_fn := () getType()!PartneredError {};
+
 AStruct := struct {
   items: i32,
   here: i32,

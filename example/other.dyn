@@ -31,7 +31,7 @@ Partition := (T: comp type, s: []T) i64 {
 QuickSort := (T: comp type, s: []T) void {
   if s.len <= 1: return;
   p: i64 = Partition(T, s);
-  QuickSort(s[0..p - 1]);
+  QuickSort(s[0..p]);
   QuickSort(s[p+1..s.len]);
 };
 Swap := (T: comp type, a: *T, b: *T) void {
@@ -42,7 +42,7 @@ Swap := (T: comp type, a: *T, b: *T) void {
 
 something := () void {
   some_fn : ?()!void = ()!void {
-    try heap.alloc(i32);
+    try (use "std/heap").alloc(i32);
   };
   try some_fn.?();
 };

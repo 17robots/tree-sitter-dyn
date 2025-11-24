@@ -38,6 +38,7 @@
 (struct_literal_member (identifier) @variable.member)
 (struct_member (identifier) @variable.member)
 (struct_member (identifier) @function.method (expression [(function_declaration)]))
+(error_suffix (identifier) @type)
 
 (boolean_literal) @boolean
 (char_literal) @character
