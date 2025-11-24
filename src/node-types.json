@@ -47,6 +47,10 @@
       "required": true,
       "types": [
         {
+          "type": "capture",
+          "named": true
+        },
+        {
           "type": "expression",
           "named": true
         },
@@ -212,7 +216,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "identifier",
@@ -736,6 +740,10 @@
       "required": true,
       "types": [
         {
+          "type": "actionable_expression",
+          "named": true
+        },
+        {
           "type": "char_literal",
           "named": true
         },
@@ -782,11 +790,23 @@
           "named": true
         },
         {
+          "type": "catch_expression",
+          "named": true
+        },
+        {
+          "type": "comp_expression",
+          "named": true
+        },
+        {
           "type": "continue_expression",
           "named": true
         },
         {
           "type": "return_expression",
+          "named": true
+        },
+        {
+          "type": "try_expression",
           "named": true
         },
         {

@@ -174,7 +174,7 @@ main := () void! {
 		.float: |c| io.print("c: {}", c),
 		.something: |c| io.print("c: {}", c),
 		.chained: |c| io.print("c: {}", c),
-		_: io.print("We dont care about the rest"),
+		_: io.print("We dont care about the rest")
 	}
 
 	List := (T: comp type) type => struct {};
@@ -187,7 +187,7 @@ main := () void! {
 	inline_();
 
 	DivideError := error {
-		DivideByZero,
+		DivideByZero
 	};
 
   divide := (x,y: f32) f32!DivideError => if y == 0: DivideError.DivideByZero else x / y;

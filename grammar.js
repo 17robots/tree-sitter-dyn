@@ -61,6 +61,7 @@ module.exports = grammar({
     [$.actionable_expression, $.semicolon_statement],
     [$.error_suffix],
     [$.function_type],
+    [$.expression, $.semicolon_statement],
   ],
   rules: {
     source_file: $ => seq($.module_declaration, repeat($.top_level)),
@@ -157,8 +158,8 @@ module.exports = grammar({
     use: $ => seq('use', $.string_literal),
     block: $ => seq(optional(seq($.identifier, ':')), '{', repeat($.statement), '}'),
     range_expression: $ => choice(
-      seq($.int_literal, '..', $.int_literal),
-      seq($.char_literal, '..', $.char_literal),
+      seq(choice($.actionable_expression, $.int_literal), '..', choice($.actionable_expression, $.int_literal)),
+      seq(choice($.actionable_expression, $.char_literal), '..', choice($.actionable_expression, $.char_literal)),
     ),
     statement: $ => choice(
       $.block,
@@ -179,8 +180,11 @@ module.exports = grammar({
       $.assign_expression,
       $.break_expression,
       $.call_expression,
+      $.catch_expression,
+      $.comp_expression,
       $.continue_expression,
       $.return_expression,
+      $.try_expression,
       $.variable_declaration
     ),
     assign_expression: $ => choice(...assign_operators.map(op => seq(choice($.actionable_expression, '_'), op, $.expression))),
@@ -188,12 +192,13 @@ module.exports = grammar({
     call_expression: $ => seq($.actionable_expression, '(', comma_separated($.expression), ')'),
     continue_expression: $ => seq('continue', optional(seq(':', $.identifier))),
     return_expression: $ => seq('return', optional($.expression)),
-    for_expression: $ => seq('for', optional(comma_separated(choice($.expression, $.range_expression))), ':', optional($.capture)),
+    for_expression: $ => seq(optional('inline'), 'for', comma_separated(choice($.expression, $.range_expression)), ':', optional($.capture)),
     if_expression: $ => seq('if', $.expression, ':', optional($.capture)),
     match_expression: $ => seq('match', $.expression, ':', '{', comma_separated($.arm), '}'),
     arm: $ => seq(
       choice(comma_separated1(choice($.expression, $.range_expression)), '_'),
       ':',
+      optional($.capture),
       $.expression
     ),
     capture: $ => seq('|', comma_separated1(seq(optional('mut'), $.identifier)), '|'),
