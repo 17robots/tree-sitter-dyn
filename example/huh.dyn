@@ -1,2 +1,4 @@
 module main;
-some_sort_of_fn := () getType()!PartneredError {};
+What := struct {
+  hmm: i32,
+};

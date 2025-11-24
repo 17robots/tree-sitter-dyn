@@ -207,7 +207,7 @@ module.exports = grammar({
 })
 
 function comma_separated1(rule) {
-  return seq(rule, repeat(seq(',', rule)));
+  return seq(rule, repeat(seq(',', rule)), optional(','));
 }
 
 function comma_separated(rule) {
