@@ -37,10 +37,6 @@
         {
           "type": "SYMBOL",
           "name": "identifier"
-        },
-        {
-          "type": "STRING",
-          "value": ";"
         }
       ]
     },
@@ -62,10 +58,6 @@
         {
           "type": "SYMBOL",
           "name": "variable_declaration"
-        },
-        {
-          "type": "STRING",
-          "value": ";"
         }
       ]
     },
@@ -871,12 +863,20 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "type"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "type"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "actionable_expression"
+                }
+              ]
             },
             {
-              "type": "SYMBOL",
-              "name": "actionable_expression"
+              "type": "BLANK"
             }
           ]
         },
@@ -1824,12 +1824,20 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "actionable_expression"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "actionable_expression"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "type"
+                }
+              ]
             },
             {
-              "type": "SYMBOL",
-              "name": "type"
+              "type": "BLANK"
             }
           ]
         },
@@ -3208,8 +3216,16 @@
       "function_type"
     ],
     [
+      "function_declaration",
+      "function_type"
+    ],
+    [
       "expression",
       "semicolon_statement"
+    ],
+    [
+      "actionable_expression",
+      "block"
     ]
   ],
   "precedences": [],
