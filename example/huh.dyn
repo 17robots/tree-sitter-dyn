@@ -1,4 +1,0 @@
-module main;
-What := struct {
-  hmm: i32,
-};

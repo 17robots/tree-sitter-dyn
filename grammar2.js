@@ -31,20 +31,29 @@ const binary_operators = [
 ]
 const unary_operators = ['!', '~', '-', '&']
 const postfix_operators = ['!', '?']
+const newline = /\n/
+const terminator = choice(newline, ';', '\0')
 module.exports = grammar({
   name: 'dyn',
-  extras: $ => [],
+  extras: $ => [
+    $.comment,
+    /\s/
+  ],
   conflicts: $ = [],
+  reserved: {
+    global: $ => ['break', 'fn', 'match', 'defer', 'struct', 'enum', 'if', 'for', 'continue', 'use', 'mut', 'or']
+  },
+  supertypes: $ => [],
   rules: {
+    source_file: seq($.module_declaration),
     comment: _ => token(choice(/\/\/[^\n]*/, /\/\*([^*]|\*+[^/*])*\*+\//)),
     boolean_literal: _ => choice('true', 'false'),
     char_literal: _ => token(seq("'", choice(/[^'\\]/, /\\./), "'")),
     float_literal: _ => token(/[0-9]+\.[0-9]+/),
     identifier: _ => token(/[a-zA-Z_][a-zA-Z0-9_]*/),
     int_literal: _ => token(/[0-9]+/),
-    source_file: seq($.module_declaration),
     string_literal: _ => token(seq('"', repeat(choice(/[^"\\]/, /\\./)), '"')),
   }
 })
 const separated1 = (sep, rule) => seq(rule, repeat(seq(sep, rule)), optional(sep))
-const separated = (sep, rule) =>  optional(separated1(sep, rule))
+const separated = (sep, rule) => optional(separated1(sep, rule))
