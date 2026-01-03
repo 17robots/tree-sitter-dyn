@@ -67,8 +67,8 @@ module.exports = grammar({
   ],
   rules: {
     source_file: $ => seq($.module_declaration, repeat($.top_level)),
-    module_declaration: $ => seq(choice('module', 'mod'), $.identifier),
-    top_level: $ => seq(optional('pub'), $.variable_declaration),
+    module_declaration: $ => seq(choice('module', 'mod'), $.identifier, optional(';')),
+    top_level: $ => seq(optional('pub'), $.variable_declaration, optional(';')),
     variable_declaration: $ => seq(optional('mut'), $.identifier, choice($.typed_decl, $.untyped_decl)),
     typed_decl: $ => seq(':', field('type', $.expression), field('value', optional(seq('=', $.expression)))),
     untyped_decl: $ => seq(':=', $.expression),
@@ -169,7 +169,7 @@ module.exports = grammar({
       seq($.for_expression, $.statement),
       seq($.if_expression, optional(seq($.statement_nosemicolon, 'else')), $.statement),
       $.match_expression,
-      seq($.semicolon_statement, ';')
+      seq($.semicolon_statement, optional(';'))
     ),
     statement_nosemicolon: $ => choice(
       $.block,
