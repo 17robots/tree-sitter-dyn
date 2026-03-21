@@ -1977,6 +1977,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "labeled_block_expression"
+        },
+        {
+          "type": "SYMBOL",
           "name": "block_expression"
         },
         {

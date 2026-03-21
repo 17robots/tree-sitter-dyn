@@ -28,10 +28,10 @@ module.exports = grammar({
   ],
   rules: {
     source_file: $ => seq(optional($.module_declaration), repeat($.declaration)),
-    module_declaration: $ => seq("module", field("name", $._name)),
+    module_declaration: $ => seq('module', field('name', $._name)),
     declaration: $ => seq(
       repeat($.doc_comment),
-      optional("pub"),
+      optional('pub'),
       choice($.extern_binding_declaration, $.binding_declaration),
     ),
     extern_binding_declaration: $ => seq(
@@ -253,6 +253,7 @@ module.exports = grammar({
       $.function_expression,
       $.array_literal,
       $.tuple_expression,
+      $.labeled_block_expression,
       $.block_expression,
       $.struct_literal,
       $.enum_variant_expression,
