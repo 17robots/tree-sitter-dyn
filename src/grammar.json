@@ -3062,6 +3062,10 @@
         {
           "type": "SYMBOL",
           "name": "named_type"
+        },
+        {
+          "type": "STRING",
+          "value": "type"
         }
       ]
     },

@@ -339,7 +339,7 @@ module.exports = grammar({
         $.base_type_expression,
       ),
     ),
-    base_type_expression: $ => choice($.function_type, $.struct_type, $.enum_type, $.applied_type, $.named_type),
+    base_type_expression: $ => choice($.function_type, $.struct_type, $.enum_type, $.applied_type, $.named_type, 'type'),
     named_type: $ => field("name", $.identifier),
     applied_type: $ => seq(
       field("callee", $.identifier),
