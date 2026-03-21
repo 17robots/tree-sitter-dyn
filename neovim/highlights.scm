@@ -41,7 +41,8 @@
 (enum_pattern
   variant: (identifier) @constructor)
 (call_expression
-  function: (identifier) @function.call)
+  function: (expression
+    identifier @function.call))
 (call_expression
   function: (field_expression
     field: (identifier) @function.call))
