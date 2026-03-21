@@ -27,7 +27,7 @@
 (applied_type
   callee: (identifier) @type)
 (struct_literal
-  name:  @type)
+  name: (identifier) @type)
 (field_expression
   field: (identifier) @property)
 (struct_literal_field
