@@ -1,4 +1,4 @@
-; Dyn Tree-sitter folds for Neovim
+; Dyn Tree-sitter folds for Helix
 
 (block_expression) @fold
 (match_expression) @fold

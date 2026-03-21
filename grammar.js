@@ -15,27 +15,41 @@ const PREC = {
   call: 14,
   functionLiteral: 9,
 }
-
 module.exports = grammar({
   name: "dyn",
-  word: $ => $.identifier,
-  extras: $ => [/[\s\uFEFF\u2060\u200B]/, $.line_comment, $.block_comment],
-  conflicts: $ => [
+  word: ($) => $.identifier,
+  extras: ($) => [/[\s\uFEFF\u2060\u200B]/, $.line_comment, $.block_comment],
+  conflicts: ($) => [
     [$.block_expression, $.tuple_expression],
     [$.primary_expression, $._name],
     [$.call_argument, $.parenthesized_expression],
     [$.binary_expression, $.function_expression],
+    [$.extern_function_type]
   ],
   rules: {
     source_file: $ => seq(optional($.module_declaration), repeat($.declaration)),
     module_declaration: $ => seq("module", field("name", $._name)),
-    declaration: $ => seq(repeat($.doc_comment), optional("pub"), choice($.extern_declaration, $.binding_declaration)),
-    extern_declaration: $ => seq(
-      "extern",
+    declaration: $ => seq(
+      repeat($.doc_comment),
+      optional("pub"),
+      choice($.extern_binding_declaration, $.binding_declaration),
+    ),
+    extern_binding_declaration: $ => seq(
+      optional("mut"),
       field("name", $._name),
-      ":",
-      field("type", $.type_expression),
+      choice(seq(":", "="), "="),
+      field("signature", $.extern_function_signature),
+    ),
+    extern_function_signature: $ => seq(
+      "extern",
+      field("type", choice($.extern_function_type, $.type_expression)),
       optional(seq("=", field("link_name", $.string_literal))),
+    ),
+    extern_function_type: $ => seq(
+      "(",
+      optional(seq(commaSep1($.function_type_parameter), optional(","))),
+      ")",
+      optional(field("return_type", $.type_expression)),
     ),
     binding_declaration: $ => seq(
       optional("mut"),
@@ -135,7 +149,7 @@ module.exports = grammar({
         optional(field("value", $.expression)),
       ),
     ),
-    continue_expression: _ => "continue",
+    continue_expression: $ => prec.right(seq("continue", optional(seq(":", field("label", $._name))))),
     return_expression: $ => prec.right(seq("return", optional(field("value", $.expression)))),
     defer_expression: $ => seq("defer", optional(field("binding", $.pipe_binding)), field("body", $.expression)),
     comptime_expression: $ => seq("comp", field("expression", $.expression)),
@@ -175,17 +189,23 @@ module.exports = grammar({
     ),
     binary_expression: $ => choice(
       prec.right(PREC.range, seq($.expression, choice("..", "..="), $.expression)),
+
       prec.left(PREC.logicalOr, seq($.expression, "||", $.expression)),
       prec.left(PREC.logicalAnd, seq($.expression, "&&", $.expression)),
+
       prec.left(PREC.bitOr, seq($.expression, "|", $.expression)),
       prec.left(PREC.bitXor, seq($.expression, "^", $.expression)),
       prec.left(PREC.bitAnd, seq($.expression, "&", $.expression)),
+
       prec.left(
         PREC.equality,
         seq($.expression, choice("==", "!=", "<", "<=", ">", ">="), $.expression),
       ),
+
       prec.left(PREC.shift, seq($.expression, choice("<<", ">>"), $.expression)),
+
       prec.left(PREC.additive, seq($.expression, choice("+", "-"), $.expression)),
+
       prec.left(PREC.multiplicative, seq($.expression, choice("*", "/", "%"), $.expression)),
     ),
     unary_expression: $ => prec(PREC.unary, seq(field("operator", choice("-", "!", "~", "&")), $.expression)),
@@ -338,6 +358,7 @@ module.exports = grammar({
       field("type", $.type_expression),
     ),
     struct_type: $ => seq(
+      optional("packed"),
       "struct",
       "{",
       optional(seq(commaSep1($.struct_type_member), optional(","))),
@@ -350,6 +371,7 @@ module.exports = grammar({
     ),
     enum_type: $ => seq(
       "enum",
+      optional(seq("(", field("repr", $.type_expression), ")")),
       "{",
       optional(seq(commaSep1($.enum_type_variant), optional(","))),
       "}",
@@ -379,6 +401,6 @@ module.exports = grammar({
   },
 })
 function commaSep1(rule) {
-  return seq(rule, repeat(seq(",", rule)));
+  return seq(rule, repeat(seq(",", rule)))
 }
 

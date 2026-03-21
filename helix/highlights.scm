@@ -1,51 +1,157 @@
-["defer" "comp" "undefined" "null"] @keyword
-["if" "match" "else"] @keyword.conditional
-["for" "while"] @keyword.control.repeat
-["try" "catch"] @keyword.control.exception
-["pub" "inline" "mut"] @keyword.storage.modifier
-["true" "false"] @constant.builtin.boolean
-["struct" "enum" "error" "type"] @type.builtin
-["module" "use"] @keyword.control.import
-"return" @keyword.control.return
+; Dyn Tree-sitter highlights for Helix
 
-(identifier) @variable
+(doc_comment) @comment.documentation
+(line_comment) @comment
+(block_comment) @comment
 
-(declaration (identifier) @type (expression (non_literal_expression [(enum) (error) (struct)])))
-(declaration (identifier) @function (expression (non_literal_expression (fn))))
+(string_literal) @string
+(char_literal) @character
+(integer_literal) @number
+(float_literal) @number.float
+(boolean_literal) @boolean
+(null_literal) @constant.builtin
 
-(mut_declaration (identifier) @type (expression (non_literal_expression [(enum) (error) (struct)])))
-(mut_declaration (identifier) @function (expression (non_literal_expression (fn))))
+(module_declaration
+  name: (identifier) @namespace)
 
-((identifier) @type.builtin (#match? @type "^(i|u)[0-9]+$"))
-((identifier) @type.builtin (#match? @type "^f(16|32|64|128)+$"))
+(extern_binding_declaration
+  name: (identifier) @function)
 
-(comment) @comment
+(binding_declaration
+  name: (identifier) @variable)
 
-(block (identifier) @label)
-(return_expression (identifier) @label)
-(break_expression (identifier) @label)
-(continue_expression (identifier) @label)
-(member_access (identifier) @variable.other.member)
-(enum_error_initialization (identifier) @type.enum.variant)
-(call (non_literal_expression (identifier))) @function.call
+(local_binding_statement
+  name: (identifier) @variable)
 
-(string) @string
-(number) @constant.numeric.integer
-(float) @constant.numeric.float
-(char) @constant.character
+(function_parameter
+  name: (identifier) @variable.parameter)
 
-(enum_member (identifier) @constant)
-(error_member (identifier) @constant)
-(struct_member (identifier) @variable.other.member)
+(function_type_parameter
+  name: (identifier) @variable.parameter)
 
-(enum_member (declaration (identifier) @variable.other))
-(error_member (declaration (identifier) @variable.other))
-(struct_member (declaration (identifier) @variable.other))
+(pipe_binding
+  (identifier) @variable.parameter)
 
-(struct_initialization name: (identifier) @type)
+(named_type
+  name: (identifier) @type)
 
-["," "." ":"] @punctuation.delimiter
-["(" ")" "[" "]" "{" "}"] @punctuation.bracket
+(applied_type
+  callee: (identifier) @type)
 
-["=" "*=" "%=" "/=" "+=" "-=" "<<=" ">>=" "&=" "^=" "|=" "||" "&&" "==" "!=" ">" ">=" "<" "<=" "&" "|" "<<" ">>" "+" "-" "*" "/" "%"] @operator
+(struct_literal
+  type: (identifier) @type)
 
+(field_expression
+  field: (identifier) @property)
+
+(struct_literal_field
+  name: (identifier) @property)
+
+(struct_type_member
+  name: (identifier) @property)
+
+(enum_type_variant
+  name: (identifier) @constructor)
+
+(enum_variant_expression
+  variant: (identifier) @constructor)
+
+(enum_pattern
+  variant: (identifier) @constructor)
+
+(call_expression
+  function: (identifier) @function.call)
+
+(call_expression
+  function: (field_expression
+    field: (identifier) @function.call))
+
+(builtin_identifier) @function.builtin
+
+(labeled_block_expression
+  label: (identifier) @label)
+
+(break_expression
+  label: (identifier) @label)
+
+(continue_expression
+  label: (identifier) @label)
+
+[
+  "module"
+  "extern"
+  "packed"
+  "use"
+  "pub"
+  "mut"
+  "comp"
+  "inline"
+  "type"
+] @keyword
+
+[
+  "if"
+  "else"
+  "match"
+  "for"
+  "break"
+  "continue"
+  "return"
+  "defer"
+] @keyword.control
+
+"fn" @keyword.function
+"or" @keyword.operator
+
+[
+  "."
+  ".."
+  "..="
+  ".*"
+  ".?"
+  ".!"
+  ":"
+  "="
+  "=>"
+  "+"
+  "-"
+  "*"
+  "/"
+  "%"
+  "+="
+  "-="
+  "*="
+  "/="
+  "%="
+  "=="
+  "!="
+  "<"
+  "<="
+  ">"
+  ">="
+  "&&"
+  "||"
+  "&"
+  "|"
+  "^"
+  "~"
+  "<<"
+  ">>"
+  "<<="
+  ">>="
+  "?"
+] @operator
+
+[
+  "("
+  ")"
+  "["
+  "]"
+  "{"
+  "}"
+] @punctuation.bracket
+
+[
+  ","
+  ";"
+] @punctuation.delimiter

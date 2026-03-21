@@ -1,0 +1,15 @@
+[
+ (block)
+ (enum)
+ (error)
+ (struct)
+ (if_statement)
+ (for_statement)
+ (while_statement)
+ (if_expression)
+ (for_expression)
+ (while_expression)
+ (fn)
+ (call)
+ (match)
+] @fold

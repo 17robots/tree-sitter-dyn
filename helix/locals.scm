@@ -1,4 +1,4 @@
-; Dyn Tree-sitter locals for Neovim
+; Dyn Tree-sitter locals for Helix
 
 (source_file) @local.scope
 (block_expression) @local.scope
