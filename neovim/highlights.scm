@@ -1,5 +1,4 @@
 ; Dyn Tree-sitter highlights for Neovim
-
 (doc_comment) @comment.documentation
 (line_comment) @comment
 (block_comment) @comment
@@ -9,7 +8,6 @@
 (float_literal) @number.float
 (boolean_literal) @boolean
 (null_literal) @constant.builtin
-
 (module_declaration
   name: (identifier) @namespace)
 (extern_binding_declaration
@@ -29,7 +27,7 @@
 (applied_type
   callee: (identifier) @type)
 (struct_literal
-  type: (identifier) @type)
+  name: (_name) @type)
 (field_expression
   field: (identifier) @property)
 (struct_literal_field

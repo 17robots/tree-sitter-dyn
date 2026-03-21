@@ -281,7 +281,7 @@ module.exports = grammar({
     block_expression: $ => seq("{", repeat($.statement), optional(field("tail", $.expression)), "}"),
     labeled_block_expression: $ => seq(field("label", $._name), ":", field("body", $.block_expression)),
     struct_literal: $ => choice(
-      seq(field("type", $._name), $.struct_literal_body),
+      seq(field("name", $._name), $.struct_literal_body),
       seq(".", $.struct_literal_body),
     ),
     struct_literal_body: $ => seq("{", optional(seq(commaSep1($.struct_literal_field), optional(","))), "}"),
