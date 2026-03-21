@@ -21,14 +21,16 @@ module.exports = grammar({
   extras: ($) => [/[\s\uFEFF\u2060\u200B]/, $.line_comment, $.block_comment],
   conflicts: ($) => [
     [$.block_expression, $.tuple_expression],
-    [$.primary_expression, $._name],
     [$.call_argument, $.parenthesized_expression],
     [$.binary_expression, $.function_expression],
+    [$.primary_expression, $.function_parameter],
+    [$.primary_expression, $.labeled_block_expression],
+    [$.primary_expression, $.struct_literal],
     [$.extern_function_type]
   ],
   rules: {
     source_file: $ => seq(optional($.module_declaration), repeat($.declaration)),
-    module_declaration: $ => seq('module', field('name', $._name)),
+    module_declaration: $ => seq('module', field('name', $.identifier)),
     declaration: $ => seq(
       repeat($.doc_comment),
       optional('pub'),
@@ -36,7 +38,7 @@ module.exports = grammar({
     ),
     extern_binding_declaration: $ => seq(
       optional("mut"),
-      field("name", $._name),
+      field("name", $.identifier),
       choice(seq(":", "="), "="),
       field("signature", $.extern_function_signature),
     ),
@@ -53,7 +55,7 @@ module.exports = grammar({
     ),
     binding_declaration: $ => seq(
       optional("mut"),
-      field("name", $._name),
+      field("name", $.identifier),
       choice(
         seq(":", "=", field("value", $.expression)),
         seq(":", field("type", $.type_expression), "=", field("value", $.expression)),
@@ -66,7 +68,7 @@ module.exports = grammar({
         repeat($.doc_comment),
         optional("pub"),
         optional("mut"),
-        field("name", $._name),
+        field("name", $.identifier),
         choice(
           seq(":", "=", field("value", $.expression)),
           seq(":", field("type", $.type_expression), "=", field("value", $.expression)),
@@ -145,11 +147,11 @@ module.exports = grammar({
     break_expression: $ => prec.right(
       seq(
         "break",
-        optional(seq(":", field("label", $._name))),
+        optional(seq(":", field("label", $.identifier))),
         optional(field("value", $.expression)),
       ),
     ),
-    continue_expression: $ => prec.right(seq("continue", optional(seq(":", field("label", $._name))))),
+    continue_expression: $ => prec.right(seq("continue", optional(seq(":", field("label", $.identifier))))),
     return_expression: $ => prec.right(seq("return", optional(field("value", $.expression)))),
     defer_expression: $ => seq("defer", optional(field("binding", $.pipe_binding)), field("body", $.expression)),
     comptime_expression: $ => seq("comp", field("expression", $.expression)),
@@ -236,7 +238,7 @@ module.exports = grammar({
         "]",
       ),
     ),
-    field_expression: $ => prec.left(PREC.call, seq(field("base", $.expression), ".", field("field", $._name))),
+    field_expression: $ => prec.left(PREC.call, seq(field("base", $.expression), ".", field("field", $.identifier))),
     deref_access_expression: $ => prec.left(PREC.call, seq(field("base", $.expression), ".*")),
     optional_unwrap_expression: $ => prec.left(PREC.call, seq(field("base", $.expression), ".?")),
     error_unwrap_expression: $ => prec.left(PREC.call, seq(field("base", $.expression), ".!")),
@@ -272,23 +274,23 @@ module.exports = grammar({
       ),
     ),
     function_parameter: $ => seq(
-      field("name", $._name),
+      field("name", $.identifier),
       optional(seq(":", field("type", $.type_expression))),
       optional(seq("=", field("default", $.expression))),
     ),
     array_literal: $ => seq("[", optional(seq(commaSep1($.expression), optional(","))), "]"),
     tuple_expression: $ => seq("{", commaSep1($.expression), optional(","), "}"),
     block_expression: $ => seq("{", repeat($.statement), optional(field("tail", $.expression)), "}"),
-    labeled_block_expression: $ => seq(field("label", $._name), ":", field("body", $.block_expression)),
+    labeled_block_expression: $ => seq(field("label", $.identifier), ":", field("body", $.block_expression)),
     struct_literal: $ => choice(
-      seq(field("name", $._name), $.struct_literal_body),
+      seq(field("name", $.identifier), $.struct_literal_body),
       seq(".", $.struct_literal_body),
     ),
     struct_literal_body: $ => seq("{", optional(seq(commaSep1($.struct_literal_field), optional(","))), "}"),
-    struct_literal_field: $ => seq(field("name", $._name), ":", field("value", $.expression)),
+    struct_literal_field: $ => seq(field("name", $.identifier), ":", field("value", $.expression)),
     enum_variant_expression: $ => choice(
-      prec(1, seq(".", field("variant", $._name), field("payload", $.argument_list_values))),
-      seq(".", field("variant", $._name)),
+      prec(1, seq(".", field("variant", $.identifier), field("payload", $.argument_list_values))),
+      seq(".", field("variant", $.identifier)),
     ),
     argument_list_values: $ => seq("(", optional(seq(commaSep1($.expression), optional(","))), ")"),
     type_literal_expression: $ => choice($.struct_type, $.enum_type),
@@ -308,16 +310,16 @@ module.exports = grammar({
       ),
     ),
     enum_pattern: $ => choice(
-      seq(".", field("variant", $._name), optional($.pattern_binding_list)),
+      seq(".", field("variant", $.identifier), optional($.pattern_binding_list)),
       seq(
-        field("root", $._name),
+        field("root", $.identifier),
         ".",
-        field("variant", $._name),
+        field("variant", $.identifier),
         optional($.pattern_binding_list),
       ),
     ),
-    pattern_binding_list: $ => seq("(", optional(seq(commaSep1(choice($._name, "_")), optional(","))), ")"),
-    identifier_pattern: $ => $._name,
+    pattern_binding_list: $ => seq("(", optional(seq(commaSep1(choice($.identifier, "_")), optional(","))), ")"),
+    identifier_pattern: $ => $.identifier,
     literal_pattern: $ => choice(
       $.integer_literal,
       $.float_literal,
@@ -338,9 +340,9 @@ module.exports = grammar({
       ),
     ),
     base_type_expression: $ => choice($.function_type, $.struct_type, $.enum_type, $.applied_type, $.named_type),
-    named_type: $ => field("name", $._name),
+    named_type: $ => field("name", $.identifier),
     applied_type: $ => seq(
-      field("callee", $._name),
+      field("callee", $.identifier),
       "(",
       optional(seq(commaSep1($.type_expression), optional(","))),
       ")",
@@ -355,7 +357,7 @@ module.exports = grammar({
       ),
     ),
     function_type_parameter: $ => choice(
-      seq(field("name", $._name), ":", field("type", $.type_expression)),
+      seq(field("name", $.identifier), ":", field("type", $.type_expression)),
       field("type", $.type_expression),
     ),
     struct_type: $ => seq(
@@ -366,9 +368,9 @@ module.exports = grammar({
       "}",
     ),
     struct_type_member: $ => choice(
-      seq(field("name", $._name), ":", field("type", $.type_expression)),
-      seq(field("name", $._name), ":", "=", field("value", $.expression)),
-      seq(field("name", $._name), "=", field("value", $.expression)),
+      seq(field("name", $.identifier), ":", field("type", $.type_expression)),
+      seq(field("name", $.identifier), ":", "=", field("value", $.expression)),
+      seq(field("name", $.identifier), "=", field("value", $.expression)),
     ),
     enum_type: $ => seq(
       "enum",
@@ -377,10 +379,9 @@ module.exports = grammar({
       optional(seq(commaSep1($.enum_type_variant), optional(","))),
       "}",
     ),
-    enum_type_variant: $ => seq(field("name", $._name), optional(seq(":", field("payload", $.type_expression)))),
-    error_type_list: $ => prec.right(seq($._name, repeat(seq(",", $._name)))),
-    pipe_binding: $ => seq("|", choice($._name, "_"), "|"),
-    _name: $ => $.identifier,
+    enum_type_variant: $ => seq(field("name", $.identifier), optional(seq(":", field("payload", $.type_expression)))),
+    error_type_list: $ => prec.right(seq($.identifier, repeat(seq(",", $.identifier)))),
+    pipe_binding: $ => seq("|", choice($.identifier, "_"), "|"),
     identifier: _ => /[A-Za-z_][A-Za-z0-9_]*/,
     builtin_identifier: _ => /\$[A-Za-z_][A-Za-z0-9_]*/,
     integer_literal: _ => token(choice(/0[bB][01][01_]*/, /0[oO][0-7][0-7_]*/, /0[xX][0-9a-fA-F][0-9a-fA-F_]*/, /[0-9][0-9_]*/)),

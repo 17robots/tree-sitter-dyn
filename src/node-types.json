@@ -1619,7 +1619,7 @@
     "type": "struct_literal",
     "named": true,
     "fields": {
-      "type": {
+      "name": {
         "multiple": false,
         "required": false,
         "types": [
