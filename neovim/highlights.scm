@@ -24,7 +24,7 @@
 (enum_variant_expression variant: (identifier) @constructor)
 (enum_pattern variant: (identifier) @constructor)
 ;(call_expression function: (primary_expression (identifier) @function.call))
-(call_expression function: (field_expression field: (identifier) @function.call))
+;(call_expression function: (field_expression field: (identifier) @function.call))
 (builtin_identifier) @function.builtin
 (labeled_block_expression label: (identifier) @label)
 (break_expression label: (identifier) @label)
