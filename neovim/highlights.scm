@@ -42,7 +42,7 @@
   variant: (identifier) @constructor)
 (call_expression
   function: (expression
-    identifier @function.call))
+    (identifier @function.call)))
 (call_expression
   function: (field_expression
     field: (identifier) @function.call))
