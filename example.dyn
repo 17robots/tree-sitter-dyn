@@ -1,0 +1,11 @@
+module main
+
+io := use "std/io"
+
+something := extern () {}
+
+Type := struct {}
+
+main := () ! {
+  io.println("Hello World\n").!
+}
