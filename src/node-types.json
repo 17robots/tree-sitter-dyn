@@ -479,10 +479,40 @@
       "required": false,
       "types": [
         {
+          "type": "enum_type_member",
+          "named": true
+        },
+        {
           "type": "enum_type_variant",
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "enum_type_member",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1070,6 +1100,10 @@
           {
             "type": "block_expression",
             "named": true
+          },
+          {
+            "type": "for_expression",
+            "named": true
           }
         ]
       },
@@ -1191,7 +1225,7 @@
         ]
       },
       "pattern": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -1257,17 +1291,16 @@
   {
     "type": "named_type",
     "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1388,7 +1421,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {

@@ -1,6 +1,7 @@
 ; Dyn Tree-sitter folds for Neovim
 
 (block_expression) @fold
+(labeled_block_expression) @fold
 (match_expression) @fold
 (function_expression) @fold
 (struct_type) @fold

@@ -6,6 +6,7 @@
 (match_expression) @local.scope
 (match_arm) @local.scope
 (for_expression) @local.scope
+(labeled_block_expression) @local.scope
 
 (module_declaration
   name: (identifier) @local.definition)

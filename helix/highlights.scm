@@ -32,14 +32,13 @@
 (pipe_binding
   (identifier) @variable.parameter)
 
-(named_type
-  name: (identifier) @type)
+(named_type (identifier) @type)
 
 (applied_type
   callee: (identifier) @type)
 
 (struct_literal
-  type: (identifier) @type)
+  name: (identifier) @type)
 
 (field_expression
   field: (identifier) @property)
@@ -52,6 +51,9 @@
 
 (enum_type_variant
   name: (identifier) @constructor)
+
+(enum_type_member
+  name: (identifier) @property)
 
 (enum_variant_expression
   variant: (identifier) @constructor)
