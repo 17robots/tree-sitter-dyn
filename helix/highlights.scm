@@ -17,6 +17,25 @@
 (extern_binding_declaration
   name: (identifier) @function)
 
+; Function-valued bindings
+(binding_declaration
+  name: (identifier) @function
+  value: (expression (primary_expression (function_expression))))
+
+(local_binding_statement
+  name: (identifier) @function
+  value: (expression (primary_expression (function_expression))))
+
+; Type-literal-valued bindings (struct/enum declarations)
+(binding_declaration
+  name: (identifier) @type
+  value: (expression (primary_expression (type_literal_expression))))
+
+(local_binding_statement
+  name: (identifier) @type
+  value: (expression (primary_expression (type_literal_expression))))
+
+; All other bindings
 (binding_declaration
   name: (identifier) @variable)
 
@@ -89,6 +108,8 @@
   "comp"
   "inline"
   "type"
+  "struct"
+  "enum"
 ] @keyword
 
 [

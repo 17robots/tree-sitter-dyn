@@ -9,8 +9,27 @@
 (null_literal) @constant.builtin
 (module_declaration name: (identifier) @namespace)
 (extern_binding_declaration name: (identifier) @function)
+
+; Function-valued bindings
+(binding_declaration
+  name: (identifier) @function
+  value: (expression (primary_expression (function_expression))))
+(local_binding_statement
+  name: (identifier) @function
+  value: (expression (primary_expression (function_expression))))
+
+; Type-literal-valued bindings (struct/enum declarations)
+(binding_declaration
+  name: (identifier) @type
+  value: (expression (primary_expression (type_literal_expression))))
+(local_binding_statement
+  name: (identifier) @type
+  value: (expression (primary_expression (type_literal_expression))))
+
+; All other bindings
 (binding_declaration name: (identifier) @variable)
 (local_binding_statement name: (identifier) @variable)
+
 (function_parameter name: (identifier) @variable.parameter)
 (function_type_parameter name: (identifier) @variable.parameter)
 (pipe_binding (identifier) @variable.parameter)
