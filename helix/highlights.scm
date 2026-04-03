@@ -81,11 +81,10 @@
   variant: (identifier) @constructor)
 
 (call_expression
-  function: (identifier) @function.call)
+  function: (expression (primary_expression (identifier) @function.call)))
 
 (call_expression
-  function: (field_expression
-    field: (identifier) @function.call))
+  function: (expression (postfix_expression (field_expression field: (identifier) @function.call))))
 
 (builtin_identifier) @function.builtin
 
