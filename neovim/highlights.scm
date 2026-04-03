@@ -30,7 +30,7 @@
 (labeled_block_expression label: (identifier) @label)
 (break_expression label: (identifier) @label)
 (continue_expression label: (identifier) @label)
-[ "module" "extern" "packed" "use" "pub" "mut" "comp" "inline" "type" ] @keyword
+[ "module" "extern" "packed" "use" "pub" "mut" "comp" "inline" "type" "struct" "enum" ] @keyword
 [ "if" "else" "match" "for" "break" "continue" "return" "defer" ] @keyword.control
 "fn" @keyword.function
 "or" @keyword.operator

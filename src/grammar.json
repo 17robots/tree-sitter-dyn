@@ -2133,12 +2133,20 @@
                     "value": "!"
                   },
                   {
-                    "type": "FIELD",
-                    "name": "errors",
-                    "content": {
-                      "type": "SYMBOL",
-                      "name": "error_type_list"
-                    }
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "FIELD",
+                        "name": "errors",
+                        "content": {
+                          "type": "SYMBOL",
+                          "name": "error_type_list"
+                        }
+                      },
+                      {
+                        "type": "BLANK"
+                      }
+                    ]
                   }
                 ]
               },
@@ -3065,8 +3073,16 @@
                 "value": "!"
               },
               {
-                "type": "SYMBOL",
-                "name": "error_type_list"
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "error_type_list"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
               }
             ]
           },
