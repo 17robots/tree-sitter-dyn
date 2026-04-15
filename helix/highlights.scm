@@ -42,6 +42,28 @@
 (local_binding_statement
   name: (identifier) @variable)
 
+; Associated bindings (TypeName.member := expr)
+(associated_binding_declaration
+  owner: (identifier) @type
+  name: (identifier) @variable)
+
+(associated_binding_declaration
+  owner: (type_path) @type)
+
+(associated_binding_declaration
+  owner: (identifier) @type
+  name: (identifier) @function
+  value: (expression (primary_expression (function_expression))))
+
+(associated_binding_declaration
+  owner: (identifier) @type
+  name: (identifier) @type
+  value: (expression (primary_expression (type_literal_expression))))
+
+; Destructure bindings
+(destructure_item
+  (identifier) @variable)
+
 (function_parameter
   name: (identifier) @variable.parameter)
 
@@ -51,31 +73,34 @@
 (pipe_binding
   (identifier) @variable.parameter)
 
+(loop_binding
+  (identifier) @variable.parameter)
+
 (named_type (identifier) @type)
 
 (applied_type
   callee: (identifier) @type)
 
-(struct_literal
-  name: (identifier) @type)
-
 (field_expression
   field: (identifier) @property)
 
-(struct_literal_field
+(named_field_initializer
   name: (identifier) @property)
 
-(struct_type_member
+(typed_struct_field
+  name: (identifier) @property)
+
+(struct_type_field
   name: (identifier) @property)
 
 (enum_type_variant
   name: (identifier) @constructor)
 
-(enum_type_member
-  name: (identifier) @property)
-
 (enum_variant_expression
   variant: (identifier) @constructor)
+
+(enum_pattern
+  root: (identifier) @type)
 
 (enum_pattern
   variant: (identifier) @constructor)
@@ -88,7 +113,7 @@
 
 (builtin_identifier) @function.builtin
 
-(labeled_block_expression
+(labeled_statement
   label: (identifier) @label)
 
 (break_expression
@@ -122,10 +147,10 @@
   "defer"
 ] @keyword.control
 
-"fn" @keyword.function
 "or" @keyword.operator
 
 [
+  ":="
   "."
   ".."
   "..="
@@ -135,6 +160,7 @@
   ":"
   "="
   "=>"
+  "!"
   "+"
   "-"
   "*"

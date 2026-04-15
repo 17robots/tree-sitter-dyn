@@ -6,7 +6,6 @@
 (match_expression) @local.scope
 (match_arm) @local.scope
 (for_expression) @local.scope
-(labeled_block_expression) @local.scope
 
 (module_declaration
   name: (identifier) @local.definition)
@@ -20,6 +19,12 @@
 (local_binding_statement
   name: (identifier) @local.definition)
 
+(associated_binding_declaration
+  name: (identifier) @local.definition)
+
+(destructure_item
+  (identifier) @local.definition)
+
 (function_parameter
   name: (identifier) @local.definition)
 
@@ -27,6 +32,9 @@
   name: (identifier) @local.definition)
 
 (pipe_binding
+  (identifier) @local.definition)
+
+(loop_binding
   (identifier) @local.definition)
 
 (pattern_binding_list
