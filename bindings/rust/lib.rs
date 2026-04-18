@@ -5,6 +5,8 @@
 //!
 //! ```
 //! let code = r#"
+//! module main
+//! x := 1
 //! "#;
 //! let mut parser = tree_sitter::Parser::new();
 //! let language = tree_sitter_dyn::LANGUAGE;

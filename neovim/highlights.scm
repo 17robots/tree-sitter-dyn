@@ -8,39 +8,41 @@
 (boolean_literal) @boolean
 (null_literal) @constant.builtin
 (module_declaration name: (identifier) @namespace)
-(extern_binding_declaration name: (identifier) @function)
+(declaration
+  name: (identifier) @function
+  signature: (extern_function_signature))
 
 ; All other bindings (fallback — overridden by more specific rules below)
-(binding_declaration name: (identifier) @variable)
-(local_binding_statement name: (identifier) @variable)
+(declaration name: (identifier) @variable)
+(declaration_statement name: (identifier) @variable)
 
 ; Function-valued bindings (overrides @variable above)
-(binding_declaration
+(declaration
   name: (identifier) @function
   value: (expression (primary_expression (function_expression))))
-(local_binding_statement
+(declaration_statement
   name: (identifier) @function
   value: (expression (primary_expression (function_expression))))
 
 ; Type-literal-valued bindings (overrides @variable above)
-(binding_declaration
+(declaration
   name: (identifier) @type
   value: (expression (primary_expression (type_literal_expression))))
-(local_binding_statement
+(declaration_statement
   name: (identifier) @type
   value: (expression (primary_expression (type_literal_expression))))
 
 ; Associated bindings (TypeName.member := expr)
-(associated_binding_declaration
+(declaration
   owner: (identifier) @type
   name: (identifier) @variable)
-(associated_binding_declaration
+(declaration
   owner: (type_path) @type)
-(associated_binding_declaration
+(declaration
   owner: (identifier) @type
   name: (identifier) @function
   value: (expression (primary_expression (function_expression))))
-(associated_binding_declaration
+(declaration
   owner: (identifier) @type
   name: (identifier) @type
   value: (expression (primary_expression (type_literal_expression))))
@@ -73,6 +75,6 @@
 [ "module" "extern" "packed" "use" "pub" "mut" "comp" "inline" "type" "struct" "enum" ] @keyword
 [ "if" "else" "match" "for" "break" "continue" "return" "defer" ] @keyword.control
 "or" @keyword.operator
-[ ":=" "." ".." "..=" ".*" ".?" ".!" ":" "=" "=>" "!" "+" "-" "*" "/" "%" "+=" "-=" "*=" "/=" "%=" "==" "!=" "<" "<=" ">" ">=" "&&" "||" "&" "|" "^" "~" "<<" ">>" "<<=" ">>=" "?" ] @operator
+[ ":=" "." ".." "..=" ".*" ".?" ".!" ":" "=" "=>" "!" "+" "-" "*" "/" "%" "+=" "-=" "*=" "/=" "%=" "&=" "|=" "^=" "==" "!=" "<" "<=" ">" ">=" "&&" "||" "&" "|" "^" "~" "<<" ">>" "<<=" ">>=" "?" ] @operator
 [ "(" ")" "[" "]" "{" "}" ] @punctuation.bracket
 [ "," ";" ] @punctuation.delimiter

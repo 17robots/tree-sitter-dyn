@@ -42,8 +42,7 @@ module.exports = grammar({
     [$.expression_statement, $.expression_branch],
     [$.statement_or_block, $.primary_expression],
     [$.statement_or_block, $.expression_branch, $.primary_expression],
-    [$.local_binding_statement],
-    [$.destructure_declaration],
+    [$.declaration_statement],
     [$.destructure_assignment],
     [$.block_expression, $.tuple_type],
     [$.argument_list, $.parameter_list],
@@ -68,29 +67,34 @@ module.exports = grammar({
       seq(
         repeat($.doc_comment),
         optional("pub"),
-        choice(
-          $.binding_declaration,
-          $.extern_binding_declaration,
-          $.associated_binding_declaration,
-        ),
+        $.declaration,
       ),
 
-    binding_declaration: ($) =>
-      seq(
-        optional("mut"),
-        field("name", $.identifier),
-        choice(
-          seq(":=", field("value", $.expression)),
-          seq(":", field("type", $.type_expression), "=", field("value", $.expression)),
+    declaration: ($) =>
+      choice(
+        seq(
+          optional("mut"),
+          field("name", $.identifier),
+          choice(
+            seq(":=", field("value", $.expression)),
+            seq(":", field("type", $.type_expression), "=", field("value", $.expression)),
+          ),
         ),
-      ),
-
-    extern_binding_declaration: ($) =>
-      seq(
-        field("name", $.identifier),
-        ":=",
-        "extern",
-        field("signature", $.extern_function_signature),
+        seq(
+          field("name", $.identifier),
+          ":=",
+          "extern",
+          field("signature", $.extern_function_signature),
+        ),
+        seq(
+          field("owner", choice($.type_path, $.identifier)),
+          ".",
+          field("name", $.identifier),
+          choice(
+            seq(":=", field("value", $.expression)),
+            seq(":", field("type", $.type_expression), "=", field("value", $.expression)),
+          ),
+        ),
       ),
 
     extern_function_signature: ($) =>
@@ -102,21 +106,12 @@ module.exports = grammar({
         optional(seq("=", field("link_name", $.string_literal))),
       ),
 
-    associated_binding_declaration: ($) =>
-      seq(
-        field("owner", choice($.type_path, $.identifier)),
-        ".",
-        field("name", $.identifier),
-        ":=",
-        field("value", $.expression),
-      ),
-
     type_path: ($) => prec.left(seq($.identifier, repeat1(seq(".", $.identifier)))),
 
     statement: ($) =>
       choice(
-        $.local_binding_statement,
-        $.destructure_declaration,
+        $.declaration_statement,
+        $.assignment_statement,
         $.destructure_assignment,
         $.if_statement,
         $.for_expression,
@@ -132,26 +127,27 @@ module.exports = grammar({
 
     empty_statement: () => ";",
 
-    local_binding_statement: ($) =>
+    declaration_statement: ($) =>
       seq(
         repeat($.doc_comment),
-        optional("mut"),
-        field("name", $.identifier),
         choice(
-          seq(":=", field("value", $.expression)),
-          seq(":", field("type", $.type_expression), "=", field("value", $.expression)),
-        ),
-        optional(";"),
-      ),
-
-    destructure_declaration: ($) =>
-      seq(
-        "{",
-        optional(seq(commaSep1($.destructure_item), optional(","))),
-        "}",
-        choice(
-          seq(":=", field("value", $.expression)),
-          seq(":", field("type", $.tuple_type), "=", field("value", $.expression)),
+          seq(
+            optional("mut"),
+            field("name", $.identifier),
+            choice(
+              seq(":=", field("value", $.expression)),
+              seq(":", field("type", $.type_expression), "=", field("value", $.expression)),
+            ),
+          ),
+          seq(
+            "{",
+            optional(seq(commaSep1($.destructure_item), optional(","))),
+            "}",
+            choice(
+              seq(":=", field("value", $.expression)),
+              seq(":", field("type", $.tuple_type), "=", field("value", $.expression)),
+            ),
+          ),
         ),
         optional(";"),
       ),
@@ -187,7 +183,6 @@ module.exports = grammar({
         $.comptime_expression,
         $.inline_expression,
         $.use_expression,
-        $.assignment_expression,
         $.or_else_expression,
         $.binary_expression,
         $.unary_expression,
@@ -287,7 +282,7 @@ module.exports = grammar({
 
     use_expression: ($) => seq("use", field("path", $.string_literal)),
 
-    assignment_expression: ($) =>
+    assignment_statement: ($) =>
       prec.right(
         PREC.assignment,
         seq(
@@ -309,6 +304,7 @@ module.exports = grammar({
             ),
           ),
           field("value", $.expression),
+          optional(";"),
         ),
       ),
 
@@ -341,7 +337,10 @@ module.exports = grammar({
       ),
 
     unary_expression: ($) =>
-      prec(PREC.unary, seq(field("operator", choice("-", "!", "~", "&")), field("value", $.expression))),
+      prec(
+        PREC.unary,
+        seq(field("operator", choice("-", "!", "~", "&", seq("&", "mut"))), field("value", $.expression)),
+      ),
 
     postfix_expression: ($) =>
       choice(
@@ -534,8 +533,8 @@ module.exports = grammar({
     non_error_type_expression: ($) =>
       choice(
         seq("?", $.type_expression),
-        seq("*", $.type_expression),
-        seq("[", "]", $.type_expression),
+        seq("*", optional("mut"), $.type_expression),
+        seq("[", "]", optional("mut"), $.type_expression),
         seq("[", $.expression, "]", $.type_expression),
         $.function_type,
         $.tuple_type,
@@ -546,8 +545,7 @@ module.exports = grammar({
         "type",
       ),
 
-    param_type_expression: ($) =>
-      choice(seq("*", "mut", $.type_expression), seq("[", "]", "mut", $.type_expression), $.type_expression),
+    param_type_expression: ($) => $.type_expression,
 
     named_type: ($) => seq($.identifier, repeat(seq(".", $.identifier))),
 

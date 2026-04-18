@@ -10,16 +10,13 @@
 (module_declaration
   name: (identifier) @local.definition)
 
-(extern_binding_declaration
+(declaration
   name: (identifier) @local.definition)
 
-(binding_declaration
+(declaration
   name: (identifier) @local.definition)
 
-(local_binding_statement
-  name: (identifier) @local.definition)
-
-(associated_binding_declaration
+(declaration_statement
   name: (identifier) @local.definition)
 
 (destructure_item

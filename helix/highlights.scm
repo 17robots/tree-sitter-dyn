@@ -14,48 +14,49 @@
 (module_declaration
   name: (identifier) @namespace)
 
-(extern_binding_declaration
-  name: (identifier) @function)
+(declaration
+  name: (identifier) @function
+  signature: (extern_function_signature))
 
 ; Function-valued bindings
-(binding_declaration
+(declaration
   name: (identifier) @function
   value: (expression (primary_expression (function_expression))))
 
-(local_binding_statement
+(declaration_statement
   name: (identifier) @function
   value: (expression (primary_expression (function_expression))))
 
 ; Type-literal-valued bindings (struct/enum declarations)
-(binding_declaration
+(declaration
   name: (identifier) @type
   value: (expression (primary_expression (type_literal_expression))))
 
-(local_binding_statement
+(declaration_statement
   name: (identifier) @type
   value: (expression (primary_expression (type_literal_expression))))
 
 ; All other bindings
-(binding_declaration
+(declaration
   name: (identifier) @variable)
 
-(local_binding_statement
+(declaration_statement
   name: (identifier) @variable)
 
 ; Associated bindings (TypeName.member := expr)
-(associated_binding_declaration
+(declaration
   owner: (identifier) @type
   name: (identifier) @variable)
 
-(associated_binding_declaration
+(declaration
   owner: (type_path) @type)
 
-(associated_binding_declaration
+(declaration
   owner: (identifier) @type
   name: (identifier) @function
   value: (expression (primary_expression (function_expression))))
 
-(associated_binding_declaration
+(declaration
   owner: (identifier) @type
   name: (identifier) @type
   value: (expression (primary_expression (type_literal_expression))))
@@ -171,6 +172,9 @@
   "*="
   "/="
   "%="
+  "&="
+  "|="
+  "^="
   "=="
   "!="
   "<"

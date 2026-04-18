@@ -86,7 +86,7 @@
     }
   },
   {
-    "type": "assignment_expression",
+    "type": "assignment_statement",
     "named": true,
     "fields": {
       "operator": {
@@ -162,46 +162,6 @@
     }
   },
   {
-    "type": "associated_binding_declaration",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "owner": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "type_path",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "binary_expression",
     "named": true,
     "fields": {},
@@ -214,42 +174,6 @@
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "binding_declaration",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "type": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "type_expression",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {
@@ -429,6 +353,120 @@
     }
   },
   {
+    "type": "declaration",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "owner": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "type_path",
+            "named": true
+          }
+        ]
+      },
+      "signature": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "extern_function_signature",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type_expression",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "declaration_statement",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "tuple_type",
+            "named": true
+          },
+          {
+            "type": "type_expression",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "destructure_item",
+          "named": true
+        },
+        {
+          "type": "doc_comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "defer_expression",
     "named": true,
     "fields": {
@@ -478,42 +516,6 @@
     "type": "destructure_assignment",
     "named": true,
     "fields": {
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "destructure_item",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "destructure_declaration",
-    "named": true,
-    "fields": {
-      "type": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "tuple_type",
-            "named": true
-          }
-        ]
-      },
       "value": {
         "multiple": false,
         "required": true,
@@ -725,10 +727,6 @@
       "required": true,
       "types": [
         {
-          "type": "assignment_expression",
-          "named": true
-        },
-        {
           "type": "binary_expression",
           "named": true
         },
@@ -823,32 +821,6 @@
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "extern_binding_declaration",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "signature": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "extern_function_signature",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {
@@ -1288,52 +1260,6 @@
         },
         {
           "type": "string_literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "local_binding_statement",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "type": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "type_expression",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "doc_comment",
           "named": true
         }
       ]
@@ -1906,6 +1832,10 @@
       "required": true,
       "types": [
         {
+          "type": "assignment_statement",
+          "named": true
+        },
+        {
           "type": "break_expression",
           "named": true
         },
@@ -1914,15 +1844,15 @@
           "named": true
         },
         {
+          "type": "declaration_statement",
+          "named": true
+        },
+        {
           "type": "defer_expression",
           "named": true
         },
         {
           "type": "destructure_assignment",
-          "named": true
-        },
-        {
-          "type": "destructure_declaration",
           "named": true
         },
         {
@@ -1943,10 +1873,6 @@
         },
         {
           "type": "labeled_statement",
-          "named": true
-        },
-        {
-          "type": "local_binding_statement",
           "named": true
         },
         {
@@ -2099,19 +2025,11 @@
       "required": true,
       "types": [
         {
-          "type": "associated_binding_declaration",
-          "named": true
-        },
-        {
-          "type": "binding_declaration",
+          "type": "declaration",
           "named": true
         },
         {
           "type": "doc_comment",
-          "named": true
-        },
-        {
-          "type": "extern_binding_declaration",
           "named": true
         }
       ]
@@ -2268,7 +2186,7 @@
     "named": true,
     "fields": {
       "operator": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -2281,6 +2199,10 @@
           },
           {
             "type": "-",
+            "named": false
+          },
+          {
+            "type": "mut",
             "named": false
           },
           {
