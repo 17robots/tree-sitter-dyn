@@ -1,40 +1,14 @@
 [
   {
-    "type": "anonymous_struct_literal",
+    "type": "anon_struct_literal",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
-      "required": false,
+      "multiple": false,
+      "required": true,
       "types": [
         {
-          "type": "named_field_initializer",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "applied_type",
-    "named": true,
-    "fields": {
-      "callee": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "type_expression",
+          "type": "literal_body",
           "named": true
         }
       ]
@@ -49,22 +23,155 @@
       "required": false,
       "types": [
         {
-          "type": "call_argument",
+          "type": "anon_struct_literal",
           "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "argument_list_values",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
+        },
         {
-          "type": "expression",
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "array_type",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "builtin_type",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "comp_type",
+          "named": true
+        },
+        {
+          "type": "composite_literal",
+          "named": true
+        },
+        {
+          "type": "context_expression",
+          "named": true
+        },
+        {
+          "type": "deref_expression",
+          "named": true
+        },
+        {
+          "type": "directive_expression",
+          "named": true
+        },
+        {
+          "type": "enum_shorthand",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_expression",
+          "named": true
+        },
+        {
+          "type": "field_type",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "generic_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "optional_type",
+          "named": true
+        },
+        {
+          "type": "or_expression",
+          "named": true
+        },
+        {
+          "type": "pointer_type",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "slice_type",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unwrap_expression",
+          "named": true
+        },
+        {
+          "type": "use_expression",
           "named": true
         }
       ]
@@ -79,86 +186,451 @@
       "required": false,
       "types": [
         {
-          "type": "expression",
+          "type": "anon_struct_literal",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "composite_literal",
+          "named": true
+        },
+        {
+          "type": "context_expression",
+          "named": true
+        },
+        {
+          "type": "deref_expression",
+          "named": true
+        },
+        {
+          "type": "directive_expression",
+          "named": true
+        },
+        {
+          "type": "enum_shorthand",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_expression",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "or_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unwrap_expression",
+          "named": true
+        },
+        {
+          "type": "use_expression",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "assignment_statement",
+    "type": "array_pattern",
     "named": true,
-    "fields": {
-      "operator": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "%=",
-            "named": false
-          },
-          {
-            "type": "&=",
-            "named": false
-          },
-          {
-            "type": "*=",
-            "named": false
-          },
-          {
-            "type": "+=",
-            "named": false
-          },
-          {
-            "type": "-=",
-            "named": false
-          },
-          {
-            "type": "/=",
-            "named": false
-          },
-          {
-            "type": "<<=",
-            "named": false
-          },
-          {
-            "type": "=",
-            "named": false
-          },
-          {
-            "type": ">>=",
-            "named": false
-          },
-          {
-            "type": "^=",
-            "named": false
-          },
-          {
-            "type": "|=",
-            "named": false
-          }
-        ]
-      },
-      "target": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "postfix_expression",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "array_pattern",
+          "named": true
+        },
+        {
+          "type": "binding_pattern",
+          "named": true
+        },
+        {
+          "type": "literal_pattern",
+          "named": true
+        },
+        {
+          "type": "range_pattern",
+          "named": true
+        },
+        {
+          "type": "struct_pattern",
+          "named": true
+        },
+        {
+          "type": "variant_pattern",
+          "named": true
+        },
+        {
+          "type": "wildcard_pattern",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "array_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "anon_struct_literal",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "array_type",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "builtin_type",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "comp_type",
+          "named": true
+        },
+        {
+          "type": "composite_literal",
+          "named": true
+        },
+        {
+          "type": "context_expression",
+          "named": true
+        },
+        {
+          "type": "deref_expression",
+          "named": true
+        },
+        {
+          "type": "directive_expression",
+          "named": true
+        },
+        {
+          "type": "enum_shorthand",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_expression",
+          "named": true
+        },
+        {
+          "type": "field_type",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "generic_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "optional_type",
+          "named": true
+        },
+        {
+          "type": "or_expression",
+          "named": true
+        },
+        {
+          "type": "pointer_type",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "slice_type",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unwrap_expression",
+          "named": true
+        },
+        {
+          "type": "use_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "assignment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "anon_struct_literal",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "composite_literal",
+          "named": true
+        },
+        {
+          "type": "context_expression",
+          "named": true
+        },
+        {
+          "type": "deref_expression",
+          "named": true
+        },
+        {
+          "type": "directive_expression",
+          "named": true
+        },
+        {
+          "type": "enum_shorthand",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_expression",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "or_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unwrap_expression",
+          "named": true
+        },
+        {
+          "type": "use_expression",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -167,17 +639,144 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "expression",
+          "type": "anon_struct_literal",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "composite_literal",
+          "named": true
+        },
+        {
+          "type": "context_expression",
+          "named": true
+        },
+        {
+          "type": "deref_expression",
+          "named": true
+        },
+        {
+          "type": "directive_expression",
+          "named": true
+        },
+        {
+          "type": "enum_shorthand",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_expression",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "or_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unwrap_expression",
+          "named": true
+        },
+        {
+          "type": "use_expression",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "block_expression",
+    "type": "binding_pattern",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "block",
     "named": true,
     "fields": {},
     "children": {
@@ -185,7 +784,39 @@
       "required": false,
       "types": [
         {
-          "type": "statement",
+          "type": "assignment",
+          "named": true
+        },
+        {
+          "type": "block",
+          "named": true
+        },
+        {
+          "type": "break_statement",
+          "named": true
+        },
+        {
+          "type": "continue_statement",
+          "named": true
+        },
+        {
+          "type": "declaration",
+          "named": true
+        },
+        {
+          "type": "defer_statement",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "for_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
           "named": true
         }
       ]
@@ -197,77 +828,275 @@
     "fields": {}
   },
   {
-    "type": "break_expression",
+    "type": "break_statement",
     "named": true,
-    "fields": {
-      "label": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "call_argument",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "expression",
+          "type": "anon_struct_literal",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "composite_literal",
+          "named": true
+        },
+        {
+          "type": "context_expression",
+          "named": true
+        },
+        {
+          "type": "deref_expression",
+          "named": true
+        },
+        {
+          "type": "directive_expression",
+          "named": true
+        },
+        {
+          "type": "enum_shorthand",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_expression",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "or_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unwrap_expression",
+          "named": true
+        },
+        {
+          "type": "use_expression",
           "named": true
         }
       ]
     }
   },
   {
+    "type": "builtin_type",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "call_expression",
     "named": true,
     "fields": {
       "function": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
-            "type": "expression",
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": "anon_struct_literal",
+            "named": true
+          },
+          {
+            "type": "array_literal",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "call_expression",
+            "named": true
+          },
+          {
+            "type": "char_literal",
+            "named": true
+          },
+          {
+            "type": "composite_literal",
+            "named": true
+          },
+          {
+            "type": "context_expression",
+            "named": true
+          },
+          {
+            "type": "deref_expression",
+            "named": true
+          },
+          {
+            "type": "directive_expression",
+            "named": true
+          },
+          {
+            "type": "enum_shorthand",
+            "named": true
+          },
+          {
+            "type": "enum_type",
+            "named": true
+          },
+          {
+            "type": "field_expression",
+            "named": true
+          },
+          {
+            "type": "float_literal",
+            "named": true
+          },
+          {
+            "type": "function",
+            "named": true
+          },
+          {
+            "type": "function_type",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "if_statement",
+            "named": true
+          },
+          {
+            "type": "index_expression",
+            "named": true
+          },
+          {
+            "type": "int_literal",
+            "named": true
+          },
+          {
+            "type": "label",
+            "named": true
+          },
+          {
+            "type": "match_expression",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": false
+          },
+          {
+            "type": "or_expression",
+            "named": true
+          },
+          {
+            "type": "range_expression",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "struct_type",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "undefined",
+            "named": false
+          },
+          {
+            "type": "unwrap_expression",
+            "named": true
+          },
+          {
+            "type": "use_expression",
             "named": true
           }
         ]
@@ -285,41 +1114,82 @@
     }
   },
   {
-    "type": "comptime_expression",
+    "type": "comp_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "array_type",
+          "named": true
+        },
+        {
+          "type": "builtin_type",
+          "named": true
+        },
+        {
+          "type": "comp_type",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_type",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "generic_type",
+          "named": true
+        },
+        {
+          "type": "optional_type",
+          "named": true
+        },
+        {
+          "type": "pointer_type",
+          "named": true
+        },
+        {
+          "type": "slice_type",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "composite_literal",
     "named": true,
     "fields": {
-      "expression": {
+      "type": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "expression",
+            "type": "call_expression",
             "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "condition_expression",
-    "named": true,
-    "fields": {
-      "capture": {
-        "multiple": false,
-        "required": false,
-        "types": [
+          },
           {
-            "type": "pipe_binding",
+            "type": "field_expression",
             "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": false,
-        "types": [
+          },
           {
-            "type": "expression",
+            "type": "identifier",
             "named": true
           }
         ]
@@ -327,219 +1197,17 @@
     },
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "literal_body",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "continue_expression",
-    "named": true,
-    "fields": {
-      "label": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "declaration",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "owner": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "type_path",
-            "named": true
-          }
-        ]
-      },
-      "signature": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "extern_function_signature",
-            "named": true
-          }
-        ]
-      },
-      "type": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "type_expression",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "declaration_statement",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "type": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "tuple_type",
-            "named": true
-          },
-          {
-            "type": "type_expression",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "destructure_item",
-          "named": true
-        },
-        {
-          "type": "doc_comment",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "defer_expression",
-    "named": true,
-    "fields": {
-      "binding": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "loop_binding",
-            "named": true
-          }
-        ]
-      },
-      "body": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "block_expression",
-            "named": true
-          },
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "deref_access_expression",
-    "named": true,
-    "fields": {
-      "base": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "destructure_assignment",
-    "named": true,
-    "fields": {
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "destructure_item",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "destructure_item",
+    "type": "continue_statement",
     "named": true,
     "fields": {},
     "children": {
@@ -554,208 +1222,119 @@
     }
   },
   {
-    "type": "empty_statement",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "enum_pattern",
-    "named": true,
-    "fields": {
-      "root": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "variant": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "pattern_binding_list",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "enum_type",
-    "named": true,
-    "fields": {
-      "repr": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "type_expression",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "enum_type_variant",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "enum_type_variant",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "payload": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "type_expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "enum_variant_expression",
-    "named": true,
-    "fields": {
-      "variant": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "argument_list_values",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "error_type_list",
+    "type": "declaration",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "type_expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "error_type_suffix",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
       "required": false,
       "types": [
         {
-          "type": "error_type_list",
+          "type": "anon_struct_literal",
           "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "error_unwrap_expression",
-    "named": true,
-    "fields": {
-      "base": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "expression",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "array_pattern",
+          "named": true
+        },
+        {
+          "type": "array_type",
+          "named": true
+        },
         {
           "type": "binary_expression",
           "named": true
         },
         {
-          "type": "break_expression",
+          "type": "boolean_literal",
           "named": true
         },
         {
-          "type": "comptime_expression",
+          "type": "builtin_type",
           "named": true
         },
         {
-          "type": "continue_expression",
+          "type": "call_expression",
           "named": true
         },
         {
-          "type": "defer_expression",
+          "type": "char_literal",
           "named": true
         },
         {
-          "type": "for_expression",
+          "type": "comp_type",
           "named": true
         },
         {
-          "type": "if_expression",
+          "type": "composite_literal",
           "named": true
         },
         {
-          "type": "inline_expression",
+          "type": "context_expression",
+          "named": true
+        },
+        {
+          "type": "deref_expression",
+          "named": true
+        },
+        {
+          "type": "directive_expression",
+          "named": true
+        },
+        {
+          "type": "enum_shorthand",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_expression",
+          "named": true
+        },
+        {
+          "type": "field_type",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "generic_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "label",
           "named": true
         },
         {
@@ -763,23 +1342,47 @@
           "named": true
         },
         {
-          "type": "or_else_expression",
+          "type": "optional_type",
           "named": true
         },
         {
-          "type": "postfix_expression",
+          "type": "or_expression",
           "named": true
         },
         {
-          "type": "primary_expression",
+          "type": "pointer_type",
           "named": true
         },
         {
-          "type": "return_expression",
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "slice_type",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_pattern",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
           "named": true
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unwrap_expression",
           "named": true
         },
         {
@@ -790,7 +1393,7 @@
     }
   },
   {
-    "type": "expression_branch",
+    "type": "defer_statement",
     "named": true,
     "fields": {},
     "children": {
@@ -798,11 +1401,353 @@
       "required": true,
       "types": [
         {
-          "type": "block_expression",
+          "type": "assignment",
           "named": true
         },
         {
-          "type": "expression",
+          "type": "block",
+          "named": true
+        },
+        {
+          "type": "break_statement",
+          "named": true
+        },
+        {
+          "type": "continue_statement",
+          "named": true
+        },
+        {
+          "type": "declaration",
+          "named": true
+        },
+        {
+          "type": "defer_statement",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "for_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "deref_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "anon_struct_literal",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "composite_literal",
+          "named": true
+        },
+        {
+          "type": "context_expression",
+          "named": true
+        },
+        {
+          "type": "deref_expression",
+          "named": true
+        },
+        {
+          "type": "directive_expression",
+          "named": true
+        },
+        {
+          "type": "enum_shorthand",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_expression",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "or_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unwrap_expression",
+          "named": true
+        },
+        {
+          "type": "use_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "directive_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "directive",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "embed_field",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array_type",
+          "named": true
+        },
+        {
+          "type": "builtin_type",
+          "named": true
+        },
+        {
+          "type": "comp_type",
+          "named": true
+        },
+        {
+          "type": "directive",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_type",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "generic_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "optional_type",
+          "named": true
+        },
+        {
+          "type": "pointer_type",
+          "named": true
+        },
+        {
+          "type": "slice_type",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "enum_shorthand",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "enum_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "builtin_type",
+          "named": true
+        },
+        {
+          "type": "enum_variant",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "enum_variant",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array_type",
+          "named": true
+        },
+        {
+          "type": "builtin_type",
+          "named": true
+        },
+        {
+          "type": "comp_type",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_type",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "generic_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "optional_type",
+          "named": true
+        },
+        {
+          "type": "pointer_type",
+          "named": true
+        },
+        {
+          "type": "slice_type",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
           "named": true
         }
       ]
@@ -814,46 +1759,122 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "extern_function_signature",
-    "named": true,
-    "fields": {
-      "link_name": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "string_literal",
-            "named": true
-          }
-        ]
-      },
-      "return_type": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "type_expression",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "function_type_parameter",
+          "type": "anon_struct_literal",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "composite_literal",
+          "named": true
+        },
+        {
+          "type": "context_expression",
+          "named": true
+        },
+        {
+          "type": "deref_expression",
+          "named": true
+        },
+        {
+          "type": "directive_expression",
+          "named": true
+        },
+        {
+          "type": "enum_shorthand",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_expression",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "or_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unwrap_expression",
+          "named": true
+        },
+        {
+          "type": "use_expression",
           "named": true
         }
       ]
@@ -863,16 +1884,6 @@
     "type": "field_expression",
     "named": true,
     "fields": {
-      "base": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
       "field": {
         "multiple": false,
         "required": true,
@@ -883,210 +1894,1172 @@
           }
         ]
       }
-    }
-  },
-  {
-    "type": "for_expression",
-    "named": true,
-    "fields": {
-      "binding": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "loop_binding",
-            "named": true
-          }
-        ]
-      },
-      "body": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "block_expression",
-            "named": true
-          },
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "head": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "function_expression",
-    "named": true,
-    "fields": {
-      "body": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "=>",
-            "named": false
-          },
-          {
-            "type": "block_expression",
-            "named": true
-          },
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "return_spec": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "function_return_spec",
-            "named": true
-          }
-        ]
-      }
     },
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "parameter_list",
+          "type": "anon_struct_literal",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "composite_literal",
+          "named": true
+        },
+        {
+          "type": "context_expression",
+          "named": true
+        },
+        {
+          "type": "deref_expression",
+          "named": true
+        },
+        {
+          "type": "directive_expression",
+          "named": true
+        },
+        {
+          "type": "enum_shorthand",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_expression",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "or_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unwrap_expression",
+          "named": true
+        },
+        {
+          "type": "use_expression",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "function_parameter",
+    "type": "field_group",
     "named": true,
-    "fields": {
-      "default": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "type": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "param_type_expression",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "anon_struct_literal",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "array_type",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "builtin_type",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "comp_type",
+          "named": true
+        },
+        {
+          "type": "composite_literal",
+          "named": true
+        },
+        {
+          "type": "context_expression",
+          "named": true
+        },
+        {
+          "type": "deref_expression",
+          "named": true
+        },
+        {
+          "type": "directive_expression",
+          "named": true
+        },
+        {
+          "type": "enum_shorthand",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_expression",
+          "named": true
+        },
+        {
+          "type": "field_type",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "generic_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "optional_type",
+          "named": true
+        },
+        {
+          "type": "or_expression",
+          "named": true
+        },
+        {
+          "type": "pointer_type",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "slice_type",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unwrap_expression",
+          "named": true
+        },
+        {
+          "type": "use_expression",
+          "named": true
+        }
+      ]
     }
   },
   {
-    "type": "function_return_spec",
+    "type": "field_init",
     "named": true,
-    "fields": {
-      "errors": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "error_type_list",
-            "named": true
-          }
-        ]
-      },
-      "return_type": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "type_expression",
-            "named": true
-          }
-        ]
-      },
-      "return_type_expr": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "anon_struct_literal",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "composite_literal",
+          "named": true
+        },
+        {
+          "type": "context_expression",
+          "named": true
+        },
+        {
+          "type": "deref_expression",
+          "named": true
+        },
+        {
+          "type": "directive_expression",
+          "named": true
+        },
+        {
+          "type": "enum_shorthand",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_expression",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "or_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unwrap_expression",
+          "named": true
+        },
+        {
+          "type": "use_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "field_pattern",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array_pattern",
+          "named": true
+        },
+        {
+          "type": "binding_pattern",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal_pattern",
+          "named": true
+        },
+        {
+          "type": "range_pattern",
+          "named": true
+        },
+        {
+          "type": "struct_pattern",
+          "named": true
+        },
+        {
+          "type": "variant_pattern",
+          "named": true
+        },
+        {
+          "type": "wildcard_pattern",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "field_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array_type",
+          "named": true
+        },
+        {
+          "type": "builtin_type",
+          "named": true
+        },
+        {
+          "type": "comp_type",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_type",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "generic_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "optional_type",
+          "named": true
+        },
+        {
+          "type": "pointer_type",
+          "named": true
+        },
+        {
+          "type": "slice_type",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "for_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "anon_struct_literal",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "assignment",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "block",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "break_statement",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "composite_literal",
+          "named": true
+        },
+        {
+          "type": "context_expression",
+          "named": true
+        },
+        {
+          "type": "continue_statement",
+          "named": true
+        },
+        {
+          "type": "declaration",
+          "named": true
+        },
+        {
+          "type": "defer_statement",
+          "named": true
+        },
+        {
+          "type": "deref_expression",
+          "named": true
+        },
+        {
+          "type": "directive_expression",
+          "named": true
+        },
+        {
+          "type": "enum_shorthand",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "field_expression",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "for_statement",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "or_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unwrap_expression",
+          "named": true
+        },
+        {
+          "type": "use_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "function",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "anon_struct_literal",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "assignment",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "block",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "composite_literal",
+          "named": true
+        },
+        {
+          "type": "context_expression",
+          "named": true
+        },
+        {
+          "type": "deref_expression",
+          "named": true
+        },
+        {
+          "type": "directive",
+          "named": true
+        },
+        {
+          "type": "directive_expression",
+          "named": true
+        },
+        {
+          "type": "enum_shorthand",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_expression",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "or_expression",
+          "named": true
+        },
+        {
+          "type": "parameter_list",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "return_types",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unwrap_expression",
+          "named": true
+        },
+        {
+          "type": "use_expression",
+          "named": true
+        }
+      ]
     }
   },
   {
     "type": "function_type",
     "named": true,
-    "fields": {
-      "return_type": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "type_expression",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
-          "type": "function_type_parameter",
+          "type": "parameter_list",
+          "named": true
+        },
+        {
+          "type": "return_types",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "function_type_parameter",
+    "type": "generic_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "field_type",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "if_statement",
     "named": true,
     "fields": {
-      "name": {
-        "multiple": false,
+      "alternative": {
+        "multiple": true,
         "required": false,
         "types": [
           {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": "anon_struct_literal",
+            "named": true
+          },
+          {
+            "type": "array_literal",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "block",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "call_expression",
+            "named": true
+          },
+          {
+            "type": "char_literal",
+            "named": true
+          },
+          {
+            "type": "composite_literal",
+            "named": true
+          },
+          {
+            "type": "context_expression",
+            "named": true
+          },
+          {
+            "type": "deref_expression",
+            "named": true
+          },
+          {
+            "type": "directive_expression",
+            "named": true
+          },
+          {
+            "type": "enum_shorthand",
+            "named": true
+          },
+          {
+            "type": "enum_type",
+            "named": true
+          },
+          {
+            "type": "field_expression",
+            "named": true
+          },
+          {
+            "type": "float_literal",
+            "named": true
+          },
+          {
+            "type": "function",
+            "named": true
+          },
+          {
+            "type": "function_type",
+            "named": true
+          },
+          {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "if_statement",
+            "named": true
+          },
+          {
+            "type": "index_expression",
+            "named": true
+          },
+          {
+            "type": "int_literal",
+            "named": true
+          },
+          {
+            "type": "label",
+            "named": true
+          },
+          {
+            "type": "match_expression",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": false
+          },
+          {
+            "type": "or_expression",
+            "named": true
+          },
+          {
+            "type": "range_expression",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "struct_type",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "undefined",
+            "named": false
+          },
+          {
+            "type": "unwrap_expression",
+            "named": true
+          },
+          {
+            "type": "use_expression",
             "named": true
           }
         ]
       },
-      "type": {
+      "condition": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": "anon_struct_literal",
+            "named": true
+          },
+          {
+            "type": "array_literal",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "call_expression",
+            "named": true
+          },
+          {
+            "type": "char_literal",
+            "named": true
+          },
+          {
+            "type": "composite_literal",
+            "named": true
+          },
+          {
+            "type": "context_expression",
+            "named": true
+          },
+          {
+            "type": "deref_expression",
+            "named": true
+          },
+          {
+            "type": "directive_expression",
+            "named": true
+          },
+          {
+            "type": "enum_shorthand",
+            "named": true
+          },
+          {
+            "type": "enum_type",
+            "named": true
+          },
+          {
+            "type": "field_expression",
+            "named": true
+          },
+          {
+            "type": "float_literal",
+            "named": true
+          },
+          {
+            "type": "function",
+            "named": true
+          },
+          {
+            "type": "function_type",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "if_statement",
+            "named": true
+          },
+          {
+            "type": "index_expression",
+            "named": true
+          },
+          {
+            "type": "int_literal",
+            "named": true
+          },
+          {
+            "type": "label",
+            "named": true
+          },
+          {
+            "type": "match_expression",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": false
+          },
+          {
+            "type": "or_expression",
+            "named": true
+          },
+          {
+            "type": "range_expression",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "struct_type",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "undefined",
+            "named": false
+          },
+          {
+            "type": "unwrap_expression",
+            "named": true
+          },
+          {
+            "type": "use_expression",
+            "named": true
+          }
+        ]
+      },
+      "consequence": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "param_type_expression",
+            "type": "block",
+            "named": true
+          },
+          {
+            "type": "label",
             "named": true
           }
         ]
@@ -1094,13 +3067,148 @@
     }
   },
   {
-    "type": "identifier_pattern",
+    "type": "index_expression",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "anon_struct_literal",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "composite_literal",
+          "named": true
+        },
+        {
+          "type": "context_expression",
+          "named": true
+        },
+        {
+          "type": "deref_expression",
+          "named": true
+        },
+        {
+          "type": "directive_expression",
+          "named": true
+        },
+        {
+          "type": "enum_shorthand",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_expression",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "or_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unwrap_expression",
+          "named": true
+        },
+        {
+          "type": "use_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "label",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "block",
+          "named": true
+        },
+        {
+          "type": "for_statement",
+          "named": true
+        },
         {
           "type": "identifier",
           "named": true
@@ -1109,125 +3217,18 @@
     }
   },
   {
-    "type": "if_expression",
+    "type": "literal_body",
     "named": true,
-    "fields": {
-      "alternative": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression_branch",
-            "named": true
-          }
-        ]
-      },
-      "condition": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "condition_expression",
-            "named": true
-          }
-        ]
-      },
-      "consequence": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression_branch",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "if_statement",
-    "named": true,
-    "fields": {
-      "alternative": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "if_statement",
-            "named": true
-          },
-          {
-            "type": "statement_or_block",
-            "named": true
-          }
-        ]
-      },
-      "condition": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "condition_expression",
-            "named": true
-          }
-        ]
-      },
-      "consequence": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "statement_or_block",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "inline_expression",
-    "named": true,
-    "fields": {
-      "expression": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "labeled_statement",
-    "named": true,
-    "fields": {
-      "body": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "block_expression",
-            "named": true
-          },
-          {
-            "type": "for_expression",
-            "named": true
-          }
-        ]
-      },
-      "label": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "field_init",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1236,7 +3237,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "boolean_literal",
@@ -1251,11 +3252,7 @@
           "named": true
         },
         {
-          "type": "integer_literal",
-          "named": true
-        },
-        {
-          "type": "null_literal",
+          "type": "int_literal",
           "named": true
         },
         {
@@ -1266,80 +3263,364 @@
     }
   },
   {
-    "type": "loop_binding",
+    "type": "match_arm",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
-      "required": false,
+      "multiple": true,
+      "required": true,
       "types": [
         {
+          "type": "anon_struct_literal",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "array_pattern",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "binding_pattern",
+          "named": true
+        },
+        {
+          "type": "block",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "composite_literal",
+          "named": true
+        },
+        {
+          "type": "context_expression",
+          "named": true
+        },
+        {
+          "type": "deref_expression",
+          "named": true
+        },
+        {
+          "type": "directive_expression",
+          "named": true
+        },
+        {
+          "type": "enum_shorthand",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_expression",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "literal_pattern",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "or_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "range_pattern",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_pattern",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unwrap_expression",
+          "named": true
+        },
+        {
+          "type": "use_expression",
+          "named": true
+        },
+        {
+          "type": "variant_pattern",
+          "named": true
+        },
+        {
+          "type": "wildcard_pattern",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "match_arm",
+    "type": "match_expression",
     "named": true,
-    "fields": {
-      "capture": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "loop_binding",
-            "named": true
-          }
-        ]
-      },
-      "guard": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "pattern": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "pattern_list",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "block_expression",
-            "named": true
-          },
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "anon_struct_literal",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "composite_literal",
+          "named": true
+        },
+        {
+          "type": "context_expression",
+          "named": true
+        },
+        {
+          "type": "deref_expression",
+          "named": true
+        },
+        {
+          "type": "directive_expression",
+          "named": true
+        },
+        {
+          "type": "enum_shorthand",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_expression",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "match_arm",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "or_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unwrap_expression",
+          "named": true
+        },
+        {
+          "type": "use_expression",
+          "named": true
+        }
+      ]
     }
   },
   {
-    "type": "match_expression",
+    "type": "optional_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "array_type",
+          "named": true
+        },
+        {
+          "type": "builtin_type",
+          "named": true
+        },
+        {
+          "type": "comp_type",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_type",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "generic_type",
+          "named": true
+        },
+        {
+          "type": "optional_type",
+          "named": true
+        },
+        {
+          "type": "pointer_type",
+          "named": true
+        },
+        {
+          "type": "slice_type",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "or_expression",
     "named": true,
     "fields": {
-      "scrutinee": {
+      "binding": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
-            "type": "expression",
+            "type": "identifier",
             "named": true
           }
         ]
@@ -1350,79 +3631,59 @@
       "required": false,
       "types": [
         {
-          "type": "match_arm",
+          "type": "anon_struct_literal",
           "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "module_declaration",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "named_field_initializer",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "named_type",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
+        },
         {
-          "type": "identifier",
+          "type": "array_literal",
           "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "non_error_type_expression",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
+        },
         {
-          "type": "applied_type",
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "block",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "break_statement",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "composite_literal",
+          "named": true
+        },
+        {
+          "type": "context_expression",
+          "named": true
+        },
+        {
+          "type": "continue_statement",
+          "named": true
+        },
+        {
+          "type": "deref_expression",
+          "named": true
+        },
+        {
+          "type": "directive_expression",
+          "named": true
+        },
+        {
+          "type": "enum_shorthand",
           "named": true
         },
         {
@@ -1430,7 +3691,15 @@
           "named": true
         },
         {
-          "type": "expression",
+          "type": "field_expression",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "function",
           "named": true
         },
         {
@@ -1438,7 +3707,43 @@
           "named": true
         },
         {
-          "type": "named_type",
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "or_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "string_literal",
           "named": true
         },
         {
@@ -1446,78 +3751,178 @@
           "named": true
         },
         {
-          "type": "tuple_type",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "type_expression",
+          "type": "unwrap_expression",
+          "named": true
+        },
+        {
+          "type": "use_expression",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "optional_unwrap_expression",
-    "named": true,
-    "fields": {
-      "base": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "or_else_expression",
-    "named": true,
-    "fields": {
-      "binding": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "loop_binding",
-            "named": true
-          }
-        ]
-      },
-      "fallback": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "param_type_expression",
+    "type": "parameter_group",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "type_expression",
+          "type": "anon_struct_literal",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "array_type",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "builtin_type",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "comp_type",
+          "named": true
+        },
+        {
+          "type": "composite_literal",
+          "named": true
+        },
+        {
+          "type": "context_expression",
+          "named": true
+        },
+        {
+          "type": "deref_expression",
+          "named": true
+        },
+        {
+          "type": "directive_expression",
+          "named": true
+        },
+        {
+          "type": "enum_shorthand",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_expression",
+          "named": true
+        },
+        {
+          "type": "field_type",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "generic_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "optional_type",
+          "named": true
+        },
+        {
+          "type": "or_expression",
+          "named": true
+        },
+        {
+          "type": "pointer_type",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "slice_type",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unwrap_expression",
+          "named": true
+        },
+        {
+          "type": "use_expression",
           "named": true
         }
       ]
@@ -1532,14 +3937,14 @@
       "required": false,
       "types": [
         {
-          "type": "function_parameter",
+          "type": "parameter_group",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "parenthesized_expression",
+    "type": "pointer_type",
     "named": true,
     "fields": {},
     "children": {
@@ -1547,45 +3952,58 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "array_type",
+          "named": true
+        },
+        {
+          "type": "builtin_type",
+          "named": true
+        },
+        {
+          "type": "comp_type",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_type",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "generic_type",
+          "named": true
+        },
+        {
+          "type": "optional_type",
+          "named": true
+        },
+        {
+          "type": "pointer_type",
+          "named": true
+        },
+        {
+          "type": "slice_type",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "pattern",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "enum_pattern",
-          "named": true
-        },
-        {
-          "type": "identifier_pattern",
-          "named": true
-        },
-        {
-          "type": "literal_pattern",
-          "named": true
-        },
-        {
-          "type": "range_pattern",
-          "named": true
-        },
-        {
-          "type": "wildcard_pattern",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "pattern_binding_list",
+    "type": "range_expression",
     "named": true,
     "fields": {},
     "children": {
@@ -1593,87 +4011,7 @@
       "required": false,
       "types": [
         {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "pattern_list",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "pattern",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "pipe_binding",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "postfix_expression",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "call_expression",
-          "named": true
-        },
-        {
-          "type": "deref_access_expression",
-          "named": true
-        },
-        {
-          "type": "error_unwrap_expression",
-          "named": true
-        },
-        {
-          "type": "field_expression",
-          "named": true
-        },
-        {
-          "type": "optional_unwrap_expression",
-          "named": true
-        },
-        {
-          "type": "subscript_expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "primary_expression",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "anonymous_struct_literal",
+          "type": "anon_struct_literal",
           "named": true
         },
         {
@@ -1681,7 +4019,7 @@
           "named": true
         },
         {
-          "type": "block_expression",
+          "type": "binary_expression",
           "named": true
         },
         {
@@ -1689,7 +4027,7 @@
           "named": true
         },
         {
-          "type": "builtin_identifier",
+          "type": "call_expression",
           "named": true
         },
         {
@@ -1697,7 +4035,31 @@
           "named": true
         },
         {
-          "type": "enum_variant_expression",
+          "type": "composite_literal",
+          "named": true
+        },
+        {
+          "type": "context_expression",
+          "named": true
+        },
+        {
+          "type": "deref_expression",
+          "named": true
+        },
+        {
+          "type": "directive_expression",
+          "named": true
+        },
+        {
+          "type": "enum_shorthand",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_expression",
           "named": true
         },
         {
@@ -1705,7 +4067,11 @@
           "named": true
         },
         {
-          "type": "function_expression",
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "function_type",
           "named": true
         },
         {
@@ -1713,15 +4079,31 @@
           "named": true
         },
         {
-          "type": "integer_literal",
+          "type": "if_statement",
           "named": true
         },
         {
-          "type": "null_literal",
+          "type": "index_expression",
           "named": true
         },
         {
-          "type": "parenthesized_expression",
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "or_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
           "named": true
         },
         {
@@ -1729,15 +4111,19 @@
           "named": true
         },
         {
-          "type": "tuple_literal",
+          "type": "struct_type",
           "named": true
         },
         {
-          "type": "type_literal_expression",
+          "type": "unary_expression",
           "named": true
         },
         {
-          "type": "typed_struct_literal",
+          "type": "unwrap_expression",
+          "named": true
+        },
+        {
+          "type": "use_expression",
           "named": true
         }
       ]
@@ -1746,61 +4132,265 @@
   {
     "type": "range_pattern",
     "named": true,
-    "fields": {
-      "end": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "pattern",
-            "named": true
-          }
-        ]
-      },
-      "operator": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "..",
-            "named": false
-          },
-          {
-            "type": "..=",
-            "named": false
-          }
-        ]
-      },
-      "start": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier_pattern",
-            "named": true
-          },
-          {
-            "type": "literal_pattern",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "int_literal",
+          "named": true
+        }
+      ]
     }
   },
   {
-    "type": "return_expression",
+    "type": "return_statement",
     "named": true,
-    "fields": {
-      "value": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "anon_struct_literal",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "composite_literal",
+          "named": true
+        },
+        {
+          "type": "context_expression",
+          "named": true
+        },
+        {
+          "type": "deref_expression",
+          "named": true
+        },
+        {
+          "type": "directive_expression",
+          "named": true
+        },
+        {
+          "type": "enum_shorthand",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_expression",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "or_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unwrap_expression",
+          "named": true
+        },
+        {
+          "type": "use_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "return_types",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array_type",
+          "named": true
+        },
+        {
+          "type": "builtin_type",
+          "named": true
+        },
+        {
+          "type": "comp_type",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_type",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "generic_type",
+          "named": true
+        },
+        {
+          "type": "optional_type",
+          "named": true
+        },
+        {
+          "type": "pointer_type",
+          "named": true
+        },
+        {
+          "type": "slice_type",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "slice_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "array_type",
+          "named": true
+        },
+        {
+          "type": "builtin_type",
+          "named": true
+        },
+        {
+          "type": "comp_type",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_type",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "generic_type",
+          "named": true
+        },
+        {
+          "type": "optional_type",
+          "named": true
+        },
+        {
+          "type": "pointer_type",
+          "named": true
+        },
+        {
+          "type": "slice_type",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1810,53 +4400,30 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "module_declaration",
+          "type": "assignment",
           "named": true
         },
         {
-          "type": "top_level_declaration",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "assignment_statement",
+          "type": "block",
           "named": true
         },
         {
-          "type": "break_expression",
+          "type": "break_statement",
           "named": true
         },
         {
-          "type": "continue_expression",
+          "type": "continue_statement",
           "named": true
         },
         {
-          "type": "declaration_statement",
+          "type": "declaration",
           "named": true
         },
         {
-          "type": "defer_expression",
-          "named": true
-        },
-        {
-          "type": "destructure_assignment",
-          "named": true
-        },
-        {
-          "type": "empty_statement",
+          "type": "defer_statement",
           "named": true
         },
         {
@@ -1864,42 +4431,26 @@
           "named": true
         },
         {
-          "type": "for_expression",
+          "type": "for_statement",
           "named": true
         },
         {
-          "type": "if_statement",
-          "named": true
-        },
-        {
-          "type": "labeled_statement",
-          "named": true
-        },
-        {
-          "type": "match_expression",
-          "named": true
-        },
-        {
-          "type": "return_expression",
+          "type": "return_statement",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "statement_or_block",
+    "type": "struct_pattern",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
-      "required": true,
+      "multiple": true,
+      "required": false,
       "types": [
         {
-          "type": "block_expression",
-          "named": true
-        },
-        {
-          "type": "statement",
+          "type": "field_pattern",
           "named": true
         }
       ]
@@ -1914,208 +4465,22 @@
       "required": false,
       "types": [
         {
-          "type": "struct_type_field",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "struct_type_field",
-    "named": true,
-    "fields": {
-      "default": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "type": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "type_expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "subscript_expression",
-    "named": true,
-    "fields": {
-      "base": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "end": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "index": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "range_operator": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "..",
-            "named": false
-          },
-          {
-            "type": "..=",
-            "named": false
-          }
-        ]
-      },
-      "start": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "top_level_declaration",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "declaration",
+          "type": "embed_field",
           "named": true
         },
         {
-          "type": "doc_comment",
+          "type": "field_group",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "tuple_literal",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tuple_type",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "type_expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "type_expression",
-    "named": true,
-    "fields": {
-      "base": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "non_error_type_expression",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "error_type_suffix",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "type_literal_expression",
+    "type": "type_identifier",
     "named": true,
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "enum_type",
-          "named": true
-        },
-        {
-          "type": "struct_type",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "type_path",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
       "required": true,
       "types": [
         {
@@ -2126,117 +4491,307 @@
     }
   },
   {
-    "type": "typed_struct_field",
+    "type": "unary_expression",
     "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "typed_struct_literal",
-    "named": true,
-    "fields": {
-      "type": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "applied_type",
-            "named": true
-          },
-          {
-            "type": "named_type",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "types": [
         {
-          "type": "typed_struct_field",
+          "type": "anon_struct_literal",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "composite_literal",
+          "named": true
+        },
+        {
+          "type": "context_expression",
+          "named": true
+        },
+        {
+          "type": "deref_expression",
+          "named": true
+        },
+        {
+          "type": "directive_expression",
+          "named": true
+        },
+        {
+          "type": "enum_shorthand",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_expression",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "or_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unwrap_expression",
+          "named": true
+        },
+        {
+          "type": "use_expression",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "unary_expression",
+    "type": "unwrap_expression",
     "named": true,
-    "fields": {
-      "operator": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "!",
-            "named": false
-          },
-          {
-            "type": "&",
-            "named": false
-          },
-          {
-            "type": "-",
-            "named": false
-          },
-          {
-            "type": "mut",
-            "named": false
-          },
-          {
-            "type": "~",
-            "named": false
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "anon_struct_literal",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "composite_literal",
+          "named": true
+        },
+        {
+          "type": "context_expression",
+          "named": true
+        },
+        {
+          "type": "deref_expression",
+          "named": true
+        },
+        {
+          "type": "directive_expression",
+          "named": true
+        },
+        {
+          "type": "enum_shorthand",
+          "named": true
+        },
+        {
+          "type": "enum_type",
+          "named": true
+        },
+        {
+          "type": "field_expression",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "function_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "or_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_type",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unwrap_expression",
+          "named": true
+        },
+        {
+          "type": "use_expression",
+          "named": true
+        }
+      ]
     }
   },
   {
     "type": "use_expression",
     "named": true,
-    "fields": {
-      "path": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "string_literal",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "variant_pattern",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array_pattern",
+          "named": true
+        },
+        {
+          "type": "binding_pattern",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal_pattern",
+          "named": true
+        },
+        {
+          "type": "range_pattern",
+          "named": true
+        },
+        {
+          "type": "struct_pattern",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -2285,11 +4840,19 @@
     "named": false
   },
   {
+    "type": "*%",
+    "named": false
+  },
+  {
     "type": "*=",
     "named": false
   },
   {
     "type": "+",
+    "named": false
+  },
+  {
+    "type": "+%",
     "named": false
   },
   {
@@ -2305,6 +4868,10 @@
     "named": false
   },
   {
+    "type": "-%",
+    "named": false
+  },
+  {
     "type": "-=",
     "named": false
   },
@@ -2313,23 +4880,11 @@
     "named": false
   },
   {
-    "type": ".!",
-    "named": false
-  },
-  {
-    "type": ".*",
-    "named": false
-  },
-  {
     "type": "..",
     "named": false
   },
   {
     "type": "..=",
-    "named": false
-  },
-  {
-    "type": ".?",
     "named": false
   },
   {
@@ -2342,14 +4897,6 @@
   },
   {
     "type": ":",
-    "named": false
-  },
-  {
-    "type": ":=",
-    "named": false
-  },
-  {
-    "type": ";",
     "named": false
   },
   {
@@ -2421,25 +4968,33 @@
     "named": false
   },
   {
-    "type": "block_comment",
-    "named": true,
-    "extra": true
+    "type": "any",
+    "named": false
+  },
+  {
+    "type": "bool",
+    "named": false
   },
   {
     "type": "break",
     "named": false
   },
   {
-    "type": "builtin_identifier",
-    "named": true
-  },
-  {
     "type": "char_literal",
     "named": true
   },
   {
+    "type": "comment",
+    "named": true,
+    "extra": true
+  },
+  {
     "type": "comp",
     "named": false
+  },
+  {
+    "type": "context_expression",
+    "named": true
   },
   {
     "type": "continue",
@@ -2450,7 +5005,7 @@
     "named": false
   },
   {
-    "type": "doc_comment",
+    "type": "directive",
     "named": true
   },
   {
@@ -2462,7 +5017,11 @@
     "named": false
   },
   {
-    "type": "extern",
+    "type": "f32",
+    "named": false
+  },
+  {
+    "type": "f64",
     "named": false
   },
   {
@@ -2486,17 +5045,16 @@
     "named": false
   },
   {
+    "type": "in",
+    "named": false
+  },
+  {
     "type": "inline",
     "named": false
   },
   {
-    "type": "integer_literal",
+    "type": "int_literal",
     "named": true
-  },
-  {
-    "type": "line_comment",
-    "named": true,
-    "extra": true
   },
   {
     "type": "match",
@@ -2511,15 +5069,11 @@
     "named": false
   },
   {
-    "type": "null_literal",
-    "named": true
-  },
-  {
-    "type": "or",
+    "type": "null",
     "named": false
   },
   {
-    "type": "packed",
+    "type": "or",
     "named": false
   },
   {
@@ -2547,7 +5101,15 @@
     "named": false
   },
   {
+    "type": "undefined",
+    "named": false
+  },
+  {
     "type": "use",
+    "named": false
+  },
+  {
+    "type": "void",
     "named": false
   },
   {

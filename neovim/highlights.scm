@@ -1,80 +1,95 @@
-(doc_comment) @comment.documentation
-(line_comment) @comment
-(block_comment) @comment
+; tree-sitter-dyn — highlights for Neovim (nvim-treesitter capture names)
+
+; -------------------------------------------------------------- keywords
+[
+  "struct"
+  "enum"
+  "use"
+  "pub"
+  "mut"
+  "comp"
+  "inline"
+] @keyword
+
+"defer" @keyword
+(context_expression) @variable.builtin
+
+[
+  "if"
+  "else"
+  "match"
+] @keyword.conditional
+
+[
+  "for"
+  "in"
+] @keyword.repeat
+
+"return" @keyword.return
+
+[
+  "break"
+  "continue"
+  "or"
+] @keyword.control
+
+; ------------------------------------------------------------- operators
+[
+  "=" "+" "-" "*" "/" "%" "+%" "-%" "*%"
+  "==" "!=" "<" ">" "<=" ">="
+  "&&" "||" "!" "&" "|" "^" "~" "<<" ">>"
+  "+=" "-=" "*=" "/=" "%=" "&=" "|=" "^=" "<<=" ">>="
+  ".." "..=" "=>" "?"
+] @operator
+
+; ------------------------------------------------------------- literals
+(int_literal) @number
+(float_literal) @number.float
 (string_literal) @string
 (char_literal) @character
-(integer_literal) @number
-(float_literal) @number.float
 (boolean_literal) @boolean
-(null_literal) @constant.builtin
-(module_declaration name: (identifier) @namespace)
-(declaration
-  name: (identifier) @function
-  signature: (extern_function_signature))
+"null" @constant.builtin
+"undefined" @constant.builtin
+"_" @variable.builtin
 
-; All other bindings (fallback — overridden by more specific rules below)
-(declaration name: (identifier) @variable)
-(declaration_statement name: (identifier) @variable)
+; ---------------------------------------------------------------- types
+(builtin_type) @type.builtin
+(type_identifier) @type
+(pointer_type "mut" @type.qualifier)
+(slice_type "mut" @type.qualifier)
+(array_type "mut" @type.qualifier)
+((identifier) @type
+  (#match? @type "^[A-Z]"))
 
-; Function-valued bindings (overrides @variable above)
+; ------------------------------------------------------------ functions
+; `name = (params) ... { }` and `name = (params) ... => expr`
 (declaration
-  name: (identifier) @function
-  value: (expression (primary_expression (function_expression))))
-(declaration_statement
-  name: (identifier) @function
-  value: (expression (primary_expression (function_expression))))
+  (identifier) @function
+  (function))
 
-; Type-literal-valued bindings (overrides @variable above)
-(declaration
-  name: (identifier) @type
-  value: (expression (primary_expression (type_literal_expression))))
-(declaration_statement
-  name: (identifier) @type
-  value: (expression (primary_expression (type_literal_expression))))
-
-; Associated bindings (TypeName.member := expr)
-(declaration
-  owner: (identifier) @type
-  name: (identifier) @variable)
-(declaration
-  owner: (type_path) @type)
-(declaration
-  owner: (identifier) @type
-  name: (identifier) @function
-  value: (expression (primary_expression (function_expression))))
-(declaration
-  owner: (identifier) @type
-  name: (identifier) @type
-  value: (expression (primary_expression (type_literal_expression))))
-
-; Destructure bindings
-(destructure_item (identifier) @variable)
-
-(function_parameter name: (identifier) @variable.parameter)
-(function_type_parameter name: (identifier) @variable.parameter)
-(pipe_binding (identifier) @variable.parameter)
-(loop_binding (identifier) @variable.parameter)
-(named_type (identifier) @type)
-(applied_type callee: (identifier) @type)
-(field_expression field: (identifier) @property)
-(named_field_initializer name: (identifier) @property)
-(typed_struct_field name: (identifier) @property)
-(struct_type_field name: (identifier) @property)
-(enum_type_variant name: (identifier) @constructor)
-(enum_variant_expression variant: (identifier) @constructor)
-(enum_pattern root: (identifier) @type)
-(enum_pattern variant: (identifier) @constructor)
 (call_expression
-  function: (expression (primary_expression (identifier) @function.call)))
+  function: (identifier) @function.call)
 (call_expression
-  function: (expression (postfix_expression (field_expression field: (identifier) @function.call))))
-(builtin_identifier) @function.builtin
-(labeled_statement label: (identifier) @label)
-(break_expression label: (identifier) @label)
-(continue_expression label: (identifier) @label)
-[ "module" "extern" "packed" "use" "pub" "mut" "comp" "inline" "type" "struct" "enum" ] @keyword
-[ "if" "else" "match" "for" "break" "continue" "return" "defer" ] @keyword.control
-"or" @keyword.operator
-[ ":=" "." ".." "..=" ".*" ".?" ".!" ":" "=" "=>" "!" "+" "-" "*" "/" "%" "+=" "-=" "*=" "/=" "%=" "&=" "|=" "^=" "==" "!=" "<" "<=" ">" ">=" "&&" "||" "&" "|" "^" "~" "<<" ">>" "<<=" ">>=" "?" ] @operator
-[ "(" ")" "[" "]" "{" "}" ] @punctuation.bracket
-[ "," ";" ] @punctuation.delimiter
+  function: (field_expression field: (identifier) @function.method.call))
+
+(parameter_group (identifier) @variable.parameter)
+
+(directive) @function.macro
+(directive_expression (directive) @function.macro)
+
+; -------------------------------------------------------------- members
+(field_expression field: (identifier) @variable.member)
+(field_group (identifier) @variable.member)
+(field_init (identifier) @variable.member)
+(enum_variant (identifier) @constant)
+(enum_shorthand (identifier) @constant)
+(variant_pattern (identifier) @constant)
+
+; --------------------------------------------------------------- misc
+(use_expression (string_literal) @string.special.path)
+(label (identifier) @label)
+(break_statement (identifier) @label)
+(continue_statement (identifier) @label)
+(comment) @comment
+
+(ERROR) @error
