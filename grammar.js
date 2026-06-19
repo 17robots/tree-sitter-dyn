@@ -36,8 +36,6 @@ module.exports = grammar({
   word: $ => $.identifier,
   extras: $ => [/\s/, ';', $.comment],
   conflicts: $ => [
-    [$._decl_lhs, $.label],
-    [$._decl_lhs, $.label, $.field_init],
     [$.composite_literal, $._expression],
     [$._expression, $.literal_pattern],
     [$._expression, $.range_pattern],
@@ -52,7 +50,7 @@ module.exports = grammar({
     [$.return_types],
     [$.return_statement],
     [$.break_statement],
-    [$._decl_lhs, $._expression],
+    [$.label, $._expression],
   ],
   rules: {
     source_file: $ => repeat($._statement),
@@ -81,7 +79,7 @@ module.exports = grammar({
     ))),
     _decl_lhs: $ => seq(
       optional('mut'),
-      choice($.identifier, '_', $.struct_pattern, $.array_pattern),
+      choice(prec(PREC.postfix, seq($.identifier, optional(seq(token.immediate('.'), $._expression)))), '_', $.struct_pattern, $.array_pattern),
     ),
     assignment: $ => prec.right(-1, seq(
       $._expression,
