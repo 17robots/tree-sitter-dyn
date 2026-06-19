@@ -181,20 +181,23 @@
                     "type": "CHOICE",
                     "members": [
                       {
-                        "type": "SEQ",
-                        "members": [
-                          {
-                            "type": "IMMEDIATE_TOKEN",
-                            "content": {
-                              "type": "STRING",
-                              "value": "."
+                        "type": "REPEAT",
+                        "content": {
+                          "type": "SEQ",
+                          "members": [
+                            {
+                              "type": "IMMEDIATE_TOKEN",
+                              "content": {
+                                "type": "STRING",
+                                "value": "."
+                              }
+                            },
+                            {
+                              "type": "SYMBOL",
+                              "name": "identifier"
                             }
-                          },
-                          {
-                            "type": "SYMBOL",
-                            "name": "_expression"
-                          }
-                        ]
+                          ]
+                        }
                       },
                       {
                         "type": "BLANK"
@@ -3222,10 +3225,6 @@
     ],
     [
       "break_statement"
-    ],
-    [
-      "label",
-      "_expression"
     ]
   ],
   "precedences": [],
