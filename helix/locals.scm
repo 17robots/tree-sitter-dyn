@@ -1,4 +1,4 @@
-; tree-sitter-dyn — locals for Neovim / nvim-treesitter
+; tree-sitter-dyn — locals for Helix
 
 [
   (source_file)
@@ -9,15 +9,15 @@
 
 (declaration
   (decl_lhs
-    (identifier) @local.definition.var))
+    (identifier) @local.definition.variable))
 
 (decl_lhs
-  (identifier) @local.definition.var)
+  (identifier) @local.definition.variable)
 
 (function
   (identifier) @local.definition.parameter)
 
 (for
-  (identifier) @local.definition.var)
+  (identifier) @local.definition.variable)
 
 (identifier) @local.reference

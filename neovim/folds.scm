@@ -1,9 +1,13 @@
-; tree-sitter-dyn — folds (Neovim)
+; tree-sitter-dyn — folds for Neovim / nvim-treesitter
+
 [
   (block)
-  (struct_type)
-  (enum_type)
-  (match_expression)
-  (literal_body)
-  (comment)
+  (struct)
+  (enum)
+  (case)
+  (function)
+  (struct_postfix)
+  (array_literal)
 ] @fold
+
+(comment) @fold

@@ -1,4 +1,12 @@
+; tree-sitter-dyn — folds for Helix
+
 [
-  (block) (struct_type) (enum_type)
-  (match_expression) (literal_body) (comment)
+  (block)
+  (struct)
+  (enum)
+  (case)
+  (function)
+  (struct_postfix)
+  (array_literal)
+  (comment)
 ] @fold

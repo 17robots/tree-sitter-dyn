@@ -1,95 +1,123 @@
-; tree-sitter-dyn — highlights for Neovim (nvim-treesitter capture names)
+; tree-sitter-dyn — highlights for Neovim / nvim-treesitter
 
-; -------------------------------------------------------------- keywords
+; Keywords
 [
+  "pub"
+  "mut"
+  "inline"
   "struct"
   "enum"
   "use"
-  "pub"
-  "mut"
-  "comp"
-  "inline"
 ] @keyword
-
-"defer" @keyword
-(context_expression) @variable.builtin
 
 [
   "if"
   "else"
-  "match"
+  "case"
 ] @keyword.conditional
 
-[
-  "for"
-  "in"
-] @keyword.repeat
+"for" @keyword.repeat
 
 "return" @keyword.return
 
 [
   "break"
   "continue"
-  "or"
 ] @keyword.control
 
-; ------------------------------------------------------------- operators
+; Operators / punctuation-like operators
 [
-  "=" "+" "-" "*" "/" "%" "+%" "-%" "*%"
-  "==" "!=" "<" ">" "<=" ">="
-  "&&" "||" "!" "&" "|" "^" "~" "<<" ">>"
-  "+=" "-=" "*=" "/=" "%=" "&=" "|=" "^=" "<<=" ">>="
-  ".." "..=" "=>" "?"
+  "=" "+" "-" "*" "/" "%" "+%" "-%" "*%" "==" "!==" "<" ">"
+  "<=" ">=" "&&" "||" "!" "&" "|" "^" "~" "<<" ">>" "+=" "-="
+  "*=" "/=" "%=" "&=" "|=" "^=" "<<=" ">>=" ".." "=>" ".*"
 ] @operator
 
-; ------------------------------------------------------------- literals
+; Literals
 (int_literal) @number
 (float_literal) @number.float
 (string_literal) @string
 (char_literal) @character
 (boolean_literal) @boolean
 "null" @constant.builtin
-"undefined" @constant.builtin
 "_" @variable.builtin
 
-; ---------------------------------------------------------------- types
-(builtin_type) @type.builtin
-(type_identifier) @type
-(pointer_type "mut" @type.qualifier)
-(slice_type "mut" @type.qualifier)
-(array_type "mut" @type.qualifier)
+; Types
+(builtin) @type.builtin
+
+(pointer_type
+  "mut" @type.qualifier)
+
+(array_type
+  "mut" @type.qualifier)
+
 ((identifier) @type
   (#match? @type "^[A-Z]"))
 
-; ------------------------------------------------------------ functions
-; `name = (params) ... { }` and `name = (params) ... => expr`
+; Declarations
 (declaration
-  (identifier) @function
+  (decl_lhs
+    (identifier) @variable))
+
+; Function declarations:
+; name = (...) ...
+(declaration
+  (decl_lhs
+    (identifier) @function)
+  "="
+  (primary_expression
+    (grouped)?)*)
+
+(declaration
+  (decl_lhs
+    (identifier) @function)
+  "="
   (function))
 
-(call_expression
-  function: (identifier) @function.call)
-(call_expression
-  function: (field_expression field: (identifier) @function.method.call))
+; Parameters / function-like identifiers inside function rule
+(function
+  (identifier) @variable.parameter)
 
-(parameter_group (identifier) @variable.parameter)
+; Fields / members
+(field_postfix
+  (identifier) @variable.member)
 
-(directive) @function.macro
-(directive_expression (directive) @function.macro)
+(struct_member
+  (identifier) @variable.member)
 
-; -------------------------------------------------------------- members
-(field_expression field: (identifier) @variable.member)
-(field_group (identifier) @variable.member)
-(field_init (identifier) @variable.member)
-(enum_variant (identifier) @constant)
-(enum_shorthand (identifier) @constant)
-(variant_pattern (identifier) @constant)
+(struct_init_member
+  (identifier) @variable.member)
 
-; --------------------------------------------------------------- misc
-(use_expression (string_literal) @string.special.path)
-(label (identifier) @label)
-(break_statement (identifier) @label)
-(continue_statement (identifier) @label)
+(enum_member
+  (identifier) @constant)
+
+(enum_literal
+  (identifier) @constant)
+
+; Calls
+(postfix
+  (identifier) @function.call
+  (call_postfix))
+
+(postfix
+  (postfix
+    (field_postfix
+      (identifier) @function.method.call))
+  (call_postfix))
+
+(call_arg
+  (identifier) @variable.parameter)
+
+; Labels
+(break
+  (identifier) @label)
+
+(continue
+  (identifier) @label)
+
+; Imports
+(use
+  (string_literal) @string.special.path)
+
+; Misc
 (comment) @comment
-
 (ERROR) @error

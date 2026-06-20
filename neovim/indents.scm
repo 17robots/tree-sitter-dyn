@@ -1,19 +1,33 @@
-; tree-sitter-dyn — indents (Neovim, nvim-treesitter indent module)
+; tree-sitter-dyn — indents for Neovim / nvim-treesitter
+
 [
   (block)
-  (struct_type)
-  (enum_type)
-  (match_expression)
-  (literal_body)
+  (struct)
+  (enum)
+  (case)
+  (struct_postfix)
   (array_literal)
-  (parameter_list)
-  (argument_list)
+  (array_type)
+  (call_postfix)
+  (grouped)
+  (function)
 ] @indent.begin
 
 [
   "}"
-  ")"
   "]"
-] @indent.branch
+  ")"
+] @indent.end
 
-(comment) @indent.auto
+[
+  (comment)
+] @indent.ignore
+
+[
+  (binary)
+  (compound_assign)
+  (call_arg)
+  (struct_init_member)
+  (struct_member)
+  (enum_member)
+] @indent.align
