@@ -170,6 +170,10 @@
         {
           "type": "identifier",
           "named": true
+        },
+        {
+          "type": "postfix",
+          "named": true
         }
       ]
     }
@@ -354,6 +358,29 @@
     }
   },
   {
+    "type": "function",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "block",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "grouped",
     "named": true,
     "fields": {},
@@ -458,7 +485,7 @@
           "named": true
         },
         {
-          "type": "expression",
+          "type": "case",
           "named": true
         },
         {
@@ -466,11 +493,31 @@
           "named": true
         },
         {
+          "type": "grouped",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if",
+          "named": true
+        },
+        {
           "type": "pointer_postfix",
           "named": true
         },
         {
+          "type": "string_literal",
+          "named": true
+        },
+        {
           "type": "struct_postfix",
+          "named": true
+        },
+        {
+          "type": "type",
           "named": true
         }
       ]
@@ -489,7 +536,15 @@
           "named": true
         },
         {
+          "type": "directive",
+          "named": true
+        },
+        {
           "type": "enum",
+          "named": true
+        },
+        {
+          "type": "function",
           "named": true
         },
         {
@@ -595,6 +650,10 @@
         },
         {
           "type": "declaration",
+          "named": true
+        },
+        {
+          "type": "expression",
           "named": true
         },
         {
@@ -734,7 +793,7 @@
     "named": false
   },
   {
-    "type": "!==",
+    "type": "!=",
     "named": false
   },
   {
@@ -814,6 +873,10 @@
     "named": false
   },
   {
+    "type": "..=",
+    "named": false
+  },
+  {
     "type": "/",
     "named": false
   },
@@ -847,6 +910,10 @@
   },
   {
     "type": "==",
+    "named": false
+  },
+  {
+    "type": "=>",
     "named": false
   },
   {
@@ -911,6 +978,10 @@
     "named": false
   },
   {
+    "type": "directive",
+    "named": true
+  },
+  {
     "type": "else",
     "named": false
   },
@@ -952,6 +1023,10 @@
   },
   {
     "type": "null",
+    "named": false
+  },
+  {
+    "type": "or",
     "named": false
   },
   {
