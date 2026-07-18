@@ -1,6 +1,6 @@
 module.exports = grammar({
   name: 'dyn',
-  extras: _ => [ /\s+/, /\/\/[^\n]*/, ],
+  extras: $ => [ /\s+/, /\/\/[^\n]*/, $.comment ],
   word: $ => $.identifier,
   rules: {
     source_file: $ => repeat(seq(optional(token('pub')), $.declaration)),
@@ -26,8 +26,9 @@ module.exports = grammar({
     continue_: $ => seq('continue', optional(seq(':', $.identifier))),
     return_: $ => seq('return', optional($.expression)),
     asm: $ => seq('asm', '{', repeat($.identifier), '}'),
-    expression: $ => choice( $.identifier, $.integer, $.float, $.string_, $.char_, $.bool, $.unary, $.binary, $.call, $.member_access, $.index, $.struct_literal, $.builtin_operator),
-    unary: $ => prec(6, choice( seq('-', $.expression), seq('&', $.expression), seq($.expression, '.*'))),
+    expression: $ => choice( $.identifier, $.integer, $.float, $.string_, $.char_, $.bool, $.prefix_unary, $.postfix_unary, $.binary, $.call, $.member_access, $.index, $.struct_literal, $.builtin_operator),
+    postfix_unary: $ => prec(6, seq($.expression, '.*')),
+    prefix_unary: $ => prec(7, seq(choice('-', '&'), $.expression)),
     binary: $ => choice(
       ...[
         ['&&', 1], ['||', 1],
@@ -56,7 +57,8 @@ module.exports = grammar({
     float: _ => /[0-9_]+\.[0-9_]+/,
     string_: _ => /"([^"\\]|\\.)*"/,
     char_: _ => /'([^'\\]|\\.)*'/,
-    bool: _ => choice('true', 'false')
+    bool: _ => choice('true', 'false'),
+    comment: _ => token(choice(seq('//', /[^\n]*/), seq('/*', /([^*]|\*+[^/*])*/, /\*+\//))),
   }
 });
 

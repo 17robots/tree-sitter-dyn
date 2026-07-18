@@ -1018,7 +1018,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "unary"
+          "name": "prefix_unary"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "postfix_unary"
         },
         {
           "type": "SYMBOL",
@@ -1046,50 +1050,45 @@
         }
       ]
     },
-    "unary": {
+    "postfix_unary": {
       "type": "PREC",
       "value": 6,
       "content": {
-        "type": "CHOICE",
+        "type": "SEQ",
         "members": [
           {
-            "type": "SEQ",
+            "type": "SYMBOL",
+            "name": "expression"
+          },
+          {
+            "type": "STRING",
+            "value": ".*"
+          }
+        ]
+      }
+    },
+    "prefix_unary": {
+      "type": "PREC",
+      "value": 7,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "CHOICE",
             "members": [
               {
                 "type": "STRING",
                 "value": "-"
               },
               {
-                "type": "SYMBOL",
-                "name": "expression"
-              }
-            ]
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
                 "type": "STRING",
                 "value": "&"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "expression"
               }
             ]
           },
           {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "expression"
-              },
-              {
-                "type": "STRING",
-                "value": ".*"
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "expression"
           }
         ]
       }
@@ -1816,6 +1815,44 @@
           "value": "false"
         }
       ]
+    },
+    "comment": {
+      "type": "TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "//"
+              },
+              {
+                "type": "PATTERN",
+                "value": "[^\\n]*"
+              }
+            ]
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "/*"
+              },
+              {
+                "type": "PATTERN",
+                "value": "([^*]|\\*+[^/*])*"
+              },
+              {
+                "type": "PATTERN",
+                "value": "\\*+\\/"
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   "extras": [
@@ -1826,6 +1863,10 @@
     {
       "type": "PATTERN",
       "value": "\\/\\/[^\\n]*"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "comment"
     }
   ],
   "conflicts": [],
