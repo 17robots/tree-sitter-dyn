@@ -19,6 +19,25 @@
     }
   },
   {
+    "type": "assignment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "binary",
     "named": true,
     "fields": {},
@@ -71,15 +90,26 @@
   {
     "type": "call",
     "named": true,
-    "fields": {},
+    "fields": {
+      "call_args": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "expression",
-          "named": true
-        },
         {
           "type": "primary",
           "named": true
@@ -624,6 +654,10 @@
       "required": true,
       "types": [
         {
+          "type": "assignment",
+          "named": true
+        },
+        {
           "type": "break_",
           "named": true
         },
@@ -641,6 +675,10 @@
         },
         {
           "type": "defer",
+          "named": true
+        },
+        {
+          "type": "expression",
           "named": true
         },
         {
@@ -692,6 +730,25 @@
     "children": {
       "multiple": true,
       "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "struct_literal_member",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "struct_literal_member",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
       "types": [
         {
           "type": "expression",
@@ -865,11 +922,19 @@
     "named": false
   },
   {
+    "type": "%=",
+    "named": false
+  },
+  {
     "type": "&",
     "named": false
   },
   {
     "type": "&&",
+    "named": false
+  },
+  {
+    "type": "&=",
     "named": false
   },
   {
@@ -889,11 +954,19 @@
     "named": false
   },
   {
+    "type": "*=",
+    "named": false
+  },
+  {
     "type": "+",
     "named": false
   },
   {
     "type": "+%",
+    "named": false
+  },
+  {
+    "type": "+=",
     "named": false
   },
   {
@@ -906,6 +979,10 @@
   },
   {
     "type": "-%",
+    "named": false
+  },
+  {
+    "type": "-=",
     "named": false
   },
   {
@@ -929,6 +1006,10 @@
     "named": false
   },
   {
+    "type": "/=",
+    "named": false
+  },
+  {
     "type": ":",
     "named": false
   },
@@ -938,6 +1019,10 @@
   },
   {
     "type": "<<",
+    "named": false
+  },
+  {
+    "type": "<<=",
     "named": false
   },
   {
@@ -969,6 +1054,10 @@
     "named": false
   },
   {
+    "type": ">>=",
+    "named": false
+  },
+  {
     "type": "[",
     "named": false
   },
@@ -978,6 +1067,10 @@
   },
   {
     "type": "^",
+    "named": false
+  },
+  {
+    "type": "^=",
     "named": false
   },
   {
@@ -1098,11 +1191,19 @@
     "named": false
   },
   {
+    "type": "|=",
+    "named": false
+  },
+  {
     "type": "||",
     "named": false
   },
   {
     "type": "}",
+    "named": false
+  },
+  {
+    "type": "~=",
     "named": false
   }
 ]

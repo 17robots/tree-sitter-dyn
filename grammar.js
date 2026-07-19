@@ -2,8 +2,8 @@
 
 const PREC = {
   ASSIGN: 1,
-  OR: 2,
-  AND: 3,
+  LOGICAL_OR: 2,
+  LOGICAL_AND: 3,
   EQUALITY: 4,
   RELATIONAL: 5,
   BIT_OR: 6,
@@ -20,7 +20,7 @@ module.exports = grammar({
   name: 'dyn',
   extras: $ => [/\s/, $.comment],
   word: $ => $.identifier,
-  conflicts: $ => [[$.primary, $.struct_literal]],
+  conflicts: $ => [[$.primary, $.struct_literal], [$.variable, $.primary]],
   rules: {
     source_file: $ => repeat(seq(optional(token('pub')), $.declaration)),
     declaration: $ => choice($.use, $.variable, $.const_variable, $.thread_local_variable, $.struct, $.enum, $.fn),
@@ -34,8 +34,8 @@ module.exports = grammar({
     enum_member: $ => seq($.identifier, optional($.type_qualifier), optional(seq('=', $.expression))),
     fn: $ => seq(optional(token('inline')), token('fn'), $.identifier, '(', commaSep($.fn_param), ')', optional($.type), $.block),
     fn_param: $ => seq($.identifier, repeat(seq(',', $.identifier)), $.type_qualifier),
-    block: $ => seq('{', repeat($.statement), '}'),
-    statement: $ => choice($.return_, $.continue_, $.break_, $.variable, $.thread_local_variable, $.const_variable, $.if_, $.case_, $.for_, $.defer, $.call),
+    block: $ => seq('{', repeat(choice($.statement)), '}'),
+    statement: $ => choice($.return_, $.continue_, $.break_, $.variable, $.thread_local_variable, $.const_variable, $.if_, $.case_, $.for_, $.defer, $.expression, $.assignment),
     return_: $ => prec.right(seq(token('return'), optional($.expression))),
     continue_: $ => seq(token('continue'), optional(seq(':', $.identifier))),
     break_: $ => seq(token('break'), optional(seq(':', $.identifier))),
@@ -47,17 +47,18 @@ module.exports = grammar({
     for_: $ => seq(optional(seq($.identifier, ':')), token('for'), optional($.for_condition), $.block),
     for_condition: $ => choice(seq($.identifier, token('in'), $.expression), $.expression),
     defer: $ => seq(token('defer'), choice($.statement, $.block)),
+    assignment: $ => prec(PREC.ASSIGN, seq($.primary, choice('=', '+=', '-=', '*=', '/=', '%=', '&=', '|=', '>>=', '<<=', '~=', '^='), $.expression)),
     range: $ => seq($.expression, choice('..', '..='), $.expression),
     type_qualifier: $ => seq(':', $.type),
-    type: $ => choice(seq($.identifier, repeat(seq('.', $.identifier))), $.array_type, $.pointer_type, $.primitive),
-    array_type: $ => seq('[', optional($.number_), ']', $.type),
-    pointer_type: $ => seq('*', $.type),
+    type: $ => prec.right(choice(seq($.identifier, repeat(seq('.', $.identifier))), $.array_type, $.pointer_type, $.primitive)),
+    array_type: $ => seq('[', optional($.number_), ']', optional(token('const')), $.type),
+    pointer_type: $ => seq('*', optional(token('const')), $.type),
     primitive: _ => token(choice('i8', 'i16', 'i32', 'i64', 'u8', 'u16', 'u32', 'u64', 'f32', 'f64', 'bool')),
     expression: $ => choice($.literal, $.primary, $.unary_prefix, $.binary),
     primary: $ => choice($.identifier, $.unary_postfix, $.group, $.call, $.field_access, $.index),
     group: $ => seq('(', $.expression, ')'),
     binary: $ => choice(...[
-      ['||', PREC.OR], ['&&', PREC.AND],
+      ['||', PREC.LOGICAL_OR], ['&&', PREC.LOGICAL_AND],
       ['==', PREC.EQUALITY], ['!=', PREC.EQUALITY],
       ['>', PREC.RELATIONAL], ['<', PREC.RELATIONAL],
       ['>=', PREC.RELATIONAL], ['<=', PREC.RELATIONAL],
@@ -69,11 +70,12 @@ module.exports = grammar({
     ].map(([op, p]) => prec.left(p, seq($.expression, op, $.expression)))),
     unary_prefix: $ => prec(PREC.PREFIX, seq(choice('-', '&'), $.expression)),
     unary_postfix: $ => prec(PREC.POSTFIX, seq($.expression, '.*')),
-    call: $ => seq($.primary, '(', commaSep($.expression), ')'),
-    field_access: $ => seq($.primary, '.', $.identifier),
+    call: $ => prec(PREC.POSTFIX, seq($.primary, '(', field('call_args', commaSep($.expression)), ')')),
+    field_access: $ => prec(PREC.POSTFIX, seq($.primary, '.', $.identifier)),
     index: $ => seq($.primary, '[', $.number_, ']'),
     literal: $ => choice($.bool_, $.null_, $.number_, $.string_, $.char_, $.struct_literal),
-    struct_literal: $ => seq(choice(seq($.identifier, repeat(seq('.', $.identifier))), '.'), '{', commaSep(seq($.identifier, ':', $.expression)), '}'),
+    struct_literal: $ => seq(choice(seq($.identifier, repeat(seq('.', $.identifier))), '.'), '{', commaSep($.struct_literal_member), '}'),
+    struct_literal_member: $ => seq($.identifier, ':', $.expression),
     bool_: _ => choice('true', 'false'),
     null_: _ => 'nil',
     number_: _ => token(choice(/0x[0-9A-Fa-f_]+/, /0b[01_]+/, /0o[0-7_]+/, /[0-9][0-9_]*\.[0-9][0-9_]*/, /[0-9][0-9_]*/)),
@@ -85,6 +87,5 @@ module.exports = grammar({
 
     // TODO
     // macro stuff
-    // add call to statement - has conflicts
   }
 })
