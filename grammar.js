@@ -86,7 +86,6 @@ module.exports = grammar({
     null_: _ => 'nil',
     number_: _ => token(choice(/0x[0-9A-Fa-f_]+/, /0b[01_]+/, /0o[0-7_]+/, /[0-9][0-9_]*\.[0-9][0-9_]*/, /[0-9][0-9_]*/)),
     string_: $ => seq('"', repeat(choice($.escape_sequence, token.immediate(/[^"\\\n]+/))), '"'),
-    char_: _ => token(seq('\'', choice(/[^'\\\n]/, /\\./), '\'')),
     char_: $ => seq('\'', choice($.escape_sequence, token.immediate(/[^'\\\n]/)), '\''),
     escape_sequence: _ => token.immediate(seq('\\', choice(/[nrt0\\"']/, /x[0-9A-Fa-f]{2}/, /u\{[0-9A-Fa-f]}+\//))),
     builtin_identifier: _ => /#[A-Za-z_][A-Za-z0-9_]*/,
