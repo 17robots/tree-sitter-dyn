@@ -20,6 +20,7 @@
 (number_) @number
 (string_) @string
 (char_) @character
+(escape_sequence) @string.escape
 (bool_) @boolean
 (null_) @constant.builtin
 "_" @variable.builtin
