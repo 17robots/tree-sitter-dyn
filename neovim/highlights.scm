@@ -1,4 +1,4 @@
-[ "pub" "inline" "struct" "enum" "use" ] @keyword
+[ "pub" "inline" "struct" "enum" "use" "fn" ] @keyword
 [ "if" "else" "case" ] @keyword.conditional
 "for" @keyword.repeat
 "return" @keyword.return
