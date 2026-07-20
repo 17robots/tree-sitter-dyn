@@ -5,29 +5,14 @@
   (struct)
   (enum)
   (case)
-  (struct_postfix)
+  (struct_literal)
   (array_literal)
   (array_type)
-  (call_postfix)
-  (grouped)
-  (function)
+  (call)
+  (group)
+  (fn)
 ] @indent.begin
 
-[
-  "}"
-  "]"
-  ")"
-] @indent.end
-
-[
-  (comment)
-] @indent.ignore
-
-[
-  (binary)
-  (compound_assign)
-  (call_arg)
-  (struct_init_member)
-  (struct_member)
-  (enum_member)
-] @indent.align
+[ "}" "]" ")" ] @indent.end
+[ (comment) ] @indent.ignore
+[ (binary) (assign) (declaration) (call_arg) (struct_literal_member) (struct_member) (enum_member) ] @indent.align

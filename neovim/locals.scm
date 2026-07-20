@@ -1,23 +1,8 @@
 ; tree-sitter-dyn — locals for Neovim / nvim-treesitter
 
-[
-  (source_file)
-  (block)
-  (function)
-  (for)
-] @local.scope
-
-(declaration
-  (decl_lhs
-    (identifier) @local.definition.var))
-
-(decl_lhs
-  (identifier) @local.definition.var)
-
-(function
-  (identifier) @local.definition.parameter)
-
-(for
-  (identifier) @local.definition.var)
-
+(source_file) (block) (fn) (for_) @local.scope
+(variable (identifier) @local.definition.var)
+(const_variable (identifier) @local.definition.var)
+(thread_local_variable (identifier) @local.definition.var)
+(fn_param (identifier) @local.definition.parameter
 (identifier) @local.reference
