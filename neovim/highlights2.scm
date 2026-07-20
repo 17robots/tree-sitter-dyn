@@ -6,12 +6,10 @@
 "for" @keyword.repeat
 "return" @keyword.return
 "break" "continue" @keyword.control
+(builtin_identifier) @keyword
 
 ; Operators / punctuation-like operators
-[
-  "=" "+" "-" "*" "/" "%" "+%" "-%" "*%" "==" "!==" "<" ">"
-  "<=" ">=" "&&" "||" "!" "&" "|" "^" "~" "<<" ">>" ".." "..=" "=>" ".*"
-] @operator
+"=" "+" "-" "*" "/" "%" "+%" "-%" "*%" "==" "!==" "<" ">" "<=" ">=" "&&" "||" "!" "&" "|" "^" "~" "<<" ">>" ".." "..=" "=>" ".*" @operator
 
 ; Literals
 (number_) @number
@@ -25,7 +23,8 @@
 (primitive) @type.builtin
 (pointer_type "const" @type.qualifier)
 (array_type "const" @type.qualifier)
-((identifier) @type (#match? @type "^[A-Z]"))
+(identifier (#match? @type "^[A-Z]"))
+(identifier (#match? @type "^#"))
 
 ; Declarations
 (const_variable "const" @type.qualifier)
