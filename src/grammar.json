@@ -1295,6 +1295,10 @@
         {
           "type": "SYMBOL",
           "name": "cast"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "align"
         }
       ]
     },
@@ -1960,8 +1964,40 @@
           }
         },
         {
+          "type": "STRING",
+          "value": "("
+        },
+        {
           "type": "SYMBOL",
           "name": "type"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
+    "align": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "#alignof"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "SYMBOL",
+          "name": "type"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
         }
       ]
     },
