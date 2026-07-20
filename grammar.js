@@ -42,7 +42,7 @@ module.exports = grammar({
     if_: $ => seq(token('if'), $.expression, $.block, optional($.else_)),
     else_: $ => seq(token('else'), choice($.if_, $.block)),
     case_: $ => seq(token('case'), $.expression, '{', commaSep($.case_arm), '}'),
-    case_arm: $ => seq(choice('_', seq($.case_pattern, repeat(seq(',', $.case_pattern)))), '=>', $.block),
+    case_arm: $ => seq(choice('_', seq($.case_pattern, repeat(seq(',', $.case_pattern)))), optional($.identifier), '=>', $.block),
     case_pattern: $ => choice($.range, $.expression),
     for_: $ => seq(optional(seq($.identifier, ':')), token('for'), optional($.for_condition), $.block),
     for_condition: $ => choice(seq($.identifier, token('in'), $.expression), $.expression),

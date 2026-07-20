@@ -189,6 +189,10 @@
         {
           "type": "case_pattern",
           "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
         }
       ]
     }
