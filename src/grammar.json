@@ -1310,6 +1310,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "len"
+        },
+        {
+          "type": "SYMBOL",
           "name": "align"
         }
       ]
