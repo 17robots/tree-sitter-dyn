@@ -1,60 +1,52 @@
-; tree-sitter-dyn — highlights for Neovim / nvim-treesitter
-
-; Keywords
-"pub" "inline" "struct" "enum" "use" @keyword
-"if" "else" "case" @keyword.conditional
+[ "pub" "inline" "struct" "enum" "use" ] @keyword
+[ "if" "else" "case" ] @keyword.conditional
 "for" @keyword.repeat
 "return" @keyword.return
-"break" "continue" @keyword.control
-(builtin_identifier) @keyword
-
-; Operators / punctuation-like operators
-"=" "+" "-" "*" "/" "%" "+%" "-%" "*%" "==" "!==" "<" ">" "<=" ">=" "&&" "||" "!" "&" "|" "^" "~" "<<" ">>" ".." "..=" "=>" ".*" @operator
-
-; Literals
+[ "break" "continue" ] @keyword.control
+[ "defer" "thread_local" ] @keyword
+"const" @type.qualifier
+[ "#sizeof" "#alignof" "#len" "#cast" ] @function.builtin
+[
+  "=" "+=" "-=" "*=" "/=" "%=" "&=" "|=" ">>=" "<<=" "~=" "^="
+  "+" "-" "*" "/" "%" "+%" "-%" "*%"
+  "==" "!=" "<" ">" "<=" ">="
+  "&&" "||"
+  "&" "|" "^"
+  "<<" ">>"
+  ".." "..=" "=>" ".*"
+] @operator
+[ "." "," ":" ] @punctuation.delimiter
+[ "(" ")" "[" "]" "{" "}" ] @punctuation.bracket
 (number_) @number
 (string_) @string
 (char_) @character
 (bool_) @boolean
-"nil" @constant.builtin
+(null_) @constant.builtin
 "_" @variable.builtin
-
-; Types
 (primitive) @type.builtin
-(pointer_type "const" @type.qualifier)
-(array_type "const" @type.qualifier)
-(identifier (#match? @type "^[A-Z]"))
-(identifier (#match? @type "^#"))
-
-; Declarations
+((identifier) @type (#match? @type "^[A-Z]"))
+(struct (identifier) @type)
+(enum (identifier) @type)
+(type (identifier) @type)
 (const_variable "const" @type.qualifier)
-(const_variable (identifier) @constant)
-(thread_local_variable "thread_local" @type.qualifier)
-(struct identifier @type)
-(enum identifier @type)
-(fn identifier @function)
-
-; Parameters / function-like identifiers inside function rule
-(fn (identifier) @variable.parameter)
-
-; Fields / members
-(field_access (identifier) @variable.member)
+(const_variable (variable (identifier) @constant))
+(thread_local_variable "thread_local" @keyword.storage)
+(thread_local_variable (variable (identifier) @variable))
+(variable (identifier) @variable)
+(fn (identifier) @function)
+(fn_param (identifier) @variable.parameter)
 (struct_member (identifier) @variable.member)
-(struct_literal_member (identifier) @variable.member)
 (enum_member (identifier) @constant)
-
-; Calls
+(struct_literal_member (identifier) @variable.member)
+(field_access (identifier) @variable.member)
 (call (identifier) @function.call)
 (call (field_access (identifier) @function.method.call))
-(call (call_args (identifier) @variable.parameter))
-
-; Labels
-(break (identifier) @label)
-(continue (identifier) @label)
-
-; Imports
-(use (string_literal) @string.special.path)
-
-; Misc
+(call (primary (identifier) @function.call))
+(call (primary (field_access (identifier) @function.method.call)))
+(field_access (identifier) @constant)
+(break_ (identifier) @label)
+(continue_ (identifier) @label)
+(for_ (identifier) @label)
+(use (string_) @string.special.path)
 (comment) @comment
 (ERROR) @error

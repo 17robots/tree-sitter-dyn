@@ -90,8 +90,5 @@ module.exports = grammar({
     builtin_identifier: _ => /#[A-Za-z_][A-Za-z0-9_]*/,
     identifier: _ => /[A-Za-z_][A-Za-z0-9_]*/,
     comment: _ => token(choice(seq("//", /[^\n]*/), seq("/*", repeat(choice(/[^*]/, /\*[^/]/)), "*/"))),
-
-    // TODO
-    // macro stuff
   }
 })

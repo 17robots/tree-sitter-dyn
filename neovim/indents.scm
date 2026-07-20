@@ -1,10 +1,8 @@
-; tree-sitter-dyn — indents for Neovim / nvim-treesitter
-
 [
   (block)
   (struct)
   (enum)
-  (case)
+  (case_)
   (struct_literal)
   (array_literal)
   (array_type)
@@ -13,6 +11,19 @@
   (fn)
 ] @indent.begin
 
-[ "}" "]" ")" ] @indent.end
-[ (comment) ] @indent.ignore
-[ (binary) (assign) (declaration) (call_arg) (struct_literal_member) (struct_member) (enum_member) ] @indent.align
+[
+  "}"
+  "]"
+  ")"
+] @indent.end
+
+(comment) @indent.ignore
+
+[
+  (binary)
+  (assignment)
+  (declaration)
+  (struct_literal_member)
+  (struct_member)
+  (enum_member)
+] @indent.align
