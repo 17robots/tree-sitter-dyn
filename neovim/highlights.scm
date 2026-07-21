@@ -29,7 +29,7 @@
 ((identifier) @type (#match? @type "^[A-Z]"))
 (struct (identifier) @type)
 (enum (identifier) @type)
-(type (identifier) @type)
+(type (field_type (identifier) @type))
 (const_variable "const" @type.qualifier)
 (const_variable (variable (identifier) @constant))
 (thread_local_variable "thread_local" @keyword.storage)
