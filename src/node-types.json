@@ -531,6 +531,21 @@
     }
   },
   {
+    "type": "fn_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "for_",
     "named": true,
     "fields": {},
@@ -977,6 +992,10 @@
         },
         {
           "type": "field_type",
+          "named": true
+        },
+        {
+          "type": "fn_type",
           "named": true
         },
         {
