@@ -25,6 +25,7 @@
 (null_) @constant.builtin
 "_" @variable.builtin
 (primitive) @type.builtin
+(struct "packed" @type.qualifier)
 ((identifier) @type (#match? @type "^[A-Z]"))
 (struct (identifier) @type)
 (enum (identifier) @type)
