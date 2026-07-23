@@ -116,11 +116,12 @@
                   "type": "CHOICE",
                   "members": [
                     {
-                      "type": "SYMBOL",
-                      "name": "type_qualifier"
+                      "type": "STRING",
+                      "value": ":"
                     },
                     {
-                      "type": "BLANK"
+                      "type": "SYMBOL",
+                      "name": "type_qualifier"
                     }
                   ]
                 },
@@ -2644,10 +2645,6 @@
     [
       "primary",
       "struct_literal"
-    ],
-    [
-      "variable",
-      "primary"
     ]
   ],
   "precedences": [],
