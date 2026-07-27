@@ -699,6 +699,21 @@
     }
   },
   {
+    "type": "panic",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "string_",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "pointer_type",
     "named": true,
     "fields": {},
@@ -851,6 +866,10 @@
         },
         {
           "type": "if_",
+          "named": true
+        },
+        {
+          "type": "panic",
           "named": true
         },
         {
@@ -1117,6 +1136,10 @@
     "named": false
   },
   {
+    "type": "#panic",
+    "named": false
+  },
+  {
     "type": "#sizeof",
     "named": false
   },
@@ -1282,6 +1305,10 @@
   },
   {
     "type": "_",
+    "named": false
+  },
+  {
+    "type": "as",
     "named": false
   },
   {
