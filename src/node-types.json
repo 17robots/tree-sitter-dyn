@@ -877,6 +877,10 @@
           "named": true
         },
         {
+          "type": "syscall",
+          "named": true
+        },
+        {
           "type": "thread_local_variable",
           "named": true
         },
@@ -977,6 +981,21 @@
         },
         {
           "type": "type_qualifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "syscall",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "expression",
           "named": true
         }
       ]
@@ -1141,6 +1160,10 @@
   },
   {
     "type": "#sizeof",
+    "named": false
+  },
+  {
+    "type": "#syscall",
     "named": false
   },
   {

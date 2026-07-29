@@ -5,7 +5,7 @@
 [ "break" "continue" ] @keyword.control
 [ "defer" "thread_local" ] @keyword
 "const" @type.qualifier
-[ "#sizeof" "#alignof" "#len" "#cast" "#panic" ] @function.builtin
+[ "#sizeof" "#alignof" "#len" "#cast" "#panic" "#syscall" ] @function.builtin
 [
   "=" "+=" "-=" "*=" "/=" "%=" "&=" "|=" ">>=" "<<=" "~=" "^="
   "+" "-" "*" "/" "%" "+%" "-%" "*%"
