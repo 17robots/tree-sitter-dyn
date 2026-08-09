@@ -963,6 +963,10 @@
         {
           "type": "struct_literal_member",
           "named": true
+        },
+        {
+          "type": "type",
+          "named": true
         }
       ]
     }
