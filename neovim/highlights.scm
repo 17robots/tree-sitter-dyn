@@ -18,17 +18,16 @@
 
 ; function
 (fn (identifier) @function)
-[ "#sizeof" "#alignof" "#len" "#cast" "#panic" "#syscall" ] @function.builtin
+[ "#alignof" "#cast" "#len" "#panic" "#sizeof" "#syscall" ] @function.builtin
 (call (primary (identifier) @function.call))
 (call (primary (field_access (identifier) @function.method.call)))
 
 ; keyword
-[ "pub" "inline" "struct" "enum" "use" "fn" "defer" "type" ] @keyword
-[ "if" "else" "case" ] @keyword.conditional
+[ "defer" "enum" "fn" "inline" "pub" "struct" "thread_local" "type" "use" ] @keyword
+[ "case" "else" "if" ] @keyword.conditional
 [ "break" "continue" ] @keyword.control
 "for" @keyword.repeat
 "return" @keyword.return
-(thread_local_variable "thread_local" @keyword.storage)
 
 ; label
 (break_ (identifier) @label)
@@ -48,7 +47,7 @@
 
 ; punctuation
 [ "(" ")" "[" "]" "{" "}" ] @punctuation.bracket
-[ "." "," ":" ] @punctuation.delimiter
+[ "," "." ":" ] @punctuation.delimiter
 
 ; number
 (number_) @number
