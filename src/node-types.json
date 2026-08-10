@@ -315,10 +315,6 @@
         {
           "type": "use",
           "named": true
-        },
-        {
-          "type": "variable",
-          "named": true
         }
       ]
     }
@@ -905,6 +901,10 @@
         },
         {
           "type": "thread_local_variable",
+          "named": true
+        },
+        {
+          "type": "type_alias",
           "named": true
         },
         {

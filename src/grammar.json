@@ -39,10 +39,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "variable"
-        },
-        {
-          "type": "SYMBOL",
           "name": "const_variable"
         },
         {
@@ -184,6 +180,30 @@
         {
           "type": "SYMBOL",
           "name": "variable"
+        }
+      ]
+    },
+    "type_alias": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "type"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "SYMBOL",
+          "name": "type"
         }
       ]
     },
@@ -334,43 +354,6 @@
         {
           "type": "STRING",
           "value": "}"
-        }
-      ]
-    },
-    "dynamic_type": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "$"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        }
-      ]
-    },
-    "type_alias": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "STRING",
-            "value": "type"
-          }
-        },
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        },
-        {
-          "type": "STRING",
-          "value": "="
-        },
-        {
-          "type": "SYMBOL",
-          "name": "type"
         }
       ]
     },
@@ -847,6 +830,10 @@
         {
           "type": "SYMBOL",
           "name": "syscall"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "type_alias"
         }
       ]
     },
@@ -1479,6 +1466,19 @@
           }
         ]
       }
+    },
+    "dynamic_type": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "$"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        }
+      ]
     },
     "field_type": {
       "type": "PREC_RIGHT",
