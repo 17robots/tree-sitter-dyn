@@ -23,13 +23,14 @@ module.exports = grammar({
   conflicts: $ => [[$.primary, $.struct_literal]],
   rules: {
     source_file: $ => repeat(seq(optional(token('pub')), $.declaration)),
-    declaration: $ => choice($.use, $.variable, $.const_variable, $.thread_local_variable, $.struct, $.enum, $.fn),
+    declaration: $ => choice($.use, $.variable, $.const_variable, $.thread_local_variable, $.struct, $.enum, $.fn, $.type_alias),
     use: $ => prec.right(seq(token('use'), $.string_, optional(seq(token('as'), $.identifier)))),
     variable: $ => seq($.identifier, choice($.type_qualifier, seq(choice(':', $.type_qualifier), '=', $.expression))),
     const_variable: $ => seq(token('const'), $.variable),
     thread_local_variable: $ => seq(token('thread_local'), $.variable),
     struct: $ => seq(optional(token('packed')), token('struct'), $.identifier, optional(seq('(', commaSep($.dynamic_type), ')')), '{', commaSep($.struct_member), '}'), // here
     dynamic_type: $ => seq('$', $.identifier),
+    type_alias: $ => seq(token('type'), $.identifier, '=', $.type),
     struct_member: $ => seq($.identifier, repeat(seq(',', $.identifier)), $.type_qualifier, optional(seq('=', $.expression))),
     enum: $ => seq(token('enum'), optional(seq('(', choice($.primitive, $.field_type), ')')), $.identifier, optional(seq('(', commaSep($.dynamic_type), ')')), '{', commaSep($.enum_member), '}'),
     enum_member: $ => seq($.identifier, optional($.type_qualifier), optional(seq('=', $.expression))),
