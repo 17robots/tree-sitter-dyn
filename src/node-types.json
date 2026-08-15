@@ -339,21 +339,6 @@
     }
   },
   {
-    "type": "dynamic_type",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "else_",
     "named": true,
     "fields": {},
@@ -380,10 +365,6 @@
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "dynamic_type",
-          "named": true
-        },
         {
           "type": "enum_member",
           "named": true
@@ -938,10 +919,6 @@
       "required": true,
       "types": [
         {
-          "type": "dynamic_type",
-          "named": true
-        },
-        {
           "type": "identifier",
           "named": true
         },
@@ -1076,10 +1053,6 @@
       "types": [
         {
           "type": "array_type",
-          "named": true
-        },
-        {
-          "type": "dynamic_type",
           "named": true
         },
         {
@@ -1241,10 +1214,6 @@
   },
   {
     "type": "#syscall",
-    "named": false
-  },
-  {
-    "type": "$",
     "named": false
   },
   {

@@ -63,7 +63,6 @@
 ((identifier) @type (#match? @type "^[A-Z]"))
 (type (field_type (identifier) @type))
 (type_alias (identifier) @type)
-(dynamic_type) @type.builtin
 (primitive) @type.builtin
 "const" @type.qualifier
 (struct "packed" @type.qualifier)

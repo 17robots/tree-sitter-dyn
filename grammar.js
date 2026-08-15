@@ -29,9 +29,9 @@ module.exports = grammar({
     const_variable: $ => seq(token('const'), $.variable),
     thread_local_variable: $ => seq(token('thread_local'), $.variable),
     type_alias: $ => seq(token('type'), $.identifier, '=', $.type),
-    struct: $ => seq(optional(token('packed')), token('struct'), $.identifier, optional(seq('(', commaSep($.dynamic_type), ')')), '{', commaSep($.struct_member), '}'), // here
+    struct: $ => seq(optional(token('packed')), token('struct'), $.identifier, '{', commaSep($.struct_member), '}'), // here
     struct_member: $ => seq($.identifier, repeat(seq(',', $.identifier)), $.type_qualifier, optional(seq('=', $.expression))),
-    enum: $ => seq(token('enum'), optional(seq('(', choice($.primitive, $.field_type), ')')), $.identifier, optional(seq('(', commaSep($.dynamic_type), ')')), '{', commaSep($.enum_member), '}'),
+    enum: $ => seq(token('enum'), optional(seq('(', choice($.primitive, $.field_type), ')')), $.identifier, '{', commaSep($.enum_member), '}'),
     enum_member: $ => seq($.identifier, optional($.type_qualifier), optional(seq('=', $.expression))),
     fn: $ => seq(optional(token('inline')), token('fn'), $.identifier, '(', commaSep($.fn_param), ')', optional($.type), $.block),
     fn_param: $ => seq($.identifier, repeat(seq(',', $.identifier)), $.type_qualifier),
@@ -53,8 +53,7 @@ module.exports = grammar({
     syscall: $ => seq(token('#syscall'), '(', commaSep($.expression), ')'),
     range: $ => seq($.expression, choice('..', '..='), $.expression),
     type_qualifier: $ => seq(':', $.type),
-    type: $ => prec.right(choice($.field_type, $.array_type, $.pointer_type, $.primitive, $.fn_type, $.dynamic_type, $.struct_type)),
-    dynamic_type: $ => seq('$', $.identifier),
+    type: $ => prec.right(choice($.field_type, $.array_type, $.pointer_type, $.primitive, $.fn_type, $.struct_type)),
     field_type: $ => prec.right(seq($.identifier, repeat(seq('.', $.identifier)))),
     array_type: $ => seq('[', optional($.number_), ']', optional(token('const')), $.type),
     pointer_type: $ => seq('*', optional(token('const')), $.type),
