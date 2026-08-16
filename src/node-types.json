@@ -20,18 +20,10 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "expression",
-          "named": true
-        },
-        {
-          "type": "number_",
-          "named": true
-        },
-        {
-          "type": "type",
           "named": true
         }
       ]
