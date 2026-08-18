@@ -60,6 +60,10 @@
         {
           "type": "SYMBOL",
           "name": "type_alias"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "variable"
         }
       ]
     },
@@ -125,21 +129,29 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "STRING",
-                      "value": ":"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "type_qualifier"
-                    }
-                  ]
+                  "type": "STRING",
+                  "value": ":"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "type"
                 },
                 {
                   "type": "STRING",
                   "value": "="
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "expression"
+                }
+              ]
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ":="
                 },
                 {
                   "type": "SYMBOL",
@@ -1285,6 +1297,30 @@
         }
       ]
     },
+    "typeof": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "#typeof"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "SYMBOL",
+          "name": "expression"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
     "type_qualifier": {
       "type": "SEQ",
       "members": [
@@ -1319,10 +1355,6 @@
           {
             "type": "SYMBOL",
             "name": "primitive"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "fn_type"
           },
           {
             "type": "SYMBOL",
@@ -1415,20 +1447,34 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "TOKEN",
-              "content": {
-                "type": "STRING",
-                "value": "const"
-              }
+              "type": "SYMBOL",
+              "name": "fn_type"
             },
             {
-              "type": "BLANK"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "STRING",
+                        "value": "const"
+                      }
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "type"
+                }
+              ]
             }
           ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "type"
         }
       ]
     },
@@ -1661,6 +1707,10 @@
         {
           "type": "SYMBOL",
           "name": "align"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "typeof"
         }
       ]
     },
@@ -2410,7 +2460,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "type"
+          "name": "identifier"
         },
         {
           "type": "STRING",
@@ -2437,12 +2487,12 @@
           "name": "type"
         },
         {
-          "type": "STRING",
-          "value": ")"
-        },
-        {
           "type": "SYMBOL",
           "name": "expression"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
         }
       ]
     },
@@ -2846,10 +2896,6 @@
           }
         ]
       }
-    },
-    "builtin_identifier": {
-      "type": "PATTERN",
-      "value": "#[A-Za-z_][A-Za-z0-9_]*"
     },
     "identifier": {
       "type": "PATTERN",
