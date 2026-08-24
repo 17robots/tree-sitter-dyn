@@ -2,7 +2,7 @@
 
 ; Keywords
 ["struct" "enum"] @keyword.storage.type
-["mut" "inline"] @keyword.storage.modifier
+["mut"] @keyword.storage.modifier
 ["use" "pub"] @keyword.control.import
 
 ["if" "else" "case"] @keyword.control.conditional
@@ -12,7 +12,7 @@
 
 ; Operators
 [
-  "=" "+" "-" "*" "/" "%" "+%" "-%" "*%" "=="
+  "=" "+" "-" "*" "/" "%" "=="
   "!==" "<" ">" "<=" ">=" "&&" "||" "!" "&" "|" "^"
   "~" "<<" ">>" "+=" "-=" "*=" "/=" "%=" "&=" "|=" "^="
   "<<=" ">>=" ".." "=>" ".*"

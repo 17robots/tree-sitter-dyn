@@ -7,7 +7,6 @@
 
 (variable (identifier) @local.definition.var)
 (const_variable (identifier) @local.definition.var)
-(thread_local_variable (identifier) @local.definition.var)
 (fn_param (identifier) @local.definition.parameter)
 
 (identifier) @local.reference

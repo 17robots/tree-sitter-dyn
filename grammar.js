@@ -21,23 +21,35 @@ module.exports = grammar({
   name: "dyn",
   extras: ($) => [/\s/, $.comment],
   word: ($) => $.identifier,
-  conflicts: ($) => [[$.primary, $.struct_literal]],
+  conflicts: ($) => [
+    [$.primary, $.struct_literal],
+    [$.field_type, $.primary],
+    [$.field_type, $.primary, $.struct_literal],
+    [$.array_type, $.array_literal],
+    [$.array_type, $.literal],
+    [$.statement, $.primary],
+    [$.defer, $.primary],
+  ],
   rules: {
-    source_file: ($) => repeat(seq(optional(token("pub")), $.declaration)),
+    source_file: ($) => repeat($.declaration),
     declaration: ($) =>
       choice(
         $.use,
-        $.const_variable,
-        $.thread_local_variable,
-        $.struct,
-        $.enum,
-        $.fn,
-        $.type_alias,
-        $.variable,
+        seq(
+          optional(token("pub")),
+          choice(
+            $.const_variable,
+            $.struct,
+            $.enum,
+            $.fn,
+            $.type_alias,
+            $.variable,
+          ),
+        ),
       ),
     use: ($) =>
       prec.right(
-        seq(token("use"), $.string_, optional(seq(token("as"), $.identifier))),
+        seq(token("use"), $.string_, optional(field("alias", $.identifier))),
       ),
     variable: ($) =>
       seq(
@@ -49,7 +61,6 @@ module.exports = grammar({
         ),
       ),
     const_variable: ($) => seq(token("const"), $.variable),
-    thread_local_variable: ($) => seq(token("thread_local"), $.variable),
     type_alias: ($) => seq(token("type"), $.identifier, "=", $.type),
     struct: ($) =>
       seq(
@@ -84,9 +95,8 @@ module.exports = grammar({
       ),
     fn: ($) =>
       seq(
-        optional(token("inline")),
         token("fn"),
-        $.identifier,
+        field("name", $.identifier),
         "(",
         commaSep($.fn_param),
         ")",
@@ -102,16 +112,15 @@ module.exports = grammar({
         $.continue_,
         $.break_,
         $.variable,
-        $.thread_local_variable,
         $.const_variable,
         $.if_,
         $.case_,
         $.for_,
         $.defer,
-        $.expression,
+        $.call,
         $.assignment,
         $.panic,
-        $.syscall,
+        prec(1, $.syscall),
         $.type_alias,
       ),
     return_: ($) => prec.right(seq(token("return"), optional($.expression))),
@@ -137,8 +146,32 @@ module.exports = grammar({
         $.block,
       ),
     for_condition: ($) =>
-      choice(seq($.identifier, token("in"), $.expression), $.expression),
-    defer: ($) => seq(token("defer"), choice($.statement, $.block)),
+      choice(
+        seq(
+          choice(
+            $.identifier,
+            seq("*", $.identifier),
+            seq("*", "const", $.identifier),
+          ),
+          token("in"),
+          $.expression,
+        ),
+        $.expression,
+      ),
+    defer: ($) =>
+      seq(
+        token("defer"),
+        choice(
+          $.block,
+          $.call,
+          $.assignment,
+          $.if_,
+          $.case_,
+          $.for_,
+          $.panic,
+          prec(1, $.syscall),
+        ),
+      ),
     assignment: ($) =>
       prec(
         PREC.ASSIGN,
@@ -155,7 +188,6 @@ module.exports = grammar({
             "|=",
             ">>=",
             "<<=",
-            "~=",
             "^=",
           ),
           $.expression,
@@ -164,7 +196,6 @@ module.exports = grammar({
     panic: ($) => seq(token("#panic"), "(", $.string_, ")"),
     syscall: ($) => seq(token("#syscall"), "(", commaSep($.expression), ")"),
     range: ($) => seq($.expression, choice("..", "..="), $.expression),
-    typeof: ($) => seq(token("#typeof"), "(", $.expression, ")"),
     type_qualifier: ($) => seq(":", $.type),
     type: ($) =>
       prec.right(
@@ -195,7 +226,10 @@ module.exports = grammar({
           "u64",
           "f32",
           "f64",
+          "isize",
+          "usize",
           "bool",
+          "void",
         ),
       ),
     fn_type: ($) =>
@@ -214,6 +248,7 @@ module.exports = grammar({
         $.len,
         $.align,
         $.typeof,
+        $.syscall,
       ),
     primary: ($) =>
       choice(
@@ -243,15 +278,13 @@ module.exports = grammar({
           [">>", PREC.SHIFT],
           ["+", PREC.ADD],
           ["-", PREC.ADD],
-          ["+%", PREC.ADD],
-          ["-%", PREC.ADD],
           ["*", PREC.MUL],
           ["/", PREC.MUL],
           ["%", PREC.MUL],
-          ["*%", PREC.MUL],
         ].map(([op, p]) => prec.left(p, seq($.expression, op, $.expression))),
       ),
-    unary_prefix: ($) => prec(PREC.PREFIX, seq(choice("-", "&"), $.expression)),
+    unary_prefix: ($) =>
+      prec(PREC.PREFIX, seq(choice("-", "&", "!", "~"), $.expression)),
     unary_postfix: ($) => prec(PREC.POSTFIX, seq($.expression, ".*")),
     call: ($) =>
       prec(
@@ -267,16 +300,28 @@ module.exports = grammar({
           "[",
           choice(
             $.expression,
+            "..",
             seq("..", $.expression),
             seq($.expression, ".."),
+            seq($.expression, "..", $.expression),
           ),
           "]",
         ),
       ),
-    size: ($) => seq(token("#sizeof"), "(", $.type, ")"),
-    align: ($) => seq(token("#alignof"), "(", $.type, ")"),
-    len: ($) => seq(token("#len"), "(", $.identifier, ")"),
-    cast: ($) => seq(token("#cast"), "(", $.type, $.expression, ")"),
+    size: ($) => seq(token("#sizeof"), "(", choice($.type, $.expression), ")"),
+    align: ($) =>
+      seq(token("#alignof"), "(", choice($.type, $.expression), ")"),
+    typeof: ($) =>
+      seq(token("#typeof"), "(", choice($.type, $.expression), ")"),
+    len: ($) => seq(token("#len"), "(", $.expression, ")"),
+    cast: ($) =>
+      seq(
+        choice(token("#cast"), token("#bitcast")),
+        "(",
+        $.type,
+        ")",
+        $.expression,
+      ),
     literal: ($) =>
       choice(
         $.bool_,
@@ -305,7 +350,8 @@ module.exports = grammar({
           /0x[0-9A-Fa-f_]+/,
           /0b[01_]+/,
           /0o[0-7_]+/,
-          /[0-9][0-9_]*\.[0-9][0-9_]*/,
+          /([0-9][0-9_]*\.[0-9][0-9_]*|\.[0-9][0-9_]*)([eE][+-]?[0-9][0-9_]*)?/,
+          /[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*/,
           /[0-9][0-9_]*/,
         ),
       ),
@@ -321,7 +367,7 @@ module.exports = grammar({
       token.immediate(
         seq(
           "\\",
-          choice(/[nrt0\\"']/, /x[0-9A-Fa-f]{2}/, /u\{[0-9A-Fa-f]}+\//),
+          choice(/[nrt0\\"']/, /x[0-9A-Fa-f]{2}/, /u\{[0-9A-Fa-f]{1,6}\}/),
         ),
       ),
     identifier: (_) => /[A-Za-z_][A-Za-z0-9_]*/,

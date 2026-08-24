@@ -18,12 +18,12 @@
 
 ; function
 (fn (identifier) @function)
-[ "#alignof" "#cast" "#len" "#panic" "#sizeof" "#syscall" ] @function.builtin
+[ "#alignof" "#bitcast" "#cast" "#len" "#panic" "#sizeof" "#syscall" ] @function.builtin
 (call (primary (identifier) @function.call))
 (call (primary (field_access (identifier) @function.method.call)))
 
 ; keyword
-[ "defer" "enum" "fn" "inline" "pub" "struct" "thread_local" "type" "use" ] @keyword
+[ "defer" "enum" "fn" "pub" "struct" "type" "use" ] @keyword
 [ "case" "else" "if" ] @keyword.conditional
 [ "break" "continue" ] @keyword.control
 "for" @keyword.repeat
@@ -36,8 +36,8 @@
 
 ; operator
 [
-  "=" "+=" "-=" "*=" "/=" "%=" "&=" "|=" ">>=" "<<=" "~=" "^="
-  "+" "-" "*" "/" "%" "+%" "-%" "*%"
+  "=" "+=" "-=" "*=" "/=" "%=" "&=" "|=" ">>=" "<<=" "^="
+  "+" "-" "*" "/" "%"
   "==" "!=" "<" ">" "<=" ">="
   "&&" "||"
   "&" "|" "^"
@@ -68,7 +68,6 @@
 (struct "packed" @type.qualifier)
 
 ; variable
-(thread_local_variable (variable (identifier) @variable))
 (variable (identifier) @variable)
 "_" @variable.builtin
 (field_access (identifier) @variable.member)
