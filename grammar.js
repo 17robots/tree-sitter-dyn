@@ -20,6 +20,7 @@ const commaSep = (rule) =>
 module.exports = grammar({
   name: "dyn",
   extras: ($) => [/\s/, $.comment],
+  externals: ($) => [$._trailing_float],
   word: ($) => $.identifier,
   conflicts: ($) => [
     [$.primary, $.struct_literal],
@@ -42,6 +43,7 @@ module.exports = grammar({
             $.struct,
             $.enum,
             $.fn,
+            $.foreign_fn,
             $.type_alias,
             $.variable,
           ),
@@ -61,7 +63,14 @@ module.exports = grammar({
         ),
       ),
     const_variable: ($) => seq(token("const"), $.variable),
-    type_alias: ($) => seq(token("type"), $.identifier, "=", $.type),
+    type_alias: ($) =>
+      seq(
+        optional(token("distinct")),
+        token("type"),
+        $.identifier,
+        "=",
+        $.type,
+      ),
     struct: ($) =>
       seq(
         optional(token("packed")),
@@ -102,6 +111,19 @@ module.exports = grammar({
         ")",
         optional($.type),
         $.block,
+      ),
+    foreign_fn: ($) =>
+      prec.right(
+        seq(
+          token("foreign"),
+          token("fn"),
+          field("name", $.identifier),
+          optional(field("link_name", $.string_)),
+          "(",
+          commaSep($.fn_param),
+          ")",
+          optional($.type),
+        ),
       ),
     fn_param: ($) =>
       seq($.identifier, repeat(seq(",", $.identifier)), $.type_qualifier),
@@ -344,15 +366,18 @@ module.exports = grammar({
     array_literal: ($) => seq("[", commaSep($.expression), "]"),
     bool_: (_) => choice("true", "false"),
     null_: (_) => "nil",
-    number_: (_) =>
-      token(
-        choice(
-          /0x[0-9A-Fa-f_]+/,
-          /0b[01_]+/,
-          /0o[0-7_]+/,
-          /([0-9][0-9_]*\.[0-9][0-9_]*|\.[0-9][0-9_]*)([eE][+-]?[0-9][0-9_]*)?/,
-          /[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*/,
-          /[0-9][0-9_]*/,
+    number_: ($) =>
+      choice(
+        $._trailing_float,
+        token(
+          choice(
+            /0x[0-9A-Fa-f_]+/,
+            /0b[01_]+/,
+            /0o[0-7_]+/,
+            /([0-9][0-9_]*\.[0-9][0-9_]*|\.[0-9][0-9_]*)([eE][+-]?[0-9][0-9_]*)?/,
+            /[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*/,
+            /[0-9][0-9_]*/,
+          ),
         ),
       ),
     string_: ($) =>

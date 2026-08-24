@@ -297,6 +297,10 @@
           "named": true
         },
         {
+          "type": "foreign_fn",
+          "named": true
+        },
+        {
           "type": "struct",
           "named": true
         },
@@ -623,6 +627,46 @@
     }
   },
   {
+    "type": "foreign_fn",
+    "named": true,
+    "fields": {
+      "link_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "string_",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "fn_param",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "group",
     "named": true,
     "fields": {},
@@ -732,6 +776,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "number_",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "panic",
@@ -1460,6 +1509,10 @@
     "named": false
   },
   {
+    "type": "distinct",
+    "named": false
+  },
+  {
     "type": "else",
     "named": false
   },
@@ -1484,6 +1537,10 @@
     "named": false
   },
   {
+    "type": "foreign",
+    "named": false
+  },
+  {
     "type": "identifier",
     "named": true
   },
@@ -1497,10 +1554,6 @@
   },
   {
     "type": "null_",
-    "named": true
-  },
-  {
-    "type": "number_",
     "named": true
   },
   {
