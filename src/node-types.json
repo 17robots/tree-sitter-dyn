@@ -468,6 +468,10 @@
           "named": true
         },
         {
+          "type": "syscall",
+          "named": true
+        },
+        {
           "type": "typeof",
           "named": true
         },
@@ -782,6 +786,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "number_",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "panic",
@@ -1555,10 +1564,6 @@
   },
   {
     "type": "null_",
-    "named": true
-  },
-  {
-    "type": "number_",
     "named": true
   },
   {

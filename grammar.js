@@ -20,6 +20,7 @@ const commaSep = (rule) =>
 module.exports = grammar({
   name: "dyn",
   extras: ($) => [/\s/, $.comment],
+  externals: ($) => [$._trailing_float],
   word: ($) => $.identifier,
   conflicts: ($) => [
     [$.primary, $.struct_literal],
@@ -28,7 +29,9 @@ module.exports = grammar({
     [$.array_type, $.array_literal],
     [$.array_type, $.literal],
     [$.statement, $.primary],
+    [$.statement, $.expression],
     [$.defer, $.primary],
+    [$.defer, $.expression],
   ],
   rules: {
     source_file: ($) => repeat($.declaration),
@@ -269,6 +272,7 @@ module.exports = grammar({
         $.len,
         $.align,
         $.typeof,
+        $.syscall,
       ),
     primary: ($) =>
       choice(
@@ -364,15 +368,18 @@ module.exports = grammar({
     array_literal: ($) => seq("[", commaSep($.expression), "]"),
     bool_: (_) => choice("true", "false"),
     null_: (_) => "nil",
-    number_: (_) =>
-      token(
-        choice(
-          /0x[0-9A-Fa-f_]+/,
-          /0b[01_]+/,
-          /0o[0-7_]+/,
-          /([0-9][0-9_]*\.[0-9][0-9_]*|\.[0-9][0-9_]*)([eE][+-]?[0-9][0-9_]*)?/,
-          /[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*/,
-          /[0-9][0-9_]*/,
+    number_: ($) =>
+      choice(
+        $._trailing_float,
+        token(
+          choice(
+            /0x[0-9A-Fa-f_]+/,
+            /0b[01_]+/,
+            /0o[0-7_]+/,
+            /([0-9][0-9_]*\.[0-9][0-9_]*|\.[0-9][0-9_]*)([eE][+-]?[0-9][0-9_]*)?/,
+            /[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*/,
+            /[0-9][0-9_]*/,
+          ),
         ),
       ),
     string_: ($) =>
