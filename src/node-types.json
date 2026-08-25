@@ -468,10 +468,6 @@
           "named": true
         },
         {
-          "type": "syscall",
-          "named": true
-        },
-        {
           "type": "typeof",
           "named": true
         },
@@ -630,6 +626,16 @@
     "type": "foreign_fn",
     "named": true,
     "fields": {
+      "foreign_kw": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "foreign",
+            "named": false
+          }
+        ]
+      },
       "link_name": {
         "multiple": false,
         "required": false,
@@ -776,11 +782,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "number_",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "panic",
@@ -1554,6 +1555,10 @@
   },
   {
     "type": "null_",
+    "named": true
+  },
+  {
+    "type": "number_",
     "named": true
   },
   {

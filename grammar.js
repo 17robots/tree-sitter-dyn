@@ -20,7 +20,6 @@ const commaSep = (rule) =>
 module.exports = grammar({
   name: "dyn",
   extras: ($) => [/\s/, $.comment],
-  externals: ($) => [$._trailing_float],
   word: ($) => $.identifier,
   conflicts: ($) => [
     [$.primary, $.struct_literal],
@@ -115,7 +114,7 @@ module.exports = grammar({
     foreign_fn: ($) =>
       prec.right(
         seq(
-          token("foreign"),
+          field("foreign_kw", token("foreign")),
           token("fn"),
           field("name", $.identifier),
           optional(field("link_name", $.string_)),
@@ -142,7 +141,7 @@ module.exports = grammar({
         $.call,
         $.assignment,
         $.panic,
-        prec(1, $.syscall),
+        $.syscall,
         $.type_alias,
       ),
     return_: ($) => prec.right(seq(token("return"), optional($.expression))),
@@ -191,7 +190,7 @@ module.exports = grammar({
           $.case_,
           $.for_,
           $.panic,
-          prec(1, $.syscall),
+          $.syscall,
         ),
       ),
     assignment: ($) =>
@@ -270,7 +269,6 @@ module.exports = grammar({
         $.len,
         $.align,
         $.typeof,
-        $.syscall,
       ),
     primary: ($) =>
       choice(
@@ -366,18 +364,15 @@ module.exports = grammar({
     array_literal: ($) => seq("[", commaSep($.expression), "]"),
     bool_: (_) => choice("true", "false"),
     null_: (_) => "nil",
-    number_: ($) =>
-      choice(
-        $._trailing_float,
-        token(
-          choice(
-            /0x[0-9A-Fa-f_]+/,
-            /0b[01_]+/,
-            /0o[0-7_]+/,
-            /([0-9][0-9_]*\.[0-9][0-9_]*|\.[0-9][0-9_]*)([eE][+-]?[0-9][0-9_]*)?/,
-            /[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*/,
-            /[0-9][0-9_]*/,
-          ),
+    number_: (_) =>
+      token(
+        choice(
+          /0x[0-9A-Fa-f_]+/,
+          /0b[01_]+/,
+          /0o[0-7_]+/,
+          /([0-9][0-9_]*\.[0-9][0-9_]*|\.[0-9][0-9_]*)([eE][+-]?[0-9][0-9_]*)?/,
+          /[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*/,
+          /[0-9][0-9_]*/,
         ),
       ),
     string_: ($) =>

@@ -590,10 +590,14 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "TOKEN",
+            "type": "FIELD",
+            "name": "foreign_kw",
             "content": {
-              "type": "STRING",
-              "value": "foreign"
+              "type": "TOKEN",
+              "content": {
+                "type": "STRING",
+                "value": "foreign"
+              }
             }
           },
           {
@@ -801,12 +805,8 @@
           "name": "panic"
         },
         {
-          "type": "PREC",
-          "value": 1,
-          "content": {
-            "type": "SYMBOL",
-            "name": "syscall"
-          }
+          "type": "SYMBOL",
+          "name": "syscall"
         },
         {
           "type": "SYMBOL",
@@ -1261,12 +1261,8 @@
               "name": "panic"
             },
             {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "SYMBOL",
-                "name": "syscall"
-              }
+              "type": "SYMBOL",
+              "name": "syscall"
             }
           ]
         }
@@ -1855,10 +1851,6 @@
         {
           "type": "SYMBOL",
           "name": "typeof"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "syscall"
         }
       ]
     },
@@ -2957,45 +2949,36 @@
       "value": "nil"
     },
     "number_": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_trailing_float"
-        },
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "0x[0-9A-Fa-f_]+"
-              },
-              {
-                "type": "PATTERN",
-                "value": "0b[01_]+"
-              },
-              {
-                "type": "PATTERN",
-                "value": "0o[0-7_]+"
-              },
-              {
-                "type": "PATTERN",
-                "value": "([0-9][0-9_]*\\.[0-9][0-9_]*|\\.[0-9][0-9_]*)([eE][+-]?[0-9][0-9_]*)?"
-              },
-              {
-                "type": "PATTERN",
-                "value": "[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*"
-              },
-              {
-                "type": "PATTERN",
-                "value": "[0-9][0-9_]*"
-              }
-            ]
+      "type": "TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "0x[0-9A-Fa-f_]+"
+          },
+          {
+            "type": "PATTERN",
+            "value": "0b[01_]+"
+          },
+          {
+            "type": "PATTERN",
+            "value": "0o[0-7_]+"
+          },
+          {
+            "type": "PATTERN",
+            "value": "([0-9][0-9_]*\\.[0-9][0-9_]*|\\.[0-9][0-9_]*)([eE][+-]?[0-9][0-9_]*)?"
+          },
+          {
+            "type": "PATTERN",
+            "value": "[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*"
+          },
+          {
+            "type": "PATTERN",
+            "value": "[0-9][0-9_]*"
           }
-        }
-      ]
+        ]
+      }
     },
     "string_": {
       "type": "SEQ",
@@ -3184,12 +3167,7 @@
     ]
   ],
   "precedences": [],
-  "externals": [
-    {
-      "type": "SYMBOL",
-      "name": "_trailing_float"
-    }
-  ],
+  "externals": [],
   "inline": [],
   "supertypes": [],
   "reserved": {}
