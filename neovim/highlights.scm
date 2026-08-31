@@ -23,7 +23,7 @@
 (call (primary (field_access (identifier) @function.method.call)))
 
 ; keyword
-[ "defer" "enum" "fn" "pub" "struct" "type" "use" ] @keyword
+[ "defer" "enum" "fn" "pub" "struct" "type" "use" "foreign" ] @keyword
 [ "case" "else" "if" ] @keyword.conditional
 [ "break" "continue" ] @keyword.control
 "for" @keyword.repeat
