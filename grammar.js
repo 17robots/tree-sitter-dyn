@@ -45,7 +45,7 @@ module.exports = grammar({
             $.struct,
             $.enum,
             $.fn,
-            $.foreign_fn,
+            $.extern_fn,
             $.type_alias,
             $.variable,
           ),
@@ -114,10 +114,10 @@ module.exports = grammar({
         optional($.type),
         $.block,
       ),
-    foreign_fn: ($) =>
+    extern_fn: ($) =>
       prec.right(
         seq(
-          token("foreign"),
+          token("extern"),
           token("fn"),
           field("name", $.identifier),
           optional(field("link_name", $.string_)),

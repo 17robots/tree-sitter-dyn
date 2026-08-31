@@ -56,7 +56,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "foreign_fn"
+                  "name": "extern_fn"
                 },
                 {
                   "type": "SYMBOL",
@@ -583,7 +583,7 @@
         }
       ]
     },
-    "foreign_fn": {
+    "extern_fn": {
       "type": "PREC_RIGHT",
       "value": 0,
       "content": {
@@ -593,7 +593,7 @@
             "type": "TOKEN",
             "content": {
               "type": "STRING",
-              "value": "foreign"
+              "value": "extern"
             }
           },
           {
