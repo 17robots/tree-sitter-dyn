@@ -117,7 +117,7 @@ module.exports = grammar({
     foreign_fn: ($) =>
       prec.right(
         seq(
-          field("foreign_kw", token("foreign")),
+          token("foreign"),
           token("fn"),
           field("name", $.identifier),
           optional(field("link_name", $.string_)),

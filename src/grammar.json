@@ -590,14 +590,10 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "FIELD",
-            "name": "foreign_kw",
+            "type": "TOKEN",
             "content": {
-              "type": "TOKEN",
-              "content": {
-                "type": "STRING",
-                "value": "foreign"
-              }
+              "type": "STRING",
+              "value": "foreign"
             }
           },
           {

@@ -630,16 +630,6 @@
     "type": "foreign_fn",
     "named": true,
     "fields": {
-      "foreign_kw": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "foreign",
-            "named": false
-          }
-        ]
-      },
       "link_name": {
         "multiple": false,
         "required": false,
