@@ -228,7 +228,6 @@ module.exports = grammar({
           $.array_type,
           $.pointer_type,
           $.primitive,
-          $.struct_type,
         ),
       ),
     field_type: ($) =>
@@ -260,7 +259,6 @@ module.exports = grammar({
       prec.right(
         seq(token("fn"), "(", commaSep($.type), ")", optional($.type)),
       ),
-    struct_type: ($) => seq($.field_type, "(", commaSep($.type), ")"),
     expression: ($) =>
       choice(
         $.literal,
@@ -359,7 +357,6 @@ module.exports = grammar({
     struct_literal: ($) =>
       seq(
         choice(seq($.identifier, repeat(seq(".", $.identifier))), "."),
-        optional(seq("(", commaSep($.type), ")")),
         "{",
         commaSep($.struct_literal_member),
         "}",

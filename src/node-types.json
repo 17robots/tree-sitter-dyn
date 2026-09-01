@@ -1032,10 +1032,6 @@
         {
           "type": "struct_literal_member",
           "named": true
-        },
-        {
-          "type": "type",
-          "named": true
         }
       ]
     }
@@ -1083,25 +1079,6 @@
     }
   },
   {
-    "type": "struct_type",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "field_type",
-          "named": true
-        },
-        {
-          "type": "type",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "syscall",
     "named": true,
     "fields": {},
@@ -1138,10 +1115,6 @@
         },
         {
           "type": "primitive",
-          "named": true
-        },
-        {
-          "type": "struct_type",
           "named": true
         }
       ]
