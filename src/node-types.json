@@ -189,6 +189,10 @@
         {
           "type": "identifier",
           "named": true
+        },
+        {
+          "type": "type_pattern",
+          "named": true
         }
       ]
     }
@@ -518,6 +522,10 @@
         {
           "type": "type",
           "named": true
+        },
+        {
+          "type": "variadic",
+          "named": true
         }
       ]
     }
@@ -585,6 +593,10 @@
         },
         {
           "type": "type",
+          "named": true
+        },
+        {
+          "type": "variadic_param",
           "named": true
         }
       ]
@@ -791,7 +803,7 @@
       "required": true,
       "types": [
         {
-          "type": "string_",
+          "type": "expression",
           "named": true
         }
       ]
@@ -911,6 +923,10 @@
       "types": [
         {
           "type": "declaration",
+          "named": true
+        },
+        {
+          "type": "target_directive",
           "named": true
         }
       ]
@@ -1094,6 +1110,40 @@
     }
   },
   {
+    "type": "target_condition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "target_directive",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "target_condition",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "type",
     "named": true,
     "fields": {},
@@ -1122,6 +1172,25 @@
   },
   {
     "type": "type_alias",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "type_pattern",
     "named": true,
     "fields": {},
     "children": {
@@ -1257,6 +1326,42 @@
     }
   },
   {
+    "type": "variadic_param",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "variadic",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "!",
     "named": false
   },
@@ -1294,6 +1399,10 @@
   },
   {
     "type": "#syscall",
+    "named": false
+  },
+  {
+    "type": "#target",
     "named": false
   },
   {
@@ -1526,6 +1635,10 @@
     "named": false
   },
   {
+    "type": "is",
+    "named": false
+  },
+  {
     "type": "null_",
     "named": true
   },
@@ -1560,6 +1673,10 @@
   {
     "type": "use",
     "named": false
+  },
+  {
+    "type": "variadic",
+    "named": true
   },
   {
     "type": "{",

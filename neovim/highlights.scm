@@ -11,6 +11,7 @@
 (const_variable (variable (identifier) @constant))
 (enum_member (identifier) @constant)
 (field_access (identifier) @constant)
+(target_condition (identifier) @variable.member (identifier) @constant)
 (null_) @constant.builtin
 
 ; error
@@ -25,6 +26,8 @@
 ; keyword
 [ "defer" "enum" "fn" "pub" "struct" "type" "use" "extern" ] @keyword
 [ "case" "else" "if" ] @keyword.conditional
+"is" @keyword.operator
+"#target" @keyword.directive
 [ "break" "continue" ] @keyword.control
 "for" @keyword.repeat
 "return" @keyword.return
@@ -44,6 +47,7 @@
   "<<" ">>"
   ".." "..=" "=>" ".*"
 ] @operator
+(variadic) @operator
 
 ; punctuation
 [ "(" ")" "[" "]" "{" "}" ] @punctuation.bracket
@@ -74,3 +78,5 @@
 (struct_literal_member (identifier) @variable.member)
 (struct_member (identifier) @variable.member)
 (fn_param (identifier) @variable.parameter)
+(variadic_param (identifier) @variable.parameter)
+(type_pattern (identifier) @variable)

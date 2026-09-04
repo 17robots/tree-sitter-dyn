@@ -17,6 +17,7 @@ const PREC = {
 };
 const commaSep = (rule) =>
   optional(seq(rule, repeat(seq(",", rule)), optional(",")));
+const commaSep1 = (rule) => seq(rule, repeat(seq(",", rule)));
 module.exports = grammar({
   name: "dyn",
   extras: ($) => [/\s/, $.comment],
@@ -34,7 +35,10 @@ module.exports = grammar({
     [$.defer, $.expression],
   ],
   rules: {
-    source_file: ($) => repeat($.declaration),
+    source_file: ($) => repeat(choice($.target_directive, $.declaration)),
+    target_directive: ($) =>
+      seq(token("#target"), "(", commaSep1($.target_condition), ")"),
+    target_condition: ($) => seq($.identifier, ":", choice($.identifier, $.number_)),
     declaration: ($) =>
       choice(
         $.use,
@@ -109,7 +113,7 @@ module.exports = grammar({
         token("fn"),
         field("name", $.identifier),
         "(",
-        commaSep($.fn_param),
+        commaSep(choice($.fn_param, $.variadic_param)),
         ")",
         optional($.type),
         $.block,
@@ -122,13 +126,19 @@ module.exports = grammar({
           field("name", $.identifier),
           optional(field("link_name", $.string_)),
           "(",
-          commaSep($.fn_param),
+          choice(
+            seq(commaSep1($.fn_param), optional(seq(",", optional($.variadic)))),
+            optional($.variadic),
+          ),
           ")",
           optional($.type),
         ),
       ),
     fn_param: ($) =>
       seq($.identifier, repeat(seq(",", $.identifier)), $.type_qualifier),
+    variadic_param: ($) =>
+      seq(field("name", $.identifier), ":", $.variadic, field("type", $.type)),
+    variadic: (_) => "...",
     block: ($) => seq("{", repeat(choice($.statement)), "}"),
     statement: ($) =>
       choice(
@@ -155,13 +165,13 @@ module.exports = grammar({
     case_: ($) =>
       seq(token("case"), $.expression, "{", commaSep($.case_arm), "}"),
     case_arm: ($) =>
-      seq(
-        choice("_", seq($.case_pattern, repeat(seq(",", $.case_pattern)))),
-        optional($.identifier),
-        "=>",
-        $.block,
+      choice(
+        seq($.type_pattern, "=>", $.block),
+        seq(choice("_", seq($.case_pattern, repeat(seq(",", $.case_pattern)))),
+            optional($.identifier), "=>", $.block),
       ),
     case_pattern: ($) => choice($.range, $.expression),
+    type_pattern: ($) => seq(token("is"), $.type, optional($.identifier)),
     for_: ($) =>
       seq(
         optional(seq($.identifier, ":")),
@@ -217,7 +227,7 @@ module.exports = grammar({
           $.expression,
         ),
       ),
-    panic: ($) => seq(token("#panic"), "(", $.string_, ")"),
+    panic: ($) => seq(token("#panic"), "(", $.expression, ")"),
     syscall: ($) => seq(token("#syscall"), "(", commaSep($.expression), ")"),
     range: ($) => seq($.expression, choice("..", "..="), $.expression),
     type_qualifier: ($) => seq(":", $.type),
@@ -252,7 +262,8 @@ module.exports = grammar({
           "isize",
           "usize",
           "bool",
-          "void",
+          "rawptr",
+          "any",
         ),
       ),
     fn_type: ($) =>
