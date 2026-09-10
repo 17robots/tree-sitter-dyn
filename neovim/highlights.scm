@@ -19,6 +19,7 @@
 
 ; function
 (fn (identifier) @function)
+(extern_fn (identifier) @function)
 [ "#alignof" "#bitcast" "#cast" "#len" "#panic" "#sizeof" "#syscall" ] @function.builtin
 (call (primary (identifier) @function.call))
 (call (primary (field_access (identifier) @function.method.call)))
@@ -26,7 +27,7 @@
 ; keyword
 [ "defer" "enum" "fn" "pub" "struct" "type" "use" "extern" ] @keyword
 [ "case" "else" "if" ] @keyword.conditional
-"is" @keyword.operator
+[ "is" "in" ] @keyword.operator
 "#target" @keyword.directive
 [ "break" "continue" ] @keyword.control
 "for" @keyword.repeat
@@ -73,6 +74,7 @@
 
 ; variable
 (variable (identifier) @variable)
+(extern_variable (identifier) @variable)
 "_" @variable.builtin
 (field_access (identifier) @variable.member)
 (struct_literal_member (identifier) @variable.member)

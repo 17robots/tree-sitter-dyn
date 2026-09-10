@@ -50,6 +50,7 @@ module.exports = grammar({
             $.enum,
             $.fn,
             $.extern_fn,
+            $.extern_variable,
             $.type_alias,
             $.variable,
           ),
@@ -133,6 +134,13 @@ module.exports = grammar({
           ")",
           optional($.type),
         ),
+      ),
+    extern_variable: ($) =>
+      seq(
+        token("extern"),
+        field("name", $.identifier),
+        optional(field("link_name", $.string_)),
+        $.type_qualifier,
       ),
     fn_param: ($) =>
       seq($.identifier, repeat(seq(",", $.identifier)), $.type_qualifier),

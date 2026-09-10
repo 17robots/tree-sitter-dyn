@@ -140,6 +140,10 @@
                 },
                 {
                   "type": "SYMBOL",
+                  "name": "extern_variable"
+                },
+                {
+                  "type": "SYMBOL",
                   "name": "type_alias"
                 },
                 {
@@ -823,6 +827,46 @@
           }
         ]
       }
+    },
+    "extern_variable": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "extern"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "link_name",
+              "content": {
+                "type": "SYMBOL",
+                "name": "string_"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "type_qualifier"
+        }
+      ]
     },
     "fn_param": {
       "type": "SEQ",
