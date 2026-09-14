@@ -356,13 +356,13 @@ module.exports = grammar({
       seq(token("#typeof"), "(", choice($.type, $.expression), ")"),
     len: ($) => seq(token("#len"), "(", $.expression, ")"),
     cast: ($) =>
-      seq(
+      prec(PREC.PREFIX, seq(
         choice(token("#cast"), token("#bitcast")),
         "(",
         $.type,
         ")",
         $.expression,
-      ),
+      )),
     literal: ($) =>
       choice(
         $.bool_,
