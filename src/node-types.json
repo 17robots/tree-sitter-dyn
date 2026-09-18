@@ -791,6 +791,22 @@
     }
   },
   {
+    "type": "link_directive",
+    "named": true,
+    "fields": {
+      "library": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "literal",
     "named": true,
     "fields": {},
@@ -963,6 +979,10 @@
       "types": [
         {
           "type": "declaration",
+          "named": true
+        },
+        {
+          "type": "link_directive",
           "named": true
         },
         {
@@ -1427,6 +1447,10 @@
   },
   {
     "type": "#len",
+    "named": false
+  },
+  {
+    "type": "#link",
     "named": false
   },
   {

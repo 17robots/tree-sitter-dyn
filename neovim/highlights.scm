@@ -28,7 +28,7 @@
 [ "defer" "enum" "fn" "pub" "struct" "type" "use" "extern" ] @keyword
 [ "case" "else" "if" ] @keyword.conditional
 [ "is" "in" ] @keyword.operator
-"#target" @keyword.directive
+[ "#target" "#link" ] @keyword.directive
 [ "break" "continue" ] @keyword.control
 "for" @keyword.repeat
 "return" @keyword.return

@@ -35,10 +35,12 @@ module.exports = grammar({
     [$.defer, $.expression],
   ],
   rules: {
-    source_file: ($) => repeat(choice($.target_directive, $.declaration)),
+    source_file: ($) => repeat(choice($.target_directive, $.link_directive, $.declaration)),
     target_directive: ($) =>
       seq(token("#target"), "(", commaSep1($.target_condition), ")"),
     target_condition: ($) => seq($.identifier, ":", choice($.identifier, $.number_)),
+    link_directive: ($) =>
+      seq(token("#link"), "(", field("library", $.string_), ")"),
     declaration: ($) =>
       choice(
         $.use,
