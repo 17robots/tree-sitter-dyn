@@ -35,9 +35,9 @@ indent_size = 4
 indent_style = tab
 indent_size = 8
 
-[Makefile]
-indent_style = tab
-indent_size = 8
+[justfile]
+indent_style = space
+indent_size = 4
 
 [parser.c]
 indent_size = 2

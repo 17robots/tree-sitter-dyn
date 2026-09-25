@@ -2,7 +2,7 @@
 (bool_) @boolean
 
 ; char
-(char_) @character
+(char_) @string
 
 ; comment
 (comment) @comment
@@ -10,28 +10,30 @@
 ; constant
 (const_variable (variable (identifier) @constant))
 (enum_member (identifier) @constant)
-(field_access (identifier) @constant)
 (target_condition (identifier) @variable.member (identifier) @constant)
 (null_) @constant.builtin
 
 ; error
-(ERROR) @error
+; Incomplete syntax is reported by diagnostics; do not recolor whole error subtrees.
 
 ; function
-(fn (identifier) @function)
-(extern_fn (identifier) @function)
+(fn name: (identifier) @function)
+(extern_fn name: (identifier) @function)
 [ "#alignof" "#bitcast" "#cast" "#len" "#panic" "#sizeof" "#syscall" "#typeof" ] @function.builtin
-(call (primary (identifier) @function.call))
-(call (primary (field_access (identifier) @function.method.call)))
+(call (primary (identifier) @function))
+(call (primary (field_access (identifier) @function.method)))
 
 ; keyword
-[ "defer" "enum" "fn" "pub" "struct" "type" "use" "extern" ] @keyword
+[ "const" "defer" "distinct" "enum" "extern" "fn" "packed" "pub" "struct" "type" "use" ] @keyword
+
 [ "case" "else" "if" ] @keyword.conditional
-[ "is" "in" ] @keyword.operator
-[ "#target" "#link" "distinct" ] @keyword.directive
+"is" @keyword.operator
+"#target" @keyword.directive
 [ "break" "continue" ] @keyword.control
-"for" @keyword.repeat
+[ "for" "in" ] @keyword.repeat
 "return" @keyword.return
+
+(primitive) @type.builtin
 
 ; label
 (break_ (identifier) @label)
@@ -44,6 +46,7 @@
   "+" "-" "*" "/" "%"
   "==" "!=" "<" ">" "<=" ">="
   "&&" "||"
+  "!" "~"
   "&" "|" "^"
   "<<" ">>"
   ".." "..=" "=>" ".*"
@@ -60,21 +63,18 @@
 ; string
 (string_) @string
 (escape_sequence) @string.escape
-(use (string_) @string.special.path)
+(use (string_) @string)
+(use alias: (identifier) @namespace)
 
 ; type
 (enum (identifier) @type)
 (struct (identifier) @type)
-((identifier) @type (#match? @type "^[A-Z]"))
 (type (field_type (identifier) @type))
 (type_alias (identifier) @type)
-(primitive) @type.builtin
-"const" @type.qualifier
-(struct "packed" @type.qualifier)
 
 ; variable
-(variable (identifier) @variable)
-(extern_variable (identifier) @variable)
+(declaration (variable (identifier) @variable))
+(statement (variable (identifier) @variable))
 "_" @variable.builtin
 (field_access (identifier) @variable.member)
 (struct_literal_member (identifier) @variable.member)
