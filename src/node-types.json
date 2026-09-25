@@ -1345,17 +1345,17 @@
             "named": true
           }
         ]
+      },
+      "path": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_",
+            "named": true
+          }
+        ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "string_",
-          "named": true
-        }
-      ]
     }
   },
   {

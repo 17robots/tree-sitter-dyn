@@ -1,101 +1,84 @@
-; tree-sitter-dyn — highlights for Helix
+; bool
+(bool_) @constant.builtin.boolean
 
-; Keywords
-["struct" "enum"] @keyword.storage.type
-["mut"] @keyword.storage.modifier
-["use" "pub"] @keyword.control.import
+; char
+(char_) @string
 
-["if" "else" "case"] @keyword.control.conditional
-"for" @keyword.control.repeat
-"return" @keyword.control.return
-["break" "continue"] @keyword.control
-
-; Operators
-[
-  "=" "+" "-" "*" "/" "%" "=="
-  "!==" "<" ">" "<=" ">=" "&&" "||" "!" "&" "|" "^"
-  "~" "<<" ">>" "+=" "-=" "*=" "/=" "%=" "&=" "|=" "^="
-  "<<=" ">>=" ".." "=>" ".*"
-] @operator
-
-; Literals
-(int_literal) @constant.numeric.integer
-(float_literal) @constant.numeric.float
-(string_literal) @string
-(char_literal) @constant.character
-(boolean_literal) @constant.builtin.boolean
-"null" @constant.builtin
-"_" @variable.builtin
-
-; Types
-(builtin) @type.builtin
-
-(pointer_type
-  "mut" @keyword.storage.modifier)
-
-(array_type
-  "mut" @keyword.storage.modifier)
-
-((identifier) @type
-  (#match? @type "^[A-Z]"))
-
-; Variables / declarations
-(declaration
-  (decl_lhs
-    (identifier) @variable))
-
-; Function declarations
-(declaration
-  (decl_lhs
-    (identifier) @function)
-  "="
-  (function))
-
-; Parameters
-(function
-  (identifier) @variable.parameter)
-
-; Function / method calls
-(postfix
-  (identifier) @function
-  (call_postfix))
-
-(postfix
-  (postfix
-    (field_postfix
-      (identifier) @function.method))
-  (call_postfix))
-
-(call_arg
-  (identifier) @variable.parameter)
-
-; Members
-(field_postfix
-  (identifier) @variable.other.member)
-
-(struct_member
-  (identifier) @variable.other.member)
-
-(struct_init_member
-  (identifier) @variable.other.member)
-
-(enum_member
-  (identifier) @type.enum.variant)
-
-(enum_literal
-  (identifier) @type.enum.variant)
-
-; Labels
-(break
-  (identifier) @label)
-
-(continue
-  (identifier) @label)
-
-; Imports
-(use
-  (string_literal) @string.special.path)
-
-; Misc
+; comment
 (comment) @comment
-(ERROR) @error
+
+; constant
+(const_variable (variable (identifier) @constant))
+(enum_member (identifier) @constant)
+(target_condition (identifier) @variable.other.member (identifier) @constant)
+(null_) @constant.builtin
+
+; error
+; Incomplete syntax is reported by diagnostics; do not recolor whole error subtrees.
+
+; function
+(fn name: (identifier) @function)
+(extern_fn name: (identifier) @function)
+[ "#alignof" "#bitcast" "#cast" "#len" "#panic" "#sizeof" "#syscall" "#typeof" ] @function.builtin
+(call (primary (identifier) @function))
+(call (primary (field_access (identifier) @function)))
+
+; keyword
+[ "const" "defer" "distinct" "enum" "extern" "fn" "packed" "pub" "struct" "type" "use" ] @keyword
+
+[ "case" "else" "if" ] @keyword.control.conditional
+"is" @keyword.operator
+"#target" @keyword.directive
+[ "break" "continue" ] @keyword.control
+[ "for" "in" ] @keyword.control.repeat
+"return" @keyword.control.return
+
+(primitive) @type.builtin
+
+; label
+(break_ (identifier) @label)
+(continue_ (identifier) @label)
+(for_ (identifier) @label)
+
+; operator
+[
+  "=" "+=" "-=" "*=" "/=" "%=" "&=" "|=" ">>=" "<<=" "^="
+  "+" "-" "*" "/" "%"
+  "==" "!=" "<" ">" "<=" ">="
+  "&&" "||"
+  "!" "~"
+  "&" "|" "^"
+  "<<" ">>"
+  ".." "..=" "=>" ".*"
+] @operator
+(variadic) @operator
+
+; punctuation
+[ "(" ")" "[" "]" "{" "}" ] @punctuation.bracket
+[ "," "." ":" ] @punctuation.delimiter
+
+; number
+(number_) @constant.numeric
+
+; string
+(string_) @string
+(escape_sequence) @string.escape
+(use (string_) @string)
+(use alias: (identifier) @namespace)
+
+; type
+(enum (identifier) @type)
+(struct (identifier) @type)
+(type (field_type (identifier) @type))
+(type_alias (identifier) @type)
+
+; variable
+(declaration (variable (identifier) @variable))
+(statement (variable (identifier) @variable))
+"_" @variable.builtin
+(field_access (identifier) @variable.other.member)
+(struct_literal_member (identifier) @variable.other.member)
+(struct_member (identifier) @variable.other.member)
+(fn_param (identifier) @variable.parameter)
+(variadic_param (identifier) @variable.parameter)
+(type_pattern (identifier) @variable)
