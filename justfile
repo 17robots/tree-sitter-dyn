@@ -37,7 +37,7 @@ editor-grammar:
     "$TS" build --wasm -o "$WORKSPACE/zed-dyn/grammars/dyn.wasm" .
 
 verify-published-grammar:
-    python3 "$WORKSPACE/tools/verify-published-grammar.py"
+    python3 tools/verify-published-grammar.py --extension "$WORKSPACE/zed-dyn/extension.toml"
 
 release: all test
 
