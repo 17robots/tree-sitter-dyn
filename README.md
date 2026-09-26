@@ -34,3 +34,7 @@ WORKSPACE=.. just verify-published-grammar
 `check-workspace` verifies matching local files and recorded hashes.
 `verify-published-grammar` reads remote pinned files; none of these publishes a
 release. Update and verify editor pins as part of the separate editor release.
+For an extension outside the combined workspace, use
+`python3 tools/verify-published-grammar.py --extension /path/to/extension.toml`.
+Its JSON report defaults to `build/readiness/published-grammar.json`; use
+`--output` to choose another location.
