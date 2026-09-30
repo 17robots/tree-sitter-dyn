@@ -19,7 +19,7 @@
 ; function
 (fn name: (identifier) @function)
 (extern_fn name: (identifier) @function)
-[ "#alignof" "#bitcast" "#cast" "#len" "#panic" "#sizeof" "#syscall" "#typeof" ] @function.builtin
+[ "#alignof" "#bitcast" "#cast" "#len" "#panic" "#reverse" "#sizeof" "#syscall" "#typeof" ] @function.builtin
 (call (primary (identifier) @function))
 (call (primary (field_access (identifier) @function.method)))
 

@@ -199,7 +199,7 @@ module.exports = grammar({
             seq("*", "const", $.identifier),
           ),
           token("in"),
-          choice($.range, $.expression),
+          choice($.range, $.reverse, $.expression),
         ),
         $.expression,
       ),
@@ -358,6 +358,8 @@ module.exports = grammar({
     typeof: ($) =>
       seq(token("#typeof"), "(", choice($.type, $.expression), ")"),
     len: ($) => seq(token("#len"), "(", $.expression, ")"),
+    reverse: ($) =>
+      seq(token("#reverse"), "(", choice($.range, $.expression), ")"),
     cast: ($) =>
       prec(PREC.PREFIX, seq(
         choice(token("#cast"), token("#bitcast")),

@@ -151,3 +151,17 @@ fn main() {
 ---
 
 (source_file (declaration (fn name: (identifier) (block (statement (for_ (for_condition (identifier) (range (expression (literal (number_))) (expression (primary (identifier))))) (block))) (statement (for_ (for_condition (identifier) (range (expression (literal (number_))) (expression (literal (number_))))) (block)))))))
+
+==================
+For-in over reversed ranges and collections
+==================
+fn main() {
+  for i in #reverse(0..n) {
+  }
+  for *v in #reverse(values) {
+  }
+  reverse := 1
+}
+---
+
+(source_file (declaration (fn name: (identifier) (block (statement (for_ (for_condition (identifier) (reverse (range (expression (literal (number_))) (expression (primary (identifier)))))) (block))) (statement (for_ (for_condition (identifier) (reverse (expression (primary (identifier))))) (block))) (statement (variable (identifier) (expression (literal (number_)))))))))
