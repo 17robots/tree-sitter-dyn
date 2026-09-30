@@ -714,6 +714,10 @@
         {
           "type": "identifier",
           "named": true
+        },
+        {
+          "type": "range",
+          "named": true
         }
       ]
     }

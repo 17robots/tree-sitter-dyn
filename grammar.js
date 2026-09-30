@@ -199,7 +199,7 @@ module.exports = grammar({
             seq("*", "const", $.identifier),
           ),
           token("in"),
-          $.expression,
+          choice($.range, $.expression),
         ),
         $.expression,
       ),
