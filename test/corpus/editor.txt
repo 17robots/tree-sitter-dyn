@@ -138,3 +138,16 @@ fn main() {}
 ---
 
 (source_file (declaration (const_variable (variable (identifier) (type (primitive)) (expression (primary (identifier)))))) (ERROR (identifier)))
+
+==================
+For-in over ranges
+==================
+fn main() {
+  for i in 0..n {
+  }
+  for j in 1..=3 {
+  }
+}
+---
+
+(source_file (declaration (fn name: (identifier) (block (statement (for_ (for_condition (identifier) (range (expression (literal (number_))) (expression (primary (identifier))))) (block))) (statement (for_ (for_condition (identifier) (range (expression (literal (number_))) (expression (literal (number_))))) (block)))))))
