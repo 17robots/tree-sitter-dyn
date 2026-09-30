@@ -718,6 +718,10 @@
         {
           "type": "range",
           "named": true
+        },
+        {
+          "type": "reverse",
+          "named": true
         }
       ]
     }
@@ -948,6 +952,25 @@
       "types": [
         {
           "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "reverse",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "range",
           "named": true
         }
       ]
@@ -1459,6 +1482,10 @@
   },
   {
     "type": "#panic",
+    "named": false
+  },
+  {
+    "type": "#reverse",
     "named": false
   },
   {
