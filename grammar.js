@@ -249,12 +249,13 @@ module.exports = grammar({
           $.array_type,
           $.pointer_type,
           $.primitive,
+          $.allocation_result_type,
         ),
       ),
     field_type: ($) =>
       prec.right(seq($.identifier, repeat(seq(".", $.identifier)))),
     array_type: ($) =>
-      seq("[", optional($.number_), "]", optional(token("const")), $.type),
+      seq("[", optional(field("length", $.expression)), "]", optional(token("const")), $.type),
     pointer_type: ($) =>
       seq("*", choice($.fn_type, seq(optional(token("const")), $.type))),
     primitive: (_) =>
@@ -275,6 +276,7 @@ module.exports = grammar({
           "bool",
           "rawptr",
           "any",
+          "Allocator",
         ),
       ),
     fn_type: ($) =>
@@ -296,6 +298,8 @@ module.exports = grammar({
       ),
     primary: ($) =>
       choice(
+        $.allocator,
+        $.allocation,
         $.identifier,
         $.unary_postfix,
         $.group,
@@ -352,6 +356,9 @@ module.exports = grammar({
           "]",
         ),
       ),
+    allocation_result_type: ($) => seq(token("#AllocResult"), "(", $.type, ")"),
+    allocator: ($) => seq(token("#allocator"), "(", $.expression, ",", $.expression, ")"),
+    allocation: ($) => seq(choice(token("#alloc_or_panic"), token("#alloc"), token("#alloc_uninit_or_panic"), token("#alloc_uninit"), token("#alloc_slice_or_panic"), token("#alloc_slice"), token("#alloc_slice_uninit_or_panic"), token("#alloc_slice_uninit")), "(", $.type, ",", $.expression, optional(seq(",", $.expression)), ")"),
     size: ($) => seq(token("#sizeof"), "(", choice($.type, $.expression), ")"),
     align: ($) =>
       seq(token("#alignof"), "(", choice($.type, $.expression), ")"),

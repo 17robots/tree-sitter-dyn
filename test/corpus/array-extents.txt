@@ -1,0 +1,68 @@
+==================
+Constant array lengths and slices
+==================
+const Size: usize = 4
+struct Buffers { fixed: [Size * 1024]u8, borrowed: []const u8 }
+fn main() { local: [2 * mem.KiB]u8 = [] }
+---
+
+(source_file
+  (declaration
+    (const_variable
+      (variable
+        (identifier)
+        (type
+          (primitive))
+        (expression
+          (literal
+            (number_))))))
+  (declaration
+    (struct
+      (identifier)
+      (struct_member
+        (identifier)
+        (type_qualifier
+          (type
+            (array_type
+              (expression
+                (binary
+                  (expression
+                    (primary
+                      (identifier)))
+                  (expression
+                    (literal
+                      (number_)))))
+              (type
+                (primitive))))))
+      (struct_member
+        (identifier)
+        (type_qualifier
+          (type
+            (array_type
+              (type
+                (primitive))))))))
+  (declaration
+    (fn
+      (identifier)
+      (block
+        (statement
+          (variable
+            (identifier)
+            (type
+              (array_type
+                (expression
+                  (binary
+                    (expression
+                      (literal
+                        (number_)))
+                    (expression
+                      (primary
+                        (field_access
+                          (primary
+                            (identifier))
+                          (identifier))))))
+                (type
+                  (primitive))))
+            (expression
+              (literal
+                (array_literal)))))))))
