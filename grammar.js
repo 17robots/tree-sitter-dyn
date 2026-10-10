@@ -146,7 +146,11 @@ module.exports = grammar({
         $.type_qualifier,
       ),
     fn_param: ($) =>
-      seq($.identifier, repeat(seq(",", $.identifier)), $.type_qualifier),
+      choice(
+        seq($.identifier, repeat(seq(",", $.identifier)), $.type_qualifier),
+        seq($.type_parameter, $.type_qualifier),
+      ),
+    type_parameter: (_) => token(seq("$", /[A-Za-z_][A-Za-z0-9_]*/)),
     variadic_param: ($) =>
       seq(field("name", $.identifier), ":", $.variadic, field("type", $.type)),
     variadic: (_) => "...",
@@ -249,7 +253,7 @@ module.exports = grammar({
           $.array_type,
           $.pointer_type,
           $.primitive,
-          $.allocation_result_type,
+          $.type_parameter,
         ),
       ),
     field_type: ($) =>
@@ -276,7 +280,6 @@ module.exports = grammar({
           "bool",
           "rawptr",
           "any",
-          "Allocator",
         ),
       ),
     fn_type: ($) =>
@@ -298,8 +301,6 @@ module.exports = grammar({
       ),
     primary: ($) =>
       choice(
-        $.allocator,
-        $.allocation,
         $.identifier,
         $.unary_postfix,
         $.group,
@@ -337,7 +338,7 @@ module.exports = grammar({
     call: ($) =>
       prec(
         PREC.POSTFIX,
-        seq($.primary, "(", field("call_args", commaSep($.expression)), ")"),
+        seq($.primary, "(", field("call_args", commaSep(choice($.expression, $.type_argument))), ")"),
       ),
     field_access: ($) => prec(PREC.POSTFIX, seq($.primary, ".", $.identifier)),
     index: ($) =>
@@ -356,9 +357,9 @@ module.exports = grammar({
           "]",
         ),
       ),
-    allocation_result_type: ($) => seq(token("#AllocResult"), "(", $.type, ")"),
-    allocator: ($) => seq(token("#allocator"), "(", $.expression, ",", $.expression, ")"),
-    allocation: ($) => seq(choice(token("#alloc_or_panic"), token("#alloc"), token("#alloc_uninit_or_panic"), token("#alloc_uninit"), token("#alloc_slice_or_panic"), token("#alloc_slice"), token("#alloc_slice_uninit_or_panic"), token("#alloc_slice_uninit")), "(", $.type, ",", $.expression, optional(seq(",", $.expression)), ")"),
+    // Types that cannot parse as expressions; a plain name stays an expression.
+    type_argument: ($) =>
+      choice($.pointer_type, $.array_type, $.primitive, $.type_parameter),
     size: ($) => seq(token("#sizeof"), "(", choice($.type, $.expression), ")"),
     align: ($) =>
       seq(token("#alignof"), "(", choice($.type, $.expression), ")"),

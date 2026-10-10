@@ -19,55 +19,6 @@
     }
   },
   {
-    "type": "allocation",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "expression",
-          "named": true
-        },
-        {
-          "type": "type",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "allocation_result_type",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "type",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "allocator",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "array_literal",
     "named": true,
     "fields": {},
@@ -191,6 +142,10 @@
           },
           {
             "type": "expression",
+            "named": true
+          },
+          {
+            "type": "type_argument",
             "named": true
           }
         ]
@@ -711,6 +666,10 @@
           "named": true
         },
         {
+          "type": "type_parameter",
+          "named": true
+        },
+        {
           "type": "type_qualifier",
           "named": true
         }
@@ -956,14 +915,6 @@
       "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "allocation",
-          "named": true
-        },
-        {
-          "type": "allocator",
-          "named": true
-        },
         {
           "type": "call",
           "named": true
@@ -1303,10 +1254,6 @@
       "required": true,
       "types": [
         {
-          "type": "allocation_result_type",
-          "named": true
-        },
-        {
           "type": "array_type",
           "named": true
         },
@@ -1320,6 +1267,10 @@
         },
         {
           "type": "primitive",
+          "named": true
+        },
+        {
+          "type": "type_parameter",
           "named": true
         }
       ]
@@ -1339,6 +1290,33 @@
         },
         {
           "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "type_argument",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "array_type",
+          "named": true
+        },
+        {
+          "type": "pointer_type",
+          "named": true
+        },
+        {
+          "type": "primitive",
+          "named": true
+        },
+        {
+          "type": "type_parameter",
           "named": true
         }
       ]
@@ -1529,47 +1507,7 @@
     "named": false
   },
   {
-    "type": "#AllocResult",
-    "named": false
-  },
-  {
     "type": "#alignof",
-    "named": false
-  },
-  {
-    "type": "#alloc",
-    "named": false
-  },
-  {
-    "type": "#alloc_or_panic",
-    "named": false
-  },
-  {
-    "type": "#alloc_slice",
-    "named": false
-  },
-  {
-    "type": "#alloc_slice_or_panic",
-    "named": false
-  },
-  {
-    "type": "#alloc_slice_uninit",
-    "named": false
-  },
-  {
-    "type": "#alloc_slice_uninit_or_panic",
-    "named": false
-  },
-  {
-    "type": "#alloc_uninit",
-    "named": false
-  },
-  {
-    "type": "#alloc_uninit_or_panic",
-    "named": false
-  },
-  {
-    "type": "#allocator",
     "named": false
   },
   {
@@ -1872,6 +1810,10 @@
   {
     "type": "type",
     "named": false
+  },
+  {
+    "type": "type_parameter",
+    "named": true
   },
   {
     "type": "use",
