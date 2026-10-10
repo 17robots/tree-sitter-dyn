@@ -34,6 +34,7 @@
 "return" @keyword.return
 
 (primitive) @type.builtin
+(type_parameter) @type
 
 ; label
 (break_ (identifier) @label)
