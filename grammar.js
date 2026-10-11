@@ -301,6 +301,7 @@ module.exports = grammar({
         $.len,
         $.align,
         $.offset,
+        $.load,
         $.typeof,
         $.syscall,
       ),
@@ -368,6 +369,7 @@ module.exports = grammar({
     size: ($) => seq(token("#sizeof"), "(", choice($.type, $.expression), ")"),
     align: ($) =>
       seq(token("#alignof"), "(", choice($.type, $.expression), ")"),
+    load: ($) => seq(token("#load"), "(", $.string_, ")"),
     offset: ($) =>
       seq(token("#offsetof"), "(", $.type, ",", $.identifier, ")"),
     typeof: ($) =>

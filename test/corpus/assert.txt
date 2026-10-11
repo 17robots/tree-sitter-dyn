@@ -49,3 +49,24 @@ Field offsets
           (expression
             (literal
               (number_))))))))
+
+================================================================================
+Embedded files
+================================================================================
+
+const ICON: []const u8 = #load("assets/icon.png")
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    (const_variable
+      (variable
+        (identifier)
+        (type
+          (array_type
+            (type
+              (primitive))))
+        (expression
+          (load
+            (string_)))))))

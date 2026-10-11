@@ -2205,6 +2205,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "load"
+        },
+        {
+          "type": "SYMBOL",
           "name": "typeof"
         },
         {
@@ -2959,6 +2963,30 @@
               "name": "expression"
             }
           ]
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
+    "load": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "#load"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string_"
         },
         {
           "type": "STRING",
