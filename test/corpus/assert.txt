@@ -1,0 +1,28 @@
+================================================================================
+Compile-time assertions
+================================================================================
+
+#assert(#sizeof(Header) == 16, "header layout")
+#assert(true)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    (static_assert
+      (expression
+        (binary
+          (expression
+            (size
+              (type
+                (field_type
+                  (identifier)))))
+          (expression
+            (literal
+              (number_)))))
+      (string_)))
+  (declaration
+    (static_assert
+      (expression
+        (literal
+          (bool_))))))

@@ -45,6 +45,7 @@ module.exports = grammar({
     declaration: ($) =>
       choice(
         $.use,
+        $.static_assert,
         seq(
           optional(token("pub")),
           choice(
@@ -242,6 +243,8 @@ module.exports = grammar({
           $.expression,
         ),
       ),
+    static_assert: ($) =>
+      seq(token("#assert"), "(", $.expression, optional(seq(",", $.string_)), ")"),
     panic: ($) => seq(token("#panic"), "(", $.expression, ")"),
     syscall: ($) => seq(token("#syscall"), "(", commaSep($.expression), ")"),
     range: ($) => seq($.expression, choice("..", "..="), $.expression),

@@ -130,6 +130,10 @@
           "name": "use"
         },
         {
+          "type": "SYMBOL",
+          "name": "static_assert"
+        },
+        {
           "type": "SEQ",
           "members": [
             {
@@ -1664,6 +1668,51 @@
           }
         ]
       }
+    },
+    "static_assert": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "#assert"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "SYMBOL",
+          "name": "expression"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ","
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "string_"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
     },
     "panic": {
       "type": "SEQ",

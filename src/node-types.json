@@ -320,6 +320,10 @@
           "named": true
         },
         {
+          "type": "static_assert",
+          "named": true
+        },
+        {
           "type": "struct",
           "named": true
         },
@@ -1102,6 +1106,25 @@
     }
   },
   {
+    "type": "static_assert",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "string_",
     "named": true,
     "fields": {},
@@ -1508,6 +1531,10 @@
   },
   {
     "type": "#alignof",
+    "named": false
+  },
+  {
+    "type": "#assert",
     "named": false
   },
   {
