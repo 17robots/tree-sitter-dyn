@@ -26,3 +26,26 @@ Compile-time assertions
       (expression
         (literal
           (bool_))))))
+
+================================================================================
+Field offsets
+================================================================================
+
+#assert(#offsetof(Header, size) == 4)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    (static_assert
+      (expression
+        (binary
+          (expression
+            (offset
+              (type
+                (field_type
+                  (identifier)))
+              (identifier)))
+          (expression
+            (literal
+              (number_))))))))

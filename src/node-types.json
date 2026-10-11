@@ -483,6 +483,10 @@
           "named": true
         },
         {
+          "type": "offset",
+          "named": true
+        },
+        {
           "type": "primary",
           "named": true
         },
@@ -876,6 +880,25 @@
     "type": "number_",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "offset",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "panic",
@@ -1551,6 +1574,10 @@
   },
   {
     "type": "#link",
+    "named": false
+  },
+  {
+    "type": "#offsetof",
     "named": false
   },
   {
