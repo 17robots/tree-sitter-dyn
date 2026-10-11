@@ -1,0 +1,30 @@
+================================================================================
+Imports
+================================================================================
+
+use "std/mem"
+use "std/io" io
+use "std/mem" mem, "std/strings", "std/io" out
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    (use
+      (import
+        (string_))))
+  (declaration
+    (use
+      (import
+        (string_)
+        (identifier))))
+  (declaration
+    (use
+      (import
+        (string_)
+        (identifier))
+      (import
+        (string_))
+      (import
+        (string_)
+        (identifier)))))

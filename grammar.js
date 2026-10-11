@@ -24,7 +24,7 @@ module.exports = grammar({
   externals: ($) => [$._trailing_float],
   word: ($) => $.identifier,
   conflicts: ($) => [
-    [$.use],
+    [$.import],
     [$.primary, $.struct_literal],
     [$.field_type, $.primary],
     [$.field_type, $.primary, $.struct_literal],
@@ -62,8 +62,9 @@ module.exports = grammar({
       ),
     // Keep both interpretations until the next token distinguishes an alias
     // from a following global declaration (newlines are ordinary whitespace).
-    use: ($) =>
-      seq(token("use"), field("path", $.string_), optional(field("alias", $.identifier))),
+    use: ($) => seq(token("use"), $.import, repeat(seq(",", $.import))),
+    import: ($) =>
+      seq(field("path", $.string_), optional(field("alias", $.identifier))),
     variable: ($) =>
       seq(
         $.identifier,

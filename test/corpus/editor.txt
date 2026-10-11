@@ -8,7 +8,8 @@ value := 42
 (source_file
   (declaration
     (use
-      (string_)))
+      (import
+        (string_))))
   (declaration
     (variable
       (identifier)
@@ -26,8 +27,9 @@ const value: i32 = 42
 (source_file
   (declaration
     (use
-      (string_)
-      (identifier)))
+      (import
+        (string_)
+        (identifier))))
   (declaration
     (const_variable
       (variable
@@ -48,7 +50,8 @@ value: i32 = 42
 (source_file
   (declaration
     (use
-      (string_)))
+      (import
+        (string_))))
   (comment)
   (declaration
     (variable
@@ -69,8 +72,9 @@ fn main() { _ = bytes./* member */equal("a", "a") }
 (source_file
   (declaration
     (use
-      (string_)
-      (identifier)))
+      (import
+        (string_)
+        (identifier))))
   (declaration
     (fn
       (identifier)
@@ -128,7 +132,7 @@ Incomplete import recovery
 use "std/
 ---
 
-(source_file (declaration (use (string_ (MISSING """)))))
+(source_file (declaration (use (import (string_ (MISSING """))))))
 
 ==================
 Missing const value recovery

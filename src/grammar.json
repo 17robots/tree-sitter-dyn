@@ -203,6 +203,31 @@
           }
         },
         {
+          "type": "SYMBOL",
+          "name": "import"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ","
+              },
+              {
+                "type": "SYMBOL",
+                "name": "import"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "import": {
+      "type": "SEQ",
+      "members": [
+        {
           "type": "FIELD",
           "name": "path",
           "content": {
@@ -3522,7 +3547,7 @@
   ],
   "conflicts": [
     [
-      "use"
+      "import"
     ],
     [
       "primary",
