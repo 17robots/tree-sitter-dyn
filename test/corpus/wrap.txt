@@ -1,0 +1,47 @@
+================================================================================
+Wrapping arithmetic
+================================================================================
+
+fn mix(h: u64, b: u64) u64 {
+  return #wrap((h ^ b) * 3)
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    (fn
+      name: (identifier)
+      (fn_param
+        (identifier)
+        (type_qualifier
+          (type
+            (primitive))))
+      (fn_param
+        (identifier)
+        (type_qualifier
+          (type
+            (primitive))))
+      (type
+        (primitive))
+      (block
+        (statement
+          (return_
+            (expression
+              (wrap
+                (expression
+                  (binary
+                    (expression
+                      (primary
+                        (group
+                          (expression
+                            (binary
+                              (expression
+                                (primary
+                                  (identifier)))
+                              (expression
+                                (primary
+                                  (identifier))))))))
+                    (expression
+                      (literal
+                        (number_)))))))))))))
