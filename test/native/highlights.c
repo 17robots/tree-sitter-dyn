@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
       declarations += !strcmp(ts_node_type(ts_node_named_child(root, child)), "declaration");
     assert(declarations == 2);
     TSNode use = ts_node_named_child(ts_node_named_child(root, 0), 0);
-    TSNode alias = ts_node_child_by_field_name(use, "alias", 5);
+    TSNode alias = ts_node_child_by_field_name(ts_node_named_child(use, 0), "alias", 5);
     assert(ts_node_is_null(alias) == (i != 4));
     ts_tree_delete(parsed);
   }
