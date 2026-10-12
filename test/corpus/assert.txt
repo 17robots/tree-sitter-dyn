@@ -1,0 +1,72 @@
+================================================================================
+Compile-time assertions
+================================================================================
+
+#assert(#sizeof(Header) == 16, "header layout")
+#assert(true)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    (static_assert
+      (expression
+        (binary
+          (expression
+            (size
+              (type
+                (field_type
+                  (identifier)))))
+          (expression
+            (literal
+              (number_)))))
+      (string_)))
+  (declaration
+    (static_assert
+      (expression
+        (literal
+          (bool_))))))
+
+================================================================================
+Field offsets
+================================================================================
+
+#assert(#offsetof(Header, size) == 4)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    (static_assert
+      (expression
+        (binary
+          (expression
+            (offset
+              (type
+                (field_type
+                  (identifier)))
+              (identifier)))
+          (expression
+            (literal
+              (number_))))))))
+
+================================================================================
+Embedded files
+================================================================================
+
+const ICON: []const u8 = #load("assets/icon.png")
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    (const_variable
+      (variable
+        (identifier)
+        (type
+          (array_type
+            (type
+              (primitive))))
+        (expression
+          (load
+            (string_)))))))

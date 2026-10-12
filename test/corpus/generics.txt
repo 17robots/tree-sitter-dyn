@@ -1,0 +1,173 @@
+==================
+Type parameters and type arguments
+==================
+fn push($T: type, arena: *Arena) *T {
+  return #cast(*T) raw(arena, #sizeof(T))
+}
+fn min(a, b: $T) T {
+  return a
+}
+fn copy(d: []$T, s: []const T) {
+}
+fn main() {
+  n := push(Node, &arena)
+  b := push(u8, &arena)
+  p := push(*Node, &arena)
+  s := push([]const u8, &arena)
+}
+
+---
+
+(source_file
+  (declaration
+    (fn
+      name: (identifier)
+      (fn_param
+        (type_parameter)
+        (type_qualifier
+          (type
+            (field_type
+              (identifier)))))
+      (fn_param
+        (identifier)
+        (type_qualifier
+          (type
+            (pointer_type
+              (type
+                (field_type
+                  (identifier)))))))
+      (type
+        (pointer_type
+          (type
+            (field_type
+              (identifier)))))
+      (block
+        (statement
+          (return_
+            (expression
+              (cast
+                (type
+                  (pointer_type
+                    (type
+                      (field_type
+                        (identifier)))))
+                (expression
+                  (primary
+                    (call
+                      (primary
+                        (identifier))
+                      call_args: (expression
+                        (primary
+                          (identifier)))
+                      call_args: (expression
+                        (size
+                          (type
+                            (field_type
+                              (identifier)))))))))))))))
+  (declaration
+    (fn
+      name: (identifier)
+      (fn_param
+        (identifier)
+        (identifier)
+        (type_qualifier
+          (type
+            (type_parameter))))
+      (type
+        (field_type
+          (identifier)))
+      (block
+        (statement
+          (return_
+            (expression
+              (primary
+                (identifier))))))))
+  (declaration
+    (fn
+      name: (identifier)
+      (fn_param
+        (identifier)
+        (type_qualifier
+          (type
+            (array_type
+              (type
+                (type_parameter))))))
+      (fn_param
+        (identifier)
+        (type_qualifier
+          (type
+            (array_type
+              (type
+                (field_type
+                  (identifier)))))))
+      (block)))
+  (declaration
+    (fn
+      name: (identifier)
+      (block
+        (statement
+          (variable
+            (identifier)
+            (expression
+              (primary
+                (call
+                  (primary
+                    (identifier))
+                  call_args: (expression
+                    (primary
+                      (identifier)))
+                  call_args: (expression
+                    (unary_prefix
+                      (expression
+                        (primary
+                          (identifier))))))))))
+        (statement
+          (variable
+            (identifier)
+            (expression
+              (primary
+                (call
+                  (primary
+                    (identifier))
+                  call_args: (type_argument
+                    (primitive))
+                  call_args: (expression
+                    (unary_prefix
+                      (expression
+                        (primary
+                          (identifier))))))))))
+        (statement
+          (variable
+            (identifier)
+            (expression
+              (primary
+                (call
+                  (primary
+                    (identifier))
+                  call_args: (type_argument
+                    (pointer_type
+                      (type
+                        (field_type
+                          (identifier)))))
+                  call_args: (expression
+                    (unary_prefix
+                      (expression
+                        (primary
+                          (identifier))))))))))
+        (statement
+          (variable
+            (identifier)
+            (expression
+              (primary
+                (call
+                  (primary
+                    (identifier))
+                  call_args: (type_argument
+                    (array_type
+                      (type
+                        (primitive))))
+                  call_args: (expression
+                    (unary_prefix
+                      (expression
+                        (primary
+                          (identifier))))))))))))))
