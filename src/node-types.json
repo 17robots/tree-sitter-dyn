@@ -509,6 +509,10 @@
         {
           "type": "unary_prefix",
           "named": true
+        },
+        {
+          "type": "wrap",
+          "named": true
         }
       ]
     }
@@ -1575,6 +1579,21 @@
     }
   },
   {
+    "type": "wrap",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "!",
     "named": false
   },
@@ -1640,6 +1659,10 @@
   },
   {
     "type": "#typeof",
+    "named": false
+  },
+  {
+    "type": "#wrap",
     "named": false
   },
   {
