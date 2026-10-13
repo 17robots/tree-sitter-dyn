@@ -75,7 +75,7 @@
 
 ; variable
 (declaration (variable (identifier) @variable))
-(statement (variable (identifier) @variable))
+(block (variable (identifier) @variable))
 "_" @variable.builtin
 (field_access (identifier) @variable.member)
 (struct_literal_member (identifier) @variable.member)

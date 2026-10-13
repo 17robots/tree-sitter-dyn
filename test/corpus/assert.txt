@@ -10,22 +10,16 @@ Compile-time assertions
 (source_file
   (declaration
     (static_assert
-      (expression
-        (binary
-          (expression
-            (size
-              (type
-                (field_type
-                  (identifier)))))
-          (expression
-            (literal
-              (number_)))))
+      (binary
+        (size
+          (type
+            (field_type
+              (identifier))))
+        (number_))
       (string_)))
   (declaration
     (static_assert
-      (expression
-        (literal
-          (bool_))))))
+      (bool_))))
 
 ================================================================================
 Field offsets
@@ -38,17 +32,13 @@ Field offsets
 (source_file
   (declaration
     (static_assert
-      (expression
-        (binary
-          (expression
-            (offset
-              (type
-                (field_type
-                  (identifier)))
+      (binary
+        (offset
+          (type
+            (field_type
               (identifier)))
-          (expression
-            (literal
-              (number_))))))))
+          (identifier))
+        (number_)))))
 
 ================================================================================
 Embedded files
@@ -67,6 +57,5 @@ const ICON: []const u8 = #load("assets/icon.png")
           (array_type
             (type
               (primitive))))
-        (expression
-          (load
-            (string_)))))))
+        (load
+          (string_))))))

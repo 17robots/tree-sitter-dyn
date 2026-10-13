@@ -25,23 +25,14 @@ fn mix(h: u64, b: u64) u64 {
       (type
         (primitive))
       (block
-        (statement
-          (return_
-            (expression
-              (wrap
-                (expression
+        (return_
+          (wrap
+            (binary
+              (primary
+                (group
                   (binary
-                    (expression
-                      (primary
-                        (group
-                          (expression
-                            (binary
-                              (expression
-                                (primary
-                                  (identifier)))
-                              (expression
-                                (primary
-                                  (identifier))))))))
-                    (expression
-                      (literal
-                        (number_)))))))))))))
+                    (primary
+                      (identifier))
+                    (primary
+                      (identifier)))))
+              (number_))))))))

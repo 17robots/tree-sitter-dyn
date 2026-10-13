@@ -13,9 +13,7 @@ value := 42
   (declaration
     (variable
       (identifier)
-      (expression
-        (literal
-          (number_))))))
+      (number_))))
 
 ==================
 Import alias followed by const
@@ -36,9 +34,7 @@ const value: i32 = 42
         (identifier)
         (type
           (primitive))
-        (expression
-          (literal
-            (number_)))))))
+        (number_)))))
 
 ==================
 Comment before next global
@@ -58,9 +54,7 @@ value: i32 = 42
       (identifier)
       (type
         (primitive))
-      (expression
-        (literal
-          (number_))))))
+      (number_))))
 
 ==================
 Comments between qualified operands
@@ -79,25 +73,19 @@ fn main() { _ = bytes./* member */equal("a", "a") }
     (fn
       (identifier)
       (block
-        (statement
-          (assignment
-            (primary
-              (identifier))
-            (expression
+        (assignment
+          (primary
+            (identifier))
+          (primary
+            (call
               (primary
-                (call
+                (field_access
                   (primary
-                    (field_access
-                      (primary
-                        (identifier))
-                      (comment)
-                      (identifier)))
-                  (expression
-                    (literal
-                      (string_)))
-                  (expression
-                    (literal
-                      (string_))))))))))))
+                    (identifier))
+                  (comment)
+                  (identifier)))
+              (string_)
+              (string_))))))))
 
 ==================
 Trailing-dot float and field
@@ -110,21 +98,16 @@ fn main() { value: f64 = 1. _ = value }
     (fn
       (identifier)
       (block
-        (statement
-          (variable
-            (identifier)
-            (type
-              (primitive))
-            (expression
-              (literal
-                (number_)))))
-        (statement
-          (assignment
-            (primary
-              (identifier))
-            (expression
-              (primary
-                (identifier)))))))))
+        (variable
+          (identifier)
+          (type
+            (primitive))
+          (number_))
+        (assignment
+          (primary
+            (identifier))
+          (primary
+            (identifier)))))))
 
 ==================
 Incomplete import recovery
@@ -132,7 +115,12 @@ Incomplete import recovery
 use "std/
 ---
 
-(source_file (declaration (use (import (string_ (MISSING """))))))
+(source_file
+  (declaration
+    (use
+      (import
+        (string_
+          (MISSING """))))))
 
 ==================
 Missing const value recovery
@@ -141,7 +129,17 @@ const value: i32 =
 fn main() {}
 ---
 
-(source_file (declaration (const_variable (variable (identifier) (type (primitive)) (expression (primary (identifier)))))) (ERROR (identifier)))
+(source_file
+  (declaration
+    (const_variable
+      (variable
+        (identifier)
+        (type
+          (primitive))
+        (primary
+          (identifier)))))
+  (ERROR
+    (identifier)))
 
 ==================
 For-in over ranges
@@ -154,7 +152,26 @@ fn main() {
 }
 ---
 
-(source_file (declaration (fn name: (identifier) (block (statement (for_ (for_condition (identifier) (range (expression (literal (number_))) (expression (primary (identifier))))) (block))) (statement (for_ (for_condition (identifier) (range (expression (literal (number_))) (expression (literal (number_))))) (block)))))))
+(source_file
+  (declaration
+    (fn
+      name: (identifier)
+      (block
+        (for_
+          (for_condition
+            (identifier)
+            (range
+              (number_)
+              (primary
+                (identifier))))
+          (block))
+        (for_
+          (for_condition
+            (identifier)
+            (range
+              (number_)
+              (number_)))
+          (block))))))
 
 ==================
 For-in over reversed ranges and collections
@@ -168,4 +185,27 @@ fn main() {
 }
 ---
 
-(source_file (declaration (fn name: (identifier) (block (statement (for_ (for_condition (identifier) (reverse (range (expression (literal (number_))) (expression (primary (identifier)))))) (block))) (statement (for_ (for_condition (identifier) (reverse (expression (primary (identifier))))) (block))) (statement (variable (identifier) (expression (literal (number_)))))))))
+(source_file
+  (declaration
+    (fn
+      name: (identifier)
+      (block
+        (for_
+          (for_condition
+            (identifier)
+            (reverse
+              (range
+                (number_)
+                (primary
+                  (identifier)))))
+          (block))
+        (for_
+          (for_condition
+            (identifier)
+            (reverse
+              (primary
+                (identifier))))
+          (block))
+        (variable
+          (identifier)
+          (number_))))))

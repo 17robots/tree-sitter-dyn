@@ -13,9 +13,7 @@ fn main() { local: [2 * mem.KiB]u8 = [] }
         (identifier)
         (type
           (primitive))
-        (expression
-          (literal
-            (number_))))))
+        (number_))))
   (declaration
     (struct
       (identifier)
@@ -24,14 +22,10 @@ fn main() { local: [2 * mem.KiB]u8 = [] }
         (type_qualifier
           (type
             (array_type
-              (expression
-                (binary
-                  (expression
-                    (primary
-                      (identifier)))
-                  (expression
-                    (literal
-                      (number_)))))
+              (binary
+                (primary
+                  (identifier))
+                (number_))
               (type
                 (primitive))))))
       (struct_member
@@ -45,24 +39,17 @@ fn main() { local: [2 * mem.KiB]u8 = [] }
     (fn
       (identifier)
       (block
-        (statement
-          (variable
-            (identifier)
-            (type
-              (array_type
-                (expression
-                  (binary
-                    (expression
-                      (literal
-                        (number_)))
-                    (expression
-                      (primary
-                        (field_access
-                          (primary
-                            (identifier))
-                          (identifier))))))
-                (type
-                  (primitive))))
-            (expression
-              (literal
-                (array_literal)))))))))
+        (variable
+          (identifier)
+          (type
+            (array_type
+              (binary
+                (number_)
+                (primary
+                  (field_access
+                    (primary
+                      (identifier))
+                    (identifier))))
+              (type
+                (primitive))))
+          (array_literal))))))
