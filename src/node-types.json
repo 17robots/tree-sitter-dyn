@@ -8,11 +8,83 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
           "named": true
         },
         {
           "type": "type",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]
@@ -27,7 +99,79 @@
       "required": false,
       "types": [
         {
-          "type": "expression",
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]
@@ -42,7 +186,79 @@
         "required": false,
         "types": [
           {
-            "type": "expression",
+            "type": "align",
+            "named": true
+          },
+          {
+            "type": "array_literal",
+            "named": true
+          },
+          {
+            "type": "binary",
+            "named": true
+          },
+          {
+            "type": "bool_",
+            "named": true
+          },
+          {
+            "type": "cast",
+            "named": true
+          },
+          {
+            "type": "char_",
+            "named": true
+          },
+          {
+            "type": "len",
+            "named": true
+          },
+          {
+            "type": "load",
+            "named": true
+          },
+          {
+            "type": "null_",
+            "named": true
+          },
+          {
+            "type": "number_",
+            "named": true
+          },
+          {
+            "type": "offset",
+            "named": true
+          },
+          {
+            "type": "primary",
+            "named": true
+          },
+          {
+            "type": "size",
+            "named": true
+          },
+          {
+            "type": "string_",
+            "named": true
+          },
+          {
+            "type": "struct_literal",
+            "named": true
+          },
+          {
+            "type": "syscall",
+            "named": true
+          },
+          {
+            "type": "typeof",
+            "named": true
+          },
+          {
+            "type": "unary_prefix",
+            "named": true
+          },
+          {
+            "type": "wrap",
             "named": true
           }
         ]
@@ -68,11 +284,79 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
           "named": true
         },
         {
           "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]
@@ -87,7 +371,79 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]
@@ -102,7 +458,59 @@
       "required": false,
       "types": [
         {
-          "type": "statement",
+          "type": "assignment",
+          "named": true
+        },
+        {
+          "type": "break_",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
+          "type": "case_",
+          "named": true
+        },
+        {
+          "type": "const_variable",
+          "named": true
+        },
+        {
+          "type": "continue_",
+          "named": true
+        },
+        {
+          "type": "defer",
+          "named": true
+        },
+        {
+          "type": "for_",
+          "named": true
+        },
+        {
+          "type": "if_",
+          "named": true
+        },
+        {
+          "type": "panic",
+          "named": true
+        },
+        {
+          "type": "return_",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "type_alias",
+          "named": true
+        },
+        {
+          "type": "variable",
           "named": true
         }
       ]
@@ -141,11 +549,83 @@
             "named": false
           },
           {
-            "type": "expression",
+            "type": "align",
+            "named": true
+          },
+          {
+            "type": "array_literal",
+            "named": true
+          },
+          {
+            "type": "binary",
+            "named": true
+          },
+          {
+            "type": "bool_",
+            "named": true
+          },
+          {
+            "type": "cast",
+            "named": true
+          },
+          {
+            "type": "char_",
+            "named": true
+          },
+          {
+            "type": "len",
+            "named": true
+          },
+          {
+            "type": "load",
+            "named": true
+          },
+          {
+            "type": "null_",
+            "named": true
+          },
+          {
+            "type": "number_",
+            "named": true
+          },
+          {
+            "type": "offset",
+            "named": true
+          },
+          {
+            "type": "primary",
+            "named": true
+          },
+          {
+            "type": "size",
+            "named": true
+          },
+          {
+            "type": "string_",
+            "named": true
+          },
+          {
+            "type": "struct_literal",
+            "named": true
+          },
+          {
+            "type": "syscall",
             "named": true
           },
           {
             "type": "type_argument",
+            "named": true
+          },
+          {
+            "type": "typeof",
+            "named": true
+          },
+          {
+            "type": "unary_prefix",
+            "named": true
+          },
+          {
+            "type": "wrap",
             "named": true
           }
         ]
@@ -171,11 +651,83 @@
       "required": true,
       "types": [
         {
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
           "type": "case_arm",
           "named": true
         },
         {
-          "type": "expression",
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]
@@ -217,11 +769,83 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "primary",
           "named": true
         },
         {
           "type": "range",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]
@@ -236,11 +860,83 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
           "named": true
         },
         {
           "type": "type",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]
@@ -440,30 +1136,11 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "type_qualifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "expression",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
           "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
           "named": true
         },
         {
@@ -471,7 +1148,19 @@
           "named": true
         },
         {
+          "type": "bool_",
+          "named": true
+        },
+        {
           "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "identifier",
           "named": true
         },
         {
@@ -479,11 +1168,15 @@
           "named": true
         },
         {
-          "type": "literal",
+          "type": "load",
           "named": true
         },
         {
-          "type": "load",
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
           "named": true
         },
         {
@@ -499,7 +1192,19 @@
           "named": true
         },
         {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
           "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "type_qualifier",
           "named": true
         },
         {
@@ -739,11 +1444,55 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
           "named": true
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "primary",
           "named": true
         },
         {
@@ -752,6 +1501,34 @@
         },
         {
           "type": "reverse",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]
@@ -766,7 +1543,79 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]
@@ -781,7 +1630,31 @@
       "required": true,
       "types": [
         {
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
           "type": "block",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
           "named": true
         },
         {
@@ -789,7 +1662,55 @@
           "named": true
         },
         {
-          "type": "expression",
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]
@@ -830,11 +1751,79 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
           "named": true
         },
         {
           "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]
@@ -849,7 +1838,79 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]
@@ -869,45 +1930,6 @@
           }
         ]
       }
-    }
-  },
-  {
-    "type": "literal",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "array_literal",
-          "named": true
-        },
-        {
-          "type": "bool_",
-          "named": true
-        },
-        {
-          "type": "char_",
-          "named": true
-        },
-        {
-          "type": "null_",
-          "named": true
-        },
-        {
-          "type": "number_",
-          "named": true
-        },
-        {
-          "type": "string_",
-          "named": true
-        },
-        {
-          "type": "struct_literal",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -958,7 +1980,79 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]
@@ -1027,7 +2121,79 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]
@@ -1042,7 +2208,79 @@
       "required": false,
       "types": [
         {
-          "type": "expression",
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]
@@ -1057,11 +2295,83 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "primary",
           "named": true
         },
         {
           "type": "range",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]
@@ -1076,11 +2386,83 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
           "named": true
         },
         {
           "type": "type",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]
@@ -1111,73 +2493,6 @@
     }
   },
   {
-    "type": "statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "assignment",
-          "named": true
-        },
-        {
-          "type": "break_",
-          "named": true
-        },
-        {
-          "type": "call",
-          "named": true
-        },
-        {
-          "type": "case_",
-          "named": true
-        },
-        {
-          "type": "const_variable",
-          "named": true
-        },
-        {
-          "type": "continue_",
-          "named": true
-        },
-        {
-          "type": "defer",
-          "named": true
-        },
-        {
-          "type": "for_",
-          "named": true
-        },
-        {
-          "type": "if_",
-          "named": true
-        },
-        {
-          "type": "panic",
-          "named": true
-        },
-        {
-          "type": "return_",
-          "named": true
-        },
-        {
-          "type": "syscall",
-          "named": true
-        },
-        {
-          "type": "type_alias",
-          "named": true
-        },
-        {
-          "type": "variable",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "static_assert",
     "named": true,
     "fields": {},
@@ -1186,11 +2501,79 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
           "named": true
         },
         {
           "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]
@@ -1258,11 +2641,83 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
           "named": true
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]
@@ -1277,7 +2732,27 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
           "named": true
         },
         {
@@ -1285,7 +2760,59 @@
           "named": true
         },
         {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
           "type": "type_qualifier",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]
@@ -1300,7 +2827,79 @@
       "required": false,
       "types": [
         {
-          "type": "expression",
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]
@@ -1460,11 +3059,83 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
           "named": true
         },
         {
           "type": "type",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]
@@ -1479,7 +3150,79 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]
@@ -1494,7 +3237,79 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]
@@ -1524,11 +3339,71 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
           "named": true
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
           "named": true
         },
         {
@@ -1537,6 +3412,18 @@
         },
         {
           "type": "type_qualifier",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]
@@ -1587,7 +3474,79 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        },
+        {
+          "type": "wrap",
           "named": true
         }
       ]

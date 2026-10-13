@@ -3603,9 +3603,15 @@
   ],
   "conflicts": [
     [
-      "import"
+      "defer",
+      "primary"
     ],
     [
+      "block",
+      "primary"
+    ],
+    [
+      "field_type",
       "primary",
       "struct_literal"
     ],
@@ -3614,33 +3620,15 @@
       "primary"
     ],
     [
-      "field_type",
       "primary",
       "struct_literal"
+    ],
+    [
+      "import"
     ],
     [
       "array_type",
       "array_literal"
-    ],
-    [
-      "array_type",
-      "literal"
-    ],
-    [
-      "statement",
-      "primary"
-    ],
-    [
-      "statement",
-      "expression"
-    ],
-    [
-      "defer",
-      "primary"
-    ],
-    [
-      "defer",
-      "expression"
     ]
   ],
   "precedences": [],
@@ -3650,7 +3638,11 @@
       "name": "_trailing_float"
     }
   ],
-  "inline": [],
+  "inline": [
+    "expression",
+    "literal",
+    "statement"
+  ],
   "supertypes": [],
   "reserved": {}
 }

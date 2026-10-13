@@ -23,17 +23,18 @@ module.exports = grammar({
   extras: ($) => [/\s/, $.comment],
   externals: ($) => [$._trailing_float],
   word: ($) => $.identifier,
+  // Pure choices would appear in every tree only as wrapper nodes. Inlining
+  // them removes about a third of all nodes without changing what parses.
+  // primary stays: it marks identifiers used as values.
+  inline: ($) => [$.expression, $.literal, $.statement],
   conflicts: ($) => [
-    [$.import],
-    [$.primary, $.struct_literal],
-    [$.field_type, $.primary],
-    [$.field_type, $.primary, $.struct_literal],
-    [$.array_type, $.array_literal],
-    [$.array_type, $.literal],
-    [$.statement, $.primary],
-    [$.statement, $.expression],
     [$.defer, $.primary],
-    [$.defer, $.expression],
+    [$.block, $.primary],
+    [$.field_type, $.primary, $.struct_literal],
+    [$.field_type, $.primary],
+    [$.primary, $.struct_literal],
+    [$.import],
+    [$.array_type, $.array_literal],
   ],
   rules: {
     source_file: ($) => repeat(choice($.target_directive, $.link_directive, $.declaration)),

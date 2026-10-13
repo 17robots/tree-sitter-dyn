@@ -42,28 +42,23 @@ fn main() {
             (field_type
               (identifier)))))
       (block
-        (statement
-          (return_
-            (expression
-              (cast
+        (return_
+          (cast
+            (type
+              (pointer_type
                 (type
-                  (pointer_type
-                    (type
-                      (field_type
-                        (identifier)))))
-                (expression
-                  (primary
-                    (call
-                      (primary
-                        (identifier))
-                      call_args: (expression
-                        (primary
-                          (identifier)))
-                      call_args: (expression
-                        (size
-                          (type
-                            (field_type
-                              (identifier)))))))))))))))
+                  (field_type
+                    (identifier)))))
+            (primary
+              (call
+                (primary
+                  (identifier))
+                call_args: (primary
+                  (identifier))
+                call_args: (size
+                  (type
+                    (field_type
+                      (identifier)))))))))))
   (declaration
     (fn
       name: (identifier)
@@ -77,11 +72,9 @@ fn main() {
         (field_type
           (identifier)))
       (block
-        (statement
-          (return_
-            (expression
-              (primary
-                (identifier))))))))
+        (return_
+          (primary
+            (identifier))))))
   (declaration
     (fn
       name: (identifier)
@@ -105,69 +98,52 @@ fn main() {
     (fn
       name: (identifier)
       (block
-        (statement
-          (variable
-            (identifier)
-            (expression
+        (variable
+          (identifier)
+          (primary
+            (call
               (primary
-                (call
-                  (primary
-                    (identifier))
-                  call_args: (expression
-                    (primary
-                      (identifier)))
-                  call_args: (expression
-                    (unary_prefix
-                      (expression
-                        (primary
-                          (identifier))))))))))
-        (statement
-          (variable
-            (identifier)
-            (expression
+                (identifier))
+              call_args: (primary
+                (identifier))
+              call_args: (unary_prefix
+                (primary
+                  (identifier))))))
+        (variable
+          (identifier)
+          (primary
+            (call
               (primary
-                (call
-                  (primary
-                    (identifier))
-                  call_args: (type_argument
-                    (primitive))
-                  call_args: (expression
-                    (unary_prefix
-                      (expression
-                        (primary
-                          (identifier))))))))))
-        (statement
-          (variable
-            (identifier)
-            (expression
+                (identifier))
+              call_args: (type_argument
+                (primitive))
+              call_args: (unary_prefix
+                (primary
+                  (identifier))))))
+        (variable
+          (identifier)
+          (primary
+            (call
               (primary
-                (call
-                  (primary
-                    (identifier))
-                  call_args: (type_argument
-                    (pointer_type
-                      (type
-                        (field_type
-                          (identifier)))))
-                  call_args: (expression
-                    (unary_prefix
-                      (expression
-                        (primary
-                          (identifier))))))))))
-        (statement
-          (variable
-            (identifier)
-            (expression
+                (identifier))
+              call_args: (type_argument
+                (pointer_type
+                  (type
+                    (field_type
+                      (identifier)))))
+              call_args: (unary_prefix
+                (primary
+                  (identifier))))))
+        (variable
+          (identifier)
+          (primary
+            (call
               (primary
-                (call
-                  (primary
-                    (identifier))
-                  call_args: (type_argument
-                    (array_type
-                      (type
-                        (primitive))))
-                  call_args: (expression
-                    (unary_prefix
-                      (expression
-                        (primary
-                          (identifier))))))))))))))
+                (identifier))
+              call_args: (type_argument
+                (array_type
+                  (type
+                    (primitive))))
+              call_args: (unary_prefix
+                (primary
+                  (identifier))))))))))
