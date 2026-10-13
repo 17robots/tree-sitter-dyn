@@ -64,8 +64,8 @@
 ; string
 (string_) @string
 (escape_sequence) @string.escape
-(use (string_) @string)
-(use alias: (identifier) @namespace)
+(import (string_) @string)
+(import alias: (identifier) @namespace)
 
 ; type
 (enum (identifier) @type)
