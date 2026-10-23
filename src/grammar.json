@@ -257,8 +257,22 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "identifier"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "identifier"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_contextual_keyword"
+              },
+              "named": true,
+              "value": "identifier"
+            }
+          ]
         },
         {
           "type": "CHOICE",
@@ -1426,32 +1440,36 @@
       ]
     },
     "type_pattern": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "STRING",
-            "value": "is"
-          }
-        },
-        {
-          "type": "SYMBOL",
-          "name": "type"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "identifier"
-            },
-            {
-              "type": "BLANK"
+      "type": "PREC",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "TOKEN",
+            "content": {
+              "type": "STRING",
+              "value": "is"
             }
-          ]
-        }
-      ]
+          },
+          {
+            "type": "SYMBOL",
+            "name": "type"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "identifier"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
     },
     "for_": {
       "type": "SEQ",
@@ -1883,6 +1901,10 @@
           },
           {
             "type": "SYMBOL",
+            "name": "fn_type"
+          },
+          {
+            "type": "SYMBOL",
             "name": "pointer_type"
           },
           {
@@ -1984,34 +2006,20 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "fn_type"
+              "type": "TOKEN",
+              "content": {
+                "type": "STRING",
+                "value": "const"
+              }
             },
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "TOKEN",
-                      "content": {
-                        "type": "STRING",
-                        "value": "const"
-                      }
-                    },
-                    {
-                      "type": "BLANK"
-                    }
-                  ]
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "type"
-                }
-              ]
+              "type": "BLANK"
             }
           ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "type"
         }
       ]
     },
@@ -2092,13 +2100,13 @@
           {
             "type": "TOKEN",
             "content": {
-              "type": "STRING",
-              "value": "fn"
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "STRING",
+                "value": "fn("
+              }
             }
-          },
-          {
-            "type": "STRING",
-            "value": "("
           },
           {
             "type": "CHOICE",
@@ -2108,7 +2116,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "type"
+                    "name": "fn_type_parameter"
                   },
                   {
                     "type": "REPEAT",
@@ -2121,7 +2129,7 @@
                         },
                         {
                           "type": "SYMBOL",
-                          "name": "type"
+                          "name": "fn_type_parameter"
                         }
                       ]
                     }
@@ -2164,6 +2172,40 @@
         ]
       }
     },
+    "fn_type_parameter": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "FIELD",
+                  "name": "name",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "identifier"
+                  }
+                },
+                {
+                  "type": "STRING",
+                  "value": ":"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "type"
+        }
+      ]
+    },
     "expression": {
       "type": "CHOICE",
       "members": [
@@ -2186,10 +2228,6 @@
         {
           "type": "SYMBOL",
           "name": "size"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "cast"
         },
         {
           "type": "SYMBOL",
@@ -2226,7 +2264,20 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "cast"
+        },
+        {
+          "type": "SYMBOL",
           "name": "identifier"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_contextual_keyword"
+          },
+          "named": true,
+          "value": "identifier"
         },
         {
           "type": "SYMBOL",
@@ -3145,48 +3196,48 @@
       ]
     },
     "cast": {
-      "type": "PREC",
-      "value": 12,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "TOKEN",
-                "content": {
-                  "type": "STRING",
-                  "value": "#cast"
-                }
-              },
-              {
-                "type": "TOKEN",
-                "content": {
-                  "type": "STRING",
-                  "value": "#bitcast"
-                }
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "TOKEN",
+              "content": {
+                "type": "STRING",
+                "value": "#cast"
               }
-            ]
-          },
-          {
-            "type": "STRING",
-            "value": "("
-          },
-          {
-            "type": "SYMBOL",
-            "name": "type"
-          },
-          {
-            "type": "STRING",
-            "value": ")"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "expression"
-          }
-        ]
-      }
+            },
+            {
+              "type": "TOKEN",
+              "content": {
+                "type": "STRING",
+                "value": "#bitcast"
+              }
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "SYMBOL",
+          "name": "type"
+        },
+        {
+          "type": "STRING",
+          "value": ","
+        },
+        {
+          "type": "SYMBOL",
+          "name": "expression"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
     },
     "literal": {
       "type": "CHOICE",
@@ -3535,6 +3586,32 @@
           }
         ]
       }
+    },
+    "_contextual_keyword": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "distinct"
+          }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "packed"
+          }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "is"
+          }
+        }
+      ]
     },
     "identifier": {
       "type": "PATTERN",

@@ -1,0 +1,68 @@
+==================
+Function types
+==================
+extern fn register(callback: fn(i32) i32)
+fn pick() fn(i32) i32 {
+  return &identity
+}
+struct Hooks { on_hit: fn(target: *Entity, damage: i32) bool, slot: *fn() }
+
+---
+
+(source_file
+  (declaration
+    (extern_fn
+      (identifier)
+      (fn_param
+        (identifier)
+        (type_qualifier
+          (type
+            (fn_type
+              (fn_type_parameter
+                (type
+                  (primitive)))
+              (type
+                (primitive))))))))
+  (declaration
+    (fn
+      (identifier)
+      (type
+        (fn_type
+          (fn_type_parameter
+            (type
+              (primitive)))
+          (type
+            (primitive))))
+      (block
+        (return_
+          (unary_prefix
+            (primary
+              (identifier)))))))
+  (declaration
+    (struct
+      (identifier)
+      (struct_member
+        (identifier)
+        (type_qualifier
+          (type
+            (fn_type
+              (fn_type_parameter
+                (identifier)
+                (type
+                  (pointer_type
+                    (type
+                      (field_type
+                        (identifier))))))
+              (fn_type_parameter
+                (identifier)
+                (type
+                  (primitive)))
+              (type
+                (primitive))))))
+      (struct_member
+        (identifier)
+        (type_qualifier
+          (type
+            (pointer_type
+              (type
+                (fn_type)))))))))

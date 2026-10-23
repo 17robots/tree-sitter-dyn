@@ -24,10 +24,6 @@
           "named": true
         },
         {
-          "type": "cast",
-          "named": true
-        },
-        {
           "type": "char_",
           "named": true
         },
@@ -115,10 +111,6 @@
           "named": true
         },
         {
-          "type": "cast",
-          "named": true
-        },
-        {
           "type": "char_",
           "named": true
         },
@@ -199,10 +191,6 @@
           },
           {
             "type": "bool_",
-            "named": true
-          },
-          {
-            "type": "cast",
             "named": true
           },
           {
@@ -300,10 +288,6 @@
           "named": true
         },
         {
-          "type": "cast",
-          "named": true
-        },
-        {
           "type": "char_",
           "named": true
         },
@@ -384,10 +368,6 @@
         },
         {
           "type": "bool_",
-          "named": true
-        },
-        {
-          "type": "cast",
           "named": true
         },
         {
@@ -565,10 +545,6 @@
             "named": true
           },
           {
-            "type": "cast",
-            "named": true
-          },
-          {
             "type": "char_",
             "named": true
           },
@@ -668,10 +644,6 @@
         },
         {
           "type": "case_arm",
-          "named": true
-        },
-        {
-          "type": "cast",
           "named": true
         },
         {
@@ -785,10 +757,6 @@
           "named": true
         },
         {
-          "type": "cast",
-          "named": true
-        },
-        {
           "type": "char_",
           "named": true
         },
@@ -873,10 +841,6 @@
         },
         {
           "type": "bool_",
-          "named": true
-        },
-        {
-          "type": "cast",
           "named": true
         },
         {
@@ -1152,10 +1116,6 @@
           "named": true
         },
         {
-          "type": "cast",
-          "named": true
-        },
-        {
           "type": "char_",
           "named": true
         },
@@ -1406,6 +1366,36 @@
       "required": false,
       "types": [
         {
+          "type": "fn_type_parameter",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fn_type_parameter",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
           "type": "type",
           "named": true
         }
@@ -1457,10 +1447,6 @@
         },
         {
           "type": "bool_",
-          "named": true
-        },
-        {
-          "type": "cast",
           "named": true
         },
         {
@@ -1559,10 +1545,6 @@
           "named": true
         },
         {
-          "type": "cast",
-          "named": true
-        },
-        {
           "type": "char_",
           "named": true
         },
@@ -1622,6 +1604,11 @@
     }
   },
   {
+    "type": "identifier",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "if_",
     "named": true,
     "fields": {},
@@ -1647,10 +1634,6 @@
         },
         {
           "type": "bool_",
-          "named": true
-        },
-        {
-          "type": "cast",
           "named": true
         },
         {
@@ -1767,10 +1750,6 @@
           "named": true
         },
         {
-          "type": "cast",
-          "named": true
-        },
-        {
           "type": "char_",
           "named": true
         },
@@ -1851,10 +1830,6 @@
         },
         {
           "type": "bool_",
-          "named": true
-        },
-        {
-          "type": "cast",
           "named": true
         },
         {
@@ -1996,10 +1971,6 @@
           "named": true
         },
         {
-          "type": "cast",
-          "named": true
-        },
-        {
           "type": "char_",
           "named": true
         },
@@ -2067,10 +2038,6 @@
       "required": true,
       "types": [
         {
-          "type": "fn_type",
-          "named": true
-        },
-        {
           "type": "type",
           "named": true
         }
@@ -2087,6 +2054,10 @@
       "types": [
         {
           "type": "call",
+          "named": true
+        },
+        {
+          "type": "cast",
           "named": true
         },
         {
@@ -2134,10 +2105,6 @@
         },
         {
           "type": "bool_",
-          "named": true
-        },
-        {
-          "type": "cast",
           "named": true
         },
         {
@@ -2224,10 +2191,6 @@
           "named": true
         },
         {
-          "type": "cast",
-          "named": true
-        },
-        {
           "type": "char_",
           "named": true
         },
@@ -2308,10 +2271,6 @@
         },
         {
           "type": "bool_",
-          "named": true
-        },
-        {
-          "type": "cast",
           "named": true
         },
         {
@@ -2399,10 +2358,6 @@
         },
         {
           "type": "bool_",
-          "named": true
-        },
-        {
-          "type": "cast",
           "named": true
         },
         {
@@ -2514,10 +2469,6 @@
         },
         {
           "type": "bool_",
-          "named": true
-        },
-        {
-          "type": "cast",
           "named": true
         },
         {
@@ -2657,10 +2608,6 @@
           "named": true
         },
         {
-          "type": "cast",
-          "named": true
-        },
-        {
           "type": "char_",
           "named": true
         },
@@ -2745,10 +2692,6 @@
         },
         {
           "type": "bool_",
-          "named": true
-        },
-        {
-          "type": "cast",
           "named": true
         },
         {
@@ -2840,10 +2783,6 @@
         },
         {
           "type": "bool_",
-          "named": true
-        },
-        {
-          "type": "cast",
           "named": true
         },
         {
@@ -2953,6 +2892,10 @@
         },
         {
           "type": "field_type",
+          "named": true
+        },
+        {
+          "type": "fn_type",
           "named": true
         },
         {
@@ -3075,10 +3018,6 @@
           "named": true
         },
         {
-          "type": "cast",
-          "named": true
-        },
-        {
           "type": "char_",
           "named": true
         },
@@ -3166,10 +3105,6 @@
           "named": true
         },
         {
-          "type": "cast",
-          "named": true
-        },
-        {
           "type": "char_",
           "named": true
         },
@@ -3250,10 +3185,6 @@
         },
         {
           "type": "bool_",
-          "named": true
-        },
-        {
-          "type": "cast",
           "named": true
         },
         {
@@ -3352,10 +3283,6 @@
         },
         {
           "type": "bool_",
-          "named": true
-        },
-        {
-          "type": "cast",
           "named": true
         },
         {
@@ -3487,10 +3414,6 @@
         },
         {
           "type": "bool_",
-          "named": true
-        },
-        {
-          "type": "cast",
           "named": true
         },
         {
@@ -3834,12 +3757,12 @@
     "named": false
   },
   {
-    "type": "for",
+    "type": "fn(",
     "named": false
   },
   {
-    "type": "identifier",
-    "named": true
+    "type": "for",
+    "named": false
   },
   {
     "type": "if",
