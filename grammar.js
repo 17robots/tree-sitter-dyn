@@ -181,7 +181,7 @@ module.exports = grammar({
     if_: ($) => seq(token("if"), $.expression, $.block, optional($.else_)),
     else_: ($) => seq(token("else"), choice($.if_, $.block)),
     case_: ($) =>
-      seq(token("case"), $.expression, "{", commaSep($.case_arm), "}"),
+      seq(token("case"), $.expression, "{", repeat($.case_arm), "}"),
     case_arm: ($) =>
       choice(
         seq($.type_pattern, "=>", $.block),

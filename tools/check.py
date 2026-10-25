@@ -26,6 +26,12 @@ if not args.provenance_only:
             result = subprocess.run([ts, 'parse', str(source)], cwd=grammar,
                                     capture_output=True, text=True)
             assert result.returncode != 0 and ('ERROR' in result.stdout or 'MISSING' in result.stdout), (expression, result.stdout, result.stderr)
+    with tempfile.TemporaryDirectory(prefix='dyn-case-grammar-') as directory:
+        source = Path(directory) / 'main.dyn'
+        source.write_text('fn main() { case 1 { 1 => {}, _ => {} } }\n')
+        result = subprocess.run([ts, 'parse', str(source)], cwd=grammar,
+                                capture_output=True, text=True)
+        assert result.returncode != 0 and ('ERROR' in result.stdout or 'MISSING' in result.stdout), result.stdout
     with tempfile.TemporaryDirectory(prefix='dyn-grammar-') as directory:
         output = Path(directory)
         for name in ('grammar.js', 'tree-sitter.json'):
