@@ -68,7 +68,7 @@ module.exports = grammar({
       seq(field("path", $.string_), optional(field("alias", $.identifier))),
     variable: ($) =>
       seq(
-        $.identifier,
+        choice($.identifier, alias($._contextual_keyword, $.identifier)),
         choice(
           $.type_qualifier,
           seq(":", $.type, "=", $.expression),
@@ -189,7 +189,7 @@ module.exports = grammar({
             optional($.identifier), "=>", $.block),
       ),
     case_pattern: ($) => choice($.range, $.expression),
-    type_pattern: ($) => seq(token("is"), $.type, optional($.identifier)),
+    type_pattern: ($) => prec(1, seq(token("is"), $.type, optional($.identifier))),
     for_: ($) =>
       seq(
         optional(seq($.identifier, ":")),
@@ -256,6 +256,7 @@ module.exports = grammar({
         choice(
           $.field_type,
           $.array_type,
+          $.fn_type,
           $.pointer_type,
           $.primitive,
           $.type_parameter,
@@ -266,7 +267,7 @@ module.exports = grammar({
     array_type: ($) =>
       seq("[", optional(field("length", $.expression)), "]", optional(token("const")), $.type),
     pointer_type: ($) =>
-      seq("*", choice($.fn_type, seq(optional(token("const")), $.type))),
+      seq("*", optional(token("const")), $.type),
     primitive: (_) =>
       token(
         choice(
@@ -289,8 +290,11 @@ module.exports = grammar({
       ),
     fn_type: ($) =>
       prec.right(
-        seq(token("fn"), "(", commaSep($.type), ")", optional($.type)),
+        seq(token(prec(1, "fn(")), commaSep($.fn_type_parameter), ")", optional($.type)),
       ),
+    // Parameter names in a function type are documentation only.
+    fn_type_parameter: ($) =>
+      seq(optional(seq(field("name", $.identifier), ":")), $.type),
     expression: ($) =>
       choice(
         $.literal,
@@ -298,7 +302,6 @@ module.exports = grammar({
         $.unary_prefix,
         $.binary,
         $.size,
-        $.cast,
         $.len,
         $.align,
         $.offset,
@@ -309,7 +312,11 @@ module.exports = grammar({
       ),
     primary: ($) =>
       choice(
+        $.cast,
         $.identifier,
+        // distinct, packed and is are keywords only where they start their
+        // construct; elsewhere they are ordinary names.
+        alias($._contextual_keyword, $.identifier),
         $.unary_postfix,
         $.group,
         $.call,
@@ -381,13 +388,14 @@ module.exports = grammar({
     reverse: ($) =>
       seq(token("#reverse"), "(", choice($.range, $.expression), ")"),
     cast: ($) =>
-      prec(PREC.PREFIX, seq(
+      seq(
         choice(token("#cast"), token("#bitcast")),
         "(",
         $.type,
-        ")",
+        ",",
         $.expression,
-      )),
+        ")",
+      ),
     literal: ($) =>
       choice(
         $.bool_,
@@ -438,6 +446,7 @@ module.exports = grammar({
           choice(/[nrt0\\"']/, /x[0-9A-Fa-f]{2}/, /u\{[0-9A-Fa-f]{1,6}\}/),
         ),
       ),
+    _contextual_keyword: (_) => choice(token("distinct"), token("packed"), token("is")),
     identifier: (_) => /[A-Za-z_][A-Za-z0-9_]*/,
     comment: (_) =>
       token(

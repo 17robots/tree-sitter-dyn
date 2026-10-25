@@ -18,6 +18,14 @@ ts = os.environ.get('TS', 'tree-sitter')
 subprocess.run(['python3', str(grammar/'tools/check-generator.py'), ts], check=True)
 if not args.provenance_only:
     subprocess.run([ts, 'test'], cwd=grammar, check=True)
+    with tempfile.TemporaryDirectory(prefix='dyn-cast-grammar-') as directory:
+        source = Path(directory) / 'main.dyn'
+        for expression in ('#cast(i32) 1', '#bitcast(u32) 1.0',
+                           '#cast(i32,)', '#cast(i32, 1, 2)'):
+            source.write_text(f'fn main() {{ value := {expression} }}\n')
+            result = subprocess.run([ts, 'parse', str(source)], cwd=grammar,
+                                    capture_output=True, text=True)
+            assert result.returncode != 0 and ('ERROR' in result.stdout or 'MISSING' in result.stdout), (expression, result.stdout, result.stderr)
     with tempfile.TemporaryDirectory(prefix='dyn-grammar-') as directory:
         output = Path(directory)
         for name in ('grammar.js', 'tree-sitter.json'):

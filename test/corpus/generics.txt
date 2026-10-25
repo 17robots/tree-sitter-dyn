@@ -2,7 +2,7 @@
 Type parameters and type arguments
 ==================
 fn push($T: type, arena: *Arena) *T {
-  return #cast(*T) raw(arena, #sizeof(T))
+  return #cast(*T, raw(arena, #sizeof(T)))
 }
 fn min(a, b: $T) T {
   return a
@@ -43,22 +43,23 @@ fn main() {
               (identifier)))))
       (block
         (return_
-          (cast
-            (type
-              (pointer_type
-                (type
-                  (field_type
-                    (identifier)))))
-            (primary
-              (call
-                (primary
-                  (identifier))
-                call_args: (primary
-                  (identifier))
-                call_args: (size
+          (primary
+            (cast
+              (type
+                (pointer_type
                   (type
                     (field_type
-                      (identifier)))))))))))
+                      (identifier)))))
+              (primary
+                (call
+                  (primary
+                    (identifier))
+                  call_args: (primary
+                    (identifier))
+                  call_args: (size
+                    (type
+                      (field_type
+                        (identifier))))))))))))
   (declaration
     (fn
       name: (identifier)

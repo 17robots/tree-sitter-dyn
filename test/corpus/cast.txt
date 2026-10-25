@@ -1,0 +1,87 @@
+==================
+Delimited casts and postfix operations
+==================
+fn main() {
+  value := #cast(i64, a + b) * 2
+  bits := #bitcast(u32, #cast(f32, value))
+  view := #cast(*u8, memory)[..count]
+  field := #cast(*Node, memory).value
+  result := #cast(fn(i32) i32, callback)(7)
+}
+
+---
+
+(source_file
+  (declaration
+    (fn
+      (identifier)
+      (block
+        (variable
+          (identifier)
+          (binary
+            (primary
+              (cast
+                (type
+                  (primitive))
+                (binary
+                  (primary
+                    (identifier))
+                  (primary
+                    (identifier)))))
+            (number_)))
+        (variable
+          (identifier)
+          (primary
+            (cast
+              (type
+                (primitive))
+              (primary
+                (cast
+                  (type
+                    (primitive))
+                  (primary
+                    (identifier)))))))
+        (variable
+          (identifier)
+          (primary
+            (index
+              (primary
+                (cast
+                  (type
+                    (pointer_type
+                      (type
+                        (primitive))))
+                  (primary
+                    (identifier))))
+              (primary
+                (identifier)))))
+        (variable
+          (identifier)
+          (primary
+            (field_access
+              (primary
+                (cast
+                  (type
+                    (pointer_type
+                      (type
+                        (field_type
+                          (identifier)))))
+                  (primary
+                    (identifier))))
+              (identifier))))
+        (variable
+          (identifier)
+          (primary
+            (call
+              (primary
+                (cast
+                  (type
+                    (fn_type
+                      (fn_type_parameter
+                        (type
+                          (primitive)))
+                      (type
+                        (primitive))))
+                  (primary
+                    (identifier))))
+              (number_))))))))

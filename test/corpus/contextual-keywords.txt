@@ -1,0 +1,24 @@
+==================
+Contextual keywords as names
+==================
+fn main() { distinct := 1
+ is: i64 = distinct + packed }
+---
+
+(source_file
+  (declaration
+    (fn
+      name: (identifier)
+      (block
+        (variable
+          (identifier)
+          (number_))
+        (variable
+          (identifier)
+          (type
+            (primitive))
+          (binary
+            (primary
+              (identifier))
+            (primary
+              (identifier))))))))
