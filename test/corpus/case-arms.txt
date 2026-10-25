@@ -1,0 +1,46 @@
+==================
+Comma-free braced arms
+==================
+
+fn choose(x: i64) i64 {
+  case x {
+    0, 1 => { return 10 }
+    2 => { return 20 } _ => { return 30 }
+  }
+}
+
+---
+
+(source_file
+  (declaration
+    (fn
+      (identifier)
+      (fn_param
+        (identifier)
+        (type_qualifier
+          (type
+            (primitive))))
+      (type
+        (primitive))
+      (block
+        (case_
+          (primary
+            (identifier))
+          (case_arm
+            (case_pattern
+              (number_))
+            (case_pattern
+              (number_))
+            (block
+              (return_
+                (number_))))
+          (case_arm
+            (case_pattern
+              (number_))
+            (block
+              (return_
+                (number_))))
+          (case_arm
+            (block
+              (return_
+                (number_)))))))))
