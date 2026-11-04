@@ -1,0 +1,103 @@
+==================
+Keywords are not names
+==================
+fn main() { is := 1 }
+---
+
+(source_file
+  (declaration
+    (fn
+      (identifier)
+      (block
+        (ERROR
+          (number_))))))
+
+==================
+Union, plain enum, and fields without defaults
+==================
+union Bits { f: f32, u: u32 }
+enum Color { Red, Green }
+struct Pair { a: u32, b: u64 }
+---
+
+(source_file
+  (declaration
+    (struct
+      (identifier)
+      (struct_member
+        (identifier)
+        (type_qualifier
+          (type
+            (primitive))))
+      (struct_member
+        (identifier)
+        (type_qualifier
+          (type
+            (primitive))))))
+  (declaration
+    (enum
+      (identifier)
+      (enum_member
+        (identifier))
+      (enum_member
+        (identifier))))
+  (declaration
+    (struct
+      (identifier)
+      (struct_member
+        (identifier)
+        (type_qualifier
+          (type
+            (primitive))))
+      (struct_member
+        (identifier)
+        (type_qualifier
+          (type
+            (primitive)))))))
+
+==================
+Typed range bindings and pointer builtins
+==================
+fn main(p: *u8) {
+  for i: i32 in -3..3 {
+    q := #offset(p, i)
+    s := #slice(p, 4)
+  }
+}
+---
+
+(source_file
+  (declaration
+    (fn
+      (identifier)
+      (fn_param
+        (identifier)
+        (type_qualifier
+          (type
+            (pointer_type
+              (type
+                (primitive))))))
+      (block
+        (for_
+          (for_condition
+            (identifier)
+            (type
+              (primitive))
+            (range
+              (unary_prefix
+                (number_))
+              (number_)))
+          (block
+            (variable
+              (identifier)
+              (pointer_offset
+                (primary
+                  (identifier))
+                (primary
+                  (identifier))))
+            (variable
+              (identifier)
+              (pointer_slice
+                (primary
+                  (identifier))
+                (number_)))))))))

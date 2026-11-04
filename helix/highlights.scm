@@ -19,12 +19,12 @@
 ; function
 (fn name: (identifier) @function)
 (extern_fn name: (identifier) @function)
-[ "#alignof" "#assert" "#bitcast" "#cast" "#len" "#load" "#offsetof" "#panic" "#reverse" "#sizeof" "#syscall" "#typeof" "#wrap" ] @function.builtin
+[ "#alignof" "#assert" "#bitcast" "#cast" "#len" "#load" "#offset" "#offsetof" "#panic" "#reverse" "#sizeof" "#slice" "#syscall" "#typeof" ] @function.builtin
 (call (primary (identifier) @function))
 (call (primary (field_access (identifier) @function)))
 
 ; keyword
-[ "const" "defer" "distinct" "enum" "extern" "fn" "packed" "pub" "struct" "type" "use" ] @keyword
+[ "const" "defer" "distinct" "enum" "extern" "fn" "packed" "pub" "struct" "type" "union" "use" ] @keyword
 
 [ "case" "else" "if" ] @keyword.control.conditional
 "is" @keyword.operator
