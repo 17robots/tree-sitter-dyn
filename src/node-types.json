@@ -48,6 +48,14 @@
           "named": true
         },
         {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
           "named": true
         },
@@ -77,10 +85,6 @@
         },
         {
           "type": "unary_prefix",
-          "named": true
-        },
-        {
-          "type": "wrap",
           "named": true
         }
       ]
@@ -135,6 +139,14 @@
           "named": true
         },
         {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
           "named": true
         },
@@ -160,10 +172,6 @@
         },
         {
           "type": "unary_prefix",
-          "named": true
-        },
-        {
-          "type": "wrap",
           "named": true
         }
       ]
@@ -218,6 +226,14 @@
             "named": true
           },
           {
+            "type": "pointer_offset",
+            "named": true
+          },
+          {
+            "type": "pointer_slice",
+            "named": true
+          },
+          {
             "type": "primary",
             "named": true
           },
@@ -243,10 +259,6 @@
           },
           {
             "type": "unary_prefix",
-            "named": true
-          },
-          {
-            "type": "wrap",
             "named": true
           }
         ]
@@ -312,6 +324,14 @@
           "named": true
         },
         {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
           "named": true
         },
@@ -337,10 +357,6 @@
         },
         {
           "type": "unary_prefix",
-          "named": true
-        },
-        {
-          "type": "wrap",
           "named": true
         }
       ]
@@ -395,6 +411,14 @@
           "named": true
         },
         {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
           "named": true
         },
@@ -420,10 +444,6 @@
         },
         {
           "type": "unary_prefix",
-          "named": true
-        },
-        {
-          "type": "wrap",
           "named": true
         }
       ]
@@ -569,6 +589,14 @@
             "named": true
           },
           {
+            "type": "pointer_offset",
+            "named": true
+          },
+          {
+            "type": "pointer_slice",
+            "named": true
+          },
+          {
             "type": "primary",
             "named": true
           },
@@ -598,10 +626,6 @@
           },
           {
             "type": "unary_prefix",
-            "named": true
-          },
-          {
-            "type": "wrap",
             "named": true
           }
         ]
@@ -671,6 +695,14 @@
           "named": true
         },
         {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
           "named": true
         },
@@ -696,10 +728,6 @@
         },
         {
           "type": "unary_prefix",
-          "named": true
-        },
-        {
-          "type": "wrap",
           "named": true
         }
       ]
@@ -781,6 +809,14 @@
           "named": true
         },
         {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
           "named": true
         },
@@ -810,10 +846,6 @@
         },
         {
           "type": "unary_prefix",
-          "named": true
-        },
-        {
-          "type": "wrap",
           "named": true
         }
       ]
@@ -868,6 +900,14 @@
           "named": true
         },
         {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
           "named": true
         },
@@ -897,10 +937,6 @@
         },
         {
           "type": "unary_prefix",
-          "named": true
-        },
-        {
-          "type": "wrap",
           "named": true
         }
       ]
@@ -1096,87 +1132,11 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
-          "type": "align",
-          "named": true
-        },
-        {
-          "type": "array_literal",
-          "named": true
-        },
-        {
-          "type": "binary",
-          "named": true
-        },
-        {
-          "type": "bool_",
-          "named": true
-        },
-        {
-          "type": "char_",
-          "named": true
-        },
-        {
           "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "len",
-          "named": true
-        },
-        {
-          "type": "load",
-          "named": true
-        },
-        {
-          "type": "null_",
-          "named": true
-        },
-        {
-          "type": "number_",
-          "named": true
-        },
-        {
-          "type": "offset",
-          "named": true
-        },
-        {
-          "type": "primary",
-          "named": true
-        },
-        {
-          "type": "size",
-          "named": true
-        },
-        {
-          "type": "string_",
-          "named": true
-        },
-        {
-          "type": "struct_literal",
-          "named": true
-        },
-        {
-          "type": "syscall",
-          "named": true
-        },
-        {
-          "type": "type_qualifier",
-          "named": true
-        },
-        {
-          "type": "typeof",
-          "named": true
-        },
-        {
-          "type": "unary_prefix",
-          "named": true
-        },
-        {
-          "type": "wrap",
           "named": true
         }
       ]
@@ -1478,6 +1438,14 @@
           "named": true
         },
         {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
           "named": true
         },
@@ -1506,15 +1474,15 @@
           "named": true
         },
         {
+          "type": "type",
+          "named": true
+        },
+        {
           "type": "typeof",
           "named": true
         },
         {
           "type": "unary_prefix",
-          "named": true
-        },
-        {
-          "type": "wrap",
           "named": true
         }
       ]
@@ -1569,6 +1537,14 @@
           "named": true
         },
         {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
           "named": true
         },
@@ -1595,18 +1571,9 @@
         {
           "type": "unary_prefix",
           "named": true
-        },
-        {
-          "type": "wrap",
-          "named": true
         }
       ]
     }
-  },
-  {
-    "type": "identifier",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "if_",
@@ -1665,6 +1632,14 @@
           "named": true
         },
         {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
           "named": true
         },
@@ -1690,10 +1665,6 @@
         },
         {
           "type": "unary_prefix",
-          "named": true
-        },
-        {
-          "type": "wrap",
           "named": true
         }
       ]
@@ -1774,6 +1745,14 @@
           "named": true
         },
         {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
           "named": true
         },
@@ -1799,10 +1778,6 @@
         },
         {
           "type": "unary_prefix",
-          "named": true
-        },
-        {
-          "type": "wrap",
           "named": true
         }
       ]
@@ -1857,6 +1832,14 @@
           "named": true
         },
         {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
           "named": true
         },
@@ -1882,10 +1865,6 @@
         },
         {
           "type": "unary_prefix",
-          "named": true
-        },
-        {
-          "type": "wrap",
           "named": true
         }
       ]
@@ -1995,6 +1974,14 @@
           "named": true
         },
         {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
           "named": true
         },
@@ -2021,9 +2008,179 @@
         {
           "type": "unary_prefix",
           "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pointer_offset",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "align",
+          "named": true
         },
         {
-          "type": "wrap",
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pointer_slice",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
           "named": true
         }
       ]
@@ -2132,6 +2289,14 @@
           "named": true
         },
         {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
           "named": true
         },
@@ -2157,10 +2322,6 @@
         },
         {
           "type": "unary_prefix",
-          "named": true
-        },
-        {
-          "type": "wrap",
           "named": true
         }
       ]
@@ -2215,6 +2376,14 @@
           "named": true
         },
         {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
           "named": true
         },
@@ -2240,10 +2409,6 @@
         },
         {
           "type": "unary_prefix",
-          "named": true
-        },
-        {
-          "type": "wrap",
           "named": true
         }
       ]
@@ -2298,6 +2463,14 @@
           "named": true
         },
         {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
           "named": true
         },
@@ -2327,10 +2500,6 @@
         },
         {
           "type": "unary_prefix",
-          "named": true
-        },
-        {
-          "type": "wrap",
           "named": true
         }
       ]
@@ -2385,6 +2554,14 @@
           "named": true
         },
         {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
           "named": true
         },
@@ -2414,10 +2591,6 @@
         },
         {
           "type": "unary_prefix",
-          "named": true
-        },
-        {
-          "type": "wrap",
           "named": true
         }
       ]
@@ -2496,6 +2669,14 @@
           "named": true
         },
         {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
           "named": true
         },
@@ -2521,10 +2702,6 @@
         },
         {
           "type": "unary_prefix",
-          "named": true
-        },
-        {
-          "type": "wrap",
           "named": true
         }
       ]
@@ -2636,6 +2813,14 @@
           "named": true
         },
         {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
           "named": true
         },
@@ -2661,10 +2846,6 @@
         },
         {
           "type": "unary_prefix",
-          "named": true
-        },
-        {
-          "type": "wrap",
           "named": true
         }
       ]
@@ -2679,83 +2860,11 @@
       "required": true,
       "types": [
         {
-          "type": "align",
-          "named": true
-        },
-        {
-          "type": "array_literal",
-          "named": true
-        },
-        {
-          "type": "binary",
-          "named": true
-        },
-        {
-          "type": "bool_",
-          "named": true
-        },
-        {
-          "type": "char_",
-          "named": true
-        },
-        {
           "type": "identifier",
           "named": true
         },
         {
-          "type": "len",
-          "named": true
-        },
-        {
-          "type": "load",
-          "named": true
-        },
-        {
-          "type": "null_",
-          "named": true
-        },
-        {
-          "type": "number_",
-          "named": true
-        },
-        {
-          "type": "offset",
-          "named": true
-        },
-        {
-          "type": "primary",
-          "named": true
-        },
-        {
-          "type": "size",
-          "named": true
-        },
-        {
-          "type": "string_",
-          "named": true
-        },
-        {
-          "type": "struct_literal",
-          "named": true
-        },
-        {
-          "type": "syscall",
-          "named": true
-        },
-        {
           "type": "type_qualifier",
-          "named": true
-        },
-        {
-          "type": "typeof",
-          "named": true
-        },
-        {
-          "type": "unary_prefix",
-          "named": true
-        },
-        {
-          "type": "wrap",
           "named": true
         }
       ]
@@ -2810,6 +2919,14 @@
           "named": true
         },
         {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
           "named": true
         },
@@ -2835,10 +2952,6 @@
         },
         {
           "type": "unary_prefix",
-          "named": true
-        },
-        {
-          "type": "wrap",
           "named": true
         }
       ]
@@ -3042,6 +3155,14 @@
           "named": true
         },
         {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
           "named": true
         },
@@ -3071,10 +3192,6 @@
         },
         {
           "type": "unary_prefix",
-          "named": true
-        },
-        {
-          "type": "wrap",
           "named": true
         }
       ]
@@ -3129,6 +3246,14 @@
           "named": true
         },
         {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
           "named": true
         },
@@ -3154,10 +3279,6 @@
         },
         {
           "type": "unary_prefix",
-          "named": true
-        },
-        {
-          "type": "wrap",
           "named": true
         }
       ]
@@ -3212,6 +3333,14 @@
           "named": true
         },
         {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
           "named": true
         },
@@ -3237,10 +3366,6 @@
         },
         {
           "type": "unary_prefix",
-          "named": true
-        },
-        {
-          "type": "wrap",
           "named": true
         }
       ]
@@ -3314,6 +3439,14 @@
           "named": true
         },
         {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
           "named": true
         },
@@ -3347,10 +3480,6 @@
         },
         {
           "type": "unary_prefix",
-          "named": true
-        },
-        {
-          "type": "wrap",
           "named": true
         }
       ]
@@ -3387,89 +3516,6 @@
       "types": [
         {
           "type": "variadic",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "wrap",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "align",
-          "named": true
-        },
-        {
-          "type": "array_literal",
-          "named": true
-        },
-        {
-          "type": "binary",
-          "named": true
-        },
-        {
-          "type": "bool_",
-          "named": true
-        },
-        {
-          "type": "char_",
-          "named": true
-        },
-        {
-          "type": "len",
-          "named": true
-        },
-        {
-          "type": "load",
-          "named": true
-        },
-        {
-          "type": "null_",
-          "named": true
-        },
-        {
-          "type": "number_",
-          "named": true
-        },
-        {
-          "type": "offset",
-          "named": true
-        },
-        {
-          "type": "primary",
-          "named": true
-        },
-        {
-          "type": "size",
-          "named": true
-        },
-        {
-          "type": "string_",
-          "named": true
-        },
-        {
-          "type": "struct_literal",
-          "named": true
-        },
-        {
-          "type": "syscall",
-          "named": true
-        },
-        {
-          "type": "typeof",
-          "named": true
-        },
-        {
-          "type": "unary_prefix",
-          "named": true
-        },
-        {
-          "type": "wrap",
           "named": true
         }
       ]
@@ -3516,6 +3562,10 @@
     "named": false
   },
   {
+    "type": "#offset",
+    "named": false
+  },
+  {
     "type": "#offsetof",
     "named": false
   },
@@ -3532,6 +3582,10 @@
     "named": false
   },
   {
+    "type": "#slice",
+    "named": false
+  },
+  {
     "type": "#syscall",
     "named": false
   },
@@ -3541,10 +3595,6 @@
   },
   {
     "type": "#typeof",
-    "named": false
-  },
-  {
-    "type": "#wrap",
     "named": false
   },
   {
@@ -3765,6 +3815,10 @@
     "named": false
   },
   {
+    "type": "identifier",
+    "named": true
+  },
+  {
     "type": "if",
     "named": false
   },
@@ -3811,6 +3865,10 @@
   {
     "type": "type_parameter",
     "named": true
+  },
+  {
+    "type": "union",
+    "named": false
   },
   {
     "type": "use",

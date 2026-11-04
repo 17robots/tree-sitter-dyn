@@ -23,6 +23,9 @@ module.exports = grammar({
   extras: ($) => [/\s/, $.comment],
   externals: ($) => [$._trailing_float],
   word: ($) => $.identifier,
+  reserved: {
+    global: (_) => ["distinct", "packed", "is", "union"],
+  },
   // Pure choices would appear in every tree only as wrapper nodes. Inlining
   // them removes about a third of all nodes without changing what parses.
   // primary stays: it marks identifiers used as values.
@@ -68,7 +71,7 @@ module.exports = grammar({
       seq(field("path", $.string_), optional(field("alias", $.identifier))),
     variable: ($) =>
       seq(
-        choice($.identifier, alias($._contextual_keyword, $.identifier)),
+        $.identifier,
         choice(
           $.type_qualifier,
           seq(":", $.type, "=", $.expression),
@@ -86,8 +89,7 @@ module.exports = grammar({
       ),
     struct: ($) =>
       seq(
-        optional(token("packed")),
-        token("struct"),
+        choice(seq(optional(token("packed")), token("struct")), token("union")),
         $.identifier,
         "{",
         commaSep($.struct_member),
@@ -98,7 +100,6 @@ module.exports = grammar({
         $.identifier,
         repeat(seq(",", $.identifier)),
         $.type_qualifier,
-        optional(seq("=", $.expression)),
       ),
     enum: ($) =>
       seq(
@@ -109,12 +110,7 @@ module.exports = grammar({
         commaSep($.enum_member),
         "}",
       ),
-    enum_member: ($) =>
-      seq(
-        $.identifier,
-        optional($.type_qualifier),
-        optional(seq("=", $.expression)),
-      ),
+    enum_member: ($) => $.identifier,
     fn: ($) =>
       seq(
         token("fn"),
@@ -202,6 +198,7 @@ module.exports = grammar({
         seq(
           choice(
             $.identifier,
+            seq($.identifier, ":", $.type),
             seq("*", $.identifier),
             seq("*", "const", $.identifier),
           ),
@@ -305,7 +302,8 @@ module.exports = grammar({
         $.len,
         $.align,
         $.offset,
-        $.wrap,
+        $.pointer_slice,
+        $.pointer_offset,
         $.load,
         $.typeof,
         $.syscall,
@@ -314,9 +312,6 @@ module.exports = grammar({
       choice(
         $.cast,
         $.identifier,
-        // distinct, packed and is are keywords only where they start their
-        // construct; elsewhere they are ordinary names.
-        alias($._contextual_keyword, $.identifier),
         $.unary_postfix,
         $.group,
         $.call,
@@ -379,7 +374,10 @@ module.exports = grammar({
     align: ($) =>
       seq(token("#alignof"), "(", choice($.type, $.expression), ")"),
     load: ($) => seq(token("#load"), "(", $.string_, ")"),
-    wrap: ($) => seq(token("#wrap"), "(", $.expression, ")"),
+    pointer_slice: ($) =>
+      seq(token("#slice"), "(", $.expression, ",", $.expression, ")"),
+    pointer_offset: ($) =>
+      seq(token("#offset"), "(", $.expression, ",", $.expression, ")"),
     offset: ($) =>
       seq(token("#offsetof"), "(", $.type, ",", $.identifier, ")"),
     typeof: ($) =>
@@ -446,7 +444,6 @@ module.exports = grammar({
           choice(/[nrt0\\"']/, /x[0-9A-Fa-f]{2}/, /u\{[0-9A-Fa-f]{1,6}\}/),
         ),
       ),
-    _contextual_keyword: (_) => choice(token("distinct"), token("packed"), token("is")),
     identifier: (_) => /[A-Za-z_][A-Za-z0-9_]*/,
     comment: (_) =>
       token(
