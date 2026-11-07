@@ -108,6 +108,7 @@ module.exports = grammar({
         token("enum"),
         optional(seq("(", choice($.primitive, $.field_type), ")")),
         $.identifier,
+        optional(seq("(", commaSep($.struct_type_parameter), ")")),
         "{",
         commaSep($.enum_member),
         "}",

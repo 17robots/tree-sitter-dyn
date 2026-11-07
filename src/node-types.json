@@ -1123,6 +1123,10 @@
         {
           "type": "primitive",
           "named": true
+        },
+        {
+          "type": "struct_type_parameter",
+          "named": true
         }
       ]
     }
