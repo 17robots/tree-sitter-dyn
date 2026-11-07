@@ -91,10 +91,12 @@ module.exports = grammar({
       seq(
         choice(seq(optional(token("packed")), token("struct")), token("union")),
         $.identifier,
+        optional(seq("(", commaSep($.struct_type_parameter), ")")),
         "{",
         commaSep($.struct_member),
         "}",
       ),
+    struct_type_parameter: ($) => seq($.type_parameter, $.type_qualifier),
     struct_member: ($) =>
       seq(
         $.identifier,
@@ -110,7 +112,7 @@ module.exports = grammar({
         commaSep($.enum_member),
         "}",
       ),
-    enum_member: ($) => $.identifier,
+    enum_member: ($) => seq($.identifier, optional($.type_qualifier)),
     fn: ($) =>
       seq(
         token("fn"),
@@ -251,6 +253,7 @@ module.exports = grammar({
     type: ($) =>
       prec.right(
         choice(
+          $.generic_type,
           $.field_type,
           $.array_type,
           $.fn_type,
@@ -259,6 +262,8 @@ module.exports = grammar({
           $.type_parameter,
         ),
       ),
+    generic_type: ($) =>
+      prec(2, seq($.field_type, token.immediate("("), commaSep1($.type), ")")),
     field_type: ($) =>
       prec.right(seq($.identifier, repeat(seq(".", $.identifier)))),
     array_type: ($) =>
