@@ -314,6 +314,20 @@ module.exports = grammar({
         $.typeof,
         $.syscall,
       ),
+    // What indexing, calls and field access apply to: a primary, or a
+    // builtin's result, as in #slice(p, n)[i]. Hidden, so trees keep their shape.
+    _postfix_base: ($) =>
+      prec(PREC.POSTFIX, choice(
+        $.primary,
+        $.size,
+        $.len,
+        $.align,
+        $.offset,
+        $.pointer_slice,
+        $.pointer_offset,
+        $.load,
+        $.typeof,
+      )),
     primary: ($) =>
       choice(
         $.cast,
@@ -354,14 +368,14 @@ module.exports = grammar({
     call: ($) =>
       prec(
         PREC.POSTFIX,
-        seq($.primary, "(", field("call_args", commaSep(choice($.expression, $.type_argument))), ")"),
+        seq($._postfix_base, "(", field("call_args", commaSep(choice($.expression, $.type_argument))), ")"),
       ),
-    field_access: ($) => prec(PREC.POSTFIX, seq($.primary, ".", $.identifier)),
+    field_access: ($) => prec(PREC.POSTFIX, seq($._postfix_base, ".", $.identifier)),
     index: ($) =>
       prec(
         PREC.POSTFIX,
         seq(
-          $.primary,
+          $._postfix_base,
           "[",
           choice(
             $.expression,
@@ -438,7 +452,8 @@ module.exports = grammar({
     string_: ($) =>
       seq(
         '"',
-        repeat(choice($.escape_sequence, token.immediate(/[^"\\\n]+/))),
+        // Above comments, so text such as "//" stays the string's.
+        repeat(choice($.escape_sequence, token.immediate(prec(1, /[^"\\\n]+/)))),
         '"',
       ),
     char_: ($) =>

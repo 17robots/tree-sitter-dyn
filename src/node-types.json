@@ -636,7 +636,39 @@
       "required": true,
       "types": [
         {
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "typeof",
           "named": true
         }
       ]
@@ -1239,11 +1271,43 @@
       "required": true,
       "types": [
         {
+          "type": "align",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
         {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
           "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "typeof",
           "named": true
         }
       ]

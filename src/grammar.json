@@ -2401,6 +2401,51 @@
         }
       ]
     },
+    "_postfix_base": {
+      "type": "PREC",
+      "value": 13,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "primary"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "size"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "len"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "align"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "offset"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "pointer_slice"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "pointer_offset"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "load"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "typeof"
+          }
+        ]
+      }
+    },
     "primary": {
       "type": "CHOICE",
       "members": [
@@ -2893,7 +2938,7 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "primary"
+            "name": "_postfix_base"
           },
           {
             "type": "STRING",
@@ -2981,7 +3026,7 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "primary"
+            "name": "_postfix_base"
           },
           {
             "type": "STRING",
@@ -3002,7 +3047,7 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "primary"
+            "name": "_postfix_base"
           },
           {
             "type": "STRING",
@@ -3689,8 +3734,12 @@
               {
                 "type": "IMMEDIATE_TOKEN",
                 "content": {
-                  "type": "PATTERN",
-                  "value": "[^\"\\\\\\n]+"
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[^\"\\\\\\n]+"
+                  }
                 }
               }
             ]
