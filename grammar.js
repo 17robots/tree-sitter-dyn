@@ -24,7 +24,7 @@ module.exports = grammar({
   externals: ($) => [$._trailing_float],
   word: ($) => $.identifier,
   reserved: {
-    global: (_) => ["distinct", "packed", "is", "union"],
+    global: (_) => ["distinct", "packed", "union"],
   },
   // Pure choices would appear in every tree only as wrapper nodes. Inlining
   // them removes about a third of all nodes without changing what parses.
@@ -33,8 +33,8 @@ module.exports = grammar({
   conflicts: ($) => [
     [$.defer, $.primary],
     [$.block, $.primary],
-    [$.field_type, $.primary, $.struct_literal],
     [$.field_type, $.primary],
+    [$.field_type, $.primary, $.struct_literal],
     [$.primary, $.struct_literal],
     [$.import],
     [$.array_type, $.array_literal],
@@ -102,6 +102,7 @@ module.exports = grammar({
         $.identifier,
         repeat(seq(",", $.identifier)),
         $.type_qualifier,
+        optional(seq("=", field("default", $.expression))),
       ),
     enum: ($) =>
       seq(
@@ -113,7 +114,8 @@ module.exports = grammar({
         commaSep($.enum_member),
         "}",
       ),
-    enum_member: ($) => seq($.identifier, optional($.type_qualifier)),
+    enum_member: ($) =>
+      seq($.identifier, optional($.type_qualifier), optional(seq("=", field("value", $.expression)))),
     fn: ($) =>
       seq(
         token("fn"),
@@ -171,6 +173,7 @@ module.exports = grammar({
         $.call,
         $.assignment,
         $.panic,
+        $.init,
         $.syscall,
         $.type_alias,
       ),
@@ -188,7 +191,13 @@ module.exports = grammar({
             optional($.identifier), "=>", $.block),
       ),
     case_pattern: ($) => choice($.range, $.expression),
-    type_pattern: ($) => prec(1, seq(token("is"), $.type, optional($.identifier))),
+    // Only spellings that cannot be values; a named type such as Point parses
+    // as a case_pattern, which the compiler resolves to a type.
+    type_pattern: ($) =>
+      prec(1, seq(
+        choice($.primitive, $.pointer_type, $.array_type, $.fn_type, $.type_parameter),
+        optional($.identifier),
+      )),
     for_: ($) =>
       seq(
         optional(seq($.identifier, ":")),
@@ -248,6 +257,7 @@ module.exports = grammar({
     static_assert: ($) =>
       seq(token("#assert"), "(", $.expression, optional(seq(",", $.string_)), ")"),
     panic: ($) => seq(token("#panic"), "(", $.expression, ")"),
+    init: ($) => seq(token("#init"), "(", $.expression, ")"),
     syscall: ($) => seq(token("#syscall"), "(", commaSep($.expression), ")"),
     range: ($) => seq($.expression, choice("..", "..="), $.expression),
     type_qualifier: ($) => seq(":", $.type),
@@ -425,11 +435,20 @@ module.exports = grammar({
         $.array_literal,
       ),
     struct_literal: ($) =>
-      seq(
-        choice(seq($.identifier, repeat(seq(".", $.identifier))), "."),
-        "{",
-        commaSep($.struct_literal_member),
-        "}",
+      choice(
+        seq(
+          choice(seq($.identifier, repeat(seq(".", $.identifier))), "."),
+          "{",
+          commaSep($.struct_literal_member),
+          "}",
+        ),
+        // Box(i32){...}: a type instance, then the brace with no space.
+        seq(
+          field("instance", $.call),
+          token.immediate("{"),
+          commaSep($.struct_literal_member),
+          "}",
+        ),
       ),
     struct_literal_member: ($) => seq($.identifier, ":", $.expression),
     array_literal: ($) => seq("[", commaSep($.expression), "]"),

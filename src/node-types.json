@@ -494,6 +494,10 @@
           "named": true
         },
         {
+          "type": "init",
+          "named": true
+        },
+        {
           "type": "panic",
           "named": true
         },
@@ -1166,7 +1170,90 @@
   {
     "type": "enum_member",
     "named": true,
-    "fields": {},
+    "fields": {
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "align",
+            "named": true
+          },
+          {
+            "type": "array_literal",
+            "named": true
+          },
+          {
+            "type": "binary",
+            "named": true
+          },
+          {
+            "type": "bool_",
+            "named": true
+          },
+          {
+            "type": "char_",
+            "named": true
+          },
+          {
+            "type": "len",
+            "named": true
+          },
+          {
+            "type": "load",
+            "named": true
+          },
+          {
+            "type": "null_",
+            "named": true
+          },
+          {
+            "type": "number_",
+            "named": true
+          },
+          {
+            "type": "offset",
+            "named": true
+          },
+          {
+            "type": "pointer_offset",
+            "named": true
+          },
+          {
+            "type": "pointer_slice",
+            "named": true
+          },
+          {
+            "type": "primary",
+            "named": true
+          },
+          {
+            "type": "size",
+            "named": true
+          },
+          {
+            "type": "string_",
+            "named": true
+          },
+          {
+            "type": "struct_literal",
+            "named": true
+          },
+          {
+            "type": "syscall",
+            "named": true
+          },
+          {
+            "type": "typeof",
+            "named": true
+          },
+          {
+            "type": "unary_prefix",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -1793,6 +1880,93 @@
     "fields": {},
     "children": {
       "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "init",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
       "required": true,
       "types": [
         {
@@ -2839,7 +3013,18 @@
   {
     "type": "struct_literal",
     "named": true,
-    "fields": {},
+    "fields": {
+      "instance": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "call",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": false,
@@ -2949,7 +3134,90 @@
   {
     "type": "struct_member",
     "named": true,
-    "fields": {},
+    "fields": {
+      "default": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "align",
+            "named": true
+          },
+          {
+            "type": "array_literal",
+            "named": true
+          },
+          {
+            "type": "binary",
+            "named": true
+          },
+          {
+            "type": "bool_",
+            "named": true
+          },
+          {
+            "type": "char_",
+            "named": true
+          },
+          {
+            "type": "len",
+            "named": true
+          },
+          {
+            "type": "load",
+            "named": true
+          },
+          {
+            "type": "null_",
+            "named": true
+          },
+          {
+            "type": "number_",
+            "named": true
+          },
+          {
+            "type": "offset",
+            "named": true
+          },
+          {
+            "type": "pointer_offset",
+            "named": true
+          },
+          {
+            "type": "pointer_slice",
+            "named": true
+          },
+          {
+            "type": "primary",
+            "named": true
+          },
+          {
+            "type": "size",
+            "named": true
+          },
+          {
+            "type": "string_",
+            "named": true
+          },
+          {
+            "type": "struct_literal",
+            "named": true
+          },
+          {
+            "type": "syscall",
+            "named": true
+          },
+          {
+            "type": "typeof",
+            "named": true
+          },
+          {
+            "type": "unary_prefix",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -3199,11 +3467,27 @@
       "required": true,
       "types": [
         {
+          "type": "array_type",
+          "named": true
+        },
+        {
+          "type": "fn_type",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
         {
-          "type": "type",
+          "type": "pointer_type",
+          "named": true
+        },
+        {
+          "type": "primitive",
+          "named": true
+        },
+        {
+          "type": "type_parameter",
           "named": true
         }
       ]
@@ -3668,6 +3952,10 @@
     "named": false
   },
   {
+    "type": "#init",
+    "named": false
+  },
+  {
     "type": "#len",
     "named": false
   },
@@ -3881,8 +4169,7 @@
   },
   {
     "type": "comment",
-    "named": true,
-    "extra": true
+    "named": true
   },
   {
     "type": "const",
@@ -3942,10 +4229,6 @@
   },
   {
     "type": "in",
-    "named": false
-  },
-  {
-    "type": "is",
     "named": false
   },
   {

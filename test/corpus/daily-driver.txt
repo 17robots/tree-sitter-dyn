@@ -1,0 +1,136 @@
+==================
+Daily-driver forms
+==================
+struct Player { health: i32 = 100, name: []const u8 = "anon" }
+enum(i32) Errno { Ok = 0, NoEnt = 2 }
+fn f(v: any, p: *Player) i32 {
+  #init(p)
+  b := Box(i32){value: 1}
+  if 0 <= b.value < 10 && (b.value & 1) != 0 { return 1 }
+  case v {
+    i32 n => { return n }
+    []const u8 s => { return 2 }
+    Point q => { return 3 }
+    _ => { return 0 }
+  }
+}
+---
+
+(source_file
+  (declaration
+    (struct
+      (identifier)
+      (struct_member
+        (identifier)
+        (type_qualifier
+          (type
+            (primitive)))
+        default: (number_))
+      (struct_member
+        (identifier)
+        (type_qualifier
+          (type
+            (array_type
+              (type
+                (primitive)))))
+        default: (string_))))
+  (declaration
+    (enum
+      (primitive)
+      (identifier)
+      (enum_member
+        (identifier)
+        value: (number_))
+      (enum_member
+        (identifier)
+        value: (number_))))
+  (declaration
+    (fn
+      name: (identifier)
+      (fn_param
+        (identifier)
+        (type_qualifier
+          (type
+            (primitive))))
+      (fn_param
+        (identifier)
+        (type_qualifier
+          (type
+            (pointer_type
+              (type
+                (field_type
+                  (identifier)))))))
+      (type
+        (primitive))
+      (block
+        (init
+          (primary
+            (identifier)))
+        (variable
+          (identifier)
+          (struct_literal
+            instance: (call
+              (primary
+                (identifier))
+              call_args: (type_argument
+                (primitive)))
+            (struct_literal_member
+              (identifier)
+              (number_))))
+        (if_
+          (binary
+            (binary
+              (binary
+                (number_)
+                (primary
+                  (field_access
+                    (primary
+                      (identifier))
+                    (identifier))))
+              (number_))
+            (binary
+              (primary
+                (group
+                  (binary
+                    (primary
+                      (field_access
+                        (primary
+                          (identifier))
+                        (identifier)))
+                    (number_))))
+              (number_)))
+          (block
+            (return_
+              (number_))))
+        (case_
+          (primary
+            (identifier))
+          (case_arm
+            (type_pattern
+              (primitive)
+              (identifier))
+            (block
+              (return_
+                (primary
+                  (identifier)))))
+          (case_arm
+            (type_pattern
+              (array_type
+                (type
+                  (primitive)))
+              (identifier))
+            (block
+              (return_
+                (number_))))
+          (case_arm
+            (case_pattern
+              (primary
+                (identifier)))
+            (identifier)
+            (block
+              (return_
+                (number_))))
+          (case_arm
+            (block
+              (return_
+                (number_)))))))))
