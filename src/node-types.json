@@ -506,6 +506,10 @@
           "named": true
         },
         {
+          "type": "static_assert",
+          "named": true
+        },
+        {
           "type": "syscall",
           "named": true
         },

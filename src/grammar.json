@@ -1282,6 +1282,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "static_assert"
+        },
+        {
+          "type": "SYMBOL",
           "name": "init"
         },
         {

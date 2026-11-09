@@ -174,6 +174,7 @@ module.exports = grammar({
         $.call,
         $.assignment,
         $.panic,
+        $.static_assert,
         $.init,
         $.syscall,
         $.type_alias,

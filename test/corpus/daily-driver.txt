@@ -165,3 +165,40 @@ extern fn g() i32
       name: (identifier)
       (type
         (primitive)))))
+
+================================================================================
+Assert in a body and reflection fields
+================================================================================
+
+fn f($K: type) {
+  #assert(#typeof(K).kind == TypeKind.Integer, "integers")
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    (fn
+      name: (identifier)
+      (fn_param
+        (type_parameter)
+        (type_qualifier
+          (type
+            (field_type
+              (identifier)))))
+      (block
+        (static_assert
+          (binary
+            (primary
+              (field_access
+                (typeof
+                  (type
+                    (field_type
+                      (identifier))))
+                (identifier)))
+            (primary
+              (field_access
+                (primary
+                  (identifier))
+                (identifier))))
+          (string_))))))
