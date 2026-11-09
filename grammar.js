@@ -21,7 +21,7 @@ const commaSep1 = (rule) => seq(rule, repeat(seq(",", rule)));
 module.exports = grammar({
   name: "dyn",
   extras: ($) => [/\s/, $.comment],
-  externals: ($) => [$._trailing_float],
+  externals: ($) => [$._trailing_float, $._same_line],
   word: ($) => $.identifier,
   reserved: {
     global: (_) => ["distinct", "packed", "union"],
@@ -139,7 +139,8 @@ module.exports = grammar({
             optional($.variadic),
           ),
           ")",
-          optional($.type),
+          // The return type starts on the line of the ")", as the compiler requires.
+          optional(seq($._same_line, $.type)),
         ),
       ),
     extern_variable: ($) =>

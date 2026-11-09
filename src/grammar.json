@@ -1048,8 +1048,17 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "type"
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_same_line"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "type"
+                  }
+                ]
               },
               {
                 "type": "BLANK"
@@ -4075,6 +4084,10 @@
     {
       "type": "SYMBOL",
       "name": "_trailing_float"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_same_line"
     }
   ],
   "inline": [
@@ -4082,5 +4095,21 @@
     "literal",
     "statement"
   ],
-  "supertypes": []
+  "supertypes": [],
+  "reserved": {
+    "global": [
+      {
+        "type": "STRING",
+        "value": "distinct"
+      },
+      {
+        "type": "STRING",
+        "value": "packed"
+      },
+      {
+        "type": "STRING",
+        "value": "union"
+      }
+    ]
+  }
 }

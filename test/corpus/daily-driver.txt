@@ -134,3 +134,34 @@ fn f(v: any, p: *Player) i32 {
             (block
               (return_
                 (number_)))))))))
+
+================================================================================
+Extern return type stays on its line
+================================================================================
+
+extern fn f(x: i32)
+count: i32
+extern fn g() i32
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    (extern_fn
+      name: (identifier)
+      (fn_param
+        (identifier)
+        (type_qualifier
+          (type
+            (primitive))))))
+  (declaration
+    (variable
+      (identifier)
+      (type_qualifier
+        (type
+          (primitive)))))
+  (declaration
+    (extern_fn
+      name: (identifier)
+      (type
+        (primitive)))))
