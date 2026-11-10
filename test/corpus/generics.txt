@@ -1,13 +1,13 @@
 ==================
 Type parameters and type arguments
 ==================
-fn push($T: type, arena: *Arena) *T {
+fn push(T: type, arena: *Arena) *T {
   return #cast(*T, raw(arena, #sizeof(T)))
 }
 fn min(a, b: $T) T {
   return a
 }
-fn copy(d: []$T, s: []const T) {
+fn copy(d: []$T, s: []const $T) {
 }
 fn main() {
   n := push(Node, &arena)
@@ -23,7 +23,7 @@ fn main() {
     (fn
       name: (identifier)
       (fn_param
-        (type_parameter)
+        (identifier)
         (type_qualifier
           (type
             (field_type
@@ -92,8 +92,7 @@ fn main() {
           (type
             (array_type
               (type
-                (field_type
-                  (identifier)))))))
+                (type_parameter))))))
       (block)))
   (declaration
     (fn

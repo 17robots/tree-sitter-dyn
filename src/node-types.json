@@ -1470,10 +1470,6 @@
           "named": true
         },
         {
-          "type": "type_parameter",
-          "named": true
-        },
-        {
           "type": "type_qualifier",
           "named": true
         }
@@ -2053,6 +2049,97 @@
     }
   },
   {
+    "type": "instance",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "align",
+          "named": true
+        },
+        {
+          "type": "array_literal",
+          "named": true
+        },
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "bool_",
+          "named": true
+        },
+        {
+          "type": "char_",
+          "named": true
+        },
+        {
+          "type": "len",
+          "named": true
+        },
+        {
+          "type": "load",
+          "named": true
+        },
+        {
+          "type": "null_",
+          "named": true
+        },
+        {
+          "type": "number_",
+          "named": true
+        },
+        {
+          "type": "offset",
+          "named": true
+        },
+        {
+          "type": "pointer_offset",
+          "named": true
+        },
+        {
+          "type": "pointer_slice",
+          "named": true
+        },
+        {
+          "type": "primary",
+          "named": true
+        },
+        {
+          "type": "size",
+          "named": true
+        },
+        {
+          "type": "string_",
+          "named": true
+        },
+        {
+          "type": "struct_literal",
+          "named": true
+        },
+        {
+          "type": "syscall",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "typeof",
+          "named": true
+        },
+        {
+          "type": "unary_prefix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "len",
     "named": true,
     "fields": {},
@@ -2500,6 +2587,10 @@
         },
         {
           "type": "index",
+          "named": true
+        },
+        {
+          "type": "instance",
           "named": true
         },
         {
@@ -3242,15 +3333,11 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
-          "type": "type_parameter",
-          "named": true
-        },
-        {
-          "type": "type_qualifier",
+          "type": "identifier",
           "named": true
         }
       ]
@@ -3957,6 +4044,10 @@
   },
   {
     "type": "#init",
+    "named": false
+  },
+  {
+    "type": "#instance",
     "named": false
   },
   {

@@ -170,7 +170,7 @@ extern fn g() i32
 Assert in a body and reflection fields
 ================================================================================
 
-fn f($K: type) {
+fn f(K: type) {
   #assert(#typeof(K).kind == TypeKind.Integer, "integers")
 }
 
@@ -181,7 +181,7 @@ fn f($K: type) {
     (fn
       name: (identifier)
       (fn_param
-        (type_parameter)
+        (identifier)
         (type_qualifier
           (type
             (field_type

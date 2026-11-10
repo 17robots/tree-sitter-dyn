@@ -96,7 +96,8 @@ module.exports = grammar({
         commaSep($.struct_member),
         "}",
       ),
-    struct_type_parameter: ($) => seq($.type_parameter, $.type_qualifier),
+    // Bare names: every name in a declaration's parentheses is a type.
+    struct_type_parameter: ($) => $.identifier,
     struct_member: ($) =>
       seq(
         $.identifier,
@@ -151,10 +152,7 @@ module.exports = grammar({
         $.type_qualifier,
       ),
     fn_param: ($) =>
-      choice(
-        seq($.identifier, repeat(seq(",", $.identifier)), $.type_qualifier),
-        seq($.type_parameter, $.type_qualifier),
-      ),
+      seq($.identifier, repeat(seq(",", $.identifier)), $.type_qualifier),
     type_parameter: (_) => token(seq("$", /[A-Za-z_][A-Za-z0-9_]*/)),
     variadic_param: ($) =>
       seq(field("name", $.identifier), ":", $.variadic, field("type", $.type)),
@@ -343,6 +341,7 @@ module.exports = grammar({
     primary: ($) =>
       choice(
         $.cast,
+        $.instance,
         $.identifier,
         $.unary_postfix,
         $.group,
@@ -417,6 +416,15 @@ module.exports = grammar({
     len: ($) => seq(token("#len"), "(", $.expression, ")"),
     reverse: ($) =>
       seq(token("#reverse"), "(", choice($.range, $.expression), ")"),
+    // #instance(f, T, ...) names a generic instance as a function value.
+    instance: ($) =>
+      seq(
+        token("#instance"),
+        "(",
+        $.expression,
+        repeat1(seq(",", choice($.type, $.expression))),
+        ")",
+      ),
     cast: ($) =>
       seq(
         choice(token("#cast"), token("#bitcast")),
