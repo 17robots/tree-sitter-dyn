@@ -21,10 +21,10 @@ const commaSep1 = (rule) => seq(rule, repeat(seq(",", rule)));
 module.exports = grammar({
   name: "dyn",
   extras: ($) => [/\s/, $.comment],
-  externals: ($) => [$._trailing_float],
+  externals: ($) => [$._trailing_float, $._same_line],
   word: ($) => $.identifier,
   reserved: {
-    global: (_) => ["distinct", "packed", "is", "union"],
+    global: (_) => ["distinct", "packed", "union"],
   },
   // Pure choices would appear in every tree only as wrapper nodes. Inlining
   // them removes about a third of all nodes without changing what parses.
@@ -33,8 +33,8 @@ module.exports = grammar({
   conflicts: ($) => [
     [$.defer, $.primary],
     [$.block, $.primary],
-    [$.field_type, $.primary, $.struct_literal],
     [$.field_type, $.primary],
+    [$.field_type, $.primary, $.struct_literal],
     [$.primary, $.struct_literal],
     [$.import],
     [$.array_type, $.array_literal],
@@ -91,26 +91,32 @@ module.exports = grammar({
       seq(
         choice(seq(optional(token("packed")), token("struct")), token("union")),
         $.identifier,
+        optional(seq("(", commaSep($.struct_type_parameter), ")")),
         "{",
         commaSep($.struct_member),
         "}",
       ),
+    // Bare names: every name in a declaration's parentheses is a type.
+    struct_type_parameter: ($) => $.identifier,
     struct_member: ($) =>
       seq(
         $.identifier,
         repeat(seq(",", $.identifier)),
         $.type_qualifier,
+        optional(seq("=", field("default", $.expression))),
       ),
     enum: ($) =>
       seq(
         token("enum"),
         optional(seq("(", choice($.primitive, $.field_type), ")")),
         $.identifier,
+        optional(seq("(", commaSep($.struct_type_parameter), ")")),
         "{",
         commaSep($.enum_member),
         "}",
       ),
-    enum_member: ($) => $.identifier,
+    enum_member: ($) =>
+      seq($.identifier, optional($.type_qualifier), optional(seq("=", field("value", $.expression)))),
     fn: ($) =>
       seq(
         token("fn"),
@@ -134,7 +140,8 @@ module.exports = grammar({
             optional($.variadic),
           ),
           ")",
-          optional($.type),
+          // The return type starts on the line of the ")", as the compiler requires.
+          optional(seq($._same_line, $.type)),
         ),
       ),
     extern_variable: ($) =>
@@ -145,10 +152,7 @@ module.exports = grammar({
         $.type_qualifier,
       ),
     fn_param: ($) =>
-      choice(
-        seq($.identifier, repeat(seq(",", $.identifier)), $.type_qualifier),
-        seq($.type_parameter, $.type_qualifier),
-      ),
+      seq($.identifier, repeat(seq(",", $.identifier)), $.type_qualifier),
     type_parameter: (_) => token(seq("$", /[A-Za-z_][A-Za-z0-9_]*/)),
     variadic_param: ($) =>
       seq(field("name", $.identifier), ":", $.variadic, field("type", $.type)),
@@ -168,6 +172,8 @@ module.exports = grammar({
         $.call,
         $.assignment,
         $.panic,
+        $.static_assert,
+        $.init,
         $.syscall,
         $.type_alias,
       ),
@@ -185,7 +191,13 @@ module.exports = grammar({
             optional($.identifier), "=>", $.block),
       ),
     case_pattern: ($) => choice($.range, $.expression),
-    type_pattern: ($) => prec(1, seq(token("is"), $.type, optional($.identifier))),
+    // Only spellings that cannot be values; a named type such as Point parses
+    // as a case_pattern, which the compiler resolves to a type.
+    type_pattern: ($) =>
+      prec(1, seq(
+        choice($.primitive, $.pointer_type, $.array_type, $.fn_type, $.type_parameter),
+        optional($.identifier),
+      )),
     for_: ($) =>
       seq(
         optional(seq($.identifier, ":")),
@@ -245,12 +257,14 @@ module.exports = grammar({
     static_assert: ($) =>
       seq(token("#assert"), "(", $.expression, optional(seq(",", $.string_)), ")"),
     panic: ($) => seq(token("#panic"), "(", $.expression, ")"),
+    init: ($) => seq(token("#init"), "(", $.expression, ")"),
     syscall: ($) => seq(token("#syscall"), "(", commaSep($.expression), ")"),
     range: ($) => seq($.expression, choice("..", "..="), $.expression),
     type_qualifier: ($) => seq(":", $.type),
     type: ($) =>
       prec.right(
         choice(
+          $.generic_type,
           $.field_type,
           $.array_type,
           $.fn_type,
@@ -259,6 +273,8 @@ module.exports = grammar({
           $.type_parameter,
         ),
       ),
+    generic_type: ($) =>
+      prec(2, seq($.field_type, token.immediate("("), commaSep1($.type), ")")),
     field_type: ($) =>
       prec.right(seq($.identifier, repeat(seq(".", $.identifier)))),
     array_type: ($) =>
@@ -301,6 +317,7 @@ module.exports = grammar({
         $.size,
         $.len,
         $.align,
+        $.limit,
         $.offset,
         $.pointer_slice,
         $.pointer_offset,
@@ -308,9 +325,24 @@ module.exports = grammar({
         $.typeof,
         $.syscall,
       ),
+    // What indexing, calls and field access apply to: a primary, or a
+    // builtin's result, as in #slice(p, n)[i]. Hidden, so trees keep their shape.
+    _postfix_base: ($) =>
+      prec(PREC.POSTFIX, choice(
+        $.primary,
+        $.size,
+        $.len,
+        $.align,
+        $.offset,
+        $.pointer_slice,
+        $.pointer_offset,
+        $.load,
+        $.typeof,
+      )),
     primary: ($) =>
       choice(
         $.cast,
+        $.instance,
         $.identifier,
         $.unary_postfix,
         $.group,
@@ -348,14 +380,14 @@ module.exports = grammar({
     call: ($) =>
       prec(
         PREC.POSTFIX,
-        seq($.primary, "(", field("call_args", commaSep(choice($.expression, $.type_argument))), ")"),
+        seq($._postfix_base, "(", field("call_args", commaSep(choice($.expression, $.type_argument))), ")"),
       ),
-    field_access: ($) => prec(PREC.POSTFIX, seq($.primary, ".", $.identifier)),
+    field_access: ($) => prec(PREC.POSTFIX, seq($._postfix_base, ".", $.identifier)),
     index: ($) =>
       prec(
         PREC.POSTFIX,
         seq(
-          $.primary,
+          $._postfix_base,
           "[",
           choice(
             $.expression,
@@ -373,6 +405,9 @@ module.exports = grammar({
     size: ($) => seq(token("#sizeof"), "(", choice($.type, $.expression), ")"),
     align: ($) =>
       seq(token("#alignof"), "(", choice($.type, $.expression), ")"),
+    // #max(T) and #min(T): an integer type's largest and smallest values.
+    limit: ($) =>
+      seq(choice(token("#max"), token("#min")), "(", $.type, ")"),
     load: ($) => seq(token("#load"), "(", $.string_, ")"),
     pointer_slice: ($) =>
       seq(token("#slice"), "(", $.expression, ",", $.expression, ")"),
@@ -385,6 +420,15 @@ module.exports = grammar({
     len: ($) => seq(token("#len"), "(", $.expression, ")"),
     reverse: ($) =>
       seq(token("#reverse"), "(", choice($.range, $.expression), ")"),
+    // #instance(f, T, ...) names a generic instance as a function value.
+    instance: ($) =>
+      seq(
+        token("#instance"),
+        "(",
+        $.expression,
+        repeat1(seq(",", choice($.type, $.expression))),
+        ")",
+      ),
     cast: ($) =>
       seq(
         choice(token("#cast"), token("#bitcast")),
@@ -405,11 +449,20 @@ module.exports = grammar({
         $.array_literal,
       ),
     struct_literal: ($) =>
-      seq(
-        choice(seq($.identifier, repeat(seq(".", $.identifier))), "."),
-        "{",
-        commaSep($.struct_literal_member),
-        "}",
+      choice(
+        seq(
+          choice(seq($.identifier, repeat(seq(".", $.identifier))), "."),
+          "{",
+          commaSep($.struct_literal_member),
+          "}",
+        ),
+        // Box(i32){...}: a type instance, then the brace with no space.
+        seq(
+          field("instance", $.call),
+          token.immediate("{"),
+          commaSep($.struct_literal_member),
+          "}",
+        ),
       ),
     struct_literal_member: ($) => seq($.identifier, ":", $.expression),
     array_literal: ($) => seq("[", commaSep($.expression), "]"),
@@ -432,7 +485,8 @@ module.exports = grammar({
     string_: ($) =>
       seq(
         '"',
-        repeat(choice($.escape_sequence, token.immediate(/[^"\\\n]+/))),
+        // Above comments, so text such as "//" stays the string's.
+        repeat(choice($.escape_sequence, token.immediate(prec(1, /[^"\\\n]+/)))),
         '"',
       ),
     char_: ($) =>

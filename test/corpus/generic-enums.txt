@@ -1,0 +1,22 @@
+================================================================================
+Generic enum declaration
+================================================================================
+
+enum Slot(T) { Empty, Full: T }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    (enum
+      (identifier)
+      (struct_type_parameter
+        (identifier))
+      (enum_member
+        (identifier))
+      (enum_member
+        (identifier)
+        (type_qualifier
+          (type
+            (field_type
+              (identifier))))))))

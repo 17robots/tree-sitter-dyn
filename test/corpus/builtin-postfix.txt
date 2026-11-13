@@ -1,0 +1,71 @@
+================================================================================
+Builtin results index and dereference
+================================================================================
+
+fn f() {
+  a := #slice(p, 7)[1]
+  #slice(p, 7)[1] = 2
+  b := #offset(p, 2).*
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    (fn
+      name: (identifier)
+      (block
+        (variable
+          (identifier)
+          (primary
+            (index
+              (pointer_slice
+                (primary
+                  (identifier))
+                (number_))
+              (number_))))
+        (assignment
+          (primary
+            (index
+              (pointer_slice
+                (primary
+                  (identifier))
+                (number_))
+              (number_)))
+          (number_))
+        (variable
+          (identifier)
+          (primary
+            (unary_postfix
+              (pointer_offset
+                (primary
+                  (identifier))
+                (number_)))))))))
+
+================================================================================
+Comment markers inside strings
+================================================================================
+
+fn f() {
+  a := "//"
+  b := "/*"
+  c := "*/" // trailing
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    (fn
+      name: (identifier)
+      (block
+        (variable
+          (identifier)
+          (string_))
+        (variable
+          (identifier)
+          (string_))
+        (variable
+          (identifier)
+          (string_))
+        (comment)))))

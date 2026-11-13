@@ -1,7 +1,7 @@
 ==================
 Keywords are not names
 ==================
-fn main() { is := 1 }
+fn main() { distinct := 1 }
 ---
 
 (source_file
@@ -9,8 +9,7 @@ fn main() { is := 1 }
     (fn
       (identifier)
       (block
-        (ERROR
-          (number_))))))
+        (ERROR)))))
 
 ==================
 Union, plain enum, and fields without defaults

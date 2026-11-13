@@ -1,0 +1,39 @@
+================================================================================
+Integer limits
+================================================================================
+
+fn f() {
+  a := #max(usize)
+  b: i32 = #min(i32) + 1
+  c := #max(u8) - b
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    (fn
+      name: (identifier)
+      (block
+        (variable
+          (identifier)
+          (limit
+            (type
+              (primitive))))
+        (variable
+          (identifier)
+          (type
+            (primitive))
+          (binary
+            (limit
+              (type
+                (primitive)))
+            (number_)))
+        (variable
+          (identifier)
+          (binary
+            (limit
+              (type
+                (primitive)))
+            (primary
+              (identifier))))))))
