@@ -317,6 +317,7 @@ module.exports = grammar({
         $.size,
         $.len,
         $.align,
+        $.limit,
         $.offset,
         $.pointer_slice,
         $.pointer_offset,
@@ -404,6 +405,9 @@ module.exports = grammar({
     size: ($) => seq(token("#sizeof"), "(", choice($.type, $.expression), ")"),
     align: ($) =>
       seq(token("#alignof"), "(", choice($.type, $.expression), ")"),
+    // #max(T) and #min(T): an integer type's largest and smallest values.
+    limit: ($) =>
+      seq(choice(token("#max"), token("#min")), "(", $.type, ")"),
     load: ($) => seq(token("#load"), "(", $.string_, ")"),
     pointer_slice: ($) =>
       seq(token("#slice"), "(", $.expression, ",", $.expression, ")"),
