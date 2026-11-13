@@ -214,6 +214,8 @@ module.exports = grammar({
             seq("*", $.identifier),
             seq("*", "const", $.identifier),
           ),
+          // for x, i in xs: the element's index.
+          optional(seq(",", field("index", $.identifier))),
           token("in"),
           choice($.range, $.reverse, $.expression),
         ),
@@ -451,7 +453,7 @@ module.exports = grammar({
     struct_literal: ($) =>
       choice(
         seq(
-          choice(seq($.identifier, repeat(seq(".", $.identifier))), "."),
+          seq($.identifier, repeat(seq(".", $.identifier))),
           "{",
           commaSep($.struct_literal_member),
           "}",

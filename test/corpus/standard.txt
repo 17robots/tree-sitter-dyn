@@ -1,0 +1,73 @@
+==================
+Index loops and text cases
+==================
+fn f(values: []const i32, word: []const u8) i32 {
+  for value, i in values { _ = i }
+  for *value, i in values { _ = i }
+  case word {
+    "go", "run" => { return 1 }
+    _ => { return 0 }
+  }
+}
+---
+
+(source_file
+  (declaration
+    (fn
+      name: (identifier)
+      (fn_param
+        (identifier)
+        (type_qualifier
+          (type
+            (array_type
+              (type
+                (primitive))))))
+      (fn_param
+        (identifier)
+        (type_qualifier
+          (type
+            (array_type
+              (type
+                (primitive))))))
+      (type
+        (primitive))
+      (block
+        (for_
+          (for_condition
+            (identifier)
+            index: (identifier)
+            (primary
+              (identifier)))
+          (block
+            (assignment
+              (primary
+                (identifier))
+              (primary
+                (identifier)))))
+        (for_
+          (for_condition
+            (identifier)
+            index: (identifier)
+            (primary
+              (identifier)))
+          (block
+            (assignment
+              (primary
+                (identifier))
+              (primary
+                (identifier)))))
+        (case_
+          (primary
+            (identifier))
+          (case_arm
+            (case_pattern
+              (string_))
+            (case_pattern
+              (string_))
+            (block
+              (return_
+                (number_))))
+          (case_arm
+            (block
+              (return_
+                (number_)))))))))
