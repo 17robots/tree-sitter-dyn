@@ -6,7 +6,7 @@ enum(i32) Errno { Ok = 0, NoEnt = 2 }
 fn f(v: any, p: *Player) i32 {
   #init(p)
   b := Box(i32){value: 1}
-  if 0 <= b.value < 10 && (b.value & 1) != 0 { return 1 }
+  if 0 <= b.value && b.value < 10 && (b.value & 1) != 0 { return 1 }
   case v {
     i32 n => { return n }
     []const u8 s => { return 2 }
@@ -87,7 +87,13 @@ fn f(v: any, p: *Player) i32 {
                     (primary
                       (identifier))
                     (identifier))))
-              (number_))
+              (binary
+                (primary
+                  (field_access
+                    (primary
+                      (identifier))
+                    (identifier)))
+                (number_)))
             (binary
               (primary
                 (group
