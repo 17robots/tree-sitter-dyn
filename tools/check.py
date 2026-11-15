@@ -18,6 +18,14 @@ ts = os.environ.get('TS', 'tree-sitter')
 subprocess.run(['python3', str(grammar/'tools/check-generator.py'), ts], check=True)
 if not args.provenance_only:
     subprocess.run([ts, 'test'], cwd=grammar, check=True)
+    # Every shipped query must compile against this grammar; editors reject the whole file otherwise.
+    with tempfile.TemporaryDirectory(prefix='dyn-query-grammar-') as directory:
+        source = Path(directory) / 'main.dyn'
+        source.write_text('fn main() {}\n')
+        for query in sorted([*grammar.glob('neovim/*.scm'), *grammar.glob('helix/*.scm')]):
+            result = subprocess.run([ts, 'query', str(query), str(source)], cwd=grammar,
+                                    capture_output=True, text=True)
+            assert result.returncode == 0 and 'Query error' not in result.stderr, (query.name, result.stderr)
     with tempfile.TemporaryDirectory(prefix='dyn-cast-grammar-') as directory:
         source = Path(directory) / 'main.dyn'
         for expression in ('#cast(i32) 1', '#bitcast(u32) 1.0',
