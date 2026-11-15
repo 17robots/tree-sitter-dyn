@@ -1,23 +1,13 @@
-; tree-sitter-dyn — locals for Helix
-
 [
   (source_file)
   (block)
-  (function)
-  (for)
+  (fn)
+  (for_)
 ] @local.scope
 
-(declaration
-  (decl_lhs
-    (identifier) @local.definition.variable))
-
-(decl_lhs
-  (identifier) @local.definition.variable)
-
-(function
-  (identifier) @local.definition.parameter)
-
-(for
-  (identifier) @local.definition.variable)
+(variable (identifier) @local.definition)
+(extern_variable (identifier) @local.definition)
+(const_variable (variable (identifier) @local.definition))
+(fn_param (identifier) @local.definition)
 
 (identifier) @local.reference

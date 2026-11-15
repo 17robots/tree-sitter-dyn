@@ -1,16 +1,2 @@
-; tree-sitter-dyn — indents for Helix
-
-[
-  (block)
-  (struct)
-  (enum)
-  (case)
-  (struct_postfix)
-  (array_literal)
-  (array_type)
-  (call_postfix)
-  (grouped)
-  (function)
-] @indent
-
-[ "}" "]" ")" ] @outdent
+[(block) (struct) (enum) (case_) (struct_literal) (array_literal) (call) (group) (fn)] @indent
+["}" "]" ")"] @outdent
