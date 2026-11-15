@@ -24,7 +24,7 @@
 (call (primary (field_access (identifier) @function)))
 
 ; keyword
-[ "const" "defer" "distinct" "enum" "extern" "fn" "packed" "pub" "struct" "type" "union" "use" ] @keyword
+[ "const" "defer" "distinct" "enum" "extern" "fn" "packed" "pub" "struct" "type" "use" ] @keyword
 
 [ "case" "else" "if" ] @keyword.control.conditional
 "#target" @keyword.directive

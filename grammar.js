@@ -24,7 +24,7 @@ module.exports = grammar({
   externals: ($) => [$._trailing_float, $._same_line],
   word: ($) => $.identifier,
   reserved: {
-    global: (_) => ["distinct", "packed", "union"],
+    global: (_) => ["distinct", "packed"],
   },
   // Pure choices would appear in every tree only as wrapper nodes. Inlining
   // them removes about a third of all nodes without changing what parses.
@@ -89,7 +89,8 @@ module.exports = grammar({
       ),
     struct: ($) =>
       seq(
-        choice(seq(optional(token("packed")), token("struct")), token("union")),
+        optional(token("packed")),
+        token("struct"),
         $.identifier,
         optional(seq("(", commaSep($.struct_type_parameter), ")")),
         "{",
