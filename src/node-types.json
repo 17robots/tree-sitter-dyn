@@ -4526,10 +4526,6 @@
     "named": true
   },
   {
-    "type": "union",
-    "named": false
-  },
-  {
     "type": "use",
     "named": false
   },

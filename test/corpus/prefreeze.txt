@@ -12,27 +12,13 @@ fn main() { distinct := 1 }
         (ERROR)))))
 
 ==================
-Union, plain enum, and fields without defaults
+Plain enum and fields without defaults
 ==================
-union Bits { f: f32, u: u32 }
 enum Color { Red, Green }
 struct Pair { a: u32, b: u64 }
 ---
 
 (source_file
-  (declaration
-    (struct
-      (identifier)
-      (struct_member
-        (identifier)
-        (type_qualifier
-          (type
-            (primitive))))
-      (struct_member
-        (identifier)
-        (type_qualifier
-          (type
-            (primitive))))))
   (declaration
     (enum
       (identifier)
