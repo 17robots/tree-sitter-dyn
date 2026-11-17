@@ -177,10 +177,11 @@ module.exports = grammar({
         $.init,
         $.syscall,
         $.type_alias,
+        $.block,
       ),
     return_: ($) => prec.right(seq(token("return"), optional($.expression))),
-    continue_: ($) => seq(token("continue"), optional(seq(":", $.identifier))),
-    break_: ($) => seq(token("break"), optional(seq(":", $.identifier))),
+    continue_: (_) => token("continue"),
+    break_: (_) => token("break"),
     if_: ($) => seq(token("if"), $.expression, $.block, optional($.else_)),
     else_: ($) => seq(token("else"), choice($.if_, $.block)),
     case_: ($) =>
@@ -200,12 +201,7 @@ module.exports = grammar({
         optional($.identifier),
       )),
     for_: ($) =>
-      seq(
-        optional(seq($.identifier, ":")),
-        token("for"),
-        optional($.for_condition),
-        $.block,
-      ),
+      seq(token("for"), optional($.for_condition), $.block),
     for_condition: ($) =>
       choice(
         seq(
@@ -213,12 +209,11 @@ module.exports = grammar({
             $.identifier,
             seq($.identifier, ":", $.type),
             seq("*", $.identifier),
-            seq("*", "const", $.identifier),
           ),
           // for x, i in xs: the element's index.
           optional(seq(",", field("index", $.identifier))),
           token("in"),
-          choice($.range, $.reverse, $.expression),
+          choice($.range, $.step, $.reverse, $.expression),
         ),
         $.expression,
       ),
@@ -323,7 +318,8 @@ module.exports = grammar({
         $.limit,
         $.offset,
         $.pointer_slice,
-        $.pointer_offset,
+        $.wrapping,
+        $.float_op,
         $.load,
         $.typeof,
         $.syscall,
@@ -338,7 +334,8 @@ module.exports = grammar({
         $.align,
         $.offset,
         $.pointer_slice,
-        $.pointer_offset,
+        $.wrapping,
+        $.float_op,
         $.load,
         $.typeof,
       )),
@@ -414,15 +411,32 @@ module.exports = grammar({
     load: ($) => seq(token("#load"), "(", $.string_, ")"),
     pointer_slice: ($) =>
       seq(token("#slice"), "(", $.expression, ",", $.expression, ")"),
-    pointer_offset: ($) =>
-      seq(token("#offset"), "(", $.expression, ",", $.expression, ")"),
     offset: ($) =>
       seq(token("#offsetof"), "(", $.type, ",", $.identifier, ")"),
     typeof: ($) =>
       seq(token("#typeof"), "(", choice($.type, $.expression), ")"),
     len: ($) => seq(token("#len"), "(", $.expression, ")"),
     reverse: ($) =>
-      seq(token("#reverse"), "(", choice($.range, $.expression), ")"),
+      seq(token("#reverse"), "(", choice($.range, $.step, $.expression), ")"),
+    // #step(first..last, n): every nth value of a range, in for loops.
+    step: ($) => seq(token("#step"), "(", $.range, ",", $.expression, ")"),
+    // #wrapping(e): e's arithmetic wraps instead of overflowing.
+    wrapping: ($) => seq(token("#wrapping"), "(", $.expression, ")"),
+    // Floating-point operations the hardware has.
+    float_op: ($) =>
+      seq(
+        choice(
+          token("#sqrt"),
+          token("#floor"),
+          token("#ceil"),
+          token("#trunc"),
+          token("#round"),
+          token("#fma"),
+        ),
+        "(",
+        commaSep1($.expression),
+        ")",
+      ),
     // #instance(f, T, ...) names a generic instance as a function value.
     instance: ($) =>
       seq(
