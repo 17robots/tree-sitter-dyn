@@ -1,0 +1,196 @@
+================================================================================
+Wrapping arithmetic
+================================================================================
+
+fn hash(value: u64) u64 {
+  return #wrapping(value * 11400714819323198485) >> 3
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    (fn
+      (identifier)
+      (fn_param
+        (identifier)
+        (type_qualifier
+          (type
+            (primitive))))
+      (type
+        (primitive))
+      (block
+        (return_
+          (binary
+            (wrapping
+              (binary
+                (primary
+                  (identifier))
+                (number_)))
+            (number_)))))))
+
+================================================================================
+Stepped ranges
+================================================================================
+
+fn f() {
+  for i in #step(0..10, 3) {
+    total += i
+  }
+  for i in #reverse(#step(0..=10, 5)) {
+    total += i
+  }
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    (fn
+      (identifier)
+      (block
+        (for_
+          (for_condition
+            (identifier)
+            (step
+              (range
+                (number_)
+                (number_))
+              (number_)))
+          (block
+            (assignment
+              (primary
+                (identifier))
+              (primary
+                (identifier)))))
+        (for_
+          (for_condition
+            (identifier)
+            (reverse
+              (step
+                (range
+                  (number_)
+                  (number_))
+                (number_))))
+          (block
+            (assignment
+              (primary
+                (identifier))
+              (primary
+                (identifier)))))))))
+
+================================================================================
+Floating-point builtins
+================================================================================
+
+fn f(x: f64, y: f64) f64 {
+  return #sqrt(x) + #floor(y) + #ceil(x) + #trunc(y) + #round(x) + #fma(x, y, 1.0)
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    (fn
+      (identifier)
+      (fn_param
+        (identifier)
+        (type_qualifier
+          (type
+            (primitive))))
+      (fn_param
+        (identifier)
+        (type_qualifier
+          (type
+            (primitive))))
+      (type
+        (primitive))
+      (block
+        (return_
+          (binary
+            (binary
+              (binary
+                (binary
+                  (binary
+                    (float_op
+                      (primary
+                        (identifier)))
+                    (float_op
+                      (primary
+                        (identifier))))
+                  (float_op
+                    (primary
+                      (identifier))))
+                (float_op
+                  (primary
+                    (identifier))))
+              (float_op
+                (primary
+                  (identifier))))
+            (float_op
+              (primary
+                (identifier))
+              (primary
+                (identifier))
+              (number_))))))))
+
+================================================================================
+Bare blocks scope locals
+================================================================================
+
+fn f() {
+  {
+    x := 1
+    defer g(x)
+  }
+  {
+    x := 2
+  }
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    (fn
+      (identifier)
+      (block
+        (block
+          (variable
+            (identifier)
+            (number_))
+          (defer
+            (call
+              (primary
+                (identifier))
+              (primary
+                (identifier)))))
+        (block
+          (variable
+            (identifier)
+            (number_)))))))
+
+================================================================================
+Endless loops end a function
+================================================================================
+
+fn serve() i32 {
+  for {
+    step()
+  }
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    (fn
+      (identifier)
+      (type
+        (primitive))
+      (block
+        (for_
+          (block
+            (call
+              (primary
+                (identifier)))))))))

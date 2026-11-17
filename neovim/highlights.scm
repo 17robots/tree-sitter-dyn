@@ -19,7 +19,7 @@
 ; function
 (fn name: (identifier) @function)
 (extern_fn name: (identifier) @function)
-[ "#alignof" "#assert" "#bitcast" "#cast" "#instance" "#len" "#load" "#max" "#min" "#offset" "#offsetof" "#panic" "#reverse" "#sizeof" "#slice" "#syscall" "#typeof" ] @function.builtin
+[ "#alignof" "#assert" "#bitcast" "#cast" "#ceil" "#floor" "#fma" "#init" "#instance" "#len" "#load" "#max" "#min" "#offsetof" "#panic" "#reverse" "#round" "#sizeof" "#slice" "#sqrt" "#step" "#syscall" "#trunc" "#typeof" "#wrapping" ] @function.builtin
 (call (primary (identifier) @function))
 (call (primary (field_access (identifier) @function.method)))
 
@@ -28,18 +28,13 @@
 
 [ "case" "else" "if" ] @keyword.conditional
 "#target" @keyword.directive
-[ "break" "continue" ] @keyword.control
+[ (break_) (continue_) ] @keyword.control
 [ "for" "in" ] @keyword.repeat
 "return" @keyword.return
 
 (primitive) @type.builtin
 (type_parameter) @type
 (struct_type_parameter (identifier) @type)
-
-; label
-(break_ (identifier) @label)
-(continue_ (identifier) @label)
-(for_ (identifier) @label)
 
 ; operator
 [

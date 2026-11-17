@@ -45,7 +45,7 @@ Typed range bindings and pointer builtins
 ==================
 fn main(p: *u8) {
   for i: i32 in -3..3 {
-    q := #offset(p, i)
+    q := #slice(p, 4)[i]
     s := #slice(p, 4)
   }
 }
@@ -75,11 +75,14 @@ fn main(p: *u8) {
           (block
             (variable
               (identifier)
-              (pointer_offset
-                (primary
-                  (identifier))
-                (primary
-                  (identifier))))
+              (primary
+                (index
+                  (pointer_slice
+                    (primary
+                      (identifier))
+                    (number_))
+                  (primary
+                    (identifier)))))
             (variable
               (identifier)
               (pointer_slice
