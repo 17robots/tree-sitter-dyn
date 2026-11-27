@@ -5,12 +5,12 @@ struct Player { health: i32 = 100, name: []const u8 = "anon" }
 enum(i32) Errno { Ok = 0, NoEnt = 2 }
 fn f(v: any, p: *Player) i32 {
   #init(p)
-  b := Box(i32){value: 1}
+  b := Box<i32>{value: 1}
   if 0 <= b.value && b.value < 10 && (b.value & 1) != 0 { return 1 }
   case v {
-    i32 n => { return n }
-    []const u8 s => { return 2 }
-    Point q => { return 3 }
+    i32(n) => { return n }
+    []const u8(s) => { return 2 }
+    Point(q) => { return 3 }
     _ => { return 0 }
   }
 }
@@ -69,10 +69,9 @@ fn f(v: any, p: *Player) i32 {
         (variable
           (identifier)
           (struct_literal
-            instance: (call
-              (primary
-                (identifier))
-              call_args: (type_argument
+            instance: (generic_instantiation
+              (identifier)
+              (type
                 (primitive)))
             (struct_literal_member
               (identifier)
@@ -131,8 +130,11 @@ fn f(v: any, p: *Player) i32 {
           (case_arm
             (case_pattern
               (primary
-                (identifier)))
-            (identifier)
+                (call
+                  (primary
+                    (identifier))
+                  call_args: (primary
+                    (identifier)))))
             (block
               (return_
                 (number_))))

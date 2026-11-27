@@ -33,7 +33,7 @@ check-workspace: test
 editor-grammar:
     python3 tools/build.py highlights
     cp grammar.js "$WORKSPACE/zed-dyn/grammars/dyn/grammar.js"
-    cp src/parser.c src/scanner.c src/node-types.json src/grammar.json "$WORKSPACE/zed-dyn/grammars/dyn/src/"
+    cp src/parser.c src/node-types.json src/grammar.json "$WORKSPACE/zed-dyn/grammars/dyn/src/"
     "$TS" build --wasm -o "$WORKSPACE/zed-dyn/grammars/dyn.wasm" .
 
 verify-published-grammar:

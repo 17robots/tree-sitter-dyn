@@ -1,0 +1,222 @@
+==================
+Phase 3: T!E, A | B, try, catch, fail, errdefer
+==================
+
+enum FsErr {
+  NotFound(str),
+  PermissionDenied,
+}
+
+enum ParseErr {
+  Empty,
+  BadFormat(i32),
+}
+
+type AppErr = FsErr | ParseErr
+
+fn load(path: str) i32!(FsErr | ParseErr) {
+  errdefer cleanup()
+  if path.len == 0 {
+    fail ParseErr.Empty
+  }
+  v := try parse(path)
+  return v
+}
+
+fn check_void() !FsErr {
+  fail FsErr.PermissionDenied
+}
+
+fn untyped() i32! {
+  fail
+}
+
+fn main() {
+  x := load("a") catch 0
+  y := load("b") catch err {
+    case err {
+      FsErr.NotFound(p) => { return }
+      FsErr.PermissionDenied, ParseErr.Empty => { return }
+      ParseErr(pe) => { return }
+    }
+  }
+  check_void() catch {}
+}
+
+---
+
+(source_file
+  (declaration
+    (enum
+      (identifier)
+      (enum_member
+        (identifier)
+        (type
+          (primitive)))
+      (enum_member
+        (identifier))))
+  (declaration
+    (enum
+      (identifier)
+      (enum_member
+        (identifier))
+      (enum_member
+        (identifier)
+        (type
+          (primitive)))))
+  (declaration
+    (type_alias
+      (identifier)
+      (type
+        (union_type
+          (type
+            (field_type
+              (identifier)))
+          (type
+            (field_type
+              (identifier)))))))
+  (declaration
+    (fn
+      name: (identifier)
+      (fn_param
+        (identifier)
+        (type_qualifier
+          (type
+            (primitive))))
+      (fallible_type
+        (type
+          (primitive))
+        (type
+          (paren_type
+            (type
+              (union_type
+                (type
+                  (field_type
+                    (identifier)))
+                (type
+                  (field_type
+                    (identifier))))))))
+      (block
+        (errdefer
+          (call
+            (primary
+              (identifier))))
+        (if_
+          (binary
+            (primary
+              (field_access
+                (primary
+                  (identifier))
+                (identifier)))
+            (number_))
+          (block
+            (fail_
+              (primary
+                (field_access
+                  (primary
+                    (identifier))
+                  (identifier))))))
+        (variable
+          (identifier)
+          (try_
+            (primary
+              (call
+                (primary
+                  (identifier))
+                call_args: (primary
+                  (identifier))))))
+        (return_
+          (primary
+            (identifier))))))
+  (declaration
+    (fn
+      name: (identifier)
+      (fallible_type
+        (type
+          (field_type
+            (identifier))))
+      (block
+        (fail_
+          (primary
+            (field_access
+              (primary
+                (identifier))
+              (identifier)))))))
+  (declaration
+    (fn
+      name: (identifier)
+      (fallible_type
+        (type
+          (primitive)))
+      (block
+        (fail_))))
+  (declaration
+    (fn
+      name: (identifier)
+      (block
+        (variable
+          (identifier)
+          (catch_
+            (primary
+              (call
+                (primary
+                  (identifier))
+                call_args: (string_)))
+            (number_)))
+        (variable
+          (identifier)
+          (catch_
+            (primary
+              (call
+                (primary
+                  (identifier))
+                call_args: (string_)))
+            binding: (identifier)
+            (block
+              (case_
+                (primary
+                  (identifier))
+                (case_arm
+                  (case_pattern
+                    (primary
+                      (call
+                        (primary
+                          (field_access
+                            (primary
+                              (identifier))
+                            (identifier)))
+                        call_args: (primary
+                          (identifier)))))
+                  (block
+                    (return_)))
+                (case_arm
+                  (case_pattern
+                    (primary
+                      (field_access
+                        (primary
+                          (identifier))
+                        (identifier))))
+                  (case_pattern
+                    (primary
+                      (field_access
+                        (primary
+                          (identifier))
+                        (identifier))))
+                  (block
+                    (return_)))
+                (case_arm
+                  (case_pattern
+                    (primary
+                      (call
+                        (primary
+                          (identifier))
+                        call_args: (primary
+                          (identifier)))))
+                  (block
+                    (return_)))))))
+        (catch_
+          (primary
+            (call
+              (primary
+                (identifier))))
+          (block))))))

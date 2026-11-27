@@ -1,15 +1,15 @@
 ==================
 Generic structs, instances and payload enums
 ==================
-struct Box(T) { value: T }
-pub enum Node { Null, Number: f64, Link: *Node }
-type IntBox = Box(i32)
-fn read(box: m.Box($T), pair: Pair(i32, []u8)) Box(T) {
-  x: Box(T)
+struct Box<T> { value: T }
+pub enum Node { Null, Number(f64), Link(*Node) }
+type IntBox = Box<i32>
+fn read<T>(box: m.Box<T>, pair: Pair<i32, []u8>) Box<T> {
+  x: Box<T>
   case node {
     Node.Null => { }
-    Node.Number v => { return v }
-    Node.Link *p => { p = nil }
+    Node.Number(v) => { return v }
+    Node.Link(*p) => { p.* = nil }
   }
   return x
 }
@@ -19,7 +19,7 @@ fn read(box: m.Box($T), pair: Pair(i32, []u8)) Box(T) {
   (declaration
     (struct
       (identifier)
-      (struct_type_parameter
+      (type_parameter
         (identifier))
       (struct_member
         (identifier)
@@ -34,17 +34,15 @@ fn read(box: m.Box($T), pair: Pair(i32, []u8)) Box(T) {
         (identifier))
       (enum_member
         (identifier)
-        (type_qualifier
-          (type
-            (primitive))))
+        (type
+          (primitive)))
       (enum_member
         (identifier)
-        (type_qualifier
-          (type
-            (pointer_type
-              (type
-                (field_type
-                  (identifier)))))))))
+        (type
+          (pointer_type
+            (type
+              (field_type
+                (identifier))))))))
   (declaration
     (type_alias
       (identifier)
@@ -56,7 +54,9 @@ fn read(box: m.Box($T), pair: Pair(i32, []u8)) Box(T) {
             (primitive))))))
   (declaration
     (fn
-      (identifier)
+      name: (identifier)
+      (type_parameter
+        (identifier))
       (fn_param
         (identifier)
         (type_qualifier
@@ -66,7 +66,8 @@ fn read(box: m.Box($T), pair: Pair(i32, []u8)) Box(T) {
                 (identifier)
                 (identifier))
               (type
-                (type_parameter))))))
+                (field_type
+                  (identifier)))))))
       (fn_param
         (identifier)
         (type_qualifier
@@ -112,29 +113,35 @@ fn read(box: m.Box($T), pair: Pair(i32, []u8)) Box(T) {
           (case_arm
             (case_pattern
               (primary
-                (field_access
+                (call
                   (primary
-                    (identifier))
-                  (identifier))))
-            (identifier)
+                    (field_access
+                      (primary
+                        (identifier))
+                      (identifier)))
+                  call_args: (primary
+                    (identifier)))))
             (block
               (return_
                 (primary
                   (identifier)))))
           (case_arm
             (case_pattern
-              (binary
-                (primary
-                  (field_access
-                    (primary
-                      (identifier))
-                    (identifier)))
-                (primary
-                  (identifier))))
+              (primary
+                (call
+                  (primary
+                    (field_access
+                      (primary
+                        (identifier))
+                      (identifier)))
+                  call_args: (pointer_binding
+                    (identifier)))))
             (block
               (assignment
                 (primary
-                  (identifier))
+                  (unary_postfix
+                    (primary
+                      (identifier))))
                 (null_)))))
         (return_
           (primary

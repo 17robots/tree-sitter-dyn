@@ -53,7 +53,7 @@ if args.workspace:
     extension = tomllib.loads((root/'zed-dyn/extension.toml').read_text())
     assert manifest['published_revision'] == extension['grammars']['dyn']['rev'], 'Extension/provenance pin mismatch'
     assert manifest['generator'] == (grammar/'.tree-sitter-version').read_text().strip(), 'Generator pin mismatch'
-    for name in ('grammar.js', 'src/parser.c', 'src/scanner.c', 'src/grammar.json', 'src/node-types.json'):
+    for name in ('grammar.js', 'src/parser.c', 'src/grammar.json', 'src/node-types.json'):
         data = (grammar/name).read_bytes()
         assert data == (root/'zed-dyn/grammars/dyn'/name).read_bytes(), f'Editor grammar drift: {name}'
         assert hashlib.sha256(data).hexdigest() == manifest['local_sha256'][name], f'Grammar provenance mismatch: {name}'

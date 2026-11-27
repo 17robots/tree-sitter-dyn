@@ -9,7 +9,8 @@ fn main() { distinct := 1 }
     (fn
       (identifier)
       (block
-        (ERROR)))))
+        (ERROR
+          (number_))))))
 
 ==================
 Plain enum and fields without defaults

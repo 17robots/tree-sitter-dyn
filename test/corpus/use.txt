@@ -3,8 +3,8 @@ Imports
 ================================================================================
 
 use "std/mem"
-use "std/io" io
-use "std/mem" mem, "std/strings", "std/io" out
+use io "std/io"
+use mem "std/mem", "std/strings", out "std/io"
 
 --------------------------------------------------------------------------------
 
@@ -16,15 +16,15 @@ use "std/mem" mem, "std/strings", "std/io" out
   (declaration
     (use
       (import
-        (string_)
-        (identifier))))
+        (identifier)
+        (string_))))
   (declaration
     (use
       (import
-        (string_)
-        (identifier))
+        (identifier)
+        (string_))
       (import
         (string_))
       (import
-        (string_)
-        (identifier)))))
+        (identifier)
+        (string_)))))

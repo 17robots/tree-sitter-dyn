@@ -1,0 +1,169 @@
+==================
+Phase 1 raw strings, labels, shorthand, and .len
+==================
+use col "std/collections", raw "std/io", "std/mem"
+
+enum Shape {
+  Empty,
+  Circle(f32),
+}
+
+fn demo(xs: []const u8, s: *Shape) usize {
+  doc := `line 1
+line 2 with "quotes" and \slashes`
+  c: Shape = .Circle(2.0)
+  outer: for i in 0..xs.len {
+    for j in 0..4 {
+      if i == j { continue outer }
+      if j == 3 { break outer }
+    }
+  }
+  case s.* {
+    .Empty => { return doc.len }
+    .Circle(*r) => { r.* += 1.0 }
+  }
+  if c == .Empty { return 0 }
+  return xs.len
+}
+---
+
+(source_file
+  (declaration
+    (use
+      (import
+        alias: (identifier)
+        path: (string_))
+      (import
+        alias: (identifier)
+        path: (string_))
+      (import
+        path: (string_))))
+  (declaration
+    (enum
+      (identifier)
+      (enum_member
+        (identifier))
+      (enum_member
+        (identifier)
+        (type
+          (primitive)))))
+  (declaration
+    (fn
+      name: (identifier)
+      (fn_param
+        (identifier)
+        (type_qualifier
+          (type
+            (array_type
+              (type
+                (primitive))))))
+      (fn_param
+        (identifier)
+        (type_qualifier
+          (type
+            (pointer_type
+              (type
+                (field_type
+                  (identifier)))))))
+      (type
+        (primitive))
+      (block
+        (variable
+          (identifier)
+          (string_))
+        (variable
+          (identifier)
+          (type
+            (field_type
+              (identifier)))
+          (primary
+            (call
+              (primary
+                (enum_shorthand
+                  (identifier)))
+              call_args: (number_))))
+        (for_
+          label: (identifier)
+          (for_condition
+            (identifier)
+            (range
+              (number_)
+              (primary
+                (field_access
+                  (primary
+                    (identifier))
+                  (identifier)))))
+          (block
+            (for_
+              (for_condition
+                (identifier)
+                (range
+                  (number_)
+                  (number_)))
+              (block
+                (if_
+                  (binary
+                    (primary
+                      (identifier))
+                    (primary
+                      (identifier)))
+                  (block
+                    (continue_
+                      label: (identifier))))
+                (if_
+                  (binary
+                    (primary
+                      (identifier))
+                    (number_))
+                  (block
+                    (break_
+                      label: (identifier))))))))
+        (case_
+          (primary
+            (unary_postfix
+              (primary
+                (identifier))))
+          (case_arm
+            (case_pattern
+              (primary
+                (enum_shorthand
+                  (identifier))))
+            (block
+              (return_
+                (primary
+                  (field_access
+                    (primary
+                      (identifier))
+                    (identifier))))))
+          (case_arm
+            (case_pattern
+              (primary
+                (call
+                  (primary
+                    (enum_shorthand
+                      (identifier)))
+                  call_args: (pointer_binding
+                    (identifier)))))
+            (block
+              (assignment
+                (primary
+                  (unary_postfix
+                    (primary
+                      (identifier))))
+                (number_)))))
+        (if_
+          (binary
+            (primary
+              (identifier))
+            (primary
+              (enum_shorthand
+                (identifier))))
+          (block
+            (return_
+              (number_))))
+        (return_
+          (primary
+            (field_access
+              (primary
+                (identifier))
+              (identifier))))))))
