@@ -1,19 +1,28 @@
 ==================
 Type parameters and type arguments
 ==================
-fn push(T: type, arena: *Arena) *T {
+fn push<T>(arena: *Arena) *T {
   return #cast(*T, raw(arena, #sizeof(T)))
 }
-fn min(a, b: $T) T {
+fn min<T>(a, b: T) T {
   return a
 }
-fn copy(d: []$T, s: []const $T) {
+fn copy<T>(d: []T, s: []const T) {
+}
+fn dispatch<K>(key: K) u64 {
+  case K {
+    str, []u8 => { return key.len }
+    u64, u32 => { return #cast(u64, key) }
+    _ => { return 0 }
+  }
 }
 fn main() {
-  n := push(Node, &arena)
-  b := push(u8, &arena)
-  p := push(*Node, &arena)
-  s := push([]const u8, &arena)
+  n := push<Node>(&arena)
+  b := push<u8>(&arena)
+  p := push<*Node>(&arena)
+  s := push<str>(&arena)
+  f := min<u32>
+  slot := Slot<i32>.Full(7)
 }
 
 ---
@@ -22,12 +31,8 @@ fn main() {
   (declaration
     (fn
       name: (identifier)
-      (fn_param
-        (identifier)
-        (type_qualifier
-          (type
-            (field_type
-              (identifier)))))
+      (type_parameter
+        (identifier))
       (fn_param
         (identifier)
         (type_qualifier
@@ -63,12 +68,15 @@ fn main() {
   (declaration
     (fn
       name: (identifier)
+      (type_parameter
+        (identifier))
       (fn_param
         (identifier)
         (identifier)
         (type_qualifier
           (type
-            (type_parameter))))
+            (field_type
+              (identifier)))))
       (type
         (field_type
           (identifier)))
@@ -79,21 +87,73 @@ fn main() {
   (declaration
     (fn
       name: (identifier)
+      (type_parameter
+        (identifier))
       (fn_param
         (identifier)
         (type_qualifier
           (type
             (array_type
               (type
-                (type_parameter))))))
+                (field_type
+                  (identifier)))))))
       (fn_param
         (identifier)
         (type_qualifier
           (type
             (array_type
               (type
-                (type_parameter))))))
+                (field_type
+                  (identifier)))))))
       (block)))
+  (declaration
+    (fn
+      name: (identifier)
+      (type_parameter
+        (identifier))
+      (fn_param
+        (identifier)
+        (type_qualifier
+          (type
+            (field_type
+              (identifier)))))
+      (type
+        (primitive))
+      (block
+        (case_
+          (primary
+            (identifier))
+          (case_arm
+            (type_pattern
+              (primitive))
+            (type
+              (array_type
+                (type
+                  (primitive))))
+            (block
+              (return_
+                (primary
+                  (field_access
+                    (primary
+                      (identifier))
+                    (identifier))))))
+          (case_arm
+            (type_pattern
+              (primitive))
+            (type
+              (primitive))
+            (block
+              (return_
+                (primary
+                  (cast
+                    (type
+                      (primitive))
+                    (primary
+                      (identifier)))))))
+          (case_arm
+            (block
+              (return_
+                (number_))))))))
   (declaration
     (fn
       name: (identifier)
@@ -103,31 +163,8 @@ fn main() {
           (primary
             (call
               (primary
-                (identifier))
-              call_args: (primary
-                (identifier))
-              call_args: (unary_prefix
-                (primary
-                  (identifier))))))
-        (variable
-          (identifier)
-          (primary
-            (call
-              (primary
-                (identifier))
-              call_args: (type_argument
-                (primitive))
-              call_args: (unary_prefix
-                (primary
-                  (identifier))))))
-        (variable
-          (identifier)
-          (primary
-            (call
-              (primary
-                (identifier))
-              call_args: (type_argument
-                (pointer_type
+                (generic_instantiation
+                  (identifier)
                   (type
                     (field_type
                       (identifier)))))
@@ -139,11 +176,57 @@ fn main() {
           (primary
             (call
               (primary
-                (identifier))
-              call_args: (type_argument
-                (array_type
+                (generic_instantiation
+                  (identifier)
                   (type
                     (primitive))))
               call_args: (unary_prefix
                 (primary
-                  (identifier))))))))))
+                  (identifier))))))
+        (variable
+          (identifier)
+          (primary
+            (call
+              (primary
+                (generic_instantiation
+                  (identifier)
+                  (type
+                    (pointer_type
+                      (type
+                        (field_type
+                          (identifier)))))))
+              call_args: (unary_prefix
+                (primary
+                  (identifier))))))
+        (variable
+          (identifier)
+          (primary
+            (call
+              (primary
+                (generic_instantiation
+                  (identifier)
+                  (type
+                    (primitive))))
+              call_args: (unary_prefix
+                (primary
+                  (identifier))))))
+        (variable
+          (identifier)
+          (primary
+            (generic_instantiation
+              (identifier)
+              (type
+                (primitive)))))
+        (variable
+          (identifier)
+          (primary
+            (call
+              (primary
+                (field_access
+                  (primary
+                    (generic_instantiation
+                      (identifier)
+                      (type
+                        (primitive))))
+                  (identifier)))
+              call_args: (number_))))))))

@@ -17,7 +17,7 @@ args=parser.parse_args()
 if not args.extension.is_file(): parser.error('Extension manifest not found; pass --extension PATH')
 settings=tomllib.loads(args.extension.read_text())['grammars']['dyn']
 repository=settings['repository'].removeprefix('https://github.com/').removesuffix('.git')
-files=['grammar.js','src/parser.c','src/scanner.c','src/grammar.json','src/node-types.json']
+files=['grammar.js','src/parser.c','src/grammar.json','src/node-types.json']
 report={'repository':settings['repository'],'revision':settings['rev'],'files':{}}
 for name in files:
     url=f'https://raw.githubusercontent.com/{repository}/{settings["rev"]}/{name}'

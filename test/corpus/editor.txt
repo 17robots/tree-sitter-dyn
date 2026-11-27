@@ -18,7 +18,7 @@ value := 42
 ==================
 Import alias followed by const
 ==================
-use "std/io" stream
+use stream "std/io"
 const value: i32 = 42
 ---
 
@@ -26,8 +26,8 @@ const value: i32 = 42
   (declaration
     (use
       (import
-        (string_)
-        (identifier))))
+        (identifier)
+        (string_))))
   (declaration
     (const_variable
       (variable
@@ -59,7 +59,7 @@ value: i32 = 42
 ==================
 Comments between qualified operands
 ==================
-use "std/bytes" bytes
+use bytes "std/bytes"
 fn main() { _ = bytes./* member */equal("a", "a") }
 ---
 
@@ -67,8 +67,8 @@ fn main() { _ = bytes./* member */equal("a", "a") }
   (declaration
     (use
       (import
-        (string_)
-        (identifier))))
+        (identifier)
+        (string_))))
   (declaration
     (fn
       (identifier)
@@ -88,9 +88,10 @@ fn main() { _ = bytes./* member */equal("a", "a") }
               (string_))))))))
 
 ==================
-Trailing-dot float and field
+Float literal and field
 ==================
-fn main() { value: f64 = 1. _ = value }
+fn main() { value: f64 = 1.0
+_ = value }
 ---
 
 (source_file

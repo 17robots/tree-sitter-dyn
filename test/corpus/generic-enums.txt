@@ -2,7 +2,7 @@
 Generic enum declaration
 ================================================================================
 
-enum Slot(T) { Empty, Full: T }
+enum Slot<T> { Empty, Full(T) }
 
 --------------------------------------------------------------------------------
 
@@ -10,13 +10,12 @@ enum Slot(T) { Empty, Full: T }
   (declaration
     (enum
       (identifier)
-      (struct_type_parameter
+      (type_parameter
         (identifier))
       (enum_member
         (identifier))
       (enum_member
         (identifier)
-        (type_qualifier
-          (type
-            (field_type
-              (identifier))))))))
+        (type
+          (field_type
+            (identifier)))))))
